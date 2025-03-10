@@ -1,2 +1,20 @@
 [
+    {
+        "anno": 2000,
+        "autore": "bbbb",
+        "copertina": "path",
+        "editore": "Mondadori",
+        "isbn": 898989,
+        "numPagine": 100,
+        "titolo": "aaaa"
+    },
+    {
+        "anno": 2000,
+        "autore": "bbbb",
+        "copertina": "path",
+        "editore": "Mondadori",
+        "isbn": 898989,
+        "numPagine": 100,
+        "titolo": "aaaa"
+    }
 ]

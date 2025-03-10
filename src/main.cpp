@@ -1,8 +1,6 @@
 #include "jsonHandler/writeJsonVisitor.h"
 #include "logica/album.h"
 #include "logica/libro.h"
-#include "qglobal.h"
-#include "qjsonobject.h"
 #include <QJsonDocument>
 
 using namespace std;
@@ -22,8 +20,7 @@ int main()
 
     writeJsonVisitor JsonVisitor; 
     
-    //l1.accept(&JsonVisitor);
-    JsonVisitor.clearAll();
+    l1.accept(&JsonVisitor);
 
     return 0;
 }

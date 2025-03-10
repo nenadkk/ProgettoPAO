@@ -22,35 +22,95 @@ void writeJsonVisitor::clearAll()
             file.write(doc.toJson());
             file.close();
         }
-
     }
 }
 
 void writeJsonVisitor::visit(libro *_libro)
 {
-    QJsonDocument doc(writeJsonVisitor::libroToJson(*(_libro)));
-    qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
-
-    //Salva l'oggetto nel json
+  //  QJsonDocument doc(writeJsonVisitor::libroToJson(*(_libro)));
     QFile file("./src/jsonHandler/data/libro.json");
-//    QString currentDir = QDir::currentPath();
-//    qDebug() << "Directory corrente:" << currentDir;
-    if(file.open(QIODevice::WriteOnly))
+
+    QJsonDocument doc;
+    QJsonArray jsonArray;
+
+    // Legge il contenuto del file 
+    if (file.open(QIODevice::ReadOnly)) 
     {
-        file.write(doc.toJson(QJsonDocument::Indented));
+        QByteArray data = file.readAll();
         file.close();
-        qDebug()<<"File salvato";
+
+        doc = QJsonDocument::fromJson(data);
+        if (doc.isArray()) 
+            jsonArray = doc.array();
+        
+    }
+
+    jsonArray.append(writeJsonVisitor::libroToJson(*(_libro)));
+
+    // Scrive i dati aggiornati nel file
+    if (file.open(QIODevice::WriteOnly)) {
+        doc.setArray(jsonArray);
+        file.write(doc.toJson());
+        file.close();
     }
 }
 
 void writeJsonVisitor::visit(canzone *_canzone)
 {
-    
+    QFile file("./src/jsonHandler/data/canzone.json");
+
+    QJsonDocument doc;
+    QJsonArray jsonArray;
+
+    // Legge il contenuto del file 
+    if (file.open(QIODevice::ReadOnly)) 
+    {
+        QByteArray data = file.readAll();
+        file.close();
+
+        doc = QJsonDocument::fromJson(data);
+        if (doc.isArray()) 
+            jsonArray = doc.array();
+        
+    }
+
+    jsonArray.append(writeJsonVisitor::canzoneToJson(*(_canzone)));
+
+    // Scrive i dati aggiornati nel file
+    if (file.open(QIODevice::WriteOnly)) {
+        doc.setArray(jsonArray);
+        file.write(doc.toJson());
+        file.close();
+    }   
 }
 
 void writeJsonVisitor::visit(album *_album)
 {
-    
+    QFile file("./src/jsonHandler/data/album.json");
+
+    QJsonDocument doc;
+    QJsonArray jsonArray;
+
+    // Legge il contenuto del file 
+    if (file.open(QIODevice::ReadOnly)) 
+    {
+        QByteArray data = file.readAll();
+        file.close();
+
+        doc = QJsonDocument::fromJson(data);
+        if (doc.isArray()) 
+            jsonArray = doc.array();
+        
+    }
+
+    jsonArray.append(writeJsonVisitor::albumToJson(*(_album)));
+
+    // Scrive i dati aggiornati nel file
+    if (file.open(QIODevice::WriteOnly)) {
+        doc.setArray(jsonArray);
+        file.write(doc.toJson());
+        file.close();
+    }
 }
 
 

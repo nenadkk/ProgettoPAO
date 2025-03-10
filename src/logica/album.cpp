@@ -39,6 +39,7 @@ const canzone* album::operator[](size_t index) const
     advance(it, index);
     return *it;
 }
+
 std::ostream& operator << (std::ostream &out, const album& a)
 {
     out<<"\nTITOLO: "<<a.getTitolo();

@@ -11,18 +11,18 @@
 
 class writeJsonVisitor : public visitor
 {
+    private:
+        QJsonObject libroToJson(const libro&);
+        QJsonObject canzoneToJson(const canzone&);
+        QJsonObject albumToJson(const album&);
+
     public:
         void visit(libro  *_libro) override;
         void visit(canzone  *_canzone) override;
         void visit(album  *_album) override;
 
-        QJsonObject libroToJson(const libro&);
-        QJsonObject canzoneToJson(const canzone&);
-        QJsonObject albumToJson(const album&);
+        void clearAll(); //svuota i file per poter poi ripopolare
 
-        void salvaLibri(const list<media>& _libri);
-        void salvaCanzoni(const list<canzone>& _canzoni);
-        void salvaAlbum(const list<media>& _album);
 };
 
 

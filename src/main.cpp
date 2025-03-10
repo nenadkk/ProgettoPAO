@@ -1,5 +1,10 @@
+#include "jsonHandler/writeJsonVisitor.h"
 #include "logica/album.h"
 #include "logica/libro.h"
+#include "qglobal.h"
+#include "qjsonobject.h"
+#include <QJsonDocument>
+
 using namespace std;
 int main()
 {
@@ -14,6 +19,11 @@ int main()
     a.addCanzone(&c3);
 
     cout<<a;
+
+    writeJsonVisitor JsonVisitor; 
+    
+    //l1.accept(&JsonVisitor);
+    JsonVisitor.clearAll();
 
     return 0;
 }

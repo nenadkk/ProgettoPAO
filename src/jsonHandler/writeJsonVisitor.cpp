@@ -1,8 +1,46 @@
 #include "writeJsonVisitor.h"
+#include "qjsonobject.h"
+#include <QJsonDocument>
+#include <QFile>
+#include <QDir>
+#include <QDebug>
+
+void writeJsonVisitor::clearAll()
+{
+    string paths[3] = {"./src/jsonHandler/data/libro.json",
+                       "./src/jsonHandler/data/canzone.json",
+                       "./src/jsonHandler/data/album.json"};
+    for(string p : paths)
+    {
+        QFile file(toQString(p));
+
+        QJsonArray emptyArray;
+        QJsonDocument doc(emptyArray);
+
+        if (file.open(QIODevice::WriteOnly)) 
+        {
+            file.write(doc.toJson());
+            file.close();
+        }
+
+    }
+}
 
 void writeJsonVisitor::visit(libro *_libro)
 {
-             
+    QJsonDocument doc(writeJsonVisitor::libroToJson(*(_libro)));
+    qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
+
+    //Salva l'oggetto nel json
+    QFile file("./src/jsonHandler/data/libro.json");
+//    QString currentDir = QDir::currentPath();
+//    qDebug() << "Directory corrente:" << currentDir;
+    if(file.open(QIODevice::WriteOnly))
+    {
+        file.write(doc.toJson(QJsonDocument::Indented));
+        file.close();
+        qDebug()<<"File salvato";
+    }
 }
 
 void writeJsonVisitor::visit(canzone *_canzone)

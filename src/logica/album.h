@@ -14,9 +14,10 @@ class album : public media
         list<canzone*> trackList; 
 
     public:
-        album(const string&, const string&, const int&, const string&);
-        //COSTRUTTORE DI COPIA, DA FARE!!!!!!!!!
-        album(const string&, const string&, const int&, const string&, //per il sotto-oggetto MEDIA
+        album(const string&, const string&, const int&, const string&, const int&);//album vuoto 
+
+        //costruttore di copia
+        album(const string&, const string&, const int&, const string&, const int&, //per il sotto-oggetto MEDIA
               const list<canzone*>&); //trackList
         
         int getDurataTotale() const;

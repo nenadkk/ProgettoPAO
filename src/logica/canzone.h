@@ -9,19 +9,16 @@ class canzone: public media
     private:
         int durata; //in secondi
         string genere;
-        int id;
 
     public:
-        canzone(const string&, const string&, const int&, const string&, //per il sotto-oggetto MEDIA
-                const int&, const string&, const int&); //durata genere id
+        canzone(const string&, const string&, const int&, const string&, const int&, //per il sotto-oggetto MEDIA
+                const int&, const string&); //durata genere 
 
         int getDurata() const;
         string getGenere() const;
-        int getId() const;
 
         void setDurata(const int&);
         void setGenere(const string&);
-        void setId(const int&);
 
         virtual void accept(visitor *_visitor) override;
 

@@ -21,6 +21,8 @@ class writeJsonVisitor : public visitor
         void visit(canzone  *_canzone) override;
         void visit(album  *_album) override;
 
+        void readAll(list<media*>&);
+
         void clearAll(); //svuota i file per poter poi ripopolare
 
 };

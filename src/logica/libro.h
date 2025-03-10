@@ -11,7 +11,7 @@ class libro: public media
         string editore;
     
     public:
-        libro(const string&, const string&, const int&, const string&, //per il sotto-oggetto MEDIA
+        libro(const string&, const string&, const int&, const string&, const int&, //per il sotto-oggetto MEDIA
               const int&, const int&, const string&); //numpagine isbn editore
 
         int getNumPagine() const;

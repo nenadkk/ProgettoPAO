@@ -1,8 +1,9 @@
 #include "libro.h"
 #include <ostream>
 
-libro::libro(const string& t, const string& a, const int& d, const string& c,
-             const int& np, const int& i, const string& ce) : media(t,a,d,c), numPagine(np), isbn(i), editore(ce) {};
+libro::libro(const string& _titolo, const string& _autore, const int& _anno, const string& _copertina, const int& _id,
+             const int& _numPagine, const int& _isbn, const string& _editore) : 
+            media(_titolo,_autore,_anno,_copertina,_id), numPagine(_numPagine), isbn(_isbn), editore(_editore) {};
 
 int libro::getNumPagine() const { return numPagine; }
 int libro::getIsbn() const { return isbn; }
@@ -10,7 +11,7 @@ string libro::getEditore() const { return editore; }
 
 void libro::setNumPagine(const int& np) { numPagine = np; }
 void libro::setIsbn(const int& i) { isbn = i; }
-void libro::setEditore(const string& ce) { editore = ce; }
+void libro::setEditore(const string& e) { editore = e; }
 
 void libro::accept(visitor *_visitor)
 {
@@ -26,6 +27,7 @@ std::ostream& operator << (std::ostream &out, const libro& l)
     out<<"\nN° PAGINE: "<<l.getNumPagine();
     out<<"\nISBN: "<<l.getIsbn();
     out<<"\nEDITORE: "<<l.getEditore();
+    out<<"\nID: "<<l.getId();
 
     return out;
 }

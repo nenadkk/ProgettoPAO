@@ -1,18 +1,16 @@
 #include "canzone.h"
 #include <ostream>
 
-canzone::canzone(const string& t, const string& a, const int& d, const string& c,
-                 const int& _durata, const string& _genere, const int& _id): 
-                 media(t,a,d,c), durata(_durata), genere(_genere), id(_id) {};
+canzone::canzone(const string& _titolo, const string& _autore, const int& _anno, const string& _copertina, const int& _id,
+                 const int& _durata, const string& _genere): 
+                 media(_titolo,_autore,_anno,_copertina,_id), durata(_durata), genere(_genere) {};
 
 int canzone::getDurata() const { return durata; }
 string canzone::getGenere() const { return genere; }
-int canzone::getId() const { return id; }
 
 
 void canzone::setDurata(const int& d) { durata=d; }
 void canzone::setGenere(const string& g) { genere=g; }
-void canzone::setId(const int& _id) { id=_id; }
 
 void canzone::accept(visitor *_visitor)
 {

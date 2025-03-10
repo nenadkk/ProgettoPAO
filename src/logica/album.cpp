@@ -3,13 +3,16 @@
 #include <ostream>
 
 
-album::album(const string& t, const string& a, const int& d, const string& c) : media(t,a,d,c) {}
-album::album(const string& t, const string& a, const int& d, const string& c,
-             const list<canzone*>& tracks) : media(t,a,d,c), durataTotale(0)
+album::album(const string& _titolo, const string& _autore, const int& _anno, const string& _copertina, const int& _id) :
+        media(_titolo, _autore, _anno, _copertina, _id), durataTotale(0) {}
+
+album::album(const string& _titolo, const string& _autore, const int& _anno, const string& _copertina, const int& _id,
+             const list<canzone*>& tracks) : media(_titolo, _autore, _anno, _copertina, _id), durataTotale(0)
 {
     for (canzone* t : tracks)
     {
-        trackList.push_back(t);
+        trackList.push_back(new canzone(t->getTitolo(),t->getAutore(),t->getAnno(),t->getCopertina(),t->getId(),t->getDurata(),t->getGenere()));
+        durataTotale+=t->getDurata();
     }
 }
 
@@ -47,6 +50,7 @@ std::ostream& operator << (std::ostream &out, const album& a)
     out<<"\nANNO: "<<a.getAnno();
     out<<"\nCOPERTINA: "<<a.getCopertina();
     out<<"\nDURATA TOT: "<<a.getDurataTotale()/60<<" min, "<<a.getDurataTotale()%60<<" sec";
+    out<<"\nID: "<<a.getId();
 
     out<<"\n\n----CANZONI----\n";
     for(canzone* c : a.trackList)

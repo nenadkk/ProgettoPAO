@@ -1,4 +1,4 @@
-#include "jsonHandler/writeJsonVisitor.h"
+#include "jsonHandler/jsonVisitor.h"
 #include "logica/album.h"
 #include "logica/libro.h"
 #include <QJsonDocument>
@@ -6,21 +6,41 @@
 using namespace std;
 int main()
 {
-    libro l1("aaaa","bbbb",2000,"path",100,898989,"Mondadori");
-    album a("kkkk","llll",2010,"path1");
+    /*
+    libro l1("aaaa","bbbb",2000,"path",1,100,898989,"Mondadori");
+    album a("kkkk","llll",2010,"path1",1);
 
-    canzone c1("ioio","yeye",2020,"path",188,"rapp",1);
-    canzone c2("carr","bbro",2023,"path",199,"rapp",2);
-    canzone c3("skkkrt","yeye",2020,"path",188,"rapp",3);
+    canzone c1("ioio","yeye",2020,"path",1,188,"rapp");
+    canzone c2("carr","bbro",2023,"path",2,199,"rapp");
+    canzone c3("skkkrt","yeye",2020,"path",3,188,"rapp");
     a.addCanzone(&c1);
     a.addCanzone(&c2);
     a.addCanzone(&c3);
 
     cout<<a;
-
-    writeJsonVisitor JsonVisitor; 
+*/
+    jsonVisitor JsonVisitor; 
     
-    l1.accept(&JsonVisitor);
+    list<media*> listaMedia;
+    JsonVisitor.readAllLibri(listaMedia);
 
+    JsonVisitor.readAllCanzoni(listaMedia);
+
+    JsonVisitor.readAllAlbum(listaMedia);
+    cout<<listaMedia.size();
+    for(auto temp : listaMedia)
+    {
+        if(dynamic_cast<album*>(temp))
+        {   
+            auto a = dynamic_cast<album*>(temp);
+            cout<<*a<<"\n";
+        }
+    }
+    /*
+    c1.accept(&JsonVisitor);
+    c2.accept(&JsonVisitor);
+    c3.accept(&JsonVisitor);
+    a.accept(&JsonVisitor);
+    */
     return 0;
 }

@@ -53,13 +53,13 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = src/main.cpp \
-		src/jsonHandler/writeJsonVisitor.cpp \
+		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
 		src/logica/libro.cpp \
 		src/logica/media.cpp 
 OBJECTS       = main.o \
-		writeJsonVisitor.o \
+		jsonVisitor.o \
 		album.o \
 		cazone.o \
 		libro.o \
@@ -128,13 +128,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		ProgettoPAO.pro src/jsonHandler/writeJsonVisitor.h \
+		ProgettoPAO.pro src/jsonHandler/jsonVisitor.h \
 		src/logica/album.h \
 		src/logica/canzone.h \
 		src/logica/libro.h \
 		src/logica/media.h \
 		src/logica/visitor.h src/main.cpp \
-		src/jsonHandler/writeJsonVisitor.cpp \
+		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
 		src/logica/libro.cpp \
@@ -300,8 +300,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/jsonHandler/writeJsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/jsonHandler/writeJsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -349,20 +349,21 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-main.o: src/main.cpp src/logica/album.h \
-		src/logica/media.h \
-		src/logica/visitor.h \
-		src/logica/canzone.h \
-		src/logica/libro.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
-
-writeJsonVisitor.o: src/jsonHandler/writeJsonVisitor.cpp src/jsonHandler/writeJsonVisitor.h \
+main.o: src/main.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/visitor.h \
 		src/logica/libro.h \
 		src/logica/media.h \
 		src/logica/canzone.h \
 		src/logica/album.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o writeJsonVisitor.o src/jsonHandler/writeJsonVisitor.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
+
+jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
+		src/logica/visitor.h \
+		src/logica/libro.h \
+		src/logica/media.h \
+		src/logica/canzone.h \
+		src/logica/album.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsonVisitor.o src/jsonHandler/jsonVisitor.cpp
 
 album.o: src/logica/album.cpp src/logica/album.h \
 		src/logica/media.h \

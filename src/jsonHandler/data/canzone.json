@@ -1,2 +1,29 @@
 [
+    {
+        "anno": 2020,
+        "autore": "yeye",
+        "copertina": "path",
+        "durata": 188,
+        "genere": "rapp",
+        "id": 1,
+        "titolo": "ioio"
+    },
+    {
+        "anno": 2023,
+        "autore": "bbro",
+        "copertina": "path",
+        "durata": 199,
+        "genere": "rapp",
+        "id": 2,
+        "titolo": "carr"
+    },
+    {
+        "anno": 2020,
+        "autore": "yeye",
+        "copertina": "path",
+        "durata": 188,
+        "genere": "rapp",
+        "id": 3,
+        "titolo": "skkkrt"
+    }
 ]

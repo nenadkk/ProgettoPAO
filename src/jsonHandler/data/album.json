@@ -1,2 +1,14 @@
 [
+    {
+        "anno": 2010,
+        "autore": "llll",
+        "canzoni": [
+            1,
+            2,
+            3
+        ],
+        "copertina": "path1",
+        "id": 1,
+        "titolo": "kkkk"
+    }
 ]

@@ -1,5 +1,5 @@
-#ifndef WRITEJSONVISITOR
-#define WRITEJSONVISITOR
+#ifndef JSONVISITOR
+#define JSONVISITOR
 
 #include "../logica/visitor.h"
 #include "../logica/libro.h"
@@ -9,7 +9,7 @@
 #include <QJsonArray>
 #include <QString>
 
-class writeJsonVisitor : public visitor
+class jsonVisitor : public visitor
 {
     private:
         QJsonObject libroToJson(const libro&);
@@ -21,7 +21,9 @@ class writeJsonVisitor : public visitor
         void visit(canzone  *_canzone) override;
         void visit(album  *_album) override;
 
-        void readAll(list<media*>&);
+        void readAllLibri(list<media*>&);
+        void readAllCanzoni(list<media*>&);
+        void readAllAlbum(list<media*>&);
 
         void clearAll(); //svuota i file per poter poi ripopolare
 

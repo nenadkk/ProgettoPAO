@@ -1,0 +1,6 @@
+#!/bin/bash
+qmake6 -project
+qmake6
+make
+rm *.o
+clear

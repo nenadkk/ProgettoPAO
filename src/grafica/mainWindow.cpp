@@ -34,19 +34,15 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 
         QLineEdit *searchBar = new QLineEdit();
         searchBar->setPlaceholderText("Cerca...");
+        connect(searchBar, &QLineEdit::returnPressed, this, &mainWindow::ricerca);
         centralLayout->addWidget(searchBar);
 
         // Area di contenuto con scroll
         QScrollArea *scrollArea = new QScrollArea();
         QWidget *contentWidget = new QWidget();
         QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
+        mediaVisibili = contentLayout;
 
-        for (int i = 1; i <= 20; ++i) {
-            QPushButton *contentItem = new QPushButton(tr("Elemento %1").arg(i));
-            contentItem->setFixedHeight(50);
-            contentItem->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-            contentLayout->addWidget(contentItem);
-        }
         contentLayout->addStretch();
         contentWidget->setLayout(contentLayout);
         scrollArea->setWidget(contentWidget);
@@ -62,4 +58,16 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
         // Configurazione della finestra principale
         setWindowTitle("Interfaccia Qt");
         resize(800, 600);
+}
+
+void mainWindow::ricerca()
+{
+    string searchText = findChild<QLineEdit *>()->text().toStdString();
+    
+    for (int i = 1; i <= 20; ++i) {
+        QPushButton *contentItem = new QPushButton(tr("Elemento %1").arg(i));
+        contentItem->setFixedHeight(50);
+        contentItem->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        mediaVisibili->addWidget(contentItem);
+    }
 }

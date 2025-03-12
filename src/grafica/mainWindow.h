@@ -4,12 +4,14 @@
 #include "../listaMedia/listaMedia.h"
 #include <QMainWindow>
 #include <QGridLayout>
+#include <QLineEdit>
 
 class mainWindow : public QMainWindow 
 {
     private:
         listamedia LM;
         QGridLayout *mediaVisibili;
+        QLineEdit *searchBar;
 
     public:
         mainWindow(QWidget* parent = nullptr);

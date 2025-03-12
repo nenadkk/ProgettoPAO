@@ -29,7 +29,7 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     // Barra laterale sinistra con pulsanti
     QWidget *sideBar = new QWidget();
     QVBoxLayout *sideBarLayout = new QVBoxLayout(sideBar);
-    
+
     QWidget *space = new QWidget();
     space->setFixedHeight(35);
     sideBarLayout->addWidget(space);
@@ -49,7 +49,7 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     QWidget *searchWidget = new QWidget();
     QHBoxLayout *searchLayout = new QHBoxLayout(searchWidget);
 
-    QLineEdit *searchBar = new QLineEdit();
+    searchBar = new QLineEdit();
     searchBar->setPlaceholderText("Cerca...");
     searchBar->setFixedHeight(35);
     searchBar->setFont(QFont("Mono",16));
@@ -59,7 +59,11 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     QPushButton *clearButton = new QPushButton("✖");
     clearButton->setFixedSize(30, 30);
     clearButton->setStyleSheet("font-size: 18px; color: #555;");
-    connect(clearButton, &QPushButton::clicked, [searchBar]() { searchBar->clear();});
+    connect(clearButton, &QPushButton::clicked, [=, this]() {
+            searchBar->clear();
+            this->reloadMediaVisibili();
+            });
+
     searchLayout->addWidget(clearButton);
     centralLayout->addWidget(searchWidget);
 
@@ -92,18 +96,86 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 
 void mainWindow::ricerca()
 {
-    string searchText = findChild<QLineEdit *>()->text().toStdString();
+    string daCercare = searchBar->text().toStdString();
+    list<media*> query = LM.search(daCercare);
 
-    for (int i = 1; i <= 20; ++i) {
-        QPushButton *contentItem = new QPushButton(tr("Elemento %1").arg(i));
-        contentItem->setFixedHeight(50);
-        contentItem->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        mediaVisibili->addWidget(contentItem);
+    //Svuota
+    if (mediaVisibili != nullptr)
+    {
+        while (QLayoutItem *item = mediaVisibili->takeAt(0)) 
+        {
+            if (QWidget *widget = item->widget()) 
+                widget->deleteLater();
+
+            delete item;
+        }
+    }    
+
+    //Ripopola con i valori filtrati
+    showMediaVisitor showvis(mediaVisibili);
+
+    int columns = 3; // Numero di colonne per riga
+    int row = 0, col = 0;
+
+    for (auto m : query) 
+    {
+
+        QWidget *itemWidget = new QWidget();
+        QVBoxLayout *itemLayout = new QVBoxLayout(itemWidget);
+
+        QLabel *imageLabel = new QLabel();
+        imageLabel->setPixmap(QPixmap("./immagini/libro.png").scaled(100, 100, Qt::KeepAspectRatio));
+        imageLabel->setAlignment(Qt::AlignCenter);
+
+        QLabel *titleLabel = new QLabel(m->getTitolo().c_str());
+        titleLabel->setAlignment(Qt::AlignCenter);
+        titleLabel->setFont(QFont("Mono",16));
+
+        QLabel *annoLable = new QLabel(to_string(m->getAnno()).c_str());
+        annoLable->setAlignment(Qt::AlignCenter);
+        annoLable->setFont(QFont("Mono",12));
+
+        itemLayout->addWidget(imageLabel);
+        itemLayout->addWidget(titleLabel);
+        itemLayout->addWidget(annoLable);
+        itemWidget->setLayout(itemLayout);
+        itemWidget->setFixedSize(200, 250);
+        // Stile per bordi arrotondati e contrasto
+        itemWidget->setStyleSheet(
+                "background-color: #686868;"
+                "border-radius: 10px;"
+                "margin: 5px;"
+                );
+        mediaVisibili->addWidget(itemWidget, row, col);
+
+        col++;
+        if (col >= columns) 
+        {
+            col = 0;
+            row++;
+        }
     }
+
+
 }
+
 
 void mainWindow::reloadMediaVisibili()
 {
+    //Svuota
+    if (mediaVisibili != nullptr)
+    {
+        while (QLayoutItem *item = mediaVisibili->takeAt(0)) 
+        {
+            if (QWidget *widget = item->widget()) 
+                widget->deleteLater();
+
+            delete item;
+        }
+    }    
+
+
+    //Ripopola
     showMediaVisitor showvis(mediaVisibili);
 
     int columns = 3; // Numero di colonne per riga
@@ -135,11 +207,11 @@ void mainWindow::reloadMediaVisibili()
         itemWidget->setLayout(itemLayout);
         itemWidget->setFixedSize(200, 250);
         // Stile per bordi arrotondati e contrasto
-            itemWidget->setStyleSheet(
+        itemWidget->setStyleSheet(
                 "background-color: #686868;"
                 "border-radius: 10px;"
                 "margin: 5px;"
-            );
+                );
         mediaVisibili->addWidget(itemWidget, row, col);
 
         col++;

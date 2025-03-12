@@ -173,6 +173,7 @@ void jsonVisitor::readAllCanzoni(list<media*>& listaMedia)
     
     for (const QJsonValue& value : jsonArray) 
     {
+
         if (value.isObject()) 
         {
             listaMedia.push_back(new canzone(value["titolo"].toString().toStdString(), 
@@ -224,7 +225,9 @@ void jsonVisitor::readAllAlbum(list<media*>& listaMedia)
                 for(auto m : listaMedia)
                 {
                     if(dynamic_cast<canzone*>(m) && m->getId()==temp.toInt()) //se è una canzone e l'id combacia
+                    {
                         a->addCanzone(dynamic_cast<canzone*>(m)); 
+                    }
                 }
             }
 

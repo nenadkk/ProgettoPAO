@@ -18,9 +18,7 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 {
     //Caricamento dati 
     LM.load();
-    cout<<"\nDIMENSIONE LM "<<LM.size();
-
-
+    cout<<LM.size(); 
     // Widget principale
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);

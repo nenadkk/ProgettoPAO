@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
        a.addCanzone(&c3);
 
        cout<<a;
-       */
     jsonVisitor JsonVisitor; 
 
     list<media*> listaMedia;
@@ -37,7 +36,6 @@ int main(int argc, char *argv[])
             cout<<*a<<"\n";
         }
     }
-    /*
        c1.accept(&JsonVisitor);
        c2.accept(&JsonVisitor);
        c3.accept(&JsonVisitor);

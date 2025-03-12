@@ -18,6 +18,8 @@ void listamedia::load()
     jVisitor.readAllAlbum(LM);
 }
 
+int listamedia::size() const { return LM.size();}
+
 list<media*> listamedia::filtroSoloLibri() const
 {
     list<media*> listaTemp;
@@ -79,7 +81,19 @@ list<media*> listamedia::search(string& strDaCercare) const
     return listaTemp;
 }
 
+media* listamedia::operator[](size_t index)
+{
+    auto it = LM.begin();
+    advance(it, index);
+    return *it;
+}
+const media* listamedia::operator[](size_t index) const
+{
+    auto it = LM.begin();
+    advance(it, index);
+    return *it;
 
+}
 
 
 

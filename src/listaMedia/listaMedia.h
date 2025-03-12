@@ -16,11 +16,15 @@ class listamedia
         void removeMedia();
         void editMedia();
 
+        int size() const;
+
         list<media*> filtroSoloLibri() const;
         list<media*> filtroSoloCanzoni() const;
         list<media*> filtroSoloAlbum() const;
 
         list<media*> search(string&) const;
 
+        media* operator[](size_t index);
+        const media* operator[](size_t index) const;
 };
 #endif

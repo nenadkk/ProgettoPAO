@@ -54,6 +54,7 @@ OBJECTS_DIR   = ./
 
 SOURCES       = src/main.cpp \
 		src/grafica/mainWindow.cpp \
+		src/grafica/showMediaVisitor.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/listaMedia/listaMedia.cpp \
 		src/logica/album.cpp \
@@ -62,6 +63,7 @@ SOURCES       = src/main.cpp \
 		src/logica/media.cpp 
 OBJECTS       = main.o \
 		mainWindow.o \
+		showMediaVisitor.o \
 		jsonVisitor.o \
 		listaMedia.o \
 		album.o \
@@ -134,6 +136,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
 		ProgettoPAO.pro src/grafica/mainWindow.h \
+		src/grafica/showMediaVisitor.h \
 		src/jsonHandler/jsonVisitor.h \
 		src/listaMedia/listaMedia.h \
 		src/logica/album.h \
@@ -142,6 +145,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/logica/media.h \
 		src/logica/visitor.h src/main.cpp \
 		src/grafica/mainWindow.cpp \
+		src/grafica/showMediaVisitor.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/listaMedia/listaMedia.cpp \
 		src/logica/album.cpp \
@@ -313,8 +317,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/grafica/mainWindow.h src/jsonHandler/jsonVisitor.h src/listaMedia/listaMedia.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/grafica/mainWindow.cpp src/jsonHandler/jsonVisitor.cpp src/listaMedia/listaMedia.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/grafica/mainWindow.h src/grafica/showMediaVisitor.h src/jsonHandler/jsonVisitor.h src/listaMedia/listaMedia.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/grafica/mainWindow.cpp src/grafica/showMediaVisitor.cpp src/jsonHandler/jsonVisitor.cpp src/listaMedia/listaMedia.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -380,8 +384,17 @@ mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/listaMedia/listaMedia.h \
 		src/logica/canzone.h \
 		src/logica/album.h \
-		src/logica/libro.h
+		src/logica/libro.h \
+		src/grafica/showMediaVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainWindow.o src/grafica/mainWindow.cpp
+
+showMediaVisitor.o: src/grafica/showMediaVisitor.cpp src/grafica/showMediaVisitor.h \
+		src/logica/visitor.h \
+		src/logica/libro.h \
+		src/logica/media.h \
+		src/logica/canzone.h \
+		src/logica/album.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o showMediaVisitor.o src/grafica/showMediaVisitor.cpp
 
 jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/visitor.h \

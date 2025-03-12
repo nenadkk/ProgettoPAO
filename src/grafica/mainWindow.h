@@ -3,19 +3,20 @@
 #include "../logica/media.h"
 #include "../listaMedia/listaMedia.h"
 #include <QMainWindow>
-#include <QVBoxLayout>
+#include <QGridLayout>
 
 class mainWindow : public QMainWindow 
 {
     private:
         listamedia LM;
-        QVBoxLayout *mediaVisibili;
+        QGridLayout *mediaVisibili;
 
     public:
         mainWindow(QWidget* parent = nullptr);
 
     public slots:
         void ricerca();
+        void reloadMediaVisibili();
 
 };
 #endif

@@ -29,8 +29,15 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     // Barra laterale sinistra con pulsanti
     QWidget *sideBar = new QWidget();
     QVBoxLayout *sideBarLayout = new QVBoxLayout(sideBar);
-    for (int i = 1; i <= 5; ++i) {
+    
+    QWidget *space = new QWidget();
+    space->setFixedHeight(35);
+    sideBarLayout->addWidget(space);
+
+    for (int i = 1; i <= 5; ++i) 
+    {
         QPushButton *button = new QPushButton(tr("Pulsante %1").arg(i));
+        button->setFixedHeight(40);
         sideBarLayout->addWidget(button);
     }
     sideBarLayout->addStretch();
@@ -39,10 +46,22 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     QWidget *centralArea = new QWidget();
     QVBoxLayout *centralLayout = new QVBoxLayout(centralArea);
 
+    QWidget *searchWidget = new QWidget();
+    QHBoxLayout *searchLayout = new QHBoxLayout(searchWidget);
+
     QLineEdit *searchBar = new QLineEdit();
     searchBar->setPlaceholderText("Cerca...");
+    searchBar->setFixedHeight(35);
+    searchBar->setFont(QFont("Mono",16));
     connect(searchBar, &QLineEdit::returnPressed, this, &mainWindow::ricerca);
-    centralLayout->addWidget(searchBar);
+    searchLayout->addWidget(searchBar);
+
+    QPushButton *clearButton = new QPushButton("✖");
+    clearButton->setFixedSize(30, 30);
+    clearButton->setStyleSheet("font-size: 18px; color: #555;");
+    connect(clearButton, &QPushButton::clicked, [searchBar]() { searchBar->clear();});
+    searchLayout->addWidget(clearButton);
+    centralLayout->addWidget(searchWidget);
 
     // Area di contenuto con scroll
     QScrollArea *scrollArea = new QScrollArea();
@@ -102,18 +121,25 @@ void mainWindow::reloadMediaVisibili()
         imageLabel->setPixmap(QPixmap("./immagini/libro.png").scaled(100, 100, Qt::KeepAspectRatio));
         imageLabel->setAlignment(Qt::AlignCenter);
 
-        QLabel *titleLabel = new QLabel(tr(LM[i]->getTitolo().c_str()).arg(i));
+        QLabel *titleLabel = new QLabel(LM[i]->getTitolo().c_str());
         titleLabel->setAlignment(Qt::AlignCenter);
+        titleLabel->setFont(QFont("Mono",16));
 
-        QLabel *descLabel = new QLabel(tr(to_string(LM[i]->getAnno()).c_str()).arg(i));
-        descLabel->setAlignment(Qt::AlignCenter);
+        QLabel *annoLable = new QLabel(to_string(LM[i]->getAnno()).c_str());
+        annoLable->setAlignment(Qt::AlignCenter);
+        annoLable->setFont(QFont("Mono",12));
 
         itemLayout->addWidget(imageLabel);
         itemLayout->addWidget(titleLabel);
-        itemLayout->addWidget(descLabel);
+        itemLayout->addWidget(annoLable);
         itemWidget->setLayout(itemLayout);
-        itemWidget->setFixedSize(150, 200);
-
+        itemWidget->setFixedSize(200, 250);
+        // Stile per bordi arrotondati e contrasto
+            itemWidget->setStyleSheet(
+                "background-color: #686868;"
+                "border-radius: 10px;"
+                "margin: 5px;"
+            );
         mediaVisibili->addWidget(itemWidget, row, col);
 
         col++;

@@ -18,7 +18,7 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 {
     //Caricamento dati 
     LM.load();
-    cout<<LM.size(); 
+
     // Widget principale
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -90,8 +90,9 @@ void mainWindow::reloadMediaVisibili()
     int columns = 3; // Numero di colonne per riga
     int row = 0, col = 0;
 
-    for (int i=0;i<<LM.size();i++) 
+    for (int i=0;i<LM.size();i++) 
     {
+
         LM[i]->accept(&showvis);
 
         QWidget *itemWidget = new QWidget();

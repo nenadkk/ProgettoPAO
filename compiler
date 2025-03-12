@@ -1,6 +1,12 @@
 #!/bin/bash
 qmake6 -project
 qmake6
+sed -i "7a QT += widgets gui core" ProgettoPAO.pro
+
 make
+if [ $? -eq 0 ]; then
+    clear
+fi
+
 rm *.o
-clear
+

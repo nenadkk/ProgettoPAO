@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-INCPATH       = -I. -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+INCPATH       = -I. -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake6
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = ProgettoPAO1.0.0
 DISTDIR = /home/nenad/Progetto/ProgettoPAO/.tmp/ProgettoPAO1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath-link,/usr/lib/x86_64-linux-gnu
-LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt6Gui.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread -lGLX -lOpenGL   
+LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt6Widgets.so /usr/lib/x86_64-linux-gnu/libQt6Gui.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread -lGLX -lOpenGL   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -53,13 +53,17 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = src/main.cpp \
+		src/grafica/mainWindow.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
+		src/listaMedia/listaMedia.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
 		src/logica/libro.cpp \
 		src/logica/media.cpp 
 OBJECTS       = main.o \
+		mainWindow.o \
 		jsonVisitor.o \
+		listaMedia.o \
 		album.o \
 		cazone.o \
 		libro.o \
@@ -121,6 +125,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/resources.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/moc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/unix/opengl.prf \
+		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/uic.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/unix/thread.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qmake_use.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/file_copies.prf \
@@ -128,13 +133,17 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		ProgettoPAO.pro src/jsonHandler/jsonVisitor.h \
+		ProgettoPAO.pro src/grafica/mainWindow.h \
+		src/jsonHandler/jsonVisitor.h \
+		src/listaMedia/listaMedia.h \
 		src/logica/album.h \
 		src/logica/canzone.h \
 		src/logica/libro.h \
 		src/logica/media.h \
 		src/logica/visitor.h src/main.cpp \
+		src/grafica/mainWindow.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
+		src/listaMedia/listaMedia.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
 		src/logica/libro.cpp \
@@ -207,6 +216,7 @@ Makefile: ProgettoPAO.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/resources.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/moc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/unix/opengl.prf \
+		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/uic.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/unix/thread.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qmake_use.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/file_copies.prf \
@@ -215,6 +225,7 @@ Makefile: ProgettoPAO.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
 		ProgettoPAO.pro \
+		/usr/lib/x86_64-linux-gnu/libQt6Widgets.prl \
 		/usr/lib/x86_64-linux-gnu/libQt6Gui.prl \
 		/usr/lib/x86_64-linux-gnu/libQt6Core.prl
 	$(QMAKE) -o Makefile ProgettoPAO.pro
@@ -275,6 +286,7 @@ Makefile: ProgettoPAO.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/resources.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/moc.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/unix/opengl.prf:
+/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/uic.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/unix/thread.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qmake_use.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/file_copies.prf:
@@ -283,6 +295,7 @@ Makefile: ProgettoPAO.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf:
 ProgettoPAO.pro:
+/usr/lib/x86_64-linux-gnu/libQt6Widgets.prl:
 /usr/lib/x86_64-linux-gnu/libQt6Gui.prl:
 /usr/lib/x86_64-linux-gnu/libQt6Core.prl:
 qmake: FORCE
@@ -300,8 +313,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/grafica/mainWindow.h src/jsonHandler/jsonVisitor.h src/listaMedia/listaMedia.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/grafica/mainWindow.cpp src/jsonHandler/jsonVisitor.cpp src/listaMedia/listaMedia.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -339,6 +352,8 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
+compiler_uic_make_all:
+compiler_uic_clean:
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
@@ -354,8 +369,19 @@ main.o: src/main.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/libro.h \
 		src/logica/media.h \
 		src/logica/canzone.h \
-		src/logica/album.h
+		src/logica/album.h \
+		src/grafica/mainWindow.h \
+		src/listaMedia/listaMedia.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
+
+mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
+		src/logica/media.h \
+		src/logica/visitor.h \
+		src/listaMedia/listaMedia.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/logica/libro.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainWindow.o src/grafica/mainWindow.cpp
 
 jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/visitor.h \
@@ -364,6 +390,15 @@ jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/canzone.h \
 		src/logica/album.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsonVisitor.o src/jsonHandler/jsonVisitor.cpp
+
+listaMedia.o: src/listaMedia/listaMedia.cpp src/listaMedia/listaMedia.h \
+		src/logica/canzone.h \
+		src/logica/media.h \
+		src/logica/visitor.h \
+		src/logica/album.h \
+		src/logica/libro.h \
+		src/jsonHandler/jsonVisitor.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o listaMedia.o src/listaMedia/listaMedia.cpp
 
 album.o: src/logica/album.cpp src/logica/album.h \
 		src/logica/media.h \

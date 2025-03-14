@@ -91,7 +91,7 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 
     // Configurazione della finestra principale
     setWindowTitle("Interfaccia Qt");
-    resize(1000, 800);
+    resize(1200, 800);
 }
 
 void mainWindow::ricerca()
@@ -114,7 +114,6 @@ void mainWindow::ricerca()
     //Ripopola con i valori filtrati
     showMediaVisitor showvis(mediaVisibili);
 
-    int columns = 3; // Numero di colonne per riga
     int row = 0, col = 0;
 
     for (auto m : query) 
@@ -149,7 +148,7 @@ void mainWindow::ricerca()
         mediaVisibili->addWidget(itemWidget, row, col);
 
         col++;
-        if (col >= columns) 
+        if (col >= 3) 
         {
             col = 0;
             row++;
@@ -174,53 +173,13 @@ void mainWindow::reloadMediaVisibili()
         }
     }    
 
-
     //Ripopola
     showMediaVisitor showvis(mediaVisibili);
 
-    int columns = 3; // Numero di colonne per riga
     int row = 0, col = 0;
 
     for (int i=0;i<LM.size();i++) 
-    {
-
         LM[i]->accept(&showvis);
-
-        QWidget *itemWidget = new QWidget();
-        QVBoxLayout *itemLayout = new QVBoxLayout(itemWidget);
-
-        QLabel *imageLabel = new QLabel();
-        imageLabel->setPixmap(QPixmap("./immagini/libro.png").scaled(100, 100, Qt::KeepAspectRatio));
-        imageLabel->setAlignment(Qt::AlignCenter);
-
-        QLabel *titleLabel = new QLabel(LM[i]->getTitolo().c_str());
-        titleLabel->setAlignment(Qt::AlignCenter);
-        titleLabel->setFont(QFont("Mono",16));
-
-        QLabel *annoLable = new QLabel(to_string(LM[i]->getAnno()).c_str());
-        annoLable->setAlignment(Qt::AlignCenter);
-        annoLable->setFont(QFont("Mono",12));
-
-        itemLayout->addWidget(imageLabel);
-        itemLayout->addWidget(titleLabel);
-        itemLayout->addWidget(annoLable);
-        itemWidget->setLayout(itemLayout);
-        itemWidget->setFixedSize(200, 250);
-        // Stile per bordi arrotondati e contrasto
-        itemWidget->setStyleSheet(
-                "background-color: #686868;"
-                "border-radius: 10px;"
-                "margin: 5px;"
-                );
-        mediaVisibili->addWidget(itemWidget, row, col);
-
-        col++;
-        if (col >= columns) 
-        {
-            col = 0;
-            row++;
-        }
-    }
 }
 
 

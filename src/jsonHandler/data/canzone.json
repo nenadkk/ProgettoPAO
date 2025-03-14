@@ -2,7 +2,7 @@
     {
         "anno": 2020,
         "autore": "yeye",
-        "copertina": "path",
+        "copertina": "./immagini/canzone.png",
         "durata": 188,
         "genere": "rapp",
         "id": 1,
@@ -11,16 +11,16 @@
     {
         "anno": 2023,
         "autore": "bbro",
-        "copertina": "path",
+        "copertina": "./immagini/canzone.png",
         "durata": 199,
         "genere": "rapp",
         "id": 2,
-        "titolo": "carr"
+        "titolo": "carraadddddddddddddddddddddddddddddddddddddd"
     },
     {
         "anno": 2020,
         "autore": "yeye",
-        "copertina": "path",
+        "copertina": "./immagini/canzone.png",
         "durata": 188,
         "genere": "rapp",
         "id": 3,

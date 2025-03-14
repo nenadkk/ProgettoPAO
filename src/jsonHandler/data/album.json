@@ -7,7 +7,7 @@
             2,
             3
         ],
-        "copertina": "path1",
+        "copertina": "./immagini/album.png",
         "id": 1,
         "titolo": "kkkk"
     }

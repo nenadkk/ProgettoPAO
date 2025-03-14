@@ -6,6 +6,7 @@ class showMediaVisitor : public visitor
 {
     private:
         QGridLayout* layoutDaRiempire;
+        int row, col;
     public:
         showMediaVisitor(QGridLayout* );
 

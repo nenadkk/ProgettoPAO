@@ -1,6 +1,9 @@
 #include "listaMedia.h"
 #include "../jsonHandler/jsonVisitor.h"
 #include <string>
+#include <algorithm> // Per std::transform
+#include <cctype>    // Per std::toupper
+                     
 void listamedia::save() const
 {
     jsonVisitor jVisitor; 
@@ -53,26 +56,58 @@ list<media*> listamedia::filtroSoloAlbum() const
     return listaTemp;
 }
 
-list<media*> listamedia::search(string& strDaCercare) const
+void listamedia::rendiMaiuscolo(string& str)
+{
+    transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::toupper(c); }); 
+}
+
+list<media*> listamedia::search(string strDaCercare) const
 {
     list<media*> listaTemp;
     for(auto m : LM)
     {
-        if(m->getTitolo().find(strDaCercare) != string::npos ||
-           m->getAutore().find(strDaCercare) != string::npos || 
-           to_string(m->getAnno()).find(strDaCercare) != string::npos ||
-           to_string(m->getId()).find(strDaCercare) != string::npos)
+        //Trasformo tutto in maiuscolo per evitare ricerca case sensitive 
+        rendiMaiuscolo(strDaCercare);
+
+        string titoloMaiuscolo = m->getTitolo(), 
+               autoreMaiuscolo = m->getAutore(), 
+               annoMaiuscolo = to_string(m->getAnno()), 
+               idMaiuscolo = to_string(m->getId());
+        
+        rendiMaiuscolo(titoloMaiuscolo);
+        rendiMaiuscolo(autoreMaiuscolo);
+        rendiMaiuscolo(annoMaiuscolo);
+        rendiMaiuscolo(idMaiuscolo);
+        
+        //ricerca
+        if(titoloMaiuscolo.find(strDaCercare) != string::npos ||
+           autoreMaiuscolo.find(strDaCercare) != string::npos || 
+           annoMaiuscolo.find(strDaCercare) != string::npos ||
+           idMaiuscolo.find(strDaCercare) != string::npos)
         {
             listaTemp.push_back(m);
         }
         else if (auto t = dynamic_cast<libro*>(m)) 
         {
-            if(to_string(t->getIsbn()).find(strDaCercare) != string::npos || t->getEditore().find(strDaCercare) != string::npos)
+            //Trasformo tutto in maiuscolo per evitare ricerca case sensitive 
+            string isbnMaiuscolo = to_string(t->getIsbn()), 
+                   editoreMaiuscolo = t->getEditore();
+
+            rendiMaiuscolo(isbnMaiuscolo);
+            rendiMaiuscolo(editoreMaiuscolo);
+
+            //ricerca
+            if(isbnMaiuscolo.find(strDaCercare) != string::npos || editoreMaiuscolo.find(strDaCercare) != string::npos)
                 listaTemp.push_back(m);
         }
         else if (auto t = dynamic_cast<canzone*>(m)) 
         {
-            if(t->getGenere().find(strDaCercare) != string::npos)
+            //Trasformo tutto in maiuscolo per evitare ricerca case sensitive 
+            string genereMaiuscolo = t->getGenere();
+            rendiMaiuscolo(genereMaiuscolo);
+
+            //ricerca
+            if(genereMaiuscolo.find(strDaCercare) != string::npos)
                 listaTemp.push_back(m);
         }
 

@@ -7,6 +7,7 @@ class listamedia
 {
     private:
         list<media*> LM;
+        static void rendiMaiuscolo(string&);
 
     public:
         void save() const;
@@ -22,7 +23,7 @@ class listamedia
         list<media*> filtroSoloCanzoni() const;
         list<media*> filtroSoloAlbum() const;
 
-        list<media*> search(string&) const;
+        list<media*> search(string) const;
 
         media* operator[](size_t index);
         const media* operator[](size_t index) const;

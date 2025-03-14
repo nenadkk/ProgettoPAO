@@ -11,7 +11,7 @@
 #include <QScrollArea>
 #include <QListWidget>
 #include <QLabel>
-#include <string>
+#include <algorithm>
 #include "showMediaVisitor.h"
 
 mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
@@ -111,51 +111,14 @@ void mainWindow::ricerca()
         }
     }    
 
-    //Ripopola con i valori filtrati
-    showMediaVisitor showvis(mediaVisibili);
-
-    int row = 0, col = 0;
-
-    for (auto m : query) 
+    if(!query.empty())
     {
+        //Ripopola con i valori filtrati
+        showMediaVisitor showvis(mediaVisibili, width());
 
-        QWidget *itemWidget = new QWidget();
-        QVBoxLayout *itemLayout = new QVBoxLayout(itemWidget);
-
-        QLabel *imageLabel = new QLabel();
-        imageLabel->setPixmap(QPixmap("./immagini/libro.png").scaled(100, 100, Qt::KeepAspectRatio));
-        imageLabel->setAlignment(Qt::AlignCenter);
-
-        QLabel *titleLabel = new QLabel(m->getTitolo().c_str());
-        titleLabel->setAlignment(Qt::AlignCenter);
-        titleLabel->setFont(QFont("Mono",16));
-
-        QLabel *annoLable = new QLabel(to_string(m->getAnno()).c_str());
-        annoLable->setAlignment(Qt::AlignCenter);
-        annoLable->setFont(QFont("Mono",12));
-
-        itemLayout->addWidget(imageLabel);
-        itemLayout->addWidget(titleLabel);
-        itemLayout->addWidget(annoLable);
-        itemWidget->setLayout(itemLayout);
-        itemWidget->setFixedSize(200, 250);
-        // Stile per bordi arrotondati e contrasto
-        itemWidget->setStyleSheet(
-                "background-color: #686868;"
-                "border-radius: 10px;"
-                "margin: 5px;"
-                );
-        mediaVisibili->addWidget(itemWidget, row, col);
-
-        col++;
-        if (col >= 3) 
-        {
-            col = 0;
-            row++;
-        }
+        for (auto m : query) 
+            m->accept(&showvis);
     }
-
-
 }
 
 
@@ -174,15 +137,21 @@ void mainWindow::reloadMediaVisibili()
     }    
 
     //Ripopola
-    showMediaVisitor showvis(mediaVisibili);
-
-    int row = 0, col = 0;
+    showMediaVisitor showvis(mediaVisibili,width());
 
     for (int i=0;i<LM.size();i++) 
         LM[i]->accept(&showvis);
 }
 
+void mainWindow::resizeEvent(QResizeEvent* event)
+{
+    QWidget::resizeEvent(event);
+    updateLayoutAtResize();
+}
 
+void mainWindow::updateLayoutAtResize()
+{
+}
 
 
 

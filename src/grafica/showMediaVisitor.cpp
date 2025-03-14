@@ -4,11 +4,19 @@
 #include "../logica/album.h"
 #include "mediaWidget.h"
 #include <QGridLayout>
+#include <algorithm>
 #include <string>
+#include <QResizeEvent>
+#include <QWidget>
 
-showMediaVisitor::showMediaVisitor(QGridLayout* _layout) : layoutDaRiempire(_layout), col(0), row(0) {}
+showMediaVisitor::showMediaVisitor(QGridLayout* _layout, int _width) : layoutDaRiempire(_layout), row(0), col(0) 
+{ 
+    maxCol = max(3,((_width-150)/(270+10)));
+    if(maxCol>5)
+        maxCol=5;
+}
 
-void showMediaVisitor::visit(libro* _libro) 
+void showMediaVisitor::visit(libro* _libro)
 {
     string campi[6] = {_libro->getTitolo(), 
         _libro->getAutore(), 
@@ -27,7 +35,7 @@ void showMediaVisitor::visit(libro* _libro)
     layoutDaRiempire->addWidget(item, row, col);
 
     col++;
-    if (col >= 3) 
+    if (col >= maxCol) 
     {
         col = 0;
         row++;
@@ -36,7 +44,12 @@ void showMediaVisitor::visit(libro* _libro)
 
 void showMediaVisitor::visit(canzone* _canzone) 
 {
-    string durata = to_string(_canzone->getDurata()/60) + ":" + to_string(_canzone->getDurata()%60);
+    string durata = to_string(_canzone->getDurata()/60) + ":";
+    if(_canzone->getDurata()%60 < 10)
+        durata = durata + "0" + to_string(_canzone->getDurata()%60);
+    else
+        durata = durata + to_string(_canzone->getDurata()%60);
+
     string campi[6] = {_canzone->getTitolo(), 
         _canzone->getAutore(), 
         to_string(_canzone->getAnno()),
@@ -55,16 +68,21 @@ void showMediaVisitor::visit(canzone* _canzone)
     layoutDaRiempire->addWidget(item, row, col);
 
     col++;
-    if (col >= 3) 
+    if (col >= maxCol) 
     {
         col = 0;
         row++;
-    }    
+    }     
 }
 
 void showMediaVisitor::visit(album* _album) 
 {
-    string durata = to_string(_album->getDurataTotale()/60) + ":" + to_string(_album->getDurataTotale()%60);
+    string durata = to_string(_album->getDurataTotale()/60) + ":";
+    if(_album->getDurataTotale()%60 < 10)
+        durata = durata + "0" + to_string(_album->getDurataTotale()%60);
+    else
+        durata = durata + to_string(_album->getDurataTotale()%60);
+
     string campi[6] = {_album->getTitolo(), 
         _album->getAutore(), 
         to_string(_album->getAnno()),
@@ -83,7 +101,7 @@ void showMediaVisitor::visit(album* _album)
     layoutDaRiempire->addWidget(item, row, col);
 
     col++;
-    if (col >= 3) 
+    if (col >= maxCol) 
     {
         col = 0;
         row++;

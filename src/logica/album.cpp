@@ -22,6 +22,7 @@ int album::getNumCanzoni() const { return trackList.size(); };
 void album::addCanzone(canzone* newCanzone)
 {
     trackList.push_back(newCanzone);
+    durataTotale+=newCanzone->getDurata();
 }
 
 void album::accept(visitor *_visitor)

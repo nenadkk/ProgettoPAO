@@ -6,9 +6,9 @@ class showMediaVisitor : public visitor
 {
     private:
         QGridLayout* layoutDaRiempire;
-        int row, col;
+        int row, col, maxCol;
     public:
-        showMediaVisitor(QGridLayout* );
+        showMediaVisitor(QGridLayout*, int );
 
         void visit(libro  *_libro) override;
         void visit(canzone  *_canzone) override;

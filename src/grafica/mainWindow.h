@@ -13,16 +13,22 @@ class mainWindow : public QMainWindow
         listamedia LM;
         QGridLayout *mediaVisibili;
         QLineEdit *searchBar;
+        QLineEdit *copertinaTemp;
 
         void resizeEvent(QResizeEvent* event) override;
         void updateLayoutAtResize();
         void svuotaMediaVisibili();
 
         void creaSottoOggettoMedia(QWidget**, QLineEdit**);
-
+        bool isImageFile(const QString &filePath) const;
 
     public:
         mainWindow(QWidget* parent = nullptr);
+
+    private slots:
+        void browseImage();
+        void confermaSalvataggio();
+        void annullaSalvataggio();
 
     public slots:
         void ricerca();

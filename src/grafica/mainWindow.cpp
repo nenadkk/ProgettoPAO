@@ -1,9 +1,4 @@
 #include "mainWindow.h"
-#include "qboxlayout.h"
-#include "qglobal.h"
-#include "qlabel.h"
-#include "qlineedit.h"
-#include "qmainwindow.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QWidget>
@@ -14,9 +9,15 @@
 #include <QScrollArea>
 #include <QListWidget>
 #include <QLabel>
-#include "qnamespace.h"
-#include "qpushbutton.h"
-#include "qwidget.h"
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QUrl>
+#include <QMimeData>
+#include <QFileDialog>
+#include <QDebug>
+
+
+#include "qglobal.h"
 #include "showMediaVisitor.h"
 
 mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
@@ -246,9 +247,31 @@ void mainWindow::creaSottoOggettoMedia(QWidget **widgetBase, QLineEdit **campiBa
     layoutAnno->addWidget(campiBase[2],0, Qt::AlignLeft);
 
     //---------- COPERTINA ----------
-    
+    QLabel *lableCopertina = new QLabel("Copertina: ");
+    lableCopertina->setFont(QFont("Mono",14));
+    lableCopertina->setFixedSize(120,30);
+
+    campiBase[3] = new QLineEdit();
+    campiBase[3]->setFont(QFont("Mono",14));
+    campiBase[3]->setFixedSize(200,30);
+
+    widgetBase[3] = new QWidget();
+
+    QHBoxLayout *layoutCopertina = new QHBoxLayout(widgetBase[3]);
     
 
+    QPushButton *browseButton = new QPushButton("Sfoglia", this);
+    browseButton->setFixedSize(120,30);
+    browseButton->setFont(QFont("Mono",12));
+
+    copertinaTemp = campiBase[3];
+    connect(browseButton, &QPushButton::clicked, this, &mainWindow::browseImage);
+
+    layoutCopertina->setContentsMargins(0,0,0,0);
+    layoutCopertina->setSpacing(0);
+    layoutCopertina->addWidget(lableCopertina,0,Qt::AlignRight);
+    layoutCopertina->addWidget(campiBase[3],0, Qt::AlignLeft);
+    layoutCopertina->addWidget(browseButton, 0, Qt::AlignLeft);
 }
 
 
@@ -325,6 +348,7 @@ void mainWindow::creaLibro()
     layout->addWidget(widgetNumPagine);
     layout->addWidget(widgetIsbn);
     layout->addWidget(widgetGenere);
+    layout->addWidget(widgetsBase[3]);
 
     mediaVisibili->addWidget(widgetCreazione);
     
@@ -340,6 +364,29 @@ void mainWindow::creaAlbum()
 
 }
 
+void mainWindow::browseImage()
+{
+        QString filePath = QFileDialog::getOpenFileName(this, "Seleziona un'immagine", "", "Immagini (*.png *.jpg *.jpeg *.bmp *.gif)");
+        if (!filePath.isEmpty())    
+            copertinaTemp->setText(filePath);
+}
+
+void mainWindow::confermaSalvataggio()
+{
+
+}
+
+void mainWindow::annullaSalvataggio()
+{
+
+}
+
+bool mainWindow::isImageFile(const QString &filePath) const 
+{
+    QFileInfo fileInfo(filePath);
+    QString ext = fileInfo.suffix().toLower();
+    return (ext == "png" || ext == "jpg" || ext == "jpeg" || ext == "bmp" || ext == "gif");
+}
 
 
 

@@ -192,6 +192,69 @@ void mainWindow::creaMedia()
     
 }
 
+void mainWindow::creaSottoOggettoMedia(QWidget **widgetBase, QLineEdit **campiBase )
+{
+    //---------- TITOLO ----------
+    QLabel *lableTitolo = new QLabel("Titolo: ");
+    lableTitolo->setFont(QFont("Mono",14));
+    lableTitolo->setFixedSize(120,30);
+
+    campiBase[0] = new QLineEdit();
+    campiBase[0]->setFont(QFont("Mono",14));
+    campiBase[0]->setFixedSize(200,30);
+
+    widgetBase[0] = new QWidget();
+
+    QHBoxLayout *layoutTitolo = new QHBoxLayout(widgetBase[0]);
+    layoutTitolo->setContentsMargins(0,0,0,0);
+    layoutTitolo->setSpacing(0);
+    layoutTitolo->addWidget(lableTitolo,0,Qt::AlignRight);
+    layoutTitolo->addWidget(campiBase[0],0, Qt::AlignLeft);
+
+    //---------- AUTORE ----------
+    QLabel *lableAutore = new QLabel("Autore: ");
+    lableAutore->setFont(QFont("Mono",14));
+    lableAutore->setFixedSize(120,30);
+
+    campiBase[1] = new QLineEdit();
+    campiBase[1]->setFont(QFont("Mono",14));
+    campiBase[1]->setFixedSize(200,30);
+
+    widgetBase[1] = new QWidget();
+
+    QHBoxLayout *layoutAutore = new QHBoxLayout(widgetBase[1]);
+    layoutAutore->setContentsMargins(0,0,0,0);
+    layoutAutore->setSpacing(0);
+    layoutAutore->addWidget(lableAutore,0,Qt::AlignRight);
+    layoutAutore->addWidget(campiBase[1],0, Qt::AlignLeft);
+
+    //---------- ANNO ----------
+    QLabel *lableAnno = new QLabel("Anno: ");
+    lableAnno->setFont(QFont("Mono",14));
+    lableAnno->setFixedSize(120,30);
+
+    campiBase[2] = new QLineEdit();
+    campiBase[2]->setFont(QFont("Mono",14));
+    campiBase[2]->setFixedSize(200,30);
+
+    widgetBase[2] = new QWidget();
+
+    QHBoxLayout *layoutAnno = new QHBoxLayout(widgetBase[2]);
+    layoutAnno->setContentsMargins(0,0,0,0);
+    layoutAnno->setSpacing(0);
+    layoutAnno->addWidget(lableAnno,0,Qt::AlignRight);
+    layoutAnno->addWidget(campiBase[2],0, Qt::AlignLeft);
+
+    //---------- COPERTINA ----------
+    
+    
+
+}
+
+
+
+
+
 void mainWindow::creaLibro()
 {
     svuotaMediaVisibili();
@@ -199,58 +262,11 @@ void mainWindow::creaLibro()
 
     QVBoxLayout *layout = new QVBoxLayout(widgetCreazione);    
     layout->setAlignment(Qt::AlignCenter);
+
+    QWidget *widgetsBase[4];
+    QLineEdit *campiBase[4];
+    creaSottoOggettoMedia(widgetsBase, campiBase);
     
-    //---------- TITOLO ----------
-    QLabel *lableTitolo = new QLabel("Titolo: ");
-    lableTitolo->setFont(QFont("Mono",14));
-    lableTitolo->setFixedSize(120,30);
-
-    QLineEdit *titolo = new QLineEdit();
-    titolo->setFont(QFont("Mono",14));
-    titolo->setFixedSize(200,30);
-
-    QWidget *widgetTitolo = new QWidget();
-
-    QHBoxLayout *layoutTitolo = new QHBoxLayout(widgetTitolo);
-    layoutTitolo->setContentsMargins(0,0,0,0);
-    layoutTitolo->setSpacing(0);
-    layoutTitolo->addWidget(lableTitolo,0,Qt::AlignRight);
-    layoutTitolo->addWidget(titolo,0, Qt::AlignLeft);
-
-    //---------- AUTORE ----------
-    QLabel *lableAutore = new QLabel("Autore: ");
-    lableAutore->setFont(QFont("Mono",14));
-    lableAutore->setFixedSize(120,30);
-
-    QLineEdit *autore = new QLineEdit();
-    autore->setFont(QFont("Mono",14));
-    autore->setFixedSize(200,30);
-
-    QWidget *widgetAutore = new QWidget();
-
-    QHBoxLayout *layoutAutore = new QHBoxLayout(widgetAutore);
-    layoutAutore->setContentsMargins(0,0,0,0);
-    layoutAutore->setSpacing(0);
-    layoutAutore->addWidget(lableAutore,0,Qt::AlignRight);
-    layoutAutore->addWidget(autore,0, Qt::AlignLeft);
-
-    //---------- ANNO ----------
-    QLabel *lableAnno = new QLabel("Anno: ");
-    lableAnno->setFont(QFont("Mono",14));
-    lableAnno->setFixedSize(120,30);
-
-    QLineEdit *anno = new QLineEdit();
-    anno->setFont(QFont("Mono",14));
-    anno->setFixedSize(200,30);
-
-    QWidget *widgetAnno = new QWidget();
-
-    QHBoxLayout *layoutAnno = new QHBoxLayout(widgetAnno);
-    layoutAnno->setContentsMargins(0,0,0,0);
-    layoutAnno->setSpacing(0);
-    layoutAnno->addWidget(lableAnno,0,Qt::AlignRight);
-    layoutAnno->addWidget(anno,0, Qt::AlignLeft);
-
     //---------- NUMERO PAGINE ----------
     QLabel *lableNumPagine = new QLabel("N° Pagine: ");
     lableNumPagine->setFont(QFont("Mono",14));
@@ -303,9 +319,9 @@ void mainWindow::creaLibro()
     layoutGenere->addWidget(genere,0, Qt::AlignLeft);
 
     //---------------------------------------------------
-    layout->addWidget(widgetTitolo);
-    layout->addWidget(widgetAutore);
-    layout->addWidget(widgetAnno);
+    layout->addWidget(widgetsBase[0]);
+    layout->addWidget(widgetsBase[1]);
+    layout->addWidget(widgetsBase[2]);
     layout->addWidget(widgetNumPagine);
     layout->addWidget(widgetIsbn);
     layout->addWidget(widgetGenere);

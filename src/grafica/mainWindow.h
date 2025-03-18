@@ -18,6 +18,8 @@ class mainWindow : public QMainWindow
         void updateLayoutAtResize();
         void svuotaMediaVisibili();
 
+        void creaSottoOggettoMedia(QWidget**, QLineEdit**);
+
 
     public:
         mainWindow(QWidget* parent = nullptr);

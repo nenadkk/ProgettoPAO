@@ -21,7 +21,7 @@ void listamedia::load()
     jVisitor.readAllAlbum(LM);
 }
 
-int listamedia::size() const { return LM.size();}
+int listamedia::size() const { return LM.size(); }
 
 list<media*> listamedia::filtroSoloLibri() const
 {

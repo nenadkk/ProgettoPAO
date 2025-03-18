@@ -16,6 +16,8 @@ class mainWindow : public QMainWindow
 
         void resizeEvent(QResizeEvent* event) override;
         void updateLayoutAtResize();
+        void svuotaMediaVisibili();
+
 
     public:
         mainWindow(QWidget* parent = nullptr);
@@ -23,6 +25,10 @@ class mainWindow : public QMainWindow
     public slots:
         void ricerca();
         void reloadMediaVisibili();
+        void creaMedia();
 
+        void creaLibro();
+        void creaCanzone();
+        void creaAlbum();
 };
 #endif

@@ -1,5 +1,8 @@
 #include "mainWindow.h"
+#include "qboxlayout.h"
 #include "qglobal.h"
+#include "qlabel.h"
+#include "qlineedit.h"
 #include "qmainwindow.h"
 #include <QApplication>
 #include <QMainWindow>
@@ -11,7 +14,8 @@
 #include <QScrollArea>
 #include <QListWidget>
 #include <QLabel>
-#include <algorithm>
+#include "qnamespace.h"
+#include "qpushbutton.h"
 #include "showMediaVisitor.h"
 
 mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
@@ -31,15 +35,14 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     QVBoxLayout *sideBarLayout = new QVBoxLayout(sideBar);
 
     QWidget *space = new QWidget();
-    space->setFixedHeight(35);
+    space->setFixedHeight(40);
     sideBarLayout->addWidget(space);
 
-    for (int i = 1; i <= 5; ++i) 
-    {
-        QPushButton *button = new QPushButton(tr("Pulsante %1").arg(i));
-        button->setFixedHeight(40);
-        sideBarLayout->addWidget(button);
-    }
+    QPushButton *pulsanteCrea = new QPushButton("Crea");
+    pulsanteCrea->setFixedHeight(40);
+    sideBarLayout->addWidget(pulsanteCrea);
+    connect(pulsanteCrea, &QPushButton::clicked, this, &mainWindow::creaMedia);
+
     sideBarLayout->addStretch();
 
     // Area centrale con barra di ricerca in alto
@@ -99,17 +102,7 @@ void mainWindow::ricerca()
     string daCercare = searchBar->text().toStdString();
     list<media*> query = LM.search(daCercare);
 
-    //Svuota
-    if (mediaVisibili != nullptr)
-    {
-        while (QLayoutItem *item = mediaVisibili->takeAt(0)) 
-        {
-            if (QWidget *widget = item->widget()) 
-                widget->deleteLater();
-
-            delete item;
-        }
-    }    
+    svuotaMediaVisibili();
 
     if(!query.empty())
     {
@@ -124,17 +117,7 @@ void mainWindow::ricerca()
 
 void mainWindow::reloadMediaVisibili()
 {
-    //Svuota
-    if (mediaVisibili != nullptr)
-    {
-        while (QLayoutItem *item = mediaVisibili->takeAt(0)) 
-        {
-            if (QWidget *widget = item->widget()) 
-                widget->deleteLater();
-
-            delete item;
-        }
-    }    
+    svuotaMediaVisibili();
 
     //Ripopola
     showMediaVisitor showvis(mediaVisibili,width());
@@ -152,6 +135,90 @@ void mainWindow::resizeEvent(QResizeEvent* event)
 void mainWindow::updateLayoutAtResize()
 {
 }
+
+void mainWindow::svuotaMediaVisibili()
+{
+    if (mediaVisibili != nullptr)
+    {
+        while (QLayoutItem *item = mediaVisibili->takeAt(0)) 
+        {
+            if (QWidget *widget = item->widget()) 
+                widget->deleteLater();
+
+            delete item;
+        }
+    }    
+}
+
+void mainWindow::creaMedia()
+{
+    svuotaMediaVisibili(); 
+    
+    QWidget* sezioneCrea = new QWidget();
+    sezioneCrea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    QVBoxLayout* layout = new QVBoxLayout(sezioneCrea);
+
+    QLabel *titoloSezione = new QLabel("SELEZIONA IL TIPO DI MEDIA DA CREARE");
+    titoloSezione->setAlignment(Qt::AlignCenter);
+    titoloSezione->setFont(QFont("Mono",18));
+    layout->addWidget(titoloSezione);
+
+    QWidget *pulsantiTipoMedia = new QWidget();
+    QHBoxLayout *layoutPulsanti = new QHBoxLayout(pulsantiTipoMedia);
+
+    QPushButton *creaLibro = new QPushButton("Libro");
+    creaLibro->setFixedHeight(40);
+    layout->addWidget(creaLibro);
+    connect(creaLibro, &QPushButton::clicked, this, &mainWindow::creaLibro);
+    layoutPulsanti->addWidget(creaLibro);
+
+    QPushButton *creaCanzone = new QPushButton("Canzone");
+    creaCanzone->setFixedHeight(40);
+    layout->addWidget(creaCanzone);
+    connect(creaCanzone, &QPushButton::clicked, this, &mainWindow::creaCanzone);
+    layoutPulsanti->addWidget(creaCanzone);
+
+    QPushButton *creaAlbum = new QPushButton("Album");
+    creaAlbum->setFixedHeight(40);
+    layout->addWidget(creaAlbum);
+    connect(creaAlbum, &QPushButton::clicked, this, &mainWindow::creaAlbum);
+    layoutPulsanti->addWidget(creaAlbum);
+
+    layout->addWidget(pulsantiTipoMedia);
+
+    mediaVisibili->addWidget(sezioneCrea);
+    
+}
+
+void mainWindow::creaLibro()
+{
+    svuotaMediaVisibili();
+    QVBoxLayout *layout = new QVBoxLayout();    
+    layout->setAlignment(Qt::AlignCenter);
+    
+    QLabel *lableTitle = new QLabel("Titolo: ");
+    QLineEdit *titolo = new QLineEdit();
+    QWidget *widgetTitolo = new QWidget();
+    QHBoxLayout *layoutTitolo = new QHBoxLayout(widgetTitolo);
+
+}
+
+void mainWindow::creaCanzone()
+{
+
+}
+
+void mainWindow::creaAlbum()
+{
+
+}
+
+
+
+
+
+
 
 
 

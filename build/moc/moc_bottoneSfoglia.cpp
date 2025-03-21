@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "src/grafica/bottoneSfoglia.h"
+#include "../../src/grafica/bottoneSfoglia.h"
 #include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

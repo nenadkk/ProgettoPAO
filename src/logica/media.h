@@ -1,6 +1,5 @@
 #ifndef MEDIA
 #define MEDIA
-#include <strstream>
 #include <iostream>
 #include "visitor.h"
 using std::string;

@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-INCPATH       = -I. -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+INCPATH       = -I. -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -Ibuild/moc -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake6
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = ProgettoPAO1.0.0
-DISTDIR = /home/nenad/Progetti/ProgettoPAO/.tmp/ProgettoPAO1.0.0
+DISTDIR = /home/nenad/Progetti/ProgettoPAO/build/obj/ProgettoPAO1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath-link,/usr/lib/x86_64-linux-gnu
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt6Widgets.so /usr/lib/x86_64-linux-gnu/libQt6Gui.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread -lGLX -lOpenGL   
@@ -48,7 +48,7 @@ STRIP         = strip
 
 ####### Output directory
 
-OBJECTS_DIR   = ./
+OBJECTS_DIR   = build/obj/
 
 ####### Files
 
@@ -62,21 +62,21 @@ SOURCES       = src/main.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
 		src/logica/libro.cpp \
-		src/logica/media.cpp moc_bottoneSfoglia.cpp \
-		moc_mainWindow.cpp
-OBJECTS       = main.o \
-		bottoneSfoglia.o \
-		mainWindow.o \
-		mediaWidget.o \
-		showMediaVisitor.o \
-		jsonVisitor.o \
-		listaMedia.o \
-		album.o \
-		cazone.o \
-		libro.o \
-		media.o \
-		moc_bottoneSfoglia.o \
-		moc_mainWindow.o
+		src/logica/media.cpp build/moc/moc_bottoneSfoglia.cpp \
+		build/moc/moc_mainWindow.cpp
+OBJECTS       = build/obj/main.o \
+		build/obj/bottoneSfoglia.o \
+		build/obj/mainWindow.o \
+		build/obj/mediaWidget.o \
+		build/obj/showMediaVisitor.o \
+		build/obj/jsonVisitor.o \
+		build/obj/listaMedia.o \
+		build/obj/album.o \
+		build/obj/cazone.o \
+		build/obj/libro.o \
+		build/obj/media.o \
+		build/obj/moc_bottoneSfoglia.o \
+		build/obj/moc_mainWindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/linux.conf \
@@ -355,30 +355,30 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_predefs_make_all: moc_predefs.h
+compiler_moc_predefs_make_all: build/moc/moc_predefs.h
 compiler_moc_predefs_clean:
-	-$(DEL_FILE) moc_predefs.h
-moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
-	g++ -pipe -O2 -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
+	-$(DEL_FILE) build/moc/moc_predefs.h
+build/moc/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
+	g++ -pipe -O2 -Wall -Wextra -fPIC -dM -E -o build/moc/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_bottoneSfoglia.cpp moc_mainWindow.cpp
+compiler_moc_header_make_all: build/moc/moc_bottoneSfoglia.cpp build/moc/moc_mainWindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_bottoneSfoglia.cpp moc_mainWindow.cpp
-moc_bottoneSfoglia.cpp: src/grafica/bottoneSfoglia.h \
-		moc_predefs.h \
+	-$(DEL_FILE) build/moc/moc_bottoneSfoglia.cpp build/moc/moc_mainWindow.cpp
+build/moc/moc_bottoneSfoglia.cpp: src/grafica/bottoneSfoglia.h \
+		build/moc/moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
-	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/bottoneSfoglia.h -o moc_bottoneSfoglia.cpp
+	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/bottoneSfoglia.h -o build/moc/moc_bottoneSfoglia.cpp
 
-moc_mainWindow.cpp: src/grafica/mainWindow.h \
+build/moc/moc_mainWindow.cpp: src/grafica/mainWindow.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
 		src/listaMedia/listaMedia.h \
 		src/logica/canzone.h \
 		src/logica/album.h \
 		src/logica/libro.h \
-		moc_predefs.h \
+		build/moc/moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
-	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/mainWindow.h -o moc_mainWindow.cpp
+	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/mainWindow.h -o build/moc/moc_mainWindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -396,7 +396,7 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ####### Compile
 
-main.o: src/main.cpp src/jsonHandler/jsonVisitor.h \
+build/obj/main.o: src/main.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/visitor.h \
 		src/logica/libro.h \
 		src/logica/media.h \
@@ -404,12 +404,12 @@ main.o: src/main.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/album.h \
 		src/grafica/mainWindow.h \
 		src/listaMedia/listaMedia.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/main.o src/main.cpp
 
-bottoneSfoglia.o: src/grafica/bottoneSfoglia.cpp src/grafica/bottoneSfoglia.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bottoneSfoglia.o src/grafica/bottoneSfoglia.cpp
+build/obj/bottoneSfoglia.o: src/grafica/bottoneSfoglia.cpp src/grafica/bottoneSfoglia.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/bottoneSfoglia.o src/grafica/bottoneSfoglia.cpp
 
-mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
+build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
 		src/listaMedia/listaMedia.h \
@@ -418,64 +418,64 @@ mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/libro.h \
 		src/grafica/showMediaVisitor.h \
 		src/grafica/bottoneSfoglia.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainWindow.o src/grafica/mainWindow.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mainWindow.o src/grafica/mainWindow.cpp
 
-mediaWidget.o: src/grafica/mediaWidget.cpp src/grafica/mediaWidget.h \
+build/obj/mediaWidget.o: src/grafica/mediaWidget.cpp src/grafica/mediaWidget.h \
 		src/logica/media.h \
 		src/logica/visitor.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mediaWidget.o src/grafica/mediaWidget.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mediaWidget.o src/grafica/mediaWidget.cpp
 
-showMediaVisitor.o: src/grafica/showMediaVisitor.cpp src/grafica/showMediaVisitor.h \
+build/obj/showMediaVisitor.o: src/grafica/showMediaVisitor.cpp src/grafica/showMediaVisitor.h \
 		src/logica/visitor.h \
 		src/logica/libro.h \
 		src/logica/media.h \
 		src/logica/canzone.h \
 		src/logica/album.h \
 		src/grafica/mediaWidget.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o showMediaVisitor.o src/grafica/showMediaVisitor.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/showMediaVisitor.o src/grafica/showMediaVisitor.cpp
 
-jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
+build/obj/jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/visitor.h \
 		src/logica/libro.h \
 		src/logica/media.h \
 		src/logica/canzone.h \
 		src/logica/album.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsonVisitor.o src/jsonHandler/jsonVisitor.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/jsonVisitor.o src/jsonHandler/jsonVisitor.cpp
 
-listaMedia.o: src/listaMedia/listaMedia.cpp src/listaMedia/listaMedia.h \
+build/obj/listaMedia.o: src/listaMedia/listaMedia.cpp src/listaMedia/listaMedia.h \
 		src/logica/canzone.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
 		src/logica/album.h \
 		src/logica/libro.h \
 		src/jsonHandler/jsonVisitor.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o listaMedia.o src/listaMedia/listaMedia.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/listaMedia.o src/listaMedia/listaMedia.cpp
 
-album.o: src/logica/album.cpp src/logica/album.h \
+build/obj/album.o: src/logica/album.cpp src/logica/album.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
 		src/logica/canzone.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o album.o src/logica/album.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/album.o src/logica/album.cpp
 
-cazone.o: src/logica/cazone.cpp src/logica/canzone.h \
+build/obj/cazone.o: src/logica/cazone.cpp src/logica/canzone.h \
 		src/logica/media.h \
 		src/logica/visitor.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cazone.o src/logica/cazone.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/cazone.o src/logica/cazone.cpp
 
-libro.o: src/logica/libro.cpp src/logica/libro.h \
+build/obj/libro.o: src/logica/libro.cpp src/logica/libro.h \
 		src/logica/media.h \
 		src/logica/visitor.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o libro.o src/logica/libro.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/libro.o src/logica/libro.cpp
 
-media.o: src/logica/media.cpp src/logica/media.h \
+build/obj/media.o: src/logica/media.cpp src/logica/media.h \
 		src/logica/visitor.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o media.o src/logica/media.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/media.o src/logica/media.cpp
 
-moc_bottoneSfoglia.o: moc_bottoneSfoglia.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_bottoneSfoglia.o moc_bottoneSfoglia.cpp
+build/obj/moc_bottoneSfoglia.o: build/moc/moc_bottoneSfoglia.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_bottoneSfoglia.o build/moc/moc_bottoneSfoglia.cpp
 
-moc_mainWindow.o: moc_mainWindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainWindow.o moc_mainWindow.cpp
+build/obj/moc_mainWindow.o: build/moc/moc_mainWindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_mainWindow.o build/moc/moc_mainWindow.cpp
 
 ####### Install
 

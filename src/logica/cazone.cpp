@@ -1,6 +1,8 @@
 #include "canzone.h"
+#include "media.h"
 #include <ostream>
 
+canzone::canzone() : media("","",0,"./immagini/canzone.png",0), durata(0), genere("") {}
 canzone::canzone(const string& _titolo, const string& _autore, const int& _anno, const string& _copertina, const int& _id,
                  const int& _durata, const string& _genere): 
                  media(_titolo,_autore,_anno,_copertina,_id), durata(_durata), genere(_genere) {};

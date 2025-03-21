@@ -16,9 +16,8 @@
 #include <QFileDialog>
 #include <QDebug>
 
-
-#include "qglobal.h"
 #include "showMediaVisitor.h"
+#include "bottoneSfoglia.h"
 
 mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 {
@@ -43,7 +42,7 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     QPushButton *pulsanteCrea = new QPushButton("Crea");
     pulsanteCrea->setFixedHeight(40);
     sideBarLayout->addWidget(pulsanteCrea);
-    connect(pulsanteCrea, &QPushButton::clicked, this, &mainWindow::creaMedia);
+    connect(pulsanteCrea, &QPushButton::clicked, this, &mainWindow::sceltaCreazione);
 
     sideBarLayout->addStretch();
 
@@ -152,7 +151,7 @@ void mainWindow::svuotaMediaVisibili()
     }    
 }
 
-void mainWindow::creaMedia()
+void mainWindow::sceltaCreazione()
 {
     svuotaMediaVisibili(); 
     
@@ -349,6 +348,7 @@ void mainWindow::creaLibro()
     layout->addWidget(widgetIsbn);
     layout->addWidget(widgetGenere);
     layout->addWidget(widgetsBase[3]);
+
 
     mediaVisibili->addWidget(widgetCreazione);
     

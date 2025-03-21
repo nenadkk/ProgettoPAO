@@ -1,5 +1,7 @@
 #include "media.h"
 
+media::~media(){}
+
 media::media(const string& _titolo, const string& _autore, const int& _anno, const string& _copertina, const int& _id ) : 
     titolo(_titolo), autore(_autore), anno(_anno), copertina(_copertina), id(_id) {};
 

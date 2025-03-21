@@ -17,6 +17,7 @@ class media
         
     public:
         media(const string&, const string&, const int&, const string&, const int&);
+        virtual ~media();
 
         string getTitolo() const;
         string getAutore() const;

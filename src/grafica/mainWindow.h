@@ -9,6 +9,8 @@
 
 class mainWindow : public QMainWindow 
 {
+    Q_OBJECT
+
     private:
         listamedia LM;
         QGridLayout *mediaVisibili;
@@ -33,7 +35,7 @@ class mainWindow : public QMainWindow
     public slots:
         void ricerca();
         void reloadMediaVisibili();
-        void creaMedia();
+        void sceltaCreazione();
 
         void creaLibro();
         void creaCanzone();

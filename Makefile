@@ -54,6 +54,7 @@ OBJECTS_DIR   = build/obj/
 
 SOURCES       = src/main.cpp \
 		src/grafica/bottoneSfoglia.cpp \
+		src/grafica/createMediaVisitor.cpp \
 		src/grafica/mainWindow.cpp \
 		src/grafica/mediaWidget.cpp \
 		src/grafica/showMediaVisitor.cpp \
@@ -66,6 +67,7 @@ SOURCES       = src/main.cpp \
 		build/moc/moc_mainWindow.cpp
 OBJECTS       = build/obj/main.o \
 		build/obj/bottoneSfoglia.o \
+		build/obj/createMediaVisitor.o \
 		build/obj/mainWindow.o \
 		build/obj/mediaWidget.o \
 		build/obj/showMediaVisitor.o \
@@ -143,6 +145,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
 		ProgettoPAO.pro src/grafica/bottoneSfoglia.h \
+		src/grafica/createMediaVisitor.h \
 		src/grafica/mainWindow.h \
 		src/grafica/mediaWidget.h \
 		src/grafica/showMediaVisitor.h \
@@ -154,6 +157,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/logica/media.h \
 		src/logica/visitor.h src/main.cpp \
 		src/grafica/bottoneSfoglia.cpp \
+		src/grafica/createMediaVisitor.cpp \
 		src/grafica/mainWindow.cpp \
 		src/grafica/mediaWidget.cpp \
 		src/grafica/showMediaVisitor.cpp \
@@ -328,8 +332,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/grafica/bottoneSfoglia.h src/grafica/mainWindow.h src/grafica/mediaWidget.h src/grafica/showMediaVisitor.h src/jsonHandler/jsonVisitor.h src/listaMedia/listaMedia.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/grafica/bottoneSfoglia.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidget.cpp src/grafica/showMediaVisitor.cpp src/jsonHandler/jsonVisitor.cpp src/listaMedia/listaMedia.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/grafica/bottoneSfoglia.h src/grafica/createMediaVisitor.h src/grafica/mainWindow.h src/grafica/mediaWidget.h src/grafica/showMediaVisitor.h src/jsonHandler/jsonVisitor.h src/listaMedia/listaMedia.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/grafica/bottoneSfoglia.cpp src/grafica/createMediaVisitor.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidget.cpp src/grafica/showMediaVisitor.cpp src/jsonHandler/jsonVisitor.cpp src/listaMedia/listaMedia.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -409,6 +413,11 @@ build/obj/main.o: src/main.cpp src/jsonHandler/jsonVisitor.h \
 build/obj/bottoneSfoglia.o: src/grafica/bottoneSfoglia.cpp src/grafica/bottoneSfoglia.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/bottoneSfoglia.o src/grafica/bottoneSfoglia.cpp
 
+build/obj/createMediaVisitor.o: src/grafica/createMediaVisitor.cpp src/grafica/createMediaVisitor.h \
+		src/logica/visitor.h \
+		src/grafica/bottoneSfoglia.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/createMediaVisitor.o src/grafica/createMediaVisitor.cpp
+
 build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
@@ -417,7 +426,7 @@ build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/album.h \
 		src/logica/libro.h \
 		src/grafica/showMediaVisitor.h \
-		src/grafica/bottoneSfoglia.h
+		src/grafica/createMediaVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mainWindow.o src/grafica/mainWindow.cpp
 
 build/obj/mediaWidget.o: src/grafica/mediaWidget.cpp src/grafica/mediaWidget.h \

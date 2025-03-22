@@ -19,17 +19,18 @@ class mainWindow : public QMainWindow
         void resizeEvent(QResizeEvent* event) override;
         void updateLayoutAtResize();
         void svuotaMediaVisibili();
+        void ricerca();
+        
+    private slots:
+        void sceltaCreazione();
+        void creaLibro();
+        void creaCanzone();
+        void creaAlbum();
 
     public:
         mainWindow(QWidget* parent = nullptr);
 
     public slots:
-        void ricerca();
         void reloadMediaVisibili();
-        void sceltaCreazione();
-
-        void creaLibro();
-        void creaCanzone();
-        void creaAlbum();
 };
 #endif

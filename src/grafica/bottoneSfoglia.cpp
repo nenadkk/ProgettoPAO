@@ -12,7 +12,14 @@ void bottoneSfoglia::browseImage()
     if(imgLineEdit)
     {
         QString filePath = QFileDialog::getOpenFileName(this, "Seleziona un'immagine", "", "Immagini (*.png *.jpg *.jpeg *.bmp *.gif)");
-        if (!filePath.isEmpty())    
+        if (!filePath.isEmpty() && isImageFile(filePath))    
             imgLineEdit->setText(filePath);       
     }
+}
+
+bool bottoneSfoglia::isImageFile(const QString &filePath) const 
+{
+    QFileInfo fileInfo(filePath);
+    QString ext = fileInfo.suffix().toLower();
+    return (ext == "png" || ext == "jpg" || ext == "jpeg" || ext == "jpeg" || ext == "bmp" || ext == "gif");
 }

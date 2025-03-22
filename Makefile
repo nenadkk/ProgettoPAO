@@ -414,6 +414,12 @@ build/obj/bottoneSfoglia.o: src/grafica/bottoneSfoglia.cpp src/grafica/bottoneSf
 
 build/obj/createMediaVisitor.o: src/grafica/createMediaVisitor.cpp src/grafica/createMediaVisitor.h \
 		src/logica/visitor.h \
+		src/logica/media.h \
+		src/grafica/mainWindow.h \
+		src/mediaManager/mediaManager.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/logica/libro.h \
 		src/grafica/bottoneSfoglia.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/createMediaVisitor.o src/grafica/createMediaVisitor.cpp
 

@@ -26,6 +26,7 @@ void showMediaVisitor::visit(libro* _libro)
         to_string(_libro->getNumPagine())+" pagine"};
 
     mediaWidget* item = new mediaWidget(static_cast<media*>(_libro), campi);
+
     item->setStyleSheet(
             "background-color: #686868;"
             "border-radius: 10px;"

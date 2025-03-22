@@ -4,6 +4,7 @@
 #include <string>
 #include <QString>
 
+//forward declaration
 class libro;
 class canzone;
 class album;

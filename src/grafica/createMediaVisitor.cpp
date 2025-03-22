@@ -1,11 +1,13 @@
 #include "createMediaVisitor.h"
 #include "bottoneSfoglia.h"
+#include "qpushbutton.h"
+#include "qwidget.h"
 
 #include <QWidget>
 #include <QLabel>
 #include <QFileDialog>
 #include <QPushButton>
-createMediaVisitor::createMediaVisitor(QGridLayout* l) : layoutEsterno(l) {}
+createMediaVisitor::createMediaVisitor(mainWindow* m, QGridLayout* l) : windowEsterna(m), layoutEsterno(l){}
 
 void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, QLineEdit **campiBase )
 {
@@ -144,6 +146,25 @@ void createMediaVisitor::visit(libro* newLibro)
     layoutGenere->addWidget(lableGenere,0,Qt::AlignRight);
     layoutGenere->addWidget(genere,0, Qt::AlignLeft);
 
+    //---------- PULSANTI ----------
+    QWidget *widgetPulsanti = new QWidget();
+    QHBoxLayout *layoutPulsanti = new QHBoxLayout(widgetPulsanti);
+
+    //---------- PULSANTE ANNULLA ----------
+    QPushButton *btnAnnulla = new QPushButton("ANNULLA",widgetPulsanti);
+    btnAnnulla->setFixedSize(200,50);
+    btnAnnulla->setFont(QFont("Mono",15));
+    QObject::connect(btnAnnulla, &QPushButton::clicked, windowEsterna, &mainWindow::reloadMediaVisibili);
+    layoutPulsanti->addWidget(btnAnnulla,0, Qt::AlignLeft);
+
+    //---------- PULSANTE SALVA ----------
+    QPushButton *btnSalva = new QPushButton("SALVA");
+    btnSalva->setFixedSize(200,50);
+    btnSalva->setFont(QFont("Mono",15));
+    layoutPulsanti->addWidget(btnSalva,0, Qt::AlignRight);
+
+ 
+
     //---------------------------------------------------
     layout->addWidget(widgetsBase[0]);
     layout->addWidget(widgetsBase[1]);
@@ -152,6 +173,7 @@ void createMediaVisitor::visit(libro* newLibro)
     layout->addWidget(widgetIsbn);
     layout->addWidget(widgetGenere);
     layout->addWidget(widgetsBase[3]);
+    layout->addWidget(widgetPulsanti);
 
     layoutEsterno->addWidget(widgetCreazione);
 
@@ -175,15 +197,11 @@ void createMediaVisitor::confermaSalvataggio()
 
 void createMediaVisitor::annullaSalvataggio()
 {
-
+    qDebug()<<"ds";
+    windowEsterna->reloadMediaVisibili();
 }
 
-bool createMediaVisitor::isImageFile(const QString &filePath) const 
-{
-    QFileInfo fileInfo(filePath);
-    QString ext = fileInfo.suffix().toLower();
-    return (ext == "png" || ext == "jpg" || ext == "jpeg" || ext == "bmp" || ext == "gif");
-}
+
 
 
 

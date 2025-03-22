@@ -15,6 +15,7 @@ class bottoneSfoglia : public QPushButton
 
     private slots:
         void browseImage();
+        bool isImageFile(const QString &filePath) const;
 
     public:
         bottoneSfoglia(QLineEdit*, QWidget* parent = nullptr);

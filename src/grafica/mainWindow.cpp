@@ -196,10 +196,9 @@ void mainWindow::creaLibro()
 {
     svuotaMediaVisibili();
 
-    libro* newLibro = new libro();
-    createMediaVisitor* vis = new createMediaVisitor(mediaVisibili);
-
-    newLibro->accept(vis);
+    libro temp;
+    createMediaVisitor vis(this, mediaVisibili);
+    temp.accept(&vis);
    
 }
 

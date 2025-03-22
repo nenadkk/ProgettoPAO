@@ -22,5 +22,6 @@ void bottoneSalva::crea()
                                     (attributi)["editore"]->text().toStdString()
                                     ));
     }
+    delete tipo;
     windowEsterna->reloadMediaVisibili();
 }

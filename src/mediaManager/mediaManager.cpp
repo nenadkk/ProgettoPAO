@@ -1,10 +1,10 @@
-#include "listaMedia.h"
+#include "mediaManager.h"
 #include "../jsonHandler/jsonVisitor.h"
 #include <string>
 #include <algorithm> // Per std::transform
 #include <cctype>    // Per std::toupper
                      
-void listamedia::save() const
+void mediaManager::save() const
 {
     jsonVisitor jVisitor; 
     jVisitor.clearAll();
@@ -13,7 +13,7 @@ void listamedia::save() const
         m->accept(&jVisitor);
 }
 
-void listamedia::load()
+void mediaManager::load()
 {
     jsonVisitor jVisitor;
     jVisitor.readAllLibri(LM);
@@ -21,9 +21,9 @@ void listamedia::load()
     jVisitor.readAllAlbum(LM);
 }
 
-int listamedia::size() const { return LM.size(); }
+int mediaManager::size() const { return LM.size(); }
 
-list<media*> listamedia::filtroSoloLibri() const
+list<media*> mediaManager::filtroSoloLibri() const
 {
     list<media*> listaTemp;
     for(auto m : LM)
@@ -34,7 +34,7 @@ list<media*> listamedia::filtroSoloLibri() const
     return listaTemp;
 }
 
-list<media*> listamedia::filtroSoloCanzoni() const
+list<media*> mediaManager::filtroSoloCanzoni() const
 {
     list<media*> listaTemp;
     for(auto m : LM)
@@ -45,7 +45,7 @@ list<media*> listamedia::filtroSoloCanzoni() const
     return listaTemp;
 }
 
-list<media*> listamedia::filtroSoloAlbum() const
+list<media*> mediaManager::filtroSoloAlbum() const
 {
     list<media*> listaTemp;
     for(auto m : LM)
@@ -56,12 +56,12 @@ list<media*> listamedia::filtroSoloAlbum() const
     return listaTemp;
 }
 
-void listamedia::rendiMaiuscolo(string& str)
+void mediaManager::rendiMaiuscolo(string& str)
 {
     transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::toupper(c); }); 
 }
 
-list<media*> listamedia::search(string strDaCercare) const
+list<media*> mediaManager::search(string strDaCercare) const
 {
     list<media*> listaTemp;
     for(auto m : LM)
@@ -116,13 +116,13 @@ list<media*> listamedia::search(string strDaCercare) const
     return listaTemp;
 }
 
-media* listamedia::operator[](size_t index)
+media* mediaManager::operator[](size_t index)
 {
     auto it = LM.begin();
     advance(it, index);
     return *it;
 }
-const media* listamedia::operator[](size_t index) const
+const media* mediaManager::operator[](size_t index) const
 {
     auto it = LM.begin();
     advance(it, index);

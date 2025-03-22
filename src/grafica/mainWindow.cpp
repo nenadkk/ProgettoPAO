@@ -22,7 +22,7 @@
 mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 {
     //Caricamento dati 
-    LM.load();
+    mediaMan.load();
 
     // Widget principale
     QWidget *centralWidget = new QWidget(this);
@@ -101,7 +101,7 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 void mainWindow::ricerca()
 {
     string daCercare = searchBar->text().toStdString();
-    list<media*> query = LM.search(daCercare);
+    list<media*> query = mediaMan.search(daCercare);
 
     svuotaMediaVisibili();
 
@@ -123,8 +123,8 @@ void mainWindow::reloadMediaVisibili()
     //Ripopola
     showMediaVisitor showvis(mediaVisibili,width());
 
-    for (int i=0;i<LM.size();i++) 
-        LM[i]->accept(&showvis);
+    for (int i=0;i<mediaMan.size();i++) 
+        mediaMan[i]->accept(&showvis);
 }
 
 void mainWindow::resizeEvent(QResizeEvent* event)

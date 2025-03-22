@@ -1,9 +1,9 @@
-#ifndef LISTAMEDIA
-#define LISTAMEDIA
+#ifndef MEDIAMANAGER
+#define MEDIAMANAGER
 #include "../logica/canzone.h"
 #include "../logica/album.h"
 #include "../logica/libro.h"
-class listamedia
+class mediaManager
 {
     private:
         list<media*> LM;

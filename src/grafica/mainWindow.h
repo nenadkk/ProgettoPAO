@@ -1,8 +1,7 @@
 #ifndef MAINWINDOW
 #define MAINWINDOW
 #include "../logica/media.h"
-#include "../listaMedia/listaMedia.h"
-#include "qwidget.h"
+#include "../mediaManager/mediaManager.h"
 #include <QMainWindow>
 #include <QGridLayout>
 #include <QLineEdit>
@@ -12,7 +11,7 @@ class mainWindow : public QMainWindow
     Q_OBJECT
 
     private:
-        listamedia LM;
+        mediaManager mediaMan;
         QGridLayout *mediaVisibili;
         QLineEdit *searchBar;
         QLineEdit *copertinaTemp;

@@ -13,11 +13,12 @@ class createMediaVisitor : public visitor
     private:
         mainWindow *windowEsterna;
         QGridLayout *layoutEsterno;
+        mediaManager *managerEsterno;
 
-        void creaSottoOggettoMedia(QWidget**, QLineEdit**);
+        void creaSottoOggettoMedia(QWidget**, QMap<QString,QLineEdit*>*);
 
     public:
-        createMediaVisitor(mainWindow*, QGridLayout*);
+        createMediaVisitor(mainWindow*, QGridLayout*, mediaManager*);
 
         virtual void visit(libro *_libro) override; 
         virtual void visit(canzone *_canzone) override; 

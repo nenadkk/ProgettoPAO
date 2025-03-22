@@ -1,20 +1,22 @@
 [
     {
-        "anno": 2000,
-        "autore": "bbbb",
-        "copertina": "./immagini/libro.png",
+        "anno": 1999,
+        "autore": "JKR",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
         "editore": "Mondadori",
-        "isbn": 898989,
-        "numPagine": 100,
-        "titolo": "aaaa"
+        "id": 0,
+        "isbn": 101010,
+        "numPagine": 220,
+        "titolo": "Harry Potter"
     },
     {
-        "anno": 2000,
-        "autore": "bbbb",
-        "copertina": "./immagini/libro.png",
-        "editore": "Mondadori",
-        "isbn": 898989,
-        "numPagine": 100,
-        "titolo": "aaaadfyfgdyfgsdyfgysfgsyfgsyfgsyfysfgysdgfsydfgsydfg"
+        "anno": 11,
+        "autore": "fdfd",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "dsdsds",
+        "id": 0,
+        "isbn": 1112,
+        "numPagine": 30,
+        "titolo": "fddsfd"
     }
 ]

@@ -4,6 +4,11 @@
 #include <algorithm> // Per std::transform
 #include <cctype>    // Per std::toupper
                      
+void mediaManager::addMedia(media* newMedia)
+{
+    LM.push_back(newMedia);
+    save();
+}
 void mediaManager::save() const
 {
     jsonVisitor jVisitor; 

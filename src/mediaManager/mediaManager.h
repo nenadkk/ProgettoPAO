@@ -13,7 +13,7 @@ class mediaManager
         void save() const;
         void load();
 
-        void addMedia();
+        void addMedia(media*);
         void removeMedia();
         void editMedia();
 

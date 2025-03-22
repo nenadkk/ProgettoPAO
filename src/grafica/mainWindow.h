@@ -16,10 +16,15 @@ class mainWindow : public QMainWindow
         QLineEdit *searchBar;
         QLineEdit *copertinaTemp;
 
+        libro* tempLibro;
+        canzone* tempCanzone;
+        album* tempAlbum;
+
         void resizeEvent(QResizeEvent* event) override;
         void updateLayoutAtResize();
         void svuotaMediaVisibili();
         void ricerca();
+        void deleteTemp();
         
     private slots:
         void sceltaCreazione();

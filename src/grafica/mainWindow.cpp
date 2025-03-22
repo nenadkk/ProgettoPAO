@@ -23,6 +23,9 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 {
     //Caricamento dati 
     mediaMan.load();
+    tempLibro = nullptr;
+    tempCanzone = nullptr;
+    tempAlbum = nullptr;
 
     // Widget principale
     QWidget *centralWidget = new QWidget(this);
@@ -149,6 +152,7 @@ void mainWindow::svuotaMediaVisibili()
             delete item;
         }
     }    
+    deleteTemp();
 }
 
 void mainWindow::sceltaCreazione()
@@ -196,10 +200,11 @@ void mainWindow::creaLibro()
 {
     svuotaMediaVisibili();
 
-    libro *temp= new libro("Harry", "Potter",1999,"",1,1,1,"sto");
+    if(tempLibro)
+        qDebug()<<tempLibro->getAnno();
+    tempLibro= new libro("Harry", "Potter",1999,"",1,1,1,"sto");
     createMediaVisitor vis(this, mediaVisibili, &mediaMan);
-    temp->accept(&vis);
-   
+    tempLibro->accept(&vis);
 }
 
 void mainWindow::creaCanzone()
@@ -210,6 +215,27 @@ void mainWindow::creaCanzone()
 void mainWindow::creaAlbum()
 {
 
+}
+
+void mainWindow::deleteTemp()
+{
+    if(tempLibro)
+    {
+        delete tempLibro;
+        tempLibro=nullptr;
+    }
+
+    if(tempCanzone)
+    {
+        delete tempCanzone;
+        tempCanzone=nullptr;
+    }
+
+    if(tempAlbum)
+    {
+        delete tempAlbum;
+        tempAlbum = nullptr;
+    }
 }
 
 

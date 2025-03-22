@@ -1,22 +1,22 @@
 [
     {
-        "anno": 1999,
-        "autore": "JKR",
+        "anno": 0,
+        "autore": "",
         "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
-        "editore": "Mondadori",
+        "editore": "",
         "id": 0,
-        "isbn": 101010,
-        "numPagine": 220,
-        "titolo": "Harry Potter"
+        "isbn": 0,
+        "numPagine": 0,
+        "titolo": "aaaaaaaaa"
     },
     {
-        "anno": 11,
-        "autore": "fdfd",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
-        "editore": "dsdsds",
+        "anno": 0,
+        "autore": "",
+        "copertina": "",
+        "editore": "",
         "id": 0,
-        "isbn": 1112,
-        "numPagine": 30,
-        "titolo": "fddsfd"
+        "isbn": 0,
+        "numPagine": 0,
+        "titolo": "dd"
     }
 ]

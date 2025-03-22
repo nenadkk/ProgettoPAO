@@ -159,6 +159,7 @@ void createMediaVisitor::visit(libro* newLibro)
 
     //---------- PULSANTE SALVA ----------
     bottoneSalva *btnSalva = new bottoneSalva(managerEsterno, campi, newLibro, windowEsterna);
+
     btnSalva->setFixedSize(200,50);
     btnSalva->setFont(QFont("Mono",15));
     layoutPulsanti->addWidget(btnSalva,0, Qt::AlignRight);

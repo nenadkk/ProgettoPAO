@@ -3,6 +3,7 @@
 #include "../logica/visitor.h"
 #include "../logica/media.h"
 #include "mainWindow.h"
+#include "widgetCreazione.h"
 
 #include <QGridLayout>
 #include <QLineEdit>
@@ -15,7 +16,7 @@ class createMediaVisitor : public visitor
         QGridLayout *layoutEsterno;
         mediaManager *managerEsterno;
 
-        void creaSottoOggettoMedia(QWidget**, QMap<QString,QLineEdit*>*);
+        void creaSottoOggettoMedia(QWidget**,widgetCreazione*);
 
     public:
         createMediaVisitor(mainWindow*, QGridLayout*, mediaManager*);

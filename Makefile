@@ -53,36 +53,36 @@ OBJECTS_DIR   = build/obj/
 ####### Files
 
 SOURCES       = src/main.cpp \
-		src/grafica/bottoneSalva.cpp \
 		src/grafica/bottoneSfoglia.cpp \
 		src/grafica/createMediaVisitor.cpp \
 		src/grafica/mainWindow.cpp \
 		src/grafica/mediaWidget.cpp \
 		src/grafica/showMediaVisitor.cpp \
+		src/grafica/widgetCreazione.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
 		src/logica/libro.cpp \
 		src/logica/media.cpp \
-		src/mediaManager/mediaManager.cpp build/moc/moc_bottoneSalva.cpp \
-		build/moc/moc_bottoneSfoglia.cpp \
-		build/moc/moc_mainWindow.cpp
+		src/mediaManager/mediaManager.cpp build/moc/moc_bottoneSfoglia.cpp \
+		build/moc/moc_mainWindow.cpp \
+		build/moc/moc_widgetCreazione.cpp
 OBJECTS       = build/obj/main.o \
-		build/obj/bottoneSalva.o \
 		build/obj/bottoneSfoglia.o \
 		build/obj/createMediaVisitor.o \
 		build/obj/mainWindow.o \
 		build/obj/mediaWidget.o \
 		build/obj/showMediaVisitor.o \
+		build/obj/widgetCreazione.o \
 		build/obj/jsonVisitor.o \
 		build/obj/album.o \
 		build/obj/cazone.o \
 		build/obj/libro.o \
 		build/obj/media.o \
 		build/obj/mediaManager.o \
-		build/obj/moc_bottoneSalva.o \
 		build/obj/moc_bottoneSfoglia.o \
-		build/obj/moc_mainWindow.o
+		build/obj/moc_mainWindow.o \
+		build/obj/moc_widgetCreazione.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/linux.conf \
@@ -148,12 +148,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		ProgettoPAO.pro src/grafica/bottoneSalva.h \
-		src/grafica/bottoneSfoglia.h \
+		ProgettoPAO.pro src/grafica/bottoneSfoglia.h \
 		src/grafica/createMediaVisitor.h \
 		src/grafica/mainWindow.h \
 		src/grafica/mediaWidget.h \
 		src/grafica/showMediaVisitor.h \
+		src/grafica/widgetCreazione.h \
 		src/jsonHandler/jsonVisitor.h \
 		src/logica/album.h \
 		src/logica/canzone.h \
@@ -161,12 +161,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/logica/media.h \
 		src/logica/visitor.h \
 		src/mediaManager/mediaManager.h src/main.cpp \
-		src/grafica/bottoneSalva.cpp \
 		src/grafica/bottoneSfoglia.cpp \
 		src/grafica/createMediaVisitor.cpp \
 		src/grafica/mainWindow.cpp \
 		src/grafica/mediaWidget.cpp \
 		src/grafica/showMediaVisitor.cpp \
+		src/grafica/widgetCreazione.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
@@ -338,8 +338,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/grafica/bottoneSalva.h src/grafica/bottoneSfoglia.h src/grafica/createMediaVisitor.h src/grafica/mainWindow.h src/grafica/mediaWidget.h src/grafica/showMediaVisitor.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/grafica/bottoneSalva.cpp src/grafica/bottoneSfoglia.cpp src/grafica/createMediaVisitor.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidget.cpp src/grafica/showMediaVisitor.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/grafica/bottoneSfoglia.h src/grafica/createMediaVisitor.h src/grafica/mainWindow.h src/grafica/mediaWidget.h src/grafica/showMediaVisitor.h src/grafica/widgetCreazione.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/grafica/bottoneSfoglia.cpp src/grafica/createMediaVisitor.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidget.cpp src/grafica/showMediaVisitor.cpp src/grafica/widgetCreazione.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -371,21 +371,9 @@ compiler_moc_predefs_clean:
 build/moc/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -fPIC -dM -E -o build/moc/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: build/moc/moc_bottoneSalva.cpp build/moc/moc_bottoneSfoglia.cpp build/moc/moc_mainWindow.cpp
+compiler_moc_header_make_all: build/moc/moc_bottoneSfoglia.cpp build/moc/moc_mainWindow.cpp build/moc/moc_widgetCreazione.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) build/moc/moc_bottoneSalva.cpp build/moc/moc_bottoneSfoglia.cpp build/moc/moc_mainWindow.cpp
-build/moc/moc_bottoneSalva.cpp: src/grafica/bottoneSalva.h \
-		src/mediaManager/mediaManager.h \
-		src/logica/canzone.h \
-		src/logica/media.h \
-		src/logica/visitor.h \
-		src/logica/album.h \
-		src/logica/libro.h \
-		src/grafica/mainWindow.h \
-		build/moc/moc_predefs.h \
-		/usr/lib/qt6/libexec/moc
-	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/bottoneSalva.h -o build/moc/moc_bottoneSalva.cpp
-
+	-$(DEL_FILE) build/moc/moc_bottoneSfoglia.cpp build/moc/moc_mainWindow.cpp build/moc/moc_widgetCreazione.cpp
 build/moc/moc_bottoneSfoglia.cpp: src/grafica/bottoneSfoglia.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
@@ -401,6 +389,18 @@ build/moc/moc_mainWindow.cpp: src/grafica/mainWindow.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
 	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/mainWindow.h -o build/moc/moc_mainWindow.cpp
+
+build/moc/moc_widgetCreazione.cpp: src/grafica/widgetCreazione.h \
+		src/grafica/mainWindow.h \
+		src/logica/media.h \
+		src/logica/visitor.h \
+		src/mediaManager/mediaManager.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/logica/libro.h \
+		build/moc/moc_predefs.h \
+		/usr/lib/qt6/libexec/moc
+	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/widgetCreazione.h -o build/moc/moc_widgetCreazione.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -427,16 +427,6 @@ build/obj/main.o: src/main.cpp src/grafica/mainWindow.h \
 		src/logica/libro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/main.o src/main.cpp
 
-build/obj/bottoneSalva.o: src/grafica/bottoneSalva.cpp src/grafica/bottoneSalva.h \
-		src/mediaManager/mediaManager.h \
-		src/logica/canzone.h \
-		src/logica/media.h \
-		src/logica/visitor.h \
-		src/logica/album.h \
-		src/logica/libro.h \
-		src/grafica/mainWindow.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/bottoneSalva.o src/grafica/bottoneSalva.cpp
-
 build/obj/bottoneSfoglia.o: src/grafica/bottoneSfoglia.cpp src/grafica/bottoneSfoglia.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/bottoneSfoglia.o src/grafica/bottoneSfoglia.cpp
 
@@ -448,7 +438,7 @@ build/obj/createMediaVisitor.o: src/grafica/createMediaVisitor.cpp src/grafica/c
 		src/logica/canzone.h \
 		src/logica/album.h \
 		src/logica/libro.h \
-		src/grafica/bottoneSalva.h \
+		src/grafica/widgetCreazione.h \
 		src/grafica/bottoneSfoglia.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/createMediaVisitor.o src/grafica/createMediaVisitor.cpp
 
@@ -460,7 +450,8 @@ build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/album.h \
 		src/logica/libro.h \
 		src/grafica/showMediaVisitor.h \
-		src/grafica/createMediaVisitor.h
+		src/grafica/createMediaVisitor.h \
+		src/grafica/widgetCreazione.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mainWindow.o src/grafica/mainWindow.cpp
 
 build/obj/mediaWidget.o: src/grafica/mediaWidget.cpp src/grafica/mediaWidget.h \
@@ -476,6 +467,16 @@ build/obj/showMediaVisitor.o: src/grafica/showMediaVisitor.cpp src/grafica/showM
 		src/logica/album.h \
 		src/grafica/mediaWidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/showMediaVisitor.o src/grafica/showMediaVisitor.cpp
+
+build/obj/widgetCreazione.o: src/grafica/widgetCreazione.cpp src/grafica/widgetCreazione.h \
+		src/grafica/mainWindow.h \
+		src/logica/media.h \
+		src/logica/visitor.h \
+		src/mediaManager/mediaManager.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/logica/libro.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/widgetCreazione.o src/grafica/widgetCreazione.cpp
 
 build/obj/jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/visitor.h \
@@ -514,14 +515,14 @@ build/obj/mediaManager.o: src/mediaManager/mediaManager.cpp src/mediaManager/med
 		src/jsonHandler/jsonVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mediaManager.o src/mediaManager/mediaManager.cpp
 
-build/obj/moc_bottoneSalva.o: build/moc/moc_bottoneSalva.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_bottoneSalva.o build/moc/moc_bottoneSalva.cpp
-
 build/obj/moc_bottoneSfoglia.o: build/moc/moc_bottoneSfoglia.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_bottoneSfoglia.o build/moc/moc_bottoneSfoglia.cpp
 
 build/obj/moc_mainWindow.o: build/moc/moc_mainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_mainWindow.o build/moc/moc_mainWindow.cpp
+
+build/obj/moc_widgetCreazione.o: build/moc/moc_widgetCreazione.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_widgetCreazione.o build/moc/moc_widgetCreazione.cpp
 
 ####### Install
 

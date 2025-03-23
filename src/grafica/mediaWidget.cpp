@@ -3,7 +3,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
-mediaWidget::mediaWidget(media* obj, string* campoDati, QWidget* parent) : object(obj), QWidget(parent)
+mediaWidget::mediaWidget(media* obj, string* campoDati, QWidget* parent) : QWidget(parent), object(obj) 
 {
         QVBoxLayout* mainLayout = new QVBoxLayout(this);
         QHBoxLayout* buttonLayout = new QHBoxLayout();

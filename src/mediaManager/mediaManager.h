@@ -17,6 +17,10 @@ class mediaManager
         void removeMedia();
         void editMedia();
 
+        int trovaIdLibero() const;
+
+        static bool confrontaId();
+
         int size() const;
 
         list<media*> filtroSoloLibri() const;

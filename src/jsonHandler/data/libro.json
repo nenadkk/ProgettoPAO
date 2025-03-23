@@ -1,12 +1,32 @@
 [
     {
-        "anno": 2001,
-        "autore": "ggi",
-        "copertina": "./immagini/1a2862f648c3e079bcb093b6bdffa9f0.jpg",
-        "editore": "jiji",
+        "anno": 1222,
+        "autore": "dadad",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "ffa",
+        "id": 5,
+        "isbn": 0,
+        "numPagine": 111,
+        "titolo": "AZZZA"
+    },
+    {
+        "anno": 1020,
+        "autore": "aa",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "gg",
         "id": 0,
+        "isbn": 0,
+        "numPagine": 32,
+        "titolo": "VVVVVVVVVV"
+    },
+    {
+        "anno": 222,
+        "autore": "1414",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "fdfdfd",
+        "id": 4,
         "isbn": 1111111111,
-        "numPagine": 220,
-        "titolo": "Madagascatr"
+        "numPagine": 222,
+        "titolo": "fdfdfd"
     }
 ]

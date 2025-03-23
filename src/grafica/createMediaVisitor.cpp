@@ -130,7 +130,7 @@ void createMediaVisitor::visit(libro* newLibro)
     mainWidget->insertLineEdit("isbn",new QLineEdit());
     (*mainWidget)["isbn"]->setFont(QFont("Mono",14));
     (*mainWidget)["isbn"]->setFixedSize(200,30);
-    QIntValidator *validatorIsbn = new QIntValidator((*mainWidget)["isbn"]);
+    QIntValidator *validatorIsbn = new QIntValidator(0,INT_MAX,(*mainWidget)["isbn"]);
     (*mainWidget)["isbn"]->setValidator(validatorIsbn);
 
     QHBoxLayout *layoutIsbn = new QHBoxLayout(widgetIsbn);

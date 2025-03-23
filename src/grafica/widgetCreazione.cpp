@@ -27,7 +27,7 @@ void widgetCreazione::crea()
                                         attributi["autore"]->text().toStdString(),
                                         attributi["anno"]->text().toInt(),
                                         attributi["copertina"]->text().toStdString(),
-                                        0,
+                                        manager->trovaIdLibero(),
                                         attributi["numeroPagine"]->text().toInt(),
                                         attributi["isbn"]->text().toInt(),
                                         attributi["editore"]->text().toStdString()));

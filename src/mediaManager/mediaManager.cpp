@@ -1,5 +1,6 @@
 #include "mediaManager.h"
 #include "../jsonHandler/jsonVisitor.h"
+#include "qglobal.h"
 #include <string>
 #include <algorithm> // Per std::transform
 #include <cctype>    // Per std::toupper
@@ -135,7 +136,38 @@ const media* mediaManager::operator[](size_t index) const
 
 }
 
+int mediaManager::trovaIdLibero() const
+{
+    list<media*> copiaLM = this->LM; // copia non profonda!! (perchè non necessaria)
 
+    if(copiaLM.empty())
+        return 0;
+    else
+    {
+        copiaLM.sort([](const media* a, const media* b) 
+        { return a->getId() < b->getId(); });
+
+
+        int last=0;
+        for(auto i : copiaLM)
+        {
+            qDebug()<<"ID: "<<i->getId();
+
+            if(i->getId()>last)
+                return last;
+
+            else if (i->getId()==last)
+                last++;
+        }
+        return ++last;
+    }
+}
+
+
+bool confrontaPerId(const media* a, const media* b) 
+{
+    return a->getId() < b->getId();
+}
 
 
 

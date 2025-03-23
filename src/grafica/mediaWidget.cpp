@@ -12,7 +12,7 @@ mediaWidget::mediaWidget(media* obj, string* campoDati, QWidget* parent) : objec
 
         // Immagine
         QLabel *imageLabel = new QLabel();
-        imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(100, 100, Qt::KeepAspectRatio));
+        imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(200, 200, Qt::KeepAspectRatio));
         imageLabel->setAlignment(Qt::AlignCenter);
         mainLayout->addWidget(imageLabel);
 

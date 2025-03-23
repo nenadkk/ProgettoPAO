@@ -16,15 +16,16 @@ class widgetCreazione : public QWidget
         media *tipo;
         mainWindow* windowEsterna;
 
-        void copiaImmagine(QString&);
+        void copiaImmagine();
         bool isImageFile(const QString &filePath) const;
+        bool validaInput();
 
     public slots:
         void crea();
         void browseImage();
 
     public:
-        widgetCreazione(mediaManager*, media*, mainWindow*, QPushButton* parent=nullptr);
+        widgetCreazione(mediaManager*, media*, mainWindow*, QWidget* parent=nullptr);
         void insertLineEdit(QString,QLineEdit*);
         QLineEdit*& operator[](const QString& );
 };

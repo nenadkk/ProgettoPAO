@@ -1,7 +1,9 @@
 #include <QFileInfo>
+#include <QMessageBox>
 #include <QFileDialog>
 #include "widgetCreazione.h"
-widgetCreazione::widgetCreazione(mediaManager* man, media* tipo, mainWindow* windowEsterna, QPushButton* parent) : 
+#include "qboxlayout.h"
+widgetCreazione::widgetCreazione(mediaManager* man, media* tipo, mainWindow* windowEsterna, QWidget* parent) : 
     QWidget(parent), manager(man), tipo(tipo), windowEsterna(windowEsterna)
 {}
 
@@ -16,23 +18,41 @@ void widgetCreazione::insertLineEdit(QString str,QLineEdit* n)
 }
 void widgetCreazione::crea()
 {
-    if(dynamic_cast<libro*>(tipo))
+    if(validaInput())
     {
-        string titolo = (attributi)["titolo"]->text().toStdString(),
-               autore = (attributi)["autore"]->text().toStdString(),
-               copertina = (attributi)["copertina"]->text().toStdString(),
-               editore = (attributi)["editore"]->text().toStdString();
-
-        int anno = (attributi)["anno"]->text().toInt(),
-            numeroPagine = (attributi)["numeroPagine"]->text().toInt(),
-            isbn = (attributi)["isbn"]->text().toInt();
+        if(dynamic_cast<libro*>(tipo))
+        {
+            copiaImmagine();
+            manager->addMedia(new libro(attributi["titolo"]->text().toStdString(),
+                                        attributi["autore"]->text().toStdString(),
+                                        attributi["anno"]->text().toInt(),
+                                        attributi["copertina"]->text().toStdString(),
+                                        0,
+                                        attributi["numeroPagine"]->text().toInt(),
+                                        attributi["isbn"]->text().toInt(),
+                                        attributi["editore"]->text().toStdString()));
+        }
+        delete tipo;
+        windowEsterna->reloadMediaVisibili();
     }
-    delete tipo;
-    windowEsterna->reloadMediaVisibili();
 }
-void widgetCreazione::copiaImmagine(QString& pathImmagine) 
+
+bool widgetCreazione::validaInput()
 {
-    QFileInfo infoImmagine(pathImmagine);
+    foreach(auto val, attributi.values())
+    {
+        if(val->text().isEmpty())
+        {
+            QMessageBox::warning(this, "Validazione", "Dati non validi o nulli. Compilare ogni campo con valori significativi.");
+            return false;
+        }
+    }
+    return true;
+}
+
+void widgetCreazione::copiaImmagine() 
+{
+    QFileInfo infoImmagine(attributi["copertina"]->text());
     if (!infoImmagine.exists()) {
         qDebug() << "L'immagine sorgente non esiste.";
         return;
@@ -44,12 +64,12 @@ void widgetCreazione::copiaImmagine(QString& pathImmagine)
 
     if (!infoDestinazione.exists()) 
     {
-        if (!QFile::copy(pathImmagine, percorsoDestinazione)) 
+        if (!QFile::copy(attributi["copertina"]->text(), percorsoDestinazione)) 
         {
             qDebug() << "Errore durante la copia dell'immagine.";
             return;
         }
-        pathImmagine = percorsoDestinazione;
+        attributi["copertina"]->setText(percorsoDestinazione);
     }
 
 

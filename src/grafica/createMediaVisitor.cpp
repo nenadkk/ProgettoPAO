@@ -1,6 +1,5 @@
 #include "createMediaVisitor.h"
 #include "widgetCreazione.h"
-#include "bottoneSfoglia.h"
 
 #include <QWidget>
 #include <QLabel>

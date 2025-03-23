@@ -16,6 +16,8 @@ class bottoneSalva : public QPushButton
         media *tipo;
         mainWindow* windowEsterna;
 
+        void copiaImmagine(QString&);
+
     private slots:
         void crea();
 

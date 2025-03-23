@@ -6,12 +6,16 @@
 #include <QLabel>
 #include <QFileDialog>
 #include <QPushButton>
+#include <QIntValidator>
+
 createMediaVisitor::createMediaVisitor(mainWindow* m, QGridLayout* l, mediaManager* man) : 
     windowEsterna(m), layoutEsterno(l), managerEsterno(man){}
 
 void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, QMap<QString,QLineEdit*>*campiBase )
 {
     //---------- TITOLO ----------
+    widgetBase[0] = new QWidget();
+
     QLabel *lableTitolo = new QLabel("Titolo: ");
     lableTitolo->setFont(QFont("Mono",14));
     lableTitolo->setFixedSize(120,30);
@@ -20,8 +24,6 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, QMap<QStrin
     (*campiBase)["titolo"]->setFont(QFont("Mono",14));
     (*campiBase)["titolo"]->setFixedSize(200,30);
 
-    widgetBase[0] = new QWidget();
-
     QHBoxLayout *layoutTitolo = new QHBoxLayout(widgetBase[0]);
     layoutTitolo->setContentsMargins(0,0,0,0);
     layoutTitolo->setSpacing(0);
@@ -29,6 +31,8 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, QMap<QStrin
     layoutTitolo->addWidget((*campiBase)["titolo"],0, Qt::AlignLeft);
 
     //---------- AUTORE ----------
+    widgetBase[1] = new QWidget();
+   
     QLabel *lableAutore = new QLabel("Autore: ");
     lableAutore->setFont(QFont("Mono",14));
     lableAutore->setFixedSize(120,30);
@@ -37,8 +41,6 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, QMap<QStrin
     (*campiBase)["autore"]->setFont(QFont("Mono",14));
     (*campiBase)["autore"]->setFixedSize(200,30);
 
-    widgetBase[1] = new QWidget();
-
     QHBoxLayout *layoutAutore = new QHBoxLayout(widgetBase[1]);
     layoutAutore->setContentsMargins(0,0,0,0);
     layoutAutore->setSpacing(0);
@@ -46,6 +48,8 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, QMap<QStrin
     layoutAutore->addWidget((*campiBase)["autore"],0, Qt::AlignLeft);
 
     //---------- ANNO ----------
+    widgetBase[2] = new QWidget();
+
     QLabel *lableAnno = new QLabel("Anno: ");
     lableAnno->setFont(QFont("Mono",14));
     lableAnno->setFixedSize(120,30);
@@ -53,8 +57,8 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, QMap<QStrin
     campiBase->insert("anno",new QLineEdit());
     (*campiBase)["anno"]->setFont(QFont("Mono",14));
     (*campiBase)["anno"]->setFixedSize(200,30);
-
-    widgetBase[2] = new QWidget();
+    QIntValidator *validatorAnno = new QIntValidator((*campiBase)["anno"]);
+    (*campiBase)["anno"]->setValidator(validatorAnno);
 
     QHBoxLayout *layoutAnno = new QHBoxLayout(widgetBase[2]);
     layoutAnno->setContentsMargins(0,0,0,0);
@@ -63,6 +67,8 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, QMap<QStrin
     layoutAnno->addWidget((*campiBase)["anno"],0, Qt::AlignLeft);
 
     //---------- COPERTINA ----------
+    widgetBase[3] = new QWidget();
+ 
     QLabel *lableCopertina = new QLabel("Copertina: ");
     lableCopertina->setFont(QFont("Mono",14));
     lableCopertina->setFixedSize(120,30);
@@ -70,8 +76,6 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, QMap<QStrin
     campiBase->insert("copertina",new QLineEdit());
     (*campiBase)["copertina"]->setFont(QFont("Mono",14));
     (*campiBase)["copertina"]->setFixedSize(200,30);
-
-    widgetBase[3] = new QWidget();
 
     QHBoxLayout *layoutCopertina = new QHBoxLayout(widgetBase[3]);
     
@@ -96,6 +100,8 @@ void createMediaVisitor::visit(libro* newLibro)
     creaSottoOggettoMedia(widgetsBase, &campi);
     
     //---------- NUMERO PAGINE ----------
+    QWidget *widgetNumPagine = new QWidget();
+ 
     QLabel *lableNumPagine = new QLabel("N° Pagine: ");
     lableNumPagine->setFont(QFont("Mono",14));
     lableNumPagine->setFixedSize(120,30);
@@ -103,8 +109,8 @@ void createMediaVisitor::visit(libro* newLibro)
     campi.insert("numeroPagine",new QLineEdit());
     campi["numeroPagine"]->setFont(QFont("Mono",14));
     campi["numeroPagine"]->setFixedSize(200,30);
-
-    QWidget *widgetNumPagine = new QWidget();
+    QIntValidator *validatorNumPag = new QIntValidator((campi)["numeroPagine"]);
+    (campi)["numeroPagine"]->setValidator(validatorNumPag);
 
     QHBoxLayout *layoutNumPagine = new QHBoxLayout(widgetNumPagine);
     layoutNumPagine->setContentsMargins(0,0,0,0);
@@ -113,6 +119,8 @@ void createMediaVisitor::visit(libro* newLibro)
     layoutNumPagine->addWidget(campi["numeroPagine"],0, Qt::AlignLeft);
 
     //---------- ISBN ----------
+    QWidget *widgetIsbn = new QWidget();
+
     QLabel *lableIsbn = new QLabel("ISBN: ");
     lableIsbn->setFont(QFont("Mono",14));
     lableIsbn->setFixedSize(120,30);
@@ -120,8 +128,8 @@ void createMediaVisitor::visit(libro* newLibro)
     campi.insert("isbn",new QLineEdit());
     campi["isbn"]->setFont(QFont("Mono",14));
     campi["isbn"]->setFixedSize(200,30);
-
-    QWidget *widgetIsbn = new QWidget();
+    QIntValidator *validatorIsbn = new QIntValidator((campi)["isbn"]);
+    (campi)["isbn"]->setValidator(validatorIsbn);
 
     QHBoxLayout *layoutIsbn = new QHBoxLayout(widgetIsbn);
     layoutIsbn->setContentsMargins(0,0,0,0);
@@ -130,6 +138,8 @@ void createMediaVisitor::visit(libro* newLibro)
     layoutIsbn->addWidget(campi["isbn"],0, Qt::AlignLeft);
 
     //---------- GENERE ----------
+    QWidget *widgetGenere = new QWidget();
+
     QLabel *lableGenere = new QLabel("Editore: ");
     lableGenere->setFont(QFont("Mono",14));
     lableGenere->setFixedSize(120,30);
@@ -138,7 +148,6 @@ void createMediaVisitor::visit(libro* newLibro)
     campi["editore"]->setFont(QFont("Mono",14));
     campi["editore"]->setFixedSize(200,30);
 
-    QWidget *widgetGenere = new QWidget();
 
     QHBoxLayout *layoutGenere = new QHBoxLayout(widgetGenere);
     layoutGenere->setContentsMargins(0,0,0,0);

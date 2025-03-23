@@ -28,5 +28,15 @@
         "isbn": 1221212,
         "numPagine": 55,
         "titolo": "cc"
+    },
+    {
+        "anno": 0,
+        "autore": "",
+        "copertina": "",
+        "editore": "dddd",
+        "id": 0,
+        "isbn": 0,
+        "numPagine": 0,
+        "titolo": "121221"
     }
 ]

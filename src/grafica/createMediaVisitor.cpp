@@ -14,6 +14,7 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, widgetCreaz
 {
     //---------- TITOLO ----------
     widgetBase[0] = new QWidget();
+    widgetBase[0]->setFixedWidth(350);
 
     QLabel *lableTitolo = new QLabel("Titolo: ");
     lableTitolo->setFont(QFont("Mono",14));
@@ -31,6 +32,7 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, widgetCreaz
 
     //---------- AUTORE ----------
     widgetBase[1] = new QWidget();
+    widgetBase[1]->setFixedWidth(350);
    
     QLabel *lableAutore = new QLabel("Autore: ");
     lableAutore->setFont(QFont("Mono",14));
@@ -48,6 +50,7 @@ void createMediaVisitor::creaSottoOggettoMedia(QWidget **widgetBase, widgetCreaz
 
     //---------- ANNO ----------
     widgetBase[2] = new QWidget();
+    widgetBase[2]->setFixedWidth(350);
 
     QLabel *lableAnno = new QLabel("Anno: ");
     lableAnno->setFont(QFont("Mono",14));
@@ -103,6 +106,7 @@ void createMediaVisitor::visit(libro* newLibro)
     
     //---------- NUMERO PAGINE ----------
     QWidget *widgetNumPagine = new QWidget();
+    widgetNumPagine->setFixedWidth(350);
  
     QLabel *lableNumPagine = new QLabel("N° Pagine: ");
     lableNumPagine->setFont(QFont("Mono",14));
@@ -122,6 +126,7 @@ void createMediaVisitor::visit(libro* newLibro)
 
     //---------- ISBN ----------
     QWidget *widgetIsbn = new QWidget();
+    widgetIsbn->setFixedWidth(350);
 
     QLabel *lableIsbn = new QLabel("ISBN: ");
     lableIsbn->setFont(QFont("Mono",14));
@@ -139,22 +144,23 @@ void createMediaVisitor::visit(libro* newLibro)
     layoutIsbn->addWidget(lableIsbn,0,Qt::AlignRight);
     layoutIsbn->addWidget((*mainWidget)["isbn"],0, Qt::AlignLeft);
 
-    //---------- GENERE ----------
-    QWidget *widgetGenere = new QWidget();
+    //---------- EDITORE ----------
+    QWidget *widgetEditore = new QWidget();
+    widgetEditore->setFixedWidth(350);
 
-    QLabel *lableGenere = new QLabel("Editore: ");
-    lableGenere->setFont(QFont("Mono",14));
-    lableGenere->setFixedSize(120,30);
+    QLabel *lableEditore = new QLabel("Editore: ");
+    lableEditore->setFont(QFont("Mono",14));
+    lableEditore->setFixedSize(120,30);
 
     mainWidget->insertLineEdit("editore",new QLineEdit());
     (*mainWidget)["editore"]->setFont(QFont("Mono",14));
     (*mainWidget)["editore"]->setFixedSize(200,30);
 
 
-    QHBoxLayout *layoutGenere = new QHBoxLayout(widgetGenere);
+    QHBoxLayout *layoutGenere = new QHBoxLayout(widgetEditore);
     layoutGenere->setContentsMargins(0,0,0,0);
     layoutGenere->setSpacing(0);
-    layoutGenere->addWidget(lableGenere,0,Qt::AlignRight);
+    layoutGenere->addWidget(lableEditore,0,Qt::AlignRight);
     layoutGenere->addWidget((*mainWidget)["editore"],0, Qt::AlignLeft);
 
     //---------- PULSANTI ----------
@@ -181,7 +187,7 @@ void createMediaVisitor::visit(libro* newLibro)
     layout->addWidget(widgetsBase[2]);
     layout->addWidget(widgetNumPagine);
     layout->addWidget(widgetIsbn);
-    layout->addWidget(widgetGenere);
+    layout->addWidget(widgetEditore);
     layout->addWidget(widgetsBase[3]);
     layout->addWidget(widgetPulsanti);
 
@@ -192,6 +198,99 @@ void createMediaVisitor::visit(libro* newLibro)
 
 void createMediaVisitor::visit(canzone* newCanzone)
 {
+    widgetCreazione *mainWidget = new widgetCreazione(managerEsterno, newCanzone, windowEsterna);
+
+    QVBoxLayout *layout = new QVBoxLayout(mainWidget);    
+    layout->setAlignment(Qt::AlignCenter);
+
+    QWidget *widgetsBase[4];
+
+    creaSottoOggettoMedia(widgetsBase, mainWidget);
+    
+    //---------- DURATA ----------
+    QWidget *widgetDurata = new QWidget();
+    widgetDurata->setFixedWidth(350);
+ 
+    QLabel *lableDurata = new QLabel("Durata: ");
+    lableDurata->setFont(QFont("Mono",14));
+    lableDurata->setFixedSize(120,30);
+
+    mainWidget->insertLineEdit("durataMin",new QLineEdit());
+    (*mainWidget)["durataMin"]->setFont(QFont("Mono",14));
+    (*mainWidget)["durataMin"]->setFixedSize(40,30);
+    QIntValidator *validatorDurataMin = new QIntValidator((*mainWidget)["durataMin"]);
+    (*mainWidget)["durataMin"]->setValidator(validatorDurataMin);
+
+    QLabel *lableMin = new QLabel("min");
+    lableMin->setFont(QFont("Mono",14));
+    
+    mainWidget->insertLineEdit("durataSec",new QLineEdit());
+    (*mainWidget)["durataSec"]->setFont(QFont("Mono",14));
+    (*mainWidget)["durataSec"]->setFixedSize(40,30);
+    QIntValidator *validatorDurataSec = new QIntValidator((*mainWidget)["durataSec"]);
+    (*mainWidget)["durataSec"]->setValidator(validatorDurataSec);
+
+    QLabel *lableSec = new QLabel("sec");
+    lableSec->setFont(QFont("Mono",14));
+
+    QHBoxLayout *layoutDurata = new QHBoxLayout(widgetDurata);
+    layoutDurata->setContentsMargins(0,0,0,0);
+    layoutDurata->setSpacing(0);
+    layoutDurata->addWidget(lableDurata,0,Qt::AlignLeft);
+    layoutDurata->addWidget((*mainWidget)["durataMin"],0, Qt::AlignRight);
+    layoutDurata->addWidget(lableMin,0,Qt::AlignRight);
+    layoutDurata->addWidget((*mainWidget)["durataSec"],0, Qt::AlignRight);
+    layoutDurata->addWidget(lableSec,0,Qt::AlignRight);
+
+    //---------- GENERE ----------
+    QWidget *widgetGenere = new QWidget();
+    widgetGenere->setFixedWidth(350);
+
+    QLabel *lableGenere = new QLabel("Genere: ");
+    lableGenere->setFont(QFont("Mono",14));
+    lableGenere->setFixedSize(120,30);
+
+    mainWidget->insertLineEdit("genere",new QLineEdit());
+    (*mainWidget)["genere"]->setFont(QFont("Mono",14));
+    (*mainWidget)["genere"]->setFixedSize(200,30);
+
+
+    QHBoxLayout *layoutGenere = new QHBoxLayout(widgetGenere);
+    layoutGenere->setContentsMargins(0,0,0,0);
+    layoutGenere->setSpacing(0);
+    layoutGenere->addWidget(lableGenere,0,Qt::AlignRight);
+    layoutGenere->addWidget((*mainWidget)["genere"],0, Qt::AlignLeft);
+
+    //---------- PULSANTI ----------
+    QWidget *widgetPulsanti = new QWidget();
+    QHBoxLayout *layoutPulsanti = new QHBoxLayout(widgetPulsanti);
+
+    //---------- PULSANTE ANNULLA ----------
+    QPushButton *btnAnnulla = new QPushButton("ANNULLA",widgetPulsanti);
+    btnAnnulla->setFixedSize(200,50);
+    btnAnnulla->setFont(QFont("Mono",15));
+    QObject::connect(btnAnnulla, &QPushButton::clicked, windowEsterna, &mainWindow::reloadMediaVisibili);
+    layoutPulsanti->addWidget(btnAnnulla,0, Qt::AlignLeft);
+
+    //---------- PULSANTE SALVA ----------
+    QPushButton *btnSalva = new QPushButton("SALVA",widgetPulsanti);
+    btnSalva->setFixedSize(200,50);
+    btnSalva->setFont(QFont("Mono",15));
+    QObject::connect(btnSalva, &QPushButton::clicked, mainWidget, &widgetCreazione::crea);
+    layoutPulsanti->addWidget(btnSalva,0, Qt::AlignRight);
+
+    //---------------------------------------------------
+    layout->addWidget(widgetsBase[0]);
+    layout->addWidget(widgetsBase[1]);
+    layout->addWidget(widgetsBase[2]);
+    layout->addWidget(widgetDurata);
+    layout->addWidget(widgetGenere);
+    layout->addWidget(widgetsBase[3]);
+    layout->addWidget(widgetPulsanti);
+
+    layoutEsterno->addWidget(mainWidget);
+
+
 
 }
 

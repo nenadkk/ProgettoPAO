@@ -151,8 +151,6 @@ int mediaManager::trovaIdLibero() const
         int last=0;
         for(auto i : copiaLM)
         {
-            qDebug()<<"ID: "<<i->getId();
-
             if(i->getId()>last)
                 return last;
 

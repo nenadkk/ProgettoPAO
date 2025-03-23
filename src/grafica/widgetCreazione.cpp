@@ -2,7 +2,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include "widgetCreazione.h"
-#include "qboxlayout.h"
+#include "qglobal.h"
+
 widgetCreazione::widgetCreazione(mediaManager* man, media* tipo, mainWindow* windowEsterna, QWidget* parent) : 
     QWidget(parent), manager(man), tipo(tipo), windowEsterna(windowEsterna)
 {}
@@ -18,8 +19,10 @@ void widgetCreazione::insertLineEdit(QString str,QLineEdit* n)
 }
 void widgetCreazione::crea()
 {
+    qDebug()<<"entrato";
     if(validaInput())
     {
+    qDebug()<<"validato";
         if(dynamic_cast<libro*>(tipo))
         {
             copiaImmagine();
@@ -32,6 +35,19 @@ void widgetCreazione::crea()
                                         attributi["isbn"]->text().toInt(),
                                         attributi["editore"]->text().toStdString()));
         }
+        else if(dynamic_cast<canzone*>(tipo))
+        {
+            copiaImmagine();
+            int durata = (attributi["durataMin"]->text().toInt())*60+(attributi["durataSec"]->text().toInt());
+            qDebug()<<"calcolato";
+            manager->addMedia(new canzone(attributi["titolo"]->text().toStdString(),
+                                        attributi["autore"]->text().toStdString(),
+                                        attributi["anno"]->text().toInt(),
+                                        attributi["copertina"]->text().toStdString(),
+                                        manager->trovaIdLibero(),
+                                        durata,
+                                        attributi["genere"]->text().toStdString()));
+        }
         delete tipo;
         windowEsterna->reloadMediaVisibili();
     }
@@ -39,6 +55,7 @@ void widgetCreazione::crea()
 
 bool widgetCreazione::validaInput()
 {
+    qDebug()<<"validazione ...";
     foreach(auto val, attributi.values())
     {
         if(val->text().isEmpty())

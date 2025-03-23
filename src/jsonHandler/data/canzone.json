@@ -5,7 +5,7 @@
         "copertina": "./immagini/canzone.png",
         "durata": 188,
         "genere": "rapp",
-        "id": 1,
+        "id": 2,
         "titolo": "ioio"
     },
     {
@@ -14,7 +14,7 @@
         "copertina": "./immagini/canzone.png",
         "durata": 199,
         "genere": "rapp",
-        "id": 2,
+        "id": 3,
         "titolo": "carraadddddddddddddddddddddddddddddddddddddd"
     },
     {
@@ -23,7 +23,25 @@
         "copertina": "./immagini/canzone.png",
         "durata": 188,
         "genere": "rapp",
-        "id": 3,
+        "id": 4,
         "titolo": "skkkrt"
+    },
+    {
+        "anno": 2020,
+        "autore": "autore",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/canzone.png",
+        "durata": 13,
+        "genere": "genere",
+        "id": 6,
+        "titolo": "titolo"
+    },
+    {
+        "anno": 2022,
+        "autore": "pap",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/canzone.png",
+        "durata": 273,
+        "genere": "buzz",
+        "id": 9,
+        "titolo": "bum"
     }
 ]

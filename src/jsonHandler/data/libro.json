@@ -28,5 +28,15 @@
         "isbn": 1111111111,
         "numPagine": 222,
         "titolo": "fdfdfd"
+    },
+    {
+        "anno": 555,
+        "autore": "eerere",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "hyrsh",
+        "id": 7,
+        "isbn": 757477,
+        "numPagine": 252,
+        "titolo": "dsds"
     }
 ]

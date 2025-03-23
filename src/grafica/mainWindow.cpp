@@ -198,14 +198,20 @@ void mainWindow::creaLibro()
 
     //il seguente oggetto libro viene deallocato una volta finita la procedura di creazione
     //all'interno di bottoneSalva::crea()
-    libro *temp = new libro("Harry", "Potter",1999,"",1,1,1,"sto");
+    libro *temp = new libro();
     createMediaVisitor vis(this, mediaVisibili, &mediaMan);
     temp->accept(&vis);
 }
 
 void mainWindow::creaCanzone()
 {
+     svuotaMediaVisibili();
 
+    //il seguente oggetto libro viene deallocato una volta finita la procedura di creazione
+    //all'interno di bottoneSalva::crea()
+    canzone *temp = new canzone();
+    createMediaVisitor vis(this, mediaVisibili, &mediaMan);
+    temp->accept(&vis);
 }
 
 void mainWindow::creaAlbum()

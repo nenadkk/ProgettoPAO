@@ -301,56 +301,72 @@ void createMediaVisitor::visit(canzone* newCanzone)
 
 void createMediaVisitor::visit(album* newAlbum)
 {
-    QWidget *mainWidget = new QWidget();
-    QHBoxLayout *mainLayout = new QHBoxLayout(mainWidget);
+            //---------- PARTE SINISTRA ----------
+    QListWidget *listWidget = new QListWidget();
+    widgetCreazione *mainWidget = new widgetCreazione(managerEsterno, newAlbum, windowEsterna, listWidget);
 
-    // Lato sinistro
-    QWidget *leftWidget = new QWidget(mainWidget);
-    QVBoxLayout *leftLayout = new QVBoxLayout(leftWidget);
+    QVBoxLayout *layoutSinistra = new QVBoxLayout(mainWidget);    
+    layoutSinistra->setAlignment(Qt::AlignCenter);
 
-    QLineEdit *lineEdit1 = new QLineEdit(mainWidget);
-    QLineEdit *lineEdit2 = new QLineEdit(mainWidget);
-    QPushButton *cancelButton = new QPushButton("Annulla", mainWidget);
-    QPushButton *confirmButton = new QPushButton("Conferma", mainWidget);
+    QWidget *widgetsBase[4];
 
-    leftLayout->addWidget(lineEdit1);
-    leftLayout->addWidget(lineEdit2);
-    leftLayout->addWidget(cancelButton);
-    leftLayout->addWidget(confirmButton);
-    leftWidget->setLayout(leftLayout);
+    creaSottoOggettoMedia(widgetsBase, mainWidget);
+    
+    //---------- PULSANTI ----------
+    QWidget *widgetPulsanti = new QWidget();
+    QHBoxLayout *layoutSinistraPulsanti = new QHBoxLayout(widgetPulsanti);
 
-    // Lato destro
-    QListWidget *listWidget = new QListWidget(mainWidget);
+    //---------- PULSANTE ANNULLA ----------
+    QPushButton *btnAnnulla = new QPushButton("ANNULLA",widgetPulsanti);
+    btnAnnulla->setFixedSize(200,50);
+    btnAnnulla->setFont(QFont("Mono",15));
+    QObject::connect(btnAnnulla, &QPushButton::clicked, windowEsterna, &mainWindow::reloadMediaVisibili);
+    layoutSinistraPulsanti->addWidget(btnAnnulla,0, Qt::AlignLeft);
 
-    for (int i = 1; i <= 10; ++i) 
+    //---------- PULSANTE SALVA ----------
+    QPushButton *btnSalva = new QPushButton("SALVA",widgetPulsanti);
+    btnSalva->setFixedSize(200,50);
+    btnSalva->setFont(QFont("Mono",15));
+    QObject::connect(btnSalva, &QPushButton::clicked, mainWidget, &widgetCreazione::crea);
+    layoutSinistraPulsanti->addWidget(btnSalva,0, Qt::AlignRight);
+
+    //---------------------------------------------------
+    layoutSinistra->addWidget(widgetsBase[0]);
+    layoutSinistra->addWidget(widgetsBase[1]);
+    layoutSinistra->addWidget(widgetsBase[2]);
+    layoutSinistra->addWidget(widgetsBase[3]);
+    layoutSinistra->addWidget(widgetPulsanti);
+
+
+            //---------- PARTE DESTRA ----------
+            
+    for (const auto m : managerEsterno->filtroSoloCanzoni()) 
     {
-        QListWidgetItem *item = new QListWidgetItem("Elemento " + QString::number(i), listWidget);
+        canzone *c = dynamic_cast<canzone*>(m);
+
+        QString str = QString::fromStdString(c->getTitolo()) + "   " + toQString(c->getAutore()+ "   "  );
+        str +=QString::number((c->getDurata())/60 ) + ":" + QString::number((c->getDurata())%60);
+        QListWidgetItem *item = new QListWidgetItem(str, listWidget);
+        item->setData(Qt::UserRole, c->getId()); // Assegna l'ID all'elemento
+
+        
+        item->setFont(QFont("Mono",20));
         item->setCheckState(Qt::Unchecked);
     }
 
-    // Aggiunta dei widget al layout principale
-    mainLayout->addWidget(leftWidget);
-    mainLayout->addWidget(listWidget);
+    listWidget->setStyleSheet(
+            "QListWidget::item {"
+            "    border-radius: 5px;"
+            "    margin: 5px;"
+            "    padding: 5px;"
+            "    background-color: #323232;"
+            "}"
+            "QListWidget::item:selected {background-color: #595959;}"
+            );
+    layoutEsterno->addWidget(mainWidget,0,0);
+    layoutEsterno->addWidget(listWidget,0,1);
 
-    // Connessione del pulsante di conferma alla funzione
-    QObject::connect(confirmButton, &QPushButton::clicked, [=]() 
-    {
-        QStringList selectedItems;
-        for (int i = 0; i < listWidget->count(); ++i) 
-        {
-            QListWidgetItem *item = listWidget->item(i);
-            if (item->checkState() == Qt::Checked) 
-            {
-                selectedItems.append(item->text());
-            }
-        }
 
-        // Mostra gli elementi selezionati
-        QMessageBox::information(mainWidget, "Elementi selezionati", selectedItems.join(", "));
-    });
-
-    mainWidget->setLayout(mainLayout);
-    layoutEsterno->addWidget(mainWidget);
 }
 
 

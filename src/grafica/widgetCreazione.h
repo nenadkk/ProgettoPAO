@@ -2,6 +2,8 @@
 #define WIDGETCREAZIONE
 #include <QPushButton>
 #include <QMap>
+#include <QListWidget>
+
 #include "mainWindow.h"
 #include "../mediaManager/mediaManager.h"
 #include "../logica/media.h"
@@ -15,6 +17,7 @@ class widgetCreazione : public QWidget
         QMap<QString, QLineEdit*> attributi;
         media *tipo;
         mainWindow* windowEsterna;
+        QListWidget* trackList;
 
         void copiaImmagine();
         bool isImageFile(const QString &filePath) const;
@@ -25,7 +28,7 @@ class widgetCreazione : public QWidget
         void browseImage();
 
     public:
-        widgetCreazione(mediaManager*, media*, mainWindow*, QWidget* parent=nullptr);
+        widgetCreazione(mediaManager*, media*, mainWindow*, QListWidget* tracks = nullptr, QWidget* parent=nullptr);
         void insertLineEdit(QString,QLineEdit*);
         QLineEdit*& operator[](const QString& );
 };

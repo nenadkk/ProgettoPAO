@@ -4,8 +4,8 @@
 #include "widgetCreazione.h"
 #include "qglobal.h"
 
-widgetCreazione::widgetCreazione(mediaManager* man, media* tipo, mainWindow* windowEsterna, QWidget* parent) : 
-    QWidget(parent), manager(man), tipo(tipo), windowEsterna(windowEsterna)
+widgetCreazione::widgetCreazione(mediaManager* man, media* tipo, mainWindow* windowEsterna, QListWidget* tracks, QWidget* parent) : 
+    QWidget(parent), manager(man), tipo(tipo), windowEsterna(windowEsterna), trackList(tracks)
 {}
 
 QLineEdit*& widgetCreazione::operator[](const QString& key) 

@@ -64,6 +64,7 @@ SOURCES       = src/main.cpp \
 		src/logica/libro.cpp \
 		src/logica/media.cpp \
 		src/mediaManager/mediaManager.cpp build/moc/moc_mainWindow.cpp \
+		build/moc/moc_mediaWidget.cpp \
 		build/moc/moc_widgetCreazione.cpp
 OBJECTS       = build/obj/main.o \
 		build/obj/createMediaVisitor.o \
@@ -78,6 +79,7 @@ OBJECTS       = build/obj/main.o \
 		build/obj/media.o \
 		build/obj/mediaManager.o \
 		build/obj/moc_mainWindow.o \
+		build/obj/moc_mediaWidget.o \
 		build/obj/moc_widgetCreazione.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf \
@@ -365,9 +367,9 @@ compiler_moc_predefs_clean:
 build/moc/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -fPIC -dM -E -o build/moc/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: build/moc/moc_mainWindow.cpp build/moc/moc_widgetCreazione.cpp
+compiler_moc_header_make_all: build/moc/moc_mainWindow.cpp build/moc/moc_mediaWidget.cpp build/moc/moc_widgetCreazione.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) build/moc/moc_mainWindow.cpp build/moc/moc_widgetCreazione.cpp
+	-$(DEL_FILE) build/moc/moc_mainWindow.cpp build/moc/moc_mediaWidget.cpp build/moc/moc_widgetCreazione.cpp
 build/moc/moc_mainWindow.cpp: src/grafica/mainWindow.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
@@ -378,6 +380,13 @@ build/moc/moc_mainWindow.cpp: src/grafica/mainWindow.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
 	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/mainWindow.h -o build/moc/moc_mainWindow.cpp
+
+build/moc/moc_mediaWidget.cpp: src/grafica/mediaWidget.h \
+		src/logica/media.h \
+		src/logica/visitor.h \
+		build/moc/moc_predefs.h \
+		/usr/lib/qt6/libexec/moc
+	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/mediaWidget.h -o build/moc/moc_mediaWidget.cpp
 
 build/moc/moc_widgetCreazione.cpp: src/grafica/widgetCreazione.h \
 		src/grafica/mainWindow.h \
@@ -502,6 +511,9 @@ build/obj/mediaManager.o: src/mediaManager/mediaManager.cpp src/mediaManager/med
 
 build/obj/moc_mainWindow.o: build/moc/moc_mainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_mainWindow.o build/moc/moc_mainWindow.cpp
+
+build/obj/moc_mediaWidget.o: build/moc/moc_mediaWidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_mediaWidget.o build/moc/moc_mediaWidget.cpp
 
 build/obj/moc_widgetCreazione.o: build/moc/moc_widgetCreazione.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_widgetCreazione.o build/moc/moc_widgetCreazione.cpp

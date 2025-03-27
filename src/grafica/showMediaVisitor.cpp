@@ -5,7 +5,6 @@
 #include "mediaWidget.h"
 #include <QGridLayout>
 #include <algorithm>
-#include <string>
 #include <QResizeEvent>
 #include <QWidget>
 
@@ -18,20 +17,9 @@ showMediaVisitor::showMediaVisitor(QGridLayout* _layout, int _width) : layoutDaR
 
 void showMediaVisitor::visit(libro* _libro)
 {
-    string campi[6] = {_libro->getTitolo(), 
-        _libro->getAutore(), 
-        to_string(_libro->getAnno()),
-        _libro->getEditore(),
-        to_string(_libro->getIsbn()),
-        to_string(_libro->getNumPagine())+" pagine"};
-
-    mediaWidget* item = new mediaWidget(static_cast<media*>(_libro), campi);
-
-    item->setStyleSheet(
-            "background-color: #686868;"
-            "border-radius: 10px;"
-            "margin: 5px;"
-            );
+    mediaWidget* item = new mediaWidget(static_cast<media*>(_libro),layoutDaRiempire);
+    
+    QObject::connect(item, &mediaWidget::clicked, item, &mediaWidget::dettagliLibro);
 
     layoutDaRiempire->addWidget(item, row, col);
 
@@ -45,26 +33,9 @@ void showMediaVisitor::visit(libro* _libro)
 
 void showMediaVisitor::visit(canzone* _canzone) 
 {
-    string durata = to_string(_canzone->getDurata()/60) + ":";
-    if(_canzone->getDurata()%60 < 10)
-        durata = durata + "0" + to_string(_canzone->getDurata()%60);
-    else
-        durata = durata + to_string(_canzone->getDurata()%60);
+    mediaWidget* item = new mediaWidget(static_cast<media*>(_canzone),layoutDaRiempire);
 
-    string campi[6] = {_canzone->getTitolo(), 
-        _canzone->getAutore(), 
-        to_string(_canzone->getAnno()),
-        _canzone->getGenere(),
-        durata,
-        " "};
-
-    mediaWidget* item = new mediaWidget(static_cast<media*>(_canzone), campi);
-
-    item->setStyleSheet(
-            "background-color: #686868;"
-            "border-radius: 10px;"
-            "margin: 5px;"
-            );
+    QObject::connect(item, &mediaWidget::clicked, item, &mediaWidget::dettagliCanzone);
 
     layoutDaRiempire->addWidget(item, row, col);
 
@@ -78,26 +49,9 @@ void showMediaVisitor::visit(canzone* _canzone)
 
 void showMediaVisitor::visit(album* _album) 
 {
-    string durata = to_string(_album->getDurataTotale()/60) + ":";
-    if(_album->getDurataTotale()%60 < 10)
-        durata = durata + "0" + to_string(_album->getDurataTotale()%60);
-    else
-        durata = durata + to_string(_album->getDurataTotale()%60);
+    mediaWidget* item = new mediaWidget(static_cast<media*>(_album), layoutDaRiempire);
 
-    string campi[6] = {_album->getTitolo(), 
-        _album->getAutore(), 
-        to_string(_album->getAnno()),
-        durata,
-        " ",
-        " "};
-
-    mediaWidget* item = new mediaWidget(static_cast<media*>(_album), campi);
-
-    item->setStyleSheet(
-            "background-color: #686868;"
-            "border-radius: 10px;"
-            "margin: 5px;"
-            );
+    QObject::connect(item, &mediaWidget::clicked, item, &mediaWidget::dettagliAlbum);
 
     layoutDaRiempire->addWidget(item, row, col);
 

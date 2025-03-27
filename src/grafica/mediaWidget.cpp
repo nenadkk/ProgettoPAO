@@ -1,32 +1,39 @@
 #include "mediaWidget.h"
-#include "qpushbutton.h"
+#include "qglobal.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QPushButton>
+#include <QMouseEvent>
 
-mediaWidget::mediaWidget(media* obj, string* campoDati, QWidget* parent) : QWidget(parent), object(obj) 
+mediaWidget::mediaWidget(media* obj, QGridLayout* l, QWidget* parent) : QWidget(parent), layoutEsterno(l), object(obj)  
 {
-        QVBoxLayout* mainLayout = new QVBoxLayout(this);
-        QHBoxLayout* buttonLayout = new QHBoxLayout();
+        QVBoxLayout* mainLayout = new QVBoxLayout();
         mainLayout->setAlignment(Qt::AlignCenter);
-        setFixedSize(270, 400);
 
-        // Immagine
+        setFixedSize(250, 330);
+        setAttribute(Qt::WA_StyledBackground);
+        setStyleSheet("QWidget {background-color: #686868; border-radius: 10px;}");
+
+
         QLabel *imageLabel = new QLabel();
-        imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(200, 200, Qt::KeepAspectRatio));
+        imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(200, 300, Qt::KeepAspectRatio));
         imageLabel->setAlignment(Qt::AlignCenter);
         mainLayout->addWidget(imageLabel);
 
+        QLabel *labelTitolo = new QLabel(toQString(obj->getTitolo()));
+        labelTitolo->setFont(QFont("Mono",13));
+        labelTitolo->setAlignment(Qt::AlignCenter);
+        mainLayout->addWidget(labelTitolo);
 
-        // Campi label
-        for (int i = 0; i < 6; ++i) 
-        {
-            QLabel *label = new QLabel(toQString(campoDati[i]), this);
-            label->setFont(QFont("Mono",13));
-            label->setWordWrap(true);
-            label->setAlignment(Qt::AlignCenter);
-            mainLayout->addWidget(label);
-        }
+        QLabel *labelAutore = new QLabel(toQString(obj->getTitolo()));
+        labelAutore->setFont(QFont("Mono",13));
+        labelAutore->setAlignment(Qt::AlignCenter);
+        mainLayout->addWidget(labelAutore);
 
+        this->setLayout(mainLayout);
+
+
+/*
         // Pulsanti
         QPushButton *buttonModifica = new QPushButton("Modifica", this);
         QPushButton *buttonElimina = new QPushButton("Elimina", this);
@@ -44,6 +51,30 @@ mediaWidget::mediaWidget(media* obj, string* campoDati, QWidget* parent) : QWidg
 
         connect(buttonModifica, &QPushButton::clicked, this, &mediaWidget::modificaClicked);
         connect(buttonElimina, &QPushButton::clicked, this, &mediaWidget::eliminaClicked); 
+        */
+}
+void mediaWidget::mousePressEvent(QMouseEvent* event)  
+{
+    if (event->button() == Qt::LeftButton) //se viene clickato con il tasto sx del mouse
+        emit clicked(); 
+                        
+    QWidget::mousePressEvent(event);
+}
+
+void mediaWidget::dettagliLibro()
+{
+    
+
+}
+
+void mediaWidget::dettagliCanzone()
+{
+
+}
+
+void mediaWidget::dettagliAlbum()
+{
+
 }
 
 void mediaWidget::modificaClicked()

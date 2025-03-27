@@ -27,6 +27,10 @@ class mainWindow : public QMainWindow
         void creaCanzone();
         void creaAlbum();
 
+        void filtraLibri();
+        void filtraCanzoni();
+        void filtraAlbum();
+
     public:
         mainWindow(QWidget* parent = nullptr);
 

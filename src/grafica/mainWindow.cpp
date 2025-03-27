@@ -36,14 +36,34 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     QVBoxLayout *sideBarLayout = new QVBoxLayout(sideBar);
 
     QWidget *space = new QWidget();
-    space->setFixedHeight(40);
+    space->setFixedHeight(60);
     sideBarLayout->addWidget(space);
 
     QPushButton *pulsanteCrea = new QPushButton("Crea");
+    pulsanteCrea->setFont(QFont("Mono",14));
     pulsanteCrea->setFixedHeight(40);
     sideBarLayout->addWidget(pulsanteCrea);
     connect(pulsanteCrea, &QPushButton::clicked, this, &mainWindow::sceltaCreazione);
 
+    QPushButton *pulsanteFiltroLibri = new QPushButton("Filtra Libri");
+    pulsanteFiltroLibri->setFont(QFont("Mono",14));
+    pulsanteFiltroLibri->setFixedHeight(40);
+    sideBarLayout->addWidget(pulsanteFiltroLibri);
+    connect(pulsanteFiltroLibri, &QPushButton::clicked, this, &mainWindow::filtraLibri);
+
+    QPushButton *pulsanteFiltroCanzoni = new QPushButton("Filtra Canzoni");
+    pulsanteFiltroCanzoni->setFont(QFont("Mono",14));
+    pulsanteFiltroCanzoni->setFixedHeight(40);
+    pulsanteFiltroCanzoni->setStyleSheet("padding: 0 10px;");
+    sideBarLayout->addWidget(pulsanteFiltroCanzoni);
+    connect(pulsanteFiltroCanzoni, &QPushButton::clicked, this, &mainWindow::filtraCanzoni);
+
+    QPushButton *pulsanteFiltroAlbum = new QPushButton("Filtra Album");
+    pulsanteFiltroAlbum->setFont(QFont("Mono",14));
+    pulsanteFiltroAlbum->setFixedHeight(40);
+    sideBarLayout->addWidget(pulsanteFiltroAlbum);
+    connect(pulsanteFiltroAlbum, &QPushButton::clicked, this, &mainWindow::filtraAlbum);
+    
     sideBarLayout->addStretch();
 
     // Area centrale con barra di ricerca in alto
@@ -78,10 +98,6 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
 
     reloadMediaVisibili();
 
-
-
-
-    //mediaVisibili->addStretch();
     contentWidget->setLayout(mediaVisibili);
     scrollArea->setWidget(contentWidget);
     scrollArea->setWidgetResizable(true);
@@ -89,7 +105,7 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     centralLayout->addWidget(scrollArea);
 
     // Aggiunta delle aree al layout principale
-    sideBar->setFixedWidth(150);
+    sideBar->setFixedWidth(200);
     mainLayout->addWidget(sideBar);
     mainLayout->addWidget(centralArea);
 
@@ -170,23 +186,31 @@ void mainWindow::sceltaCreazione()
 
     QPushButton *creaLibro = new QPushButton("Libro");
     creaLibro->setFixedHeight(40);
+    creaLibro->setFont(QFont("Mono",15));
     layout->addWidget(creaLibro);
     connect(creaLibro, &QPushButton::clicked, this, &mainWindow::creaLibro);
     layoutPulsanti->addWidget(creaLibro);
 
     QPushButton *creaCanzone = new QPushButton("Canzone");
     creaCanzone->setFixedHeight(40);
+    creaCanzone->setFont(QFont("Mono",15));
     layout->addWidget(creaCanzone);
     connect(creaCanzone, &QPushButton::clicked, this, &mainWindow::creaCanzone);
     layoutPulsanti->addWidget(creaCanzone);
 
     QPushButton *creaAlbum = new QPushButton("Album");
     creaAlbum->setFixedHeight(40);
+    creaAlbum->setFont(QFont("Mono",15));
     layout->addWidget(creaAlbum);
     connect(creaAlbum, &QPushButton::clicked, this, &mainWindow::creaAlbum);
     layoutPulsanti->addWidget(creaAlbum);
 
     layout->addWidget(pulsantiTipoMedia);
+
+    QWidget *space = new QWidget();
+    space->setFixedHeight(200);
+    space->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    layout->addWidget(space);
 
     mediaVisibili->addWidget(sezioneCrea);
     
@@ -225,11 +249,32 @@ void mainWindow::creaAlbum()
     temp->accept(&vis);
 }
 
+void mainWindow::filtraLibri()
+{
+    svuotaMediaVisibili();
+    showMediaVisitor vis(mediaVisibili,width());
 
+    for(auto m : mediaMan.filtroSoloLibri())
+        m->accept(&vis);
+}
 
+void mainWindow::filtraCanzoni()
+{
+    svuotaMediaVisibili();
+    showMediaVisitor vis(mediaVisibili,width());
 
+    for(auto m : mediaMan.filtroSoloCanzoni())
+        m->accept(&vis);
+}
 
+void mainWindow::filtraAlbum()
+{
+    svuotaMediaVisibili();
+    showMediaVisitor vis(mediaVisibili,width());
 
+    for(auto m : mediaMan.filtroSoloAlbum())
+        m->accept(&vis);
+}
 
 
 

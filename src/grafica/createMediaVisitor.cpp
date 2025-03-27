@@ -197,8 +197,6 @@ void createMediaVisitor::visit(libro* newLibro)
     layout->addWidget(widgetPulsanti);
 
     layoutEsterno->addWidget(mainWidget);
-
-
 }
 
 void createMediaVisitor::visit(canzone* newCanzone)
@@ -294,9 +292,6 @@ void createMediaVisitor::visit(canzone* newCanzone)
     layout->addWidget(widgetPulsanti);
 
     layoutEsterno->addWidget(mainWidget);
-
-
-
 }
 
 void createMediaVisitor::visit(album* newAlbum)
@@ -366,12 +361,4 @@ void createMediaVisitor::visit(album* newAlbum)
     layoutEsterno->addWidget(mainWidget,0,0);
     layoutEsterno->addWidget(listWidget,0,1);
 
-
 }
-
-
-
-
-
-
-

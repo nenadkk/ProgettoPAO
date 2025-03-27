@@ -10,5 +10,45 @@
         "copertina": "./immagini/album.png",
         "id": 1,
         "titolo": "kkkk"
+    },
+    {
+        "anno": 2020,
+        "autore": "gg",
+        "canzoni": [
+            2,
+            3,
+            6,
+            9
+        ],
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "id": 8,
+        "titolo": "GGNEW"
+    },
+    {
+        "anno": 2020,
+        "autore": "FFF",
+        "canzoni": [
+            2,
+            3,
+            6,
+            9
+        ],
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "id": 11,
+        "titolo": "FFF"
+    },
+    {
+        "anno": 2020,
+        "autore": "PP",
+        "canzoni": [
+            2,
+            3,
+            4,
+            6,
+            9
+        ],
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "id": 10,
+        "titolo": "PP"
     }
 ]

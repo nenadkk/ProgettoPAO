@@ -1,6 +1,5 @@
 #include "mediaManager.h"
 #include "../jsonHandler/jsonVisitor.h"
-#include "qglobal.h"
 #include <string>
 #include <algorithm> // Per std::transform
 #include <cctype>    // Per std::toupper
@@ -161,15 +160,15 @@ int mediaManager::trovaIdLibero() const
     }
 }
 
-
-bool confrontaPerId(const media* a, const media* b) 
+media* mediaManager::searchById(int _id) const
 {
-    return a->getId() < b->getId();
+    for(auto m : LM)
+    {
+        if(m->getId()==_id)
+            return m;
+    }
+    return nullptr;
 }
-
-
-
-
 
 
 

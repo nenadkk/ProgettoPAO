@@ -18,8 +18,7 @@ class mediaManager
         void editMedia();
 
         int trovaIdLibero() const;
-
-        static bool confrontaId();
+        media* searchById(int) const;
 
         int size() const;
 
@@ -27,7 +26,7 @@ class mediaManager
         list<media*> filtroSoloCanzoni() const;
         list<media*> filtroSoloAlbum() const;
 
-        list<media*> search(string) const;
+        list<media*> search(string) const; 
 
         media* operator[](size_t index);
         const media* operator[](size_t index) const;

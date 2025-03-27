@@ -19,10 +19,8 @@ void widgetCreazione::insertLineEdit(QString str,QLineEdit* n)
 }
 void widgetCreazione::crea()
 {
-    qDebug()<<"entrato";
     if(validaInput())
     {
-    qDebug()<<"validato";
         if(dynamic_cast<libro*>(tipo))
         {
             copiaImmagine();
@@ -39,7 +37,6 @@ void widgetCreazione::crea()
         {
             copiaImmagine();
             int durata = (attributi["durataMin"]->text().toInt())*60+(attributi["durataSec"]->text().toInt());
-            qDebug()<<"calcolato";
             manager->addMedia(new canzone(attributi["titolo"]->text().toStdString(),
                                         attributi["autore"]->text().toStdString(),
                                         attributi["anno"]->text().toInt(),
@@ -48,6 +45,33 @@ void widgetCreazione::crea()
                                         durata,
                                         attributi["genere"]->text().toStdString()));
         }
+        else if (dynamic_cast<album*>(tipo)) 
+        {
+            copiaImmagine();
+            //creazione album
+            album *newAlbum = new album(attributi["titolo"]->text().toStdString(),
+                                        attributi["autore"]->text().toStdString(),
+                                        attributi["anno"]->text().toInt(),
+                                        attributi["copertina"]->text().toStdString(),
+                                        manager->trovaIdLibero());
+
+            //aggiunta canzoni ad album
+            for(int i=0; i<trackList->count();++i)
+            {
+                QListWidgetItem *item = trackList->item(i);
+                if (item->checkState() == Qt::Checked) 
+                {
+                    int trackID = item->data(Qt::UserRole).toInt();
+                    media* c = manager->searchById(trackID);
+                    if(c && dynamic_cast<canzone*>(c))
+                    {
+                        newAlbum->addCanzone(dynamic_cast<canzone*>(c));
+                    }
+                }
+            }
+
+            manager->addMedia(newAlbum);
+        }
         delete tipo;
         windowEsterna->reloadMediaVisibili();
     }
@@ -55,7 +79,6 @@ void widgetCreazione::crea()
 
 bool widgetCreazione::validaInput()
 {
-    qDebug()<<"validazione ...";
     foreach(auto val, attributi.values())
     {
         if(val->text().isEmpty())

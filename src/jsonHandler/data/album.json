@@ -4,7 +4,8 @@
         "autore": "llll",
         "canzoni": [
             2,
-            3
+            3,
+            4
         ],
         "copertina": "./immagini/album.png",
         "id": 1,

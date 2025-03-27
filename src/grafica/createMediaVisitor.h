@@ -25,9 +25,6 @@ class createMediaVisitor : public visitor
         virtual void visit(canzone *_canzone) override; 
         virtual void visit(album *_album) override;
     
-    private slots:
-        void confermaSalvataggio();
-        void annullaSalvataggio();
 };
 
 #endif

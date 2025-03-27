@@ -197,7 +197,7 @@ void mainWindow::creaLibro()
     svuotaMediaVisibili();
 
     //il seguente oggetto libro viene deallocato una volta finita la procedura di creazione
-    //all'interno di bottoneSalva::crea()
+    //all'interno di widgetCreazione::crea()
     libro *temp = new libro();
     createMediaVisitor vis(this, mediaVisibili, &mediaMan);
     temp->accept(&vis);
@@ -205,10 +205,10 @@ void mainWindow::creaLibro()
 
 void mainWindow::creaCanzone()
 {
-     svuotaMediaVisibili();
+    svuotaMediaVisibili();
 
-    //il seguente oggetto libro viene deallocato una volta finita la procedura di creazione
-    //all'interno di bottoneSalva::crea()
+    //il seguente oggetto canzone viene deallocato una volta finita la procedura di creazione
+    //all'interno di widgetCreazione::crea()
     canzone *temp = new canzone();
     createMediaVisitor vis(this, mediaVisibili, &mediaMan);
     temp->accept(&vis);
@@ -216,7 +216,13 @@ void mainWindow::creaCanzone()
 
 void mainWindow::creaAlbum()
 {
+    svuotaMediaVisibili();
 
+    //il seguente oggetto album viene deallocato una volta finita la procedura di creazione
+    //all'interno di widgetCreazione::crea()
+    album *temp = new album();
+    createMediaVisitor vis(this, mediaVisibili, &mediaMan);
+    temp->accept(&vis);
 }
 
 

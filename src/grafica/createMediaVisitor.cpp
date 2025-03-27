@@ -6,6 +6,11 @@
 #include <QFileDialog>
 #include <QPushButton>
 #include <QIntValidator>
+#include <QLineEdit>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QListWidget>
+#include <QMessageBox>
 
 createMediaVisitor::createMediaVisitor(mainWindow* m, QGridLayout* l, mediaManager* man) : 
     windowEsterna(m), layoutEsterno(l), managerEsterno(man){}
@@ -296,19 +301,57 @@ void createMediaVisitor::visit(canzone* newCanzone)
 
 void createMediaVisitor::visit(album* newAlbum)
 {
+    QWidget *mainWidget = new QWidget();
+    QHBoxLayout *mainLayout = new QHBoxLayout(mainWidget);
 
+    // Lato sinistro
+    QWidget *leftWidget = new QWidget(mainWidget);
+    QVBoxLayout *leftLayout = new QVBoxLayout(leftWidget);
+
+    QLineEdit *lineEdit1 = new QLineEdit(mainWidget);
+    QLineEdit *lineEdit2 = new QLineEdit(mainWidget);
+    QPushButton *cancelButton = new QPushButton("Annulla", mainWidget);
+    QPushButton *confirmButton = new QPushButton("Conferma", mainWidget);
+
+    leftLayout->addWidget(lineEdit1);
+    leftLayout->addWidget(lineEdit2);
+    leftLayout->addWidget(cancelButton);
+    leftLayout->addWidget(confirmButton);
+    leftWidget->setLayout(leftLayout);
+
+    // Lato destro
+    QListWidget *listWidget = new QListWidget(mainWidget);
+
+    for (int i = 1; i <= 10; ++i) 
+    {
+        QListWidgetItem *item = new QListWidgetItem("Elemento " + QString::number(i), listWidget);
+        item->setCheckState(Qt::Unchecked);
+    }
+
+    // Aggiunta dei widget al layout principale
+    mainLayout->addWidget(leftWidget);
+    mainLayout->addWidget(listWidget);
+
+    // Connessione del pulsante di conferma alla funzione
+    QObject::connect(confirmButton, &QPushButton::clicked, [=]() 
+    {
+        QStringList selectedItems;
+        for (int i = 0; i < listWidget->count(); ++i) 
+        {
+            QListWidgetItem *item = listWidget->item(i);
+            if (item->checkState() == Qt::Checked) 
+            {
+                selectedItems.append(item->text());
+            }
+        }
+
+        // Mostra gli elementi selezionati
+        QMessageBox::information(mainWidget, "Elementi selezionati", selectedItems.join(", "));
+    });
+
+    mainWidget->setLayout(mainLayout);
+    layoutEsterno->addWidget(mainWidget);
 }
-
-void createMediaVisitor::confermaSalvataggio()
-{
-
-}
-
-void createMediaVisitor::annullaSalvataggio()
-{
-    windowEsterna->reloadMediaVisibili();
-}
-
 
 
 

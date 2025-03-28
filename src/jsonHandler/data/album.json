@@ -50,5 +50,14 @@
         "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
         "id": 10,
         "titolo": "PP"
+    },
+    {
+        "anno": 11,
+        "autore": "vv",
+        "canzoni": [
+        ],
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "id": 13,
+        "titolo": "vuoto"
     }
 ]

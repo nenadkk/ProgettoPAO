@@ -450,7 +450,10 @@ build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 
 build/obj/mediaWidget.o: src/grafica/mediaWidget.cpp src/grafica/mediaWidget.h \
 		src/logica/media.h \
-		src/logica/visitor.h
+		src/logica/visitor.h \
+		src/logica/libro.h \
+		src/logica/canzone.h \
+		src/logica/album.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mediaWidget.o src/grafica/mediaWidget.cpp
 
 build/obj/showMediaVisitor.o: src/grafica/showMediaVisitor.cpp src/grafica/showMediaVisitor.h \

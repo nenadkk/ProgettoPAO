@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include <QEvent>
+#include <QListWidget>
 
 
 class mediaWidget : public QWidget
@@ -17,12 +18,16 @@ class mediaWidget : public QWidget
         QGridLayout* layoutEsterno;
         media* object;
 
+        void resetSchermata();
+        void aggiungiPulsanti(QHBoxLayout*);
+
     protected:
         void mousePressEvent(QMouseEvent* event) override;
 
     public:
         explicit mediaWidget(media*, QGridLayout*, QWidget* parent = nullptr);
 
+        //le seguenti tre sono pubbliche per poter venir connesse da showMediaVisitor
         void dettagliLibro();
         void dettagliCanzone();
         void dettagliAlbum();

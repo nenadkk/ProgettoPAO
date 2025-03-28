@@ -17,7 +17,7 @@ showMediaVisitor::showMediaVisitor(QGridLayout* _layout, int _width) : layoutDaR
 
 void showMediaVisitor::visit(libro* _libro)
 {
-    mediaWidget* item = new mediaWidget(static_cast<media*>(_libro),layoutDaRiempire);
+    mediaWidget* item = new mediaWidget(_libro,layoutDaRiempire);
     
     QObject::connect(item, &mediaWidget::clicked, item, &mediaWidget::dettagliLibro);
 
@@ -33,7 +33,7 @@ void showMediaVisitor::visit(libro* _libro)
 
 void showMediaVisitor::visit(canzone* _canzone) 
 {
-    mediaWidget* item = new mediaWidget(static_cast<media*>(_canzone),layoutDaRiempire);
+    mediaWidget* item = new mediaWidget(_canzone,layoutDaRiempire);
 
     QObject::connect(item, &mediaWidget::clicked, item, &mediaWidget::dettagliCanzone);
 
@@ -49,7 +49,7 @@ void showMediaVisitor::visit(canzone* _canzone)
 
 void showMediaVisitor::visit(album* _album) 
 {
-    mediaWidget* item = new mediaWidget(static_cast<media*>(_album), layoutDaRiempire);
+    mediaWidget* item = new mediaWidget(_album, layoutDaRiempire);
 
     QObject::connect(item, &mediaWidget::clicked, item, &mediaWidget::dettagliAlbum);
 

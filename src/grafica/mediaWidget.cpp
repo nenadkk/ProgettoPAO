@@ -40,25 +40,7 @@ mediaWidget::mediaWidget(media* obj, QGridLayout* l, QWidget* parent) : QWidget(
         this->setLayout(mainLayout);
 
 
-/*
-        // Pulsanti
-        QPushButton *buttonModifica = new QPushButton("Modifica", this);
-        QPushButton *buttonElimina = new QPushButton("Elimina", this);
-        
-        buttonLayout->addWidget(buttonModifica);
-        buttonLayout->addWidget(buttonElimina);
-        
-        buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8;");
-        buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8;");
 
-        buttonModifica->setFixedSize(120, 40);
-        buttonElimina->setFixedSize(120, 40);
-
-        mainLayout->addLayout(buttonLayout);
-
-        connect(buttonModifica, &QPushButton::clicked, this, &mediaWidget::modificaClicked);
-        connect(buttonElimina, &QPushButton::clicked, this, &mediaWidget::eliminaClicked); 
-        */
 }
 void mediaWidget::mousePressEvent(QMouseEvent* event)  
 {
@@ -141,6 +123,10 @@ void mediaWidget::dettagliLibro()
     info->setAlignment(Qt::AlignLeft);
     layout->addWidget(info);
 
+    QHBoxLayout *layoutPulsanti = new QHBoxLayout();
+    aggiungiPulsanti(layoutPulsanti);
+    layout->addLayout(layoutPulsanti);
+
     this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
@@ -177,7 +163,11 @@ void mediaWidget::dettagliCanzone()
     QLabel *info = new QLabel(str);
     info->setFont(QFont("Mono",20));
     info->setAlignment(Qt::AlignLeft);
-    layout->addWidget(info);
+    layout->addWidget(info);    
+
+    QHBoxLayout *layoutPulsanti = new QHBoxLayout();
+    aggiungiPulsanti(layoutPulsanti);
+    layout->addLayout(layoutPulsanti);
 
     this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
@@ -188,12 +178,9 @@ void mediaWidget::dettagliAlbum()
 {
     resetSchermata();
 
-    this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
-
     QHBoxLayout *layout = new QHBoxLayout();
 
     //PARTE DI SINISTRA
-    QWidget *parteSx = new QWidget();
     QVBoxLayout *layoutSX = new QVBoxLayout();
     layoutSX->setAlignment(Qt::AlignLeft);
 
@@ -220,9 +207,12 @@ void mediaWidget::dettagliAlbum()
     info->setFont(QFont("Mono",20));
     info->setAlignment(Qt::AlignLeft);
 
+    QHBoxLayout *layoutPulsanti = new QHBoxLayout();
+    aggiungiPulsanti(layoutPulsanti);
+
     layoutSX->addWidget(info);
-    parteSx->setLayout(layoutSX);
-    layout->addWidget(parteSx);
+    layoutSX->addLayout(layoutPulsanti);
+    layout->addLayout(layoutSX);
 
     //PARTE DI DESTRA
     QVBoxLayout *layoutDX = new QVBoxLayout();
@@ -267,10 +257,33 @@ void mediaWidget::dettagliAlbum()
     parteDx->setLayout(layoutDX);
     layout->addWidget(parteDx);
 
+    this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
 }
 
+void mediaWidget::aggiungiPulsanti(QHBoxLayout* layoutPulsanti)
+{
+        // Pulsanti
+        QPushButton *buttonModifica = new QPushButton("Modifica");
+        QPushButton *buttonElimina = new QPushButton("Elimina");
+        
+        layoutPulsanti->addWidget(buttonModifica);
+        layoutPulsanti->addWidget(buttonElimina);
+        
+        buttonModifica->setFont(QFont("Mono",18));
+        buttonElimina->setFont(QFont("Mono",18));
+
+
+        buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+        buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+
+        buttonModifica->setFixedSize(150, 60);
+        buttonElimina->setFixedSize(150, 60);
+
+        connect(buttonModifica, &QPushButton::clicked, this, &mediaWidget::modificaClicked);
+        connect(buttonElimina, &QPushButton::clicked, this, &mediaWidget::eliminaClicked); 
+}
 
 void mediaWidget::eliminaClicked()
 {

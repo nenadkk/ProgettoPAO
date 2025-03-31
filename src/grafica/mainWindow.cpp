@@ -16,11 +16,15 @@
 #include <QFileDialog>
 #include <QDebug>
 
-#include "showMediaVisitor.h"
 #include "createMediaVisitor.h"
+#include "mediaWidgetAnteprima.h"
 
-mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
+mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent), rowGrid(0), colGrid(0)
 {
+    // Configurazione della finestra principale
+    setWindowTitle("Interfaccia Qt");
+    resize(1200, 800);
+
     //Caricamento dati 
     mediaMan.load();
 
@@ -109,9 +113,6 @@ mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent)
     mainLayout->addWidget(sideBar);
     mainLayout->addWidget(centralArea);
 
-    // Configurazione della finestra principale
-    setWindowTitle("Interfaccia Qt");
-    resize(1200, 800);
 }
 
 void mainWindow::ricerca()
@@ -124,26 +125,36 @@ void mainWindow::ricerca()
     if(!query.empty())
     {
         //Ripopola con i valori filtrati
-        showMediaVisitor showvis(this,mediaVisibili, width());
-
         for (auto m : query) 
-            m->accept(&showvis);
+            addToMediaVisibili(m);
     }
 }
+void mainWindow::addToMediaVisibili(media* m)
+{
+    int maxCol = max(2,((this->width())/(270+10)));
+    if(maxCol>5)
+        maxCol=5;
 
+    mediaWidgetAnteprima* item = new mediaWidgetAnteprima(m,this,mediaVisibili);
+
+    QObject::connect(item, &mediaWidgetAnteprima::clicked, item, &mediaWidgetAnteprima::mostraDettagli);
+
+    mediaVisibili->addWidget(item, rowGrid, colGrid);
+
+    colGrid++;
+    if (colGrid >= maxCol) 
+    {
+        colGrid = 0;
+        rowGrid++;
+    }
+}
 
 void mainWindow::reloadMediaVisibili()
 {
     svuotaMediaVisibili();
 
-    //Ripopola
-    showMediaVisitor showvis(this,mediaVisibili,width());
-
     for (int i=0;i<mediaMan.size();i++) 
-    {
-        mediaMan[i]->accept(&showvis);
-
-    }
+        addToMediaVisibili(mediaMan[i]);
 }
 
 void mainWindow::resizeEvent(QResizeEvent* event)
@@ -158,6 +169,9 @@ void mainWindow::updateLayoutAtResize()
 
 void mainWindow::svuotaMediaVisibili()
 {
+    rowGrid=0;
+    colGrid=0;
+
     if (mediaVisibili != nullptr)
     {
         while (QLayoutItem *item = mediaVisibili->takeAt(0)) 
@@ -255,28 +269,25 @@ void mainWindow::creaAlbum()
 void mainWindow::filtraLibri()
 {
     svuotaMediaVisibili();
-    showMediaVisitor vis(this,mediaVisibili,width());
 
     for(auto m : mediaMan.filtroSoloLibri())
-        m->accept(&vis);
+        addToMediaVisibili(m);
 }
 
 void mainWindow::filtraCanzoni()
 {
     svuotaMediaVisibili();
-    showMediaVisitor vis(this,mediaVisibili,width());
 
     for(auto m : mediaMan.filtroSoloCanzoni())
-        m->accept(&vis);
+        addToMediaVisibili(m);
 }
 
 void mainWindow::filtraAlbum()
 {
     svuotaMediaVisibili();
-    showMediaVisitor vis(this,mediaVisibili,width());
 
     for(auto m : mediaMan.filtroSoloAlbum())
-        m->accept(&vis);
+        addToMediaVisibili(m);
 }
 
 

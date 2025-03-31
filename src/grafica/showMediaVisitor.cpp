@@ -2,13 +2,14 @@
 #include "../logica/libro.h"
 #include "../logica/canzone.h"
 #include "../logica/album.h"
-#include "mediaWidget.h"
+#include "mediaWidgetAnteprima.h"
 #include <QGridLayout>
 #include <algorithm>
 #include <QResizeEvent>
 #include <QWidget>
 
-showMediaVisitor::showMediaVisitor(QGridLayout* _layout, int _width) : layoutDaRiempire(_layout), row(0), col(0) 
+showMediaVisitor::showMediaVisitor(mainWindow* w, QGridLayout* _layout, int _width) : 
+    windowEsterna(w), layoutDaRiempire(_layout), row(0), col(0) 
 { 
     maxCol = max(3,((_width-150)/(270+10)));
     if(maxCol>5)
@@ -17,9 +18,9 @@ showMediaVisitor::showMediaVisitor(QGridLayout* _layout, int _width) : layoutDaR
 
 void showMediaVisitor::visit(libro* _libro)
 {
-    mediaWidget* item = new mediaWidget(_libro,layoutDaRiempire);
+    mediaWidgetAnteprima* item = new mediaWidgetAnteprima(_libro, windowEsterna,layoutDaRiempire);
     
-    QObject::connect(item, &mediaWidget::clicked, item, &mediaWidget::dettagliLibro);
+    QObject::connect(item, &mediaWidgetAnteprima::clicked, item, &mediaWidgetAnteprima::mostraDettagli);
 
     layoutDaRiempire->addWidget(item, row, col);
 
@@ -33,9 +34,9 @@ void showMediaVisitor::visit(libro* _libro)
 
 void showMediaVisitor::visit(canzone* _canzone) 
 {
-    mediaWidget* item = new mediaWidget(_canzone,layoutDaRiempire);
+    mediaWidgetAnteprima* item = new mediaWidgetAnteprima(_canzone, windowEsterna,layoutDaRiempire);
 
-    QObject::connect(item, &mediaWidget::clicked, item, &mediaWidget::dettagliCanzone);
+    QObject::connect(item, &mediaWidgetAnteprima::clicked, item, &mediaWidgetAnteprima::mostraDettagli);
 
     layoutDaRiempire->addWidget(item, row, col);
 
@@ -49,9 +50,9 @@ void showMediaVisitor::visit(canzone* _canzone)
 
 void showMediaVisitor::visit(album* _album) 
 {
-    mediaWidget* item = new mediaWidget(_album, layoutDaRiempire);
+    mediaWidgetAnteprima* item = new mediaWidgetAnteprima(_album, windowEsterna, layoutDaRiempire);
 
-    QObject::connect(item, &mediaWidget::clicked, item, &mediaWidget::dettagliAlbum);
+    QObject::connect(item, &mediaWidgetAnteprima::clicked, item, &mediaWidgetAnteprima::mostraDettagli);
 
     layoutDaRiempire->addWidget(item, row, col);
 

@@ -18,7 +18,6 @@ class mainWindow : public QMainWindow
 
         void resizeEvent(QResizeEvent* event) override;
         void updateLayoutAtResize();
-        void svuotaMediaVisibili();
         void ricerca();
         
     private slots:
@@ -33,6 +32,7 @@ class mainWindow : public QMainWindow
 
     public:
         mainWindow(QWidget* parent = nullptr);
+        void svuotaMediaVisibili();
 
     public slots:
         void reloadMediaVisibili();

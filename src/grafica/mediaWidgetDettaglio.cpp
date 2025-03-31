@@ -1,107 +1,28 @@
-#include "mediaWidget.h"
-#include "../logica/libro.h"
-#include "../logica/canzone.h"
-#include "../logica/album.h"
-#include "qboxlayout.h"
-#include "qglobal.h"
-#include "qwidget.h"
+#include "mediaWidgetDettaglio.h"
+#include <QWidget>
 
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QPushButton>
-#include <QMouseEvent>
-#include <QListWidget>
+mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj): QWidget(nullptr), object(obj) {}
 
-mediaWidget::mediaWidget(media* obj, QGridLayout* l, QWidget* parent) : QWidget(parent), layoutEsterno(l), object(obj)  
+mediaWidgetDettaglio* mediaWidgetDettaglio::creaDettaglio(media* obj) 
 {
-        QVBoxLayout* mainLayout = new QVBoxLayout();
-        mainLayout->setAlignment(Qt::AlignCenter);
+    mediaWidgetDettaglio *newWidget = new mediaWidgetDettaglio(obj);
 
-        setFixedSize(250, 330);
-        setAttribute(Qt::WA_StyledBackground);
-        setStyleSheet("QWidget {background-color: #686868; border-radius: 10px;}");
+    if(dynamic_cast<libro*>(obj))
+        newWidget->creaDettaglioLibro();
 
+    else if (dynamic_cast<canzone*>(obj))
+        newWidget->creaDettaglioCanzone();
 
-        QLabel *imageLabel = new QLabel();
-        imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(200, 300, Qt::KeepAspectRatio));
-        imageLabel->setAlignment(Qt::AlignCenter);
-        mainLayout->addWidget(imageLabel);
+    else if (dynamic_cast<album*>(obj))
+        newWidget->creaDettaglioAlbum();
 
-        QLabel *labelTitolo = new QLabel(toQString(object->getTitolo()));
-        labelTitolo->setFont(QFont("Mono",13));
-        labelTitolo->setAlignment(Qt::AlignCenter);
-        mainLayout->addWidget(labelTitolo);
-
-        QLabel *labelAutore = new QLabel(toQString(object->getTitolo()));
-        labelAutore->setFont(QFont("Mono",13));
-        labelAutore->setAlignment(Qt::AlignCenter);
-        mainLayout->addWidget(labelAutore);
-
-        this->setLayout(mainLayout);
-
-
-
-}
-void mediaWidget::mousePressEvent(QMouseEvent* event)  
-{
-    if (event->button() == Qt::LeftButton) //se viene clickato con il tasto sx del mouse
-        emit clicked(); 
-                        
-    QWidget::mousePressEvent(event);
+    return newWidget;
 }
 
-void mediaWidget::resetSchermata()
+void mediaWidgetDettaglio::creaDettaglioLibro()
 {
-    if (!layoutEsterno)
-        return;
-
-
-    // Rimuove tutti gli altri widget
-    for (int i = layoutEsterno->count() - 1; i >= 0; --i) 
-    {
-        QLayoutItem* item = layoutEsterno->itemAt(i);
-        if (item) 
-        {
-            QWidget* widget = item->widget();
-            if (widget && widget != this) 
-            {
-                layoutEsterno->removeWidget(widget);
-                delete widget;  
-            }
-        }
-    }
-
-    // Svuota questo widget
-    if(layout())
-    {
-        QLayout *l =layout();
-        for (int i = l->count() - 1; i >= 0; --i) 
-        {
-            QLayoutItem* item = l->itemAt(i);
-            if (item) 
-            {
-                QWidget* widget = item->widget();
-
-                l->removeWidget(widget);
-                delete widget;  
-            }
-        }   
-        delete layout(); //rimuove il corrente layout associato al widget
-    }
-
-    //rimuovo la formattazione precedente
-    this->setMinimumSize(QSize(0, 0));  
-    this->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
-    this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    layoutEsterno->update();
-}
-
-void mediaWidget::dettagliLibro()
-{
-    resetSchermata();
-
     QVBoxLayout *layout = new QVBoxLayout();
-    layout->setAlignment(Qt::AlignLeft);
+    layout->setAlignment(Qt::AlignCenter);
 
     libro *objLibro = dynamic_cast<libro*>(object);
 
@@ -120,7 +41,7 @@ void mediaWidget::dettagliLibro()
                     
     QLabel *info = new QLabel(str);
     info->setFont(QFont("Mono",20));
-    info->setAlignment(Qt::AlignLeft);
+    info->setAlignment(Qt::AlignCenter);
     layout->addWidget(info);
 
     QHBoxLayout *layoutPulsanti = new QHBoxLayout();
@@ -132,12 +53,10 @@ void mediaWidget::dettagliLibro()
 
 }
 
-void mediaWidget::dettagliCanzone()
+void mediaWidgetDettaglio::creaDettaglioCanzone()
 {
-    resetSchermata();
-
     QVBoxLayout *layout = new QVBoxLayout();
-    layout->setAlignment(Qt::AlignLeft);
+    layout->setAlignment(Qt::AlignCenter);
 
     canzone *objCanzone = dynamic_cast<canzone*>(object);
 
@@ -162,22 +81,21 @@ void mediaWidget::dettagliCanzone()
 
     QLabel *info = new QLabel(str);
     info->setFont(QFont("Mono",20));
-    info->setAlignment(Qt::AlignLeft);
+    info->setAlignment(Qt::AlignCenter);
     layout->addWidget(info);    
 
     QHBoxLayout *layoutPulsanti = new QHBoxLayout();
-    aggiungiPulsanti(layoutPulsanti);
+    //aggiungiPulsanti(layoutPulsanti);
     layout->addLayout(layoutPulsanti);
 
     this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
+
 }
 
-void mediaWidget::dettagliAlbum()
+void mediaWidgetDettaglio::creaDettaglioAlbum()
 {
-    resetSchermata();
-
     QHBoxLayout *layout = new QHBoxLayout();
 
     //PARTE DI SINISTRA
@@ -208,7 +126,7 @@ void mediaWidget::dettagliAlbum()
     info->setAlignment(Qt::AlignLeft);
 
     QHBoxLayout *layoutPulsanti = new QHBoxLayout();
-    aggiungiPulsanti(layoutPulsanti);
+    //aggiungiPulsanti(layoutPulsanti);
 
     layoutSX->addWidget(info);
     layoutSX->addLayout(layoutPulsanti);
@@ -260,9 +178,10 @@ void mediaWidget::dettagliAlbum()
     this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
+
 }
 
-void mediaWidget::aggiungiPulsanti(QHBoxLayout* layoutPulsanti)
+void mediaWidgetDettaglio::aggiungiPulsanti(QHBoxLayout* layoutPulsanti)
 {
         // Pulsanti
         QPushButton *buttonModifica = new QPushButton("Modifica");
@@ -281,15 +200,5 @@ void mediaWidget::aggiungiPulsanti(QHBoxLayout* layoutPulsanti)
         buttonModifica->setFixedSize(150, 60);
         buttonElimina->setFixedSize(150, 60);
 
-        connect(buttonModifica, &QPushButton::clicked, this, &mediaWidget::modificaClicked);
-        connect(buttonElimina, &QPushButton::clicked, this, &mediaWidget::eliminaClicked); 
 }
 
-void mediaWidget::eliminaClicked()
-{
-
-}
-void mediaWidget::modificaClicked()
-{
-
-}

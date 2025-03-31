@@ -43,5 +43,14 @@
         "genere": "buzz",
         "id": 9,
         "titolo": "bum"
+    },
+    {
+        "anno": 3433,
+        "autore": "kedot",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/canzone.png",
+        "durata": 251,
+        "genere": "daaaaa",
+        "id": 12,
+        "titolo": "3636"
     }
 ]

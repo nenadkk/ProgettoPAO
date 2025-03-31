@@ -124,7 +124,7 @@ void mainWindow::ricerca()
     if(!query.empty())
     {
         //Ripopola con i valori filtrati
-        showMediaVisitor showvis(mediaVisibili, width());
+        showMediaVisitor showvis(this,mediaVisibili, width());
 
         for (auto m : query) 
             m->accept(&showvis);
@@ -137,10 +137,13 @@ void mainWindow::reloadMediaVisibili()
     svuotaMediaVisibili();
 
     //Ripopola
-    showMediaVisitor showvis(mediaVisibili,width());
+    showMediaVisitor showvis(this,mediaVisibili,width());
 
     for (int i=0;i<mediaMan.size();i++) 
+    {
         mediaMan[i]->accept(&showvis);
+
+    }
 }
 
 void mainWindow::resizeEvent(QResizeEvent* event)
@@ -252,7 +255,7 @@ void mainWindow::creaAlbum()
 void mainWindow::filtraLibri()
 {
     svuotaMediaVisibili();
-    showMediaVisitor vis(mediaVisibili,width());
+    showMediaVisitor vis(this,mediaVisibili,width());
 
     for(auto m : mediaMan.filtroSoloLibri())
         m->accept(&vis);
@@ -261,7 +264,7 @@ void mainWindow::filtraLibri()
 void mainWindow::filtraCanzoni()
 {
     svuotaMediaVisibili();
-    showMediaVisitor vis(mediaVisibili,width());
+    showMediaVisitor vis(this,mediaVisibili,width());
 
     for(auto m : mediaMan.filtroSoloCanzoni())
         m->accept(&vis);
@@ -270,7 +273,7 @@ void mainWindow::filtraCanzoni()
 void mainWindow::filtraAlbum()
 {
     svuotaMediaVisibili();
-    showMediaVisitor vis(mediaVisibili,width());
+    showMediaVisitor vis(this,mediaVisibili,width());
 
     for(auto m : mediaMan.filtroSoloAlbum())
         m->accept(&vis);

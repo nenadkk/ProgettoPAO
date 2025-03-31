@@ -19,8 +19,6 @@ class mainWindow : public QMainWindow
         int rowGrid;
         int colGrid;
 
-        void resizeEvent(QResizeEvent* event) override;
-        void updateLayoutAtResize();
         void ricerca();
         void addToMediaVisibili(media*);
         

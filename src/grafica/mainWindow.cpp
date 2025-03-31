@@ -9,12 +9,6 @@
 #include <QScrollArea>
 #include <QListWidget>
 #include <QLabel>
-#include <QDragEnterEvent>
-#include <QDropEvent>
-#include <QUrl>
-#include <QMimeData>
-#include <QFileDialog>
-#include <QDebug>
 
 #include "createMediaVisitor.h"
 #include "mediaWidgetAnteprima.h"
@@ -155,16 +149,6 @@ void mainWindow::reloadMediaVisibili()
 
     for (int i=0;i<mediaMan.size();i++) 
         addToMediaVisibili(mediaMan[i]);
-}
-
-void mainWindow::resizeEvent(QResizeEvent* event)
-{
-    QWidget::resizeEvent(event);
-    updateLayoutAtResize();
-}
-
-void mainWindow::updateLayoutAtResize()
-{
 }
 
 void mainWindow::svuotaMediaVisibili()

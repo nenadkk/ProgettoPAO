@@ -28,7 +28,7 @@ class widgetCreazione : public QWidget
         void browseImage();
 
     public:
-        widgetCreazione(mediaManager*, media*, mainWindow*, QListWidget* tracks = nullptr, QWidget* parent=nullptr);
+        widgetCreazione(mediaManager*, media*, QWidget* parent=nullptr, QListWidget* tracks = nullptr);
         void insertLineEdit(QString,QLineEdit*);
         QLineEdit*& operator[](const QString& );
 };

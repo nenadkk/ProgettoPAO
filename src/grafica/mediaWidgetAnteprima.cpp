@@ -8,44 +8,46 @@
 #include <QMouseEvent>
 #include <QListWidget>
 
-mediaWidgetAnteprima::mediaWidgetAnteprima(media* obj, mainWindow* w, QGridLayout* l, QWidget* parent) : 
-    QWidget(parent), object(obj) ,widowEsterna(w) ,layoutEsterno(l)
+mediaWidgetAnteprima::mediaWidgetAnteprima(media* obj, QGridLayout* l, QWidget* parent) : 
+    QWidget(parent), object(obj) ,layoutEsterno(l)
 {
-        QVBoxLayout* mainLayout = new QVBoxLayout();
-        mainLayout->setAlignment(Qt::AlignCenter);
+    windowEsterna = (dynamic_cast<mainWindow*>(parent));
 
-        setFixedSize(250, 330);
-        setAttribute(Qt::WA_StyledBackground);
-        setStyleSheet("QWidget {background-color: #686868; border-radius: 10px;}");
+    QVBoxLayout* mainLayout = new QVBoxLayout();
+    mainLayout->setAlignment(Qt::AlignCenter);
 
-        QLabel *imageLabel = new QLabel();
-        imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(200, 300, Qt::KeepAspectRatio));
-        imageLabel->setAlignment(Qt::AlignCenter);
-        mainLayout->addWidget(imageLabel);
+    setFixedSize(250, 330);
+    setAttribute(Qt::WA_StyledBackground);
+    setStyleSheet("QWidget {background-color: #686868; border-radius: 10px;}");
 
-        QString str = QString::fromStdString(object->getTitolo()) + 
-            QString::fromStdString(object->getAutore());
+    QLabel *imageLabel = new QLabel();
+    imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(200, 300, Qt::KeepAspectRatio));
+    imageLabel->setAlignment(Qt::AlignCenter);
+    mainLayout->addWidget(imageLabel);
 
-        QLabel *labelTesto = new QLabel(str);
-        labelTesto->setFont(QFont("Mono",13));
-        labelTesto->setAlignment(Qt::AlignCenter);
-        mainLayout->addWidget(labelTesto);
+    QString str = QString::fromStdString(object->getTitolo()) + 
+        QString::fromStdString(object->getAutore());
 
-        this->setLayout(mainLayout);
+    QLabel *labelTesto = new QLabel(str);
+    labelTesto->setFont(QFont("Mono",13));
+    labelTesto->setAlignment(Qt::AlignCenter);
+    mainLayout->addWidget(labelTesto);
+
+    this->setLayout(mainLayout);
 
 }
 void mediaWidgetAnteprima::mousePressEvent(QMouseEvent* event)  
 {
     if (event->button() == Qt::LeftButton) //se viene clickato con il tasto sx del mouse
         emit clicked(); 
-                        
+
     QWidget::mousePressEvent(event);
 }
 
 void mediaWidgetAnteprima::mostraDettagli()
 {
     mediaWidgetDettaglio *item = mediaWidgetDettaglio::creaDettaglio(object); 
-    widowEsterna->svuotaMediaVisibili();
+    windowEsterna->svuotaMediaVisibili();
     layoutEsterno->addWidget(item);
 }
 

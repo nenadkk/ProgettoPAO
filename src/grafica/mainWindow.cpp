@@ -129,7 +129,7 @@ void mainWindow::addToMediaVisibili(media* m)
     if(maxCol>5)
         maxCol=5;
 
-    mediaWidgetAnteprima* item = new mediaWidgetAnteprima(m,this,mediaVisibili);
+    mediaWidgetAnteprima* item = new mediaWidgetAnteprima(m,mediaVisibili,this);
 
     QObject::connect(item, &mediaWidgetAnteprima::clicked, item, &mediaWidgetAnteprima::mostraDettagli);
 

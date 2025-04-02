@@ -4,9 +4,11 @@
 #include "widgetCreazione.h"
 #include "qglobal.h"
 
-widgetCreazione::widgetCreazione(mediaManager* man, media* tipo, mainWindow* windowEsterna, QListWidget* tracks, QWidget* parent) : 
-    QWidget(parent), manager(man), tipo(tipo), windowEsterna(windowEsterna), trackList(tracks)
-{}
+widgetCreazione::widgetCreazione(mediaManager* man, media* tipo, QWidget* parent, QListWidget* tracks) : 
+    QWidget(parent), manager(man), tipo(tipo), trackList(tracks)
+{
+    windowEsterna = dynamic_cast<mainWindow*>(parent);
+}
 
 QLineEdit*& widgetCreazione::operator[](const QString& key) 
 {

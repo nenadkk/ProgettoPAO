@@ -17,7 +17,7 @@ class mediaWidgetAnteprima : public QWidget
 
     private:
         media* object;
-        mainWindow* widowEsterna;
+        mainWindow* windowEsterna;
         QGridLayout* layoutEsterno;
 
 
@@ -25,7 +25,7 @@ class mediaWidgetAnteprima : public QWidget
         void mousePressEvent(QMouseEvent* event) override;
 
     public:
-        explicit mediaWidgetAnteprima(media*, mainWindow*, QGridLayout*, QWidget* parent = nullptr);
+        explicit mediaWidgetAnteprima(media*, QGridLayout*, QWidget* parent = nullptr);
 
         void mostraDettagli();
 

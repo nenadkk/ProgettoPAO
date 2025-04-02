@@ -38,5 +38,15 @@
         "isbn": 898392832,
         "numPagine": 299,
         "titolo": "3030"
+    },
+    {
+        "anno": 656,
+        "autore": "fjsj",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "traetaet",
+        "id": 16,
+        "isbn": 464643,
+        "numPagine": 66,
+        "titolo": "444"
     }
 ]

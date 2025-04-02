@@ -25,7 +25,7 @@ mediaWidgetAnteprima::mediaWidgetAnteprima(media* obj, QGridLayout* l, QWidget* 
     imageLabel->setAlignment(Qt::AlignCenter);
     mainLayout->addWidget(imageLabel);
 
-    QString str = QString::fromStdString(object->getTitolo()) + 
+    QString str = QString::fromStdString(object->getTitolo()) + "\n" +
         QString::fromStdString(object->getAutore());
 
     QLabel *labelTesto = new QLabel(str);

@@ -24,64 +24,73 @@ void widgetCreazione::insertLineEdit(QString str,QLineEdit* n)
     attributi.insert(str,n);
 }
 
-void widgetCreazione::crea()
+void widgetCreazione::creaLibro()
 {
     if(validaInput())
     {
-            copiaImmagine();
-            manager->addMedia(new libro(attributi["titolo"]->text().toStdString(),
-                                        attributi["autore"]->text().toStdString(),
-                                        attributi["anno"]->text().toInt(),
-                                        attributi["copertina"]->text().toStdString(),
-                                        manager->trovaIdLibero(),
-                                        attributi["numeroPagine"]->text().toInt(),
-                                        attributi["isbn"]->text().toInt(),
-                                        attributi["editore"]->text().toStdString()));
-
-
-
-
-            int durata = (attributi["durataMin"]->text().toInt())*60+(attributi["durataSec"]->text().toInt());
-            manager->addMedia(new canzone(attributi["titolo"]->text().toStdString(),
-                                        attributi["autore"]->text().toStdString(),
-                                        attributi["anno"]->text().toInt(),
-                                        attributi["copertina"]->text().toStdString(),
-                                        manager->trovaIdLibero(),
-                                        durata,
-                                        attributi["genere"]->text().toStdString()));
-
-
-
-
-
-            //creazione album
-            album *newAlbum = new album(attributi["titolo"]->text().toStdString(),
-                                        attributi["autore"]->text().toStdString(),
-                                        attributi["anno"]->text().toInt(),
-                                        attributi["copertina"]->text().toStdString(),
-                                        manager->trovaIdLibero());
-
-            //aggiunta canzoni ad album
-            for(int i=0; i<trackList->count();++i)
-            {
-                QListWidgetItem *item = trackList->item(i);
-
-                if (item->checkState() == Qt::Checked) 
-                {
-                    int trackID = item->data(Qt::UserRole).toInt();
-                    media* c = manager->searchById(trackID);
-                    if(c && dynamic_cast<canzone*>(c))
-                    {
-                        newAlbum->addCanzone(dynamic_cast<canzone*>(c));
-                    }
-                }
-            }
-
-            manager->addMedia(newAlbum);
+        copiaImmagine();
+        manager->addMedia(new libro(attributi["titolo"]->text().toStdString(),
+                    attributi["autore"]->text().toStdString(),
+                    attributi["anno"]->text().toInt(),
+                    attributi["copertina"]->text().toStdString(),
+                    manager->trovaIdLibero(),
+                    attributi["numeroPagine"]->text().toInt(),
+                    attributi["isbn"]->text().toInt(),
+                    attributi["editore"]->text().toStdString()));
 
         windowEsterna->reloadMediaVisibili();
     }
 }
+
+void widgetCreazione::creaCanzone()
+{
+    if(validaInput())
+    {
+        int durata = (attributi["durataMin"]->text().toInt())*60+(attributi["durataSec"]->text().toInt());
+        manager->addMedia(new canzone(attributi["titolo"]->text().toStdString(),
+                    attributi["autore"]->text().toStdString(),
+                    attributi["anno"]->text().toInt(),
+                    attributi["copertina"]->text().toStdString(),
+                    manager->trovaIdLibero(),
+                    durata,
+                    attributi["genere"]->text().toStdString()));
+
+        windowEsterna->reloadMediaVisibili();
+    }
+}
+
+void widgetCreazione::creaAlbum()
+{
+    if(validaInput())
+    {
+        //creazione album
+        album *newAlbum = new album(attributi["titolo"]->text().toStdString(),
+                attributi["autore"]->text().toStdString(),
+                attributi["anno"]->text().toInt(),
+                attributi["copertina"]->text().toStdString(),
+                manager->trovaIdLibero());
+
+        //aggiunta canzoni ad album
+        for(int i=0; i<trackList->count();++i)
+        {
+            QListWidgetItem *item = trackList->item(i);
+
+            if (item->checkState() == Qt::Checked) 
+            {
+                int trackID = item->data(Qt::UserRole).toInt();
+                media* c = manager->searchById(trackID);
+                if(c && dynamic_cast<canzone*>(c))
+                {
+                    newAlbum->addCanzone(dynamic_cast<canzone*>(c));
+                }
+            }
+        }
+
+        manager->addMedia(newAlbum);
+        windowEsterna->reloadMediaVisibili();
+    }
+}
+
 
 bool widgetCreazione::validaInput()
 {
@@ -305,7 +314,7 @@ void widgetCreazione::buildWidget(libro* newLibro)
     QPushButton *btnSalva = new QPushButton("SALVA",widgetPulsanti);
     btnSalva->setFixedSize(200,50);
     btnSalva->setFont(QFont("Mono",15));
-    QObject::connect(btnSalva, &QPushButton::clicked, this, &widgetCreazione::crea);
+    QObject::connect(btnSalva, &QPushButton::clicked, this, &widgetCreazione::creaLibro);
     layoutPulsanti->addWidget(btnSalva,0, Qt::AlignRight);
 
     //---------------------------------------------------
@@ -402,7 +411,7 @@ void widgetCreazione::buildWidget(canzone* newCanzone)
     QPushButton *btnSalva = new QPushButton("SALVA",widgetPulsanti);
     btnSalva->setFixedSize(200,50);
     btnSalva->setFont(QFont("Mono",15));
-    QObject::connect(btnSalva, &QPushButton::clicked, this, &widgetCreazione::crea);
+    QObject::connect(btnSalva, &QPushButton::clicked, this, &widgetCreazione::creaCanzone);
     layoutPulsanti->addWidget(btnSalva,0, Qt::AlignRight);
 
     //---------------------------------------------------
@@ -444,7 +453,7 @@ void widgetCreazione::buildWidget(album* newAlbum)
     QPushButton *btnSalva = new QPushButton("SALVA",widgetPulsanti);
     btnSalva->setFixedSize(200,50);
     btnSalva->setFont(QFont("Mono",15));
-    QObject::connect(btnSalva, &QPushButton::clicked, this, &widgetCreazione::crea);
+    QObject::connect(btnSalva, &QPushButton::clicked, this, &widgetCreazione::creaAlbum);
     layoutSinistraPulsanti->addWidget(btnSalva,0, Qt::AlignRight);
 
     //---------------------------------------------------

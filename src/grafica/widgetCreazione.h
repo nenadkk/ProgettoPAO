@@ -24,9 +24,13 @@ class widgetCreazione : public QWidget
 
         void creaSottoOggettoMedia(QWidget**,widgetCreazione*);
 
-    public slots:
-        void crea();
+    private slots:
+        void creaLibro();
+        void creaCanzone();
+        void creaAlbum();
         void browseImage();
+
+    public slots:
 
         void buildWidget(libro*);
         void buildWidget(canzone*);

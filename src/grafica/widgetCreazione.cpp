@@ -6,8 +6,8 @@
 #include "qglobal.h"
 #include "widgetCreazioneVisitor.h"
 
-widgetCreazione::widgetCreazione(media* tipo, mediaManager* man, QWidget* parent, QListWidget* tracks) : 
-    QWidget(parent), manager(man), tipo(tipo), trackList(tracks)
+widgetCreazione::widgetCreazione(media* tipo, mediaManager* man, QWidget* parent) : 
+    QWidget(parent), manager(man), trackList(nullptr)
 {
     windowEsterna = dynamic_cast<mainWindow*>(parent);
     widgetCreazioneVisitor vis(this);
@@ -28,8 +28,6 @@ void widgetCreazione::crea()
 {
     if(validaInput())
     {
-        if(dynamic_cast<libro*>(tipo))
-        {
             copiaImmagine();
             manager->addMedia(new libro(attributi["titolo"]->text().toStdString(),
                                         attributi["autore"]->text().toStdString(),
@@ -39,10 +37,10 @@ void widgetCreazione::crea()
                                         attributi["numeroPagine"]->text().toInt(),
                                         attributi["isbn"]->text().toInt(),
                                         attributi["editore"]->text().toStdString()));
-        }
-        else if(dynamic_cast<canzone*>(tipo))
-        {
-            copiaImmagine();
+
+
+
+
             int durata = (attributi["durataMin"]->text().toInt())*60+(attributi["durataSec"]->text().toInt());
             manager->addMedia(new canzone(attributi["titolo"]->text().toStdString(),
                                         attributi["autore"]->text().toStdString(),
@@ -51,10 +49,11 @@ void widgetCreazione::crea()
                                         manager->trovaIdLibero(),
                                         durata,
                                         attributi["genere"]->text().toStdString()));
-        }
-        else if (dynamic_cast<album*>(tipo)) 
-        {
-            copiaImmagine();
+
+
+
+
+
             //creazione album
             album *newAlbum = new album(attributi["titolo"]->text().toStdString(),
                                         attributi["autore"]->text().toStdString(),
@@ -79,8 +78,7 @@ void widgetCreazione::crea()
             }
 
             manager->addMedia(newAlbum);
-        }
-        delete tipo;
+
         windowEsterna->reloadMediaVisibili();
     }
 }

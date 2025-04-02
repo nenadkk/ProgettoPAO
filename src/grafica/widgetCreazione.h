@@ -15,7 +15,6 @@ class widgetCreazione : public QWidget
     private:
         mediaManager *manager;
         QMap<QString, QLineEdit*> attributi;
-        media *tipo;
         mainWindow* windowEsterna;
         QListWidget* trackList;
 
@@ -34,7 +33,7 @@ class widgetCreazione : public QWidget
         void buildWidget(album*);
 
     public:
-        widgetCreazione(media*, mediaManager*, QWidget* parent=nullptr, QListWidget* tracks = nullptr);
+        widgetCreazione(media*, mediaManager*, QWidget* parent=nullptr);
         void insertLineEdit(QString,QLineEdit*);
         QLineEdit*& operator[](const QString& );
 };

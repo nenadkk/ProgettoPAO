@@ -1,30 +1,20 @@
 #include "mediaWidgetDettaglio.h"
+#include "sceltaDettaglioVisitor.h"
 #include <QWidget>
 
-mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj): QWidget(nullptr), object(obj) {}
-
-mediaWidgetDettaglio* mediaWidgetDettaglio::creaDettaglio(media* obj) 
+mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj): QWidget(nullptr) 
 {
-    mediaWidgetDettaglio *newWidget = new mediaWidgetDettaglio(obj);
-
-    if(dynamic_cast<libro*>(obj))
-        newWidget->creaDettaglioLibro();
-
-    else if (dynamic_cast<canzone*>(obj))
-        newWidget->creaDettaglioCanzone();
-
-    else if (dynamic_cast<album*>(obj))
-        newWidget->creaDettaglioAlbum();
-
-    return newWidget;
+    sceltaDettaglioVisitor vis(this);
+    obj->accept(&vis);
 }
 
-void mediaWidgetDettaglio::creaDettaglioLibro()
+void mediaWidgetDettaglio::creaDettaglio(libro* object)
 {
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setAlignment(Qt::AlignCenter);
 
-    libro *objLibro = dynamic_cast<libro*>(object);
+    libro *objLibro = dynamic_cast<libro*>(object); //sono sicuro che funzioni perché questa
+                                                    //funzione è richiamata dal visitor
 
     QLabel *imageLabel = new QLabel();
     imageLabel->setPixmap(QPixmap(toQString(objLibro->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
@@ -53,7 +43,7 @@ void mediaWidgetDettaglio::creaDettaglioLibro()
 
 }
 
-void mediaWidgetDettaglio::creaDettaglioCanzone()
+void mediaWidgetDettaglio::creaDettaglio(canzone* object)
 {
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setAlignment(Qt::AlignCenter);
@@ -94,7 +84,7 @@ void mediaWidgetDettaglio::creaDettaglioCanzone()
 
 }
 
-void mediaWidgetDettaglio::creaDettaglioAlbum()
+void mediaWidgetDettaglio::creaDettaglio(album* object)
 {
     QHBoxLayout *layout = new QHBoxLayout();
 

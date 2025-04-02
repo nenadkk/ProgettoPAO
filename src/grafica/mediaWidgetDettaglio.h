@@ -13,20 +13,19 @@
 #include <QEvent>
 #include <QListWidget>
 
+class sceltaDettaglioVisitor;
+
 class mediaWidgetDettaglio : public QWidget
 {    
     private:
-        media* object;
-
-        mediaWidgetDettaglio(media*);
         void aggiungiPulsanti(QHBoxLayout*);
 
-        void creaDettaglioLibro();
-        void creaDettaglioCanzone();
-        void creaDettaglioAlbum();
-
     public:
-        static mediaWidgetDettaglio* creaDettaglio(media*);
+        mediaWidgetDettaglio(media*);
+
+        void creaDettaglio(libro*);
+        void creaDettaglio(canzone*);
+        void creaDettaglio(album*);
 
 };
 

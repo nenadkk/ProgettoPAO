@@ -33,6 +33,9 @@ mediaWidgetAnteprima::mediaWidgetAnteprima(media* obj, QGridLayout* l, QWidget* 
     labelTesto->setAlignment(Qt::AlignCenter);
     mainLayout->addWidget(labelTesto);
 
+    QObject::connect(this, &mediaWidgetAnteprima::clicked,
+                     this, &mediaWidgetAnteprima::mostraDettagli);
+
     this->setLayout(mainLayout);
 
 }
@@ -46,7 +49,7 @@ void mediaWidgetAnteprima::mousePressEvent(QMouseEvent* event)
 
 void mediaWidgetAnteprima::mostraDettagli()
 {
-    mediaWidgetDettaglio *item = mediaWidgetDettaglio::creaDettaglio(object); 
+    mediaWidgetDettaglio *item = new mediaWidgetDettaglio(object); 
     windowEsterna->svuotaMediaVisibili();
     layoutEsterno->addWidget(item);
 }

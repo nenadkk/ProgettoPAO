@@ -57,6 +57,7 @@ SOURCES       = src/main.cpp \
 		src/grafica/mainWindow.cpp \
 		src/grafica/mediaWidgetAnteprima.cpp \
 		src/grafica/mediaWidgetDettaglio.cpp \
+		src/grafica/sceltaDettaglioVisitor.cpp \
 		src/grafica/widgetCreazione.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
@@ -71,6 +72,7 @@ OBJECTS       = build/obj/main.o \
 		build/obj/mainWindow.o \
 		build/obj/mediaWidgetAnteprima.o \
 		build/obj/mediaWidgetDettaglio.o \
+		build/obj/sceltaDettaglioVisitor.o \
 		build/obj/widgetCreazione.o \
 		build/obj/jsonVisitor.o \
 		build/obj/album.o \
@@ -150,6 +152,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/grafica/mainWindow.h \
 		src/grafica/mediaWidgetAnteprima.h \
 		src/grafica/mediaWidgetDettaglio.h \
+		src/grafica/sceltaDettaglioVisitor.h \
 		src/grafica/widgetCreazione.h \
 		src/jsonHandler/jsonVisitor.h \
 		src/logica/album.h \
@@ -162,6 +165,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/grafica/mainWindow.cpp \
 		src/grafica/mediaWidgetAnteprima.cpp \
 		src/grafica/mediaWidgetDettaglio.cpp \
+		src/grafica/sceltaDettaglioVisitor.cpp \
 		src/grafica/widgetCreazione.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
@@ -334,8 +338,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/grafica/createMediaVisitor.h src/grafica/mainWindow.h src/grafica/mediaWidgetAnteprima.h src/grafica/mediaWidgetDettaglio.h src/grafica/widgetCreazione.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/grafica/createMediaVisitor.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidgetAnteprima.cpp src/grafica/mediaWidgetDettaglio.cpp src/grafica/widgetCreazione.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/grafica/createMediaVisitor.h src/grafica/mainWindow.h src/grafica/mediaWidgetAnteprima.h src/grafica/mediaWidgetDettaglio.h src/grafica/sceltaDettaglioVisitor.h src/grafica/widgetCreazione.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/grafica/createMediaVisitor.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidgetAnteprima.cpp src/grafica/mediaWidgetDettaglio.cpp src/grafica/sceltaDettaglioVisitor.cpp src/grafica/widgetCreazione.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -471,8 +475,20 @@ build/obj/mediaWidgetDettaglio.o: src/grafica/mediaWidgetDettaglio.cpp src/grafi
 		src/logica/canzone.h \
 		src/logica/album.h \
 		src/grafica/mainWindow.h \
-		src/mediaManager/mediaManager.h
+		src/mediaManager/mediaManager.h \
+		src/grafica/sceltaDettaglioVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mediaWidgetDettaglio.o src/grafica/mediaWidgetDettaglio.cpp
+
+build/obj/sceltaDettaglioVisitor.o: src/grafica/sceltaDettaglioVisitor.cpp src/grafica/sceltaDettaglioVisitor.h \
+		src/logica/visitor.h \
+		src/grafica/mediaWidgetDettaglio.h \
+		src/logica/libro.h \
+		src/logica/media.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/grafica/mainWindow.h \
+		src/mediaManager/mediaManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/sceltaDettaglioVisitor.o src/grafica/sceltaDettaglioVisitor.cpp
 
 build/obj/widgetCreazione.o: src/grafica/widgetCreazione.cpp src/grafica/widgetCreazione.h \
 		src/grafica/mainWindow.h \

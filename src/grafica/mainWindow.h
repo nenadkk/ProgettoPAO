@@ -14,16 +14,15 @@ class mainWindow : public QMainWindow
         mediaManager mediaMan;
         QGridLayout *mediaVisibili;
         QLineEdit *searchBar;
-        QLineEdit *copertinaTemp;
 
-        int rowGrid;
-        int colGrid;
+        int rowGrid; //serve per disposizione anteprime nel layout pricipale
+        int colGrid; //serve per disposizione anteprime nel layout pricipale
 
         void ricerca();
-        void addToMediaVisibili(media*);
+        void addToMediaVisibili(media*);//aggiunge l'anteprima del media al layout principale
         
     private slots:
-        void sceltaCreazione();
+        void sceltaCreazione();//scegli che tipo di media creare
         void creaLibro();
         void creaCanzone();
         void creaAlbum();

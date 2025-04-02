@@ -131,8 +131,6 @@ void mainWindow::addToMediaVisibili(media* m)
 
     mediaWidgetAnteprima* item = new mediaWidgetAnteprima(m,mediaVisibili,this);
 
-    QObject::connect(item, &mediaWidgetAnteprima::clicked, item, &mediaWidgetAnteprima::mostraDettagli);
-
     mediaVisibili->addWidget(item, rowGrid, colGrid);
 
     colGrid++;

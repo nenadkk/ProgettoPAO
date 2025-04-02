@@ -27,11 +27,15 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 namespace {
 struct qt_meta_stringdata_widgetCreazione_t {
-    uint offsetsAndSizes[8];
+    uint offsetsAndSizes[16];
     char stringdata0[16];
     char stringdata1[5];
     char stringdata2[1];
     char stringdata3[12];
+    char stringdata4[12];
+    char stringdata5[7];
+    char stringdata6[9];
+    char stringdata7[7];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_widgetCreazione_t::offsetsAndSizes) + ofs), len 
@@ -40,12 +44,20 @@ Q_CONSTINIT static const qt_meta_stringdata_widgetCreazione_t qt_meta_stringdata
         QT_MOC_LITERAL(0, 15),  // "widgetCreazione"
         QT_MOC_LITERAL(16, 4),  // "crea"
         QT_MOC_LITERAL(21, 0),  // ""
-        QT_MOC_LITERAL(22, 11)   // "browseImage"
+        QT_MOC_LITERAL(22, 11),  // "browseImage"
+        QT_MOC_LITERAL(34, 11),  // "buildWidget"
+        QT_MOC_LITERAL(46, 6),  // "libro*"
+        QT_MOC_LITERAL(53, 8),  // "canzone*"
+        QT_MOC_LITERAL(62, 6)   // "album*"
     },
     "widgetCreazione",
     "crea",
     "",
-    "browseImage"
+    "browseImage",
+    "buildWidget",
+    "libro*",
+    "canzone*",
+    "album*"
 };
 #undef QT_MOC_LITERAL
 } // unnamed namespace
@@ -56,7 +68,7 @@ Q_CONSTINIT static const uint qt_meta_data_widgetCreazione[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,12 +76,18 @@ Q_CONSTINIT static const uint qt_meta_data_widgetCreazione[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   26,    2, 0x0a,    1 /* Public */,
-       3,    0,   27,    2, 0x0a,    2 /* Public */,
+       1,    0,   44,    2, 0x0a,    1 /* Public */,
+       3,    0,   45,    2, 0x0a,    2 /* Public */,
+       4,    1,   46,    2, 0x0a,    3 /* Public */,
+       4,    1,   49,    2, 0x0a,    5 /* Public */,
+       4,    1,   52,    2, 0x0a,    7 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 5,    2,
+    QMetaType::Void, 0x80000000 | 6,    2,
+    QMetaType::Void, 0x80000000 | 7,    2,
 
        0        // eod
 };
@@ -86,7 +104,16 @@ Q_CONSTINIT const QMetaObject widgetCreazione::staticMetaObject = { {
         // method 'crea'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'browseImage'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'buildWidget'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<libro *, std::false_type>,
+        // method 'buildWidget'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<canzone *, std::false_type>,
+        // method 'buildWidget'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<album *, std::false_type>
     >,
     nullptr
 } };
@@ -99,10 +126,12 @@ void widgetCreazione::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         switch (_id) {
         case 0: _t->crea(); break;
         case 1: _t->browseImage(); break;
+        case 2: _t->buildWidget((*reinterpret_cast< std::add_pointer_t<libro*>>(_a[1]))); break;
+        case 3: _t->buildWidget((*reinterpret_cast< std::add_pointer_t<canzone*>>(_a[1]))); break;
+        case 4: _t->buildWidget((*reinterpret_cast< std::add_pointer_t<album*>>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *widgetCreazione::metaObject() const
@@ -124,13 +153,13 @@ int widgetCreazione::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 5;
     }
     return _id;
 }

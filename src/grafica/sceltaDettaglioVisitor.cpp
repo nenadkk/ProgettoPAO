@@ -5,13 +5,13 @@ sceltaDettaglioVisitor::sceltaDettaglioVisitor(mediaWidgetDettaglio* m) : widget
 
 void sceltaDettaglioVisitor::visit(libro* _libro)
 {
-    widget->creaDettaglio(_libro);
+    widget->buildDettaglio(_libro);
 }
 void sceltaDettaglioVisitor::visit(canzone* _canzone)
 {
-    widget->creaDettaglio(_canzone);
+    widget->buildDettaglio(_canzone);
 }
 void sceltaDettaglioVisitor::visit(album* _album)
 {
-    widget->creaDettaglio(_album);
+    widget->buildDettaglio(_album);
 }

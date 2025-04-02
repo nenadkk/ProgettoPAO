@@ -53,12 +53,12 @@ OBJECTS_DIR   = build/obj/
 ####### Files
 
 SOURCES       = src/main.cpp \
-		src/grafica/createMediaVisitor.cpp \
 		src/grafica/mainWindow.cpp \
 		src/grafica/mediaWidgetAnteprima.cpp \
 		src/grafica/mediaWidgetDettaglio.cpp \
 		src/grafica/sceltaDettaglioVisitor.cpp \
 		src/grafica/widgetCreazione.cpp \
+		src/grafica/widgetCreazioneVisitor.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
@@ -68,12 +68,12 @@ SOURCES       = src/main.cpp \
 		build/moc/moc_mediaWidgetAnteprima.cpp \
 		build/moc/moc_widgetCreazione.cpp
 OBJECTS       = build/obj/main.o \
-		build/obj/createMediaVisitor.o \
 		build/obj/mainWindow.o \
 		build/obj/mediaWidgetAnteprima.o \
 		build/obj/mediaWidgetDettaglio.o \
 		build/obj/sceltaDettaglioVisitor.o \
 		build/obj/widgetCreazione.o \
+		build/obj/widgetCreazioneVisitor.o \
 		build/obj/jsonVisitor.o \
 		build/obj/album.o \
 		build/obj/cazone.o \
@@ -148,12 +148,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		ProgettoPAO.pro src/grafica/createMediaVisitor.h \
-		src/grafica/mainWindow.h \
+		ProgettoPAO.pro src/grafica/mainWindow.h \
 		src/grafica/mediaWidgetAnteprima.h \
 		src/grafica/mediaWidgetDettaglio.h \
 		src/grafica/sceltaDettaglioVisitor.h \
 		src/grafica/widgetCreazione.h \
+		src/grafica/widgetCreazioneVisitor.h \
 		src/jsonHandler/jsonVisitor.h \
 		src/logica/album.h \
 		src/logica/canzone.h \
@@ -161,12 +161,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/logica/media.h \
 		src/logica/visitor.h \
 		src/mediaManager/mediaManager.h src/main.cpp \
-		src/grafica/createMediaVisitor.cpp \
 		src/grafica/mainWindow.cpp \
 		src/grafica/mediaWidgetAnteprima.cpp \
 		src/grafica/mediaWidgetDettaglio.cpp \
 		src/grafica/sceltaDettaglioVisitor.cpp \
 		src/grafica/widgetCreazione.cpp \
+		src/grafica/widgetCreazioneVisitor.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
@@ -338,8 +338,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/grafica/createMediaVisitor.h src/grafica/mainWindow.h src/grafica/mediaWidgetAnteprima.h src/grafica/mediaWidgetDettaglio.h src/grafica/sceltaDettaglioVisitor.h src/grafica/widgetCreazione.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/grafica/createMediaVisitor.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidgetAnteprima.cpp src/grafica/mediaWidgetDettaglio.cpp src/grafica/sceltaDettaglioVisitor.cpp src/grafica/widgetCreazione.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/grafica/mainWindow.h src/grafica/mediaWidgetAnteprima.h src/grafica/mediaWidgetDettaglio.h src/grafica/sceltaDettaglioVisitor.h src/grafica/widgetCreazione.h src/grafica/widgetCreazioneVisitor.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidgetAnteprima.cpp src/grafica/mediaWidgetDettaglio.cpp src/grafica/sceltaDettaglioVisitor.cpp src/grafica/widgetCreazione.cpp src/grafica/widgetCreazioneVisitor.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -434,17 +434,6 @@ build/obj/main.o: src/main.cpp src/grafica/mainWindow.h \
 		src/logica/libro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/main.o src/main.cpp
 
-build/obj/createMediaVisitor.o: src/grafica/createMediaVisitor.cpp src/grafica/createMediaVisitor.h \
-		src/logica/visitor.h \
-		src/logica/media.h \
-		src/grafica/mainWindow.h \
-		src/mediaManager/mediaManager.h \
-		src/logica/canzone.h \
-		src/logica/album.h \
-		src/logica/libro.h \
-		src/grafica/widgetCreazione.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/createMediaVisitor.o src/grafica/createMediaVisitor.cpp
-
 build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
@@ -452,7 +441,6 @@ build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/canzone.h \
 		src/logica/album.h \
 		src/logica/libro.h \
-		src/grafica/createMediaVisitor.h \
 		src/grafica/widgetCreazione.h \
 		src/grafica/mediaWidgetAnteprima.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mainWindow.o src/grafica/mainWindow.cpp
@@ -497,8 +485,20 @@ build/obj/widgetCreazione.o: src/grafica/widgetCreazione.cpp src/grafica/widgetC
 		src/mediaManager/mediaManager.h \
 		src/logica/canzone.h \
 		src/logica/album.h \
-		src/logica/libro.h
+		src/logica/libro.h \
+		src/grafica/widgetCreazioneVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/widgetCreazione.o src/grafica/widgetCreazione.cpp
+
+build/obj/widgetCreazioneVisitor.o: src/grafica/widgetCreazioneVisitor.cpp src/grafica/widgetCreazioneVisitor.h \
+		src/logica/visitor.h \
+		src/logica/media.h \
+		src/grafica/mainWindow.h \
+		src/mediaManager/mediaManager.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/logica/libro.h \
+		src/grafica/widgetCreazione.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/widgetCreazioneVisitor.o src/grafica/widgetCreazioneVisitor.cpp
 
 build/obj/jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/visitor.h \

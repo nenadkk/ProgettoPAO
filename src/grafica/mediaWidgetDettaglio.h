@@ -23,9 +23,9 @@ class mediaWidgetDettaglio : public QWidget
     public:
         mediaWidgetDettaglio(media*);
 
-        void creaDettaglio(libro*);
-        void creaDettaglio(canzone*);
-        void creaDettaglio(album*);
+        void buildDettaglio(libro*);
+        void buildDettaglio(canzone*);
+        void buildDettaglio(album*);
 
 };
 

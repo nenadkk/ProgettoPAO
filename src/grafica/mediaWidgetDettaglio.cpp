@@ -8,7 +8,7 @@ mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj): QWidget(nullptr)
     obj->accept(&vis);
 }
 
-void mediaWidgetDettaglio::creaDettaglio(libro* object)
+void mediaWidgetDettaglio::buildDettaglio(libro* object)
 {
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setAlignment(Qt::AlignCenter);
@@ -43,7 +43,7 @@ void mediaWidgetDettaglio::creaDettaglio(libro* object)
 
 }
 
-void mediaWidgetDettaglio::creaDettaglio(canzone* object)
+void mediaWidgetDettaglio::buildDettaglio(canzone* object)
 {
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setAlignment(Qt::AlignCenter);
@@ -84,7 +84,7 @@ void mediaWidgetDettaglio::creaDettaglio(canzone* object)
 
 }
 
-void mediaWidgetDettaglio::creaDettaglio(album* object)
+void mediaWidgetDettaglio::buildDettaglio(album* object)
 {
     QHBoxLayout *layout = new QHBoxLayout();
 

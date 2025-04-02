@@ -10,7 +10,7 @@
 #include <QListWidget>
 #include <QLabel>
 
-#include "createMediaVisitor.h"
+#include "widgetCreazione.h"
 #include "mediaWidgetAnteprima.h"
 
 mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent), rowGrid(0), colGrid(0)
@@ -222,8 +222,8 @@ void mainWindow::creaLibro()
     //il seguente oggetto libro viene deallocato una volta finita la procedura di creazione
     //all'interno di widgetCreazione::crea()
     libro *temp = new libro();
-    createMediaVisitor vis(this, mediaVisibili, &mediaMan);
-    temp->accept(&vis);
+    widgetCreazione *wid = new widgetCreazione(temp,&mediaMan,this);
+    mediaVisibili->addWidget(wid);
 }
 
 void mainWindow::creaCanzone()
@@ -233,8 +233,8 @@ void mainWindow::creaCanzone()
     //il seguente oggetto canzone viene deallocato una volta finita la procedura di creazione
     //all'interno di widgetCreazione::crea()
     canzone *temp = new canzone();
-    createMediaVisitor vis(this, mediaVisibili, &mediaMan);
-    temp->accept(&vis);
+    widgetCreazione *wid = new widgetCreazione(temp,&mediaMan,this);
+    mediaVisibili->addWidget(wid);
 }
 
 void mainWindow::creaAlbum()
@@ -244,8 +244,8 @@ void mainWindow::creaAlbum()
     //il seguente oggetto album viene deallocato una volta finita la procedura di creazione
     //all'interno di widgetCreazione::crea()
     album *temp = new album();
-    createMediaVisitor vis(this, mediaVisibili, &mediaMan);
-    temp->accept(&vis);
+    widgetCreazione *wid = new widgetCreazione(temp,&mediaMan,this);
+    mediaVisibili->addWidget(wid);
 }
 
 void mainWindow::filtraLibri()

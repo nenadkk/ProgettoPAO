@@ -23,12 +23,18 @@ class widgetCreazione : public QWidget
         bool isImageFile(const QString &filePath) const;
         bool validaInput();
 
+        void creaSottoOggettoMedia(QWidget**,widgetCreazione*);
+
     public slots:
         void crea();
         void browseImage();
 
+        void buildWidget(libro*);
+        void buildWidget(canzone*);
+        void buildWidget(album*);
+
     public:
-        widgetCreazione(mediaManager*, media*, QWidget* parent=nullptr, QListWidget* tracks = nullptr);
+        widgetCreazione(media*, mediaManager*, QWidget* parent=nullptr, QListWidget* tracks = nullptr);
         void insertLineEdit(QString,QLineEdit*);
         QLineEdit*& operator[](const QString& );
 };

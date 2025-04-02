@@ -1,5 +1,5 @@
-#ifndef CREATEMEDIAVISITOR
-#define CREATEMEDIAVISITOR
+#ifndef WIDGETCREAZIONEVISITOR
+#define WIDGETCREAZIONEVISITOR
 #include "../logica/visitor.h"
 #include "../logica/media.h"
 #include "mainWindow.h"
@@ -9,17 +9,13 @@
 #include <QLineEdit>
 #include <QObject>
 
-class createMediaVisitor : public visitor
+class widgetCreazioneVisitor : public visitor
 {
     private:
-        mainWindow *windowEsterna;
-        QGridLayout *layoutEsterno;
-        mediaManager *managerEsterno;
-
-        void creaSottoOggettoMedia(QWidget**,widgetCreazione*);
+        widgetCreazione* widget;
 
     public:
-        createMediaVisitor(mainWindow*, QGridLayout*, mediaManager*);
+        widgetCreazioneVisitor(widgetCreazione*);
 
         virtual void visit(libro *_libro) override; 
         virtual void visit(canzone *_canzone) override; 

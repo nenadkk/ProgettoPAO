@@ -28,5 +28,15 @@
         "isbn": 757477,
         "numPagine": 252,
         "titolo": "dsds"
+    },
+    {
+        "anno": 3030,
+        "autore": "rrrrrr",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "fgagag",
+        "id": 15,
+        "isbn": 898392832,
+        "numPagine": 299,
+        "titolo": "3030"
     }
 ]

@@ -1,5 +1,6 @@
 #include "mediaManager.h"
 #include "../jsonHandler/jsonVisitor.h"
+#include "../jsonHandler/jsonHandler.h"
 #include <string>
 #include <algorithm> // Per std::transform
 #include <cctype>    // Per std::toupper
@@ -11,19 +12,19 @@ void mediaManager::addMedia(media* newMedia)
 }
 void mediaManager::save() const
 {
-    jsonVisitor jVisitor; 
-    jVisitor.clearAll();
+    jsonHandler jHandler; 
+    jHandler.clearAll();
     
     for(auto m : LM)
-        m->accept(&jVisitor);
+        jHandler.saveMedia(m);
 }
 
 void mediaManager::load()
 {
-    jsonVisitor jVisitor;
-    jVisitor.readAllLibri(LM);
-    jVisitor.readAllCanzoni(LM);
-    jVisitor.readAllAlbum(LM);
+    jsonHandler jHandler;
+    jHandler.readAllLibri(LM);
+    jHandler.readAllCanzoni(LM);
+    jHandler.readAllAlbum(LM);
 }
 
 int mediaManager::size() const { return LM.size(); }

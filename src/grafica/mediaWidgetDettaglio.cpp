@@ -1,8 +1,10 @@
 #include "mediaWidgetDettaglio.h"
 #include "sceltaDettaglioVisitor.h"
 #include <QWidget>
+#include <QPushButton>
+#include <QMessageBox>
 
-mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj): QWidget(nullptr) 
+mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj): QWidget(nullptr), object(obj)
 {
     sceltaDettaglioVisitor vis(this);
     obj->accept(&vis);
@@ -75,7 +77,7 @@ void mediaWidgetDettaglio::buildDettaglio(canzone* object)
     layout->addWidget(info);    
 
     QHBoxLayout *layoutPulsanti = new QHBoxLayout();
-    //aggiungiPulsanti(layoutPulsanti);
+    aggiungiPulsanti(layoutPulsanti);
     layout->addLayout(layoutPulsanti);
 
     this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
@@ -116,7 +118,7 @@ void mediaWidgetDettaglio::buildDettaglio(album* object)
     info->setAlignment(Qt::AlignLeft);
 
     QHBoxLayout *layoutPulsanti = new QHBoxLayout();
-    //aggiungiPulsanti(layoutPulsanti);
+    aggiungiPulsanti(layoutPulsanti);
 
     layoutSX->addWidget(info);
     layoutSX->addLayout(layoutPulsanti);
@@ -183,12 +185,40 @@ void mediaWidgetDettaglio::aggiungiPulsanti(QHBoxLayout* layoutPulsanti)
         buttonModifica->setFont(QFont("Mono",18));
         buttonElimina->setFont(QFont("Mono",18));
 
-
         buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
         buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
 
         buttonModifica->setFixedSize(150, 60);
         buttonElimina->setFixedSize(150, 60);
 
+        connect(buttonElimina, &QPushButton::clicked, this, &mediaWidgetDettaglio::removeMedia);
+
 }
+
+void mediaWidgetDettaglio::removeMedia()
+{
+    QString str = "L'elemento verrà eliminato definitivamente. Vuoi procedere?";
+    QMessageBox::StandardButton reply = QMessageBox::question(this, "Conferma azione",str,QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) 
+    {
+
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

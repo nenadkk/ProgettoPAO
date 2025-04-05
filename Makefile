@@ -59,6 +59,7 @@ SOURCES       = src/main.cpp \
 		src/grafica/sceltaDettaglioVisitor.cpp \
 		src/grafica/widgetCreazione.cpp \
 		src/grafica/widgetCreazioneVisitor.cpp \
+		src/jsonHandler/jsonHandler.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
@@ -74,6 +75,7 @@ OBJECTS       = build/obj/main.o \
 		build/obj/sceltaDettaglioVisitor.o \
 		build/obj/widgetCreazione.o \
 		build/obj/widgetCreazioneVisitor.o \
+		build/obj/jsonHandler.o \
 		build/obj/jsonVisitor.o \
 		build/obj/album.o \
 		build/obj/cazone.o \
@@ -154,6 +156,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/grafica/sceltaDettaglioVisitor.h \
 		src/grafica/widgetCreazione.h \
 		src/grafica/widgetCreazioneVisitor.h \
+		src/jsonHandler/jsonHandler.h \
 		src/jsonHandler/jsonVisitor.h \
 		src/logica/album.h \
 		src/logica/canzone.h \
@@ -167,6 +170,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/grafica/sceltaDettaglioVisitor.cpp \
 		src/grafica/widgetCreazione.cpp \
 		src/grafica/widgetCreazioneVisitor.cpp \
+		src/jsonHandler/jsonHandler.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
 		src/logica/cazone.cpp \
@@ -338,8 +342,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/grafica/mainWindow.h src/grafica/mediaWidgetAnteprima.h src/grafica/mediaWidgetDettaglio.h src/grafica/sceltaDettaglioVisitor.h src/grafica/widgetCreazione.h src/grafica/widgetCreazioneVisitor.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidgetAnteprima.cpp src/grafica/mediaWidgetDettaglio.cpp src/grafica/sceltaDettaglioVisitor.cpp src/grafica/widgetCreazione.cpp src/grafica/widgetCreazioneVisitor.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/grafica/mainWindow.h src/grafica/mediaWidgetAnteprima.h src/grafica/mediaWidgetDettaglio.h src/grafica/sceltaDettaglioVisitor.h src/grafica/widgetCreazione.h src/grafica/widgetCreazioneVisitor.h src/jsonHandler/jsonHandler.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/grafica/mainWindow.cpp src/grafica/mediaWidgetAnteprima.cpp src/grafica/mediaWidgetDettaglio.cpp src/grafica/sceltaDettaglioVisitor.cpp src/grafica/widgetCreazione.cpp src/grafica/widgetCreazioneVisitor.cpp src/jsonHandler/jsonHandler.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -500,6 +504,15 @@ build/obj/widgetCreazioneVisitor.o: src/grafica/widgetCreazioneVisitor.cpp src/g
 		src/grafica/widgetCreazione.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/widgetCreazioneVisitor.o src/grafica/widgetCreazioneVisitor.cpp
 
+build/obj/jsonHandler.o: src/jsonHandler/jsonHandler.cpp src/jsonHandler/jsonVisitor.h \
+		src/logica/visitor.h \
+		src/logica/libro.h \
+		src/logica/media.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/jsonHandler/jsonHandler.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/jsonHandler.o src/jsonHandler/jsonHandler.cpp
+
 build/obj/jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/visitor.h \
 		src/logica/libro.h \
@@ -534,7 +547,8 @@ build/obj/mediaManager.o: src/mediaManager/mediaManager.cpp src/mediaManager/med
 		src/logica/visitor.h \
 		src/logica/album.h \
 		src/logica/libro.h \
-		src/jsonHandler/jsonVisitor.h
+		src/jsonHandler/jsonVisitor.h \
+		src/jsonHandler/jsonHandler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mediaManager.o src/mediaManager/mediaManager.cpp
 
 build/obj/moc_mainWindow.o: build/moc/moc_mainWindow.cpp 

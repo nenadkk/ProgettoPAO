@@ -33,6 +33,7 @@ class mainWindow : public QMainWindow
 
     public:
         mainWindow(QWidget* parent = nullptr);
+        void mostraDettagli(media*);
         void svuotaMediaVisibili();
 
     public slots:

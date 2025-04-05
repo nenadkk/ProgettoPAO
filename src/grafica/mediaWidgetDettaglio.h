@@ -18,10 +18,11 @@ class mediaWidgetDettaglio : public QWidget
     private:
         media* object;
         mediaManager* manager;
+        mainWindow* windowEsterna;
         void aggiungiPulsanti(QHBoxLayout*);
 
     public:
-        mediaWidgetDettaglio(media*);
+        mediaWidgetDettaglio(media*,mediaManager*,QWidget *parent = nullptr);
 
         void buildDettaglio(libro*);
         void buildDettaglio(canzone*);

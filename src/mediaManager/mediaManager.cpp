@@ -1,5 +1,4 @@
 #include "mediaManager.h"
-#include "../jsonHandler/jsonVisitor.h"
 #include "../jsonHandler/jsonHandler.h"
 #include <string>
 #include <algorithm> // Per std::transform
@@ -17,6 +16,23 @@ void mediaManager::save() const
     
     for(auto m : LM)
         jHandler.saveMedia(m);
+}
+
+void mediaManager::removeMedia(int _id)
+{
+    media* temp = searchById(_id);
+    auto i = LM.begin();
+    while(i != LM.end())
+    {
+        if((*i)->getId()==temp->getId())
+        {
+            i = LM.erase(i);
+            delete temp;
+            save();
+        }
+        else
+            i++;
+    }
 }
 
 void mediaManager::load()

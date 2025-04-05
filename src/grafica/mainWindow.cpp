@@ -12,6 +12,7 @@
 
 #include "widgetCreazione.h"
 #include "mediaWidgetAnteprima.h"
+#include "mediaWidgetDettaglio.h"
 
 mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent), rowGrid(0), colGrid(0)
 {
@@ -123,6 +124,7 @@ void mainWindow::ricerca()
             addToMediaVisibili(m);
     }
 }
+
 void mainWindow::addToMediaVisibili(media* m)
 {
     int maxCol = max(2,((this->width())/(270+10)));
@@ -266,7 +268,12 @@ void mainWindow::filtraAlbum()
         addToMediaVisibili(m);
 }
 
-
+void mainWindow::mostraDettagli(media* obj)
+{
+    mediaWidgetDettaglio *item = new mediaWidgetDettaglio(obj,&mediaMan,this); 
+    svuotaMediaVisibili();
+    mediaVisibili->addWidget(item);
+}
 
 
 

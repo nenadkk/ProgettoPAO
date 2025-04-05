@@ -446,7 +446,8 @@ build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/album.h \
 		src/logica/libro.h \
 		src/grafica/widgetCreazione.h \
-		src/grafica/mediaWidgetAnteprima.h
+		src/grafica/mediaWidgetAnteprima.h \
+		src/grafica/mediaWidgetDettaglio.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mainWindow.o src/grafica/mainWindow.cpp
 
 build/obj/mediaWidgetAnteprima.o: src/grafica/mediaWidgetAnteprima.cpp src/grafica/mediaWidgetAnteprima.h \
@@ -456,8 +457,7 @@ build/obj/mediaWidgetAnteprima.o: src/grafica/mediaWidgetAnteprima.cpp src/grafi
 		src/mediaManager/mediaManager.h \
 		src/logica/canzone.h \
 		src/logica/album.h \
-		src/logica/libro.h \
-		src/grafica/mediaWidgetDettaglio.h
+		src/logica/libro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mediaWidgetAnteprima.o src/grafica/mediaWidgetAnteprima.cpp
 
 build/obj/mediaWidgetDettaglio.o: src/grafica/mediaWidgetDettaglio.cpp src/grafica/mediaWidgetDettaglio.h \
@@ -547,8 +547,8 @@ build/obj/mediaManager.o: src/mediaManager/mediaManager.cpp src/mediaManager/med
 		src/logica/visitor.h \
 		src/logica/album.h \
 		src/logica/libro.h \
-		src/jsonHandler/jsonVisitor.h \
-		src/jsonHandler/jsonHandler.h
+		src/jsonHandler/jsonHandler.h \
+		src/jsonHandler/jsonVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mediaManager.o src/mediaManager/mediaManager.cpp
 
 build/obj/moc_mainWindow.o: build/moc/moc_mainWindow.cpp 

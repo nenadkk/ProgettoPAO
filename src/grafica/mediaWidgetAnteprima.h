@@ -27,8 +27,6 @@ class mediaWidgetAnteprima : public QWidget
     public:
         explicit mediaWidgetAnteprima(media*, QGridLayout*, QWidget* parent = nullptr);
 
-        void mostraDettagli();
-
     signals:
         void clicked();
 };

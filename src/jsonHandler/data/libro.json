@@ -1,55 +1,5 @@
 [
     {
-        "anno": 1222,
-        "autore": "dadad",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
-        "editore": "ffa",
-        "id": 5,
-        "isbn": 0,
-        "numPagine": 111,
-        "titolo": "AZZZA"
-    },
-    {
-        "anno": 1020,
-        "autore": "aa",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
-        "editore": "gg",
-        "id": 0,
-        "isbn": 0,
-        "numPagine": 32,
-        "titolo": "VVVVVVVVVV"
-    },
-    {
-        "anno": 555,
-        "autore": "eerere",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
-        "editore": "hyrsh",
-        "id": 7,
-        "isbn": 757477,
-        "numPagine": 252,
-        "titolo": "dsds"
-    },
-    {
-        "anno": 3030,
-        "autore": "rrrrrr",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
-        "editore": "fgagag",
-        "id": 15,
-        "isbn": 898392832,
-        "numPagine": 299,
-        "titolo": "3030"
-    },
-    {
-        "anno": 656,
-        "autore": "fjsj",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
-        "editore": "traetaet",
-        "id": 16,
-        "isbn": 464643,
-        "numPagine": 66,
-        "titolo": "444"
-    },
-    {
         "anno": 1999,
         "autore": "90kkk",
         "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",

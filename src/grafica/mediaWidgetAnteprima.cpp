@@ -1,5 +1,4 @@
 #include "mediaWidgetAnteprima.h"
-#include "mediaWidgetDettaglio.h"
 #include "mainWindow.h"
 
 #include <QVBoxLayout>
@@ -33,9 +32,10 @@ mediaWidgetAnteprima::mediaWidgetAnteprima(media* obj, QGridLayout* l, QWidget* 
     labelTesto->setAlignment(Qt::AlignCenter);
     mainLayout->addWidget(labelTesto);
 
-    QObject::connect(this, &mediaWidgetAnteprima::clicked,
-                     this, &mediaWidgetAnteprima::mostraDettagli);
-
+    QObject::connect(this, &mediaWidgetAnteprima::clicked, [=,this](){
+            windowEsterna->mostraDettagli(object);
+            });
+    
     this->setLayout(mainLayout);
 
 }
@@ -45,12 +45,5 @@ void mediaWidgetAnteprima::mousePressEvent(QMouseEvent* event)
         emit clicked(); 
 
     QWidget::mousePressEvent(event);
-}
-
-void mediaWidgetAnteprima::mostraDettagli()
-{
-    mediaWidgetDettaglio *item = new mediaWidgetDettaglio(object); 
-    windowEsterna->svuotaMediaVisibili();
-    layoutEsterno->addWidget(item);
 }
 

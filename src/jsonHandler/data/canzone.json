@@ -1,14 +1,5 @@
 [
     {
-        "anno": 2020,
-        "autore": "yeye",
-        "copertina": "./immagini/canzone.png",
-        "durata": 188,
-        "genere": "rapp",
-        "id": 2,
-        "titolo": "ioio"
-    },
-    {
         "anno": 2023,
         "autore": "bbro",
         "copertina": "./immagini/canzone.png",
@@ -61,14 +52,5 @@
         "genere": "udiufheifu",
         "id": 14,
         "titolo": "9988"
-    },
-    {
-        "anno": 1222,
-        "autore": "fdf",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/canzone.png",
-        "durata": 93,
-        "genere": "fsfs",
-        "id": 19,
-        "titolo": "777"
     }
 ]

@@ -14,7 +14,7 @@ class mediaManager
         void load();
 
         void addMedia(media*);
-        void removeMedia();
+        void removeMedia(int);// rimuove in base all'id
         void editMedia();
 
         int trovaIdLibero() const;

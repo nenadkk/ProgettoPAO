@@ -1,11 +1,14 @@
 #include "mediaWidgetDettaglio.h"
+#include "qglobal.h"
 #include "sceltaDettaglioVisitor.h"
 #include <QWidget>
 #include <QPushButton>
 #include <QMessageBox>
 
-mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj): QWidget(nullptr), object(obj)
+mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj, mediaManager* man, QWidget* parent): 
+    QWidget(parent), object(obj),manager(man)
 {
+    windowEsterna = (dynamic_cast<mainWindow*>(parent));
     sceltaDettaglioVisitor vis(this);
     obj->accept(&vis);
 }
@@ -202,7 +205,8 @@ void mediaWidgetDettaglio::removeMedia()
 
     if (reply == QMessageBox::Yes) 
     {
-
+        manager->removeMedia(object->getId());
+        windowEsterna->reloadMediaVisibili();
     }
     
 }

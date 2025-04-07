@@ -20,14 +20,13 @@ void mediaManager::save() const
 
 void mediaManager::removeMedia(int _id)
 {
-    media* temp = searchById(_id);
+    int id = searchById(_id)->getId();
     auto i = LM.begin();
     while(i != LM.end())
     {
-        if((*i)->getId()==temp->getId())
+        if((*i)->getId()==id)
         {
             i = LM.erase(i);
-            delete temp;
             save();
         }
         else

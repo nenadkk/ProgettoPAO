@@ -61,34 +61,35 @@ void widgetCreazione::creaCanzone()
 
 void widgetCreazione::creaAlbum()
 {
-    if(validaInput())
+    if(!validaInput())
+        return;
+
+    //creazione album
+    album *newAlbum = new album(attributi["titolo"]->text().toStdString(),
+            attributi["autore"]->text().toStdString(),
+            attributi["anno"]->text().toInt(),
+            attributi["copertina"]->text().toStdString(),
+            manager->trovaIdLibero());
+
+    //aggiunta canzoni ad album
+    for(int i=0; i<trackList->count();++i)
     {
-        //creazione album
-        album *newAlbum = new album(attributi["titolo"]->text().toStdString(),
-                attributi["autore"]->text().toStdString(),
-                attributi["anno"]->text().toInt(),
-                attributi["copertina"]->text().toStdString(),
-                manager->trovaIdLibero());
+        QListWidgetItem *item = trackList->item(i);
 
-        //aggiunta canzoni ad album
-        for(int i=0; i<trackList->count();++i)
+        if (item->checkState() == Qt::Checked) 
         {
-            QListWidgetItem *item = trackList->item(i);
-
-            if (item->checkState() == Qt::Checked) 
+            int trackID = item->data(Qt::UserRole).toInt();
+            media* c = manager->searchById(trackID);
+            if(c && dynamic_cast<canzone*>(c))
             {
-                int trackID = item->data(Qt::UserRole).toInt();
-                media* c = manager->searchById(trackID);
-                if(c && dynamic_cast<canzone*>(c))
-                {
-                    newAlbum->addCanzone(dynamic_cast<canzone*>(c));
-                }
+                newAlbum->addCanzone(dynamic_cast<canzone*>(c));
             }
         }
-
-        manager->addMedia(newAlbum);
-        windowEsterna->reloadMediaVisibili();
     }
+
+    manager->addMedia(newAlbum);
+    windowEsterna->reloadMediaVisibili();
+
 }
 
 

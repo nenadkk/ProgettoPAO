@@ -1,6 +1,18 @@
 #!/bin/bash
 qmake6 -project
 qmake6
+sed -i "7a QT += widgets gui core" ProgettoPAO.pro
+sed -i "7a OBJECTS_DIR = build/obj" ProgettoPAO.pro
+sed -i "7a MOC_DIR = build/moc" ProgettoPAO.pro
+
 make
-rm *.o
-clear
+#fa clear se la compilazione non ha dato errori
+if [ $? -eq 0 ]; then
+    clear
+fi
+
+# Verifica se l'opzione -k NON è stata fornita
+if [[ -z "$1" ]] || [[ "$1" != "-k" ]]; then
+    rm build/obj/*.o
+fi
+

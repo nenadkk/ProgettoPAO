@@ -1,6 +1,8 @@
 #include "libro.h"
+#include "media.h"
 #include <ostream>
 
+libro::libro() : media("", "", 0, "./immagini/libro.png", 0), numPagine(0), isbn(0), editore("") {}
 libro::libro(const string& _titolo, const string& _autore, const int& _anno, const string& _copertina, const int& _id,
              const int& _numPagine, const int& _isbn, const string& _editore) : 
             media(_titolo,_autore,_anno,_copertina,_id), numPagine(_numPagine), isbn(_isbn), editore(_editore) {};

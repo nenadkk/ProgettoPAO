@@ -11,6 +11,7 @@ class canzone: public media
         string genere;
 
     public:
+        canzone();
         canzone(const string&, const string&, const int&, const string&, const int&, //per il sotto-oggetto MEDIA
                 const int&, const string&); //durata genere 
 

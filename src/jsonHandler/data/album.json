@@ -3,12 +3,72 @@
         "anno": 2010,
         "autore": "llll",
         "canzoni": [
-            1,
             2,
-            3
+            3,
+            4
         ],
-        "copertina": "path1",
+        "copertina": "./immagini/album.png",
         "id": 1,
         "titolo": "kkkk"
+    },
+    {
+        "anno": 2020,
+        "autore": "gg",
+        "canzoni": [
+            2,
+            3,
+            6,
+            9
+        ],
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "id": 8,
+        "titolo": "GGNEW"
+    },
+    {
+        "anno": 2020,
+        "autore": "FFF",
+        "canzoni": [
+            2,
+            3,
+            6,
+            9
+        ],
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "id": 11,
+        "titolo": "FFF"
+    },
+    {
+        "anno": 2020,
+        "autore": "PP",
+        "canzoni": [
+            2,
+            3,
+            4,
+            6,
+            9
+        ],
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "id": 10,
+        "titolo": "PP"
+    },
+    {
+        "anno": 11,
+        "autore": "vv",
+        "canzoni": [
+        ],
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "id": 13,
+        "titolo": "vuoto"
+    },
+    {
+        "anno": 555,
+        "autore": "hhiu",
+        "canzoni": [
+            6,
+            9
+        ],
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "id": 17,
+        "titolo": "khiuh"
     }
 ]

@@ -21,12 +21,6 @@ class jsonVisitor : public visitor
         void visit(canzone  *_canzone) override;
         void visit(album  *_album) override;
 
-        void readAllLibri(list<media*>&);
-        void readAllCanzoni(list<media*>&);
-        void readAllAlbum(list<media*>&);
-
-        void clearAll(); //svuota i file per poter poi ripopolare
-
 };
 
 

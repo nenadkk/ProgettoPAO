@@ -2,7 +2,7 @@
 #include "canzone.h"
 #include <ostream>
 
-
+album::album() : media("", "", 0, "./immagini/album.png",0) {}
 album::album(const string& _titolo, const string& _autore, const int& _anno, const string& _copertina, const int& _id) :
         media(_titolo, _autore, _anno, _copertina, _id), durataTotale(0) {}
 
@@ -22,6 +22,7 @@ int album::getNumCanzoni() const { return trackList.size(); };
 void album::addCanzone(canzone* newCanzone)
 {
     trackList.push_back(newCanzone);
+    durataTotale+=newCanzone->getDurata();
 }
 
 void album::accept(visitor *_visitor)

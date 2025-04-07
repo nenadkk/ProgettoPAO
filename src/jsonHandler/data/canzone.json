@@ -1,29 +1,56 @@
 [
     {
-        "anno": 2020,
-        "autore": "yeye",
-        "copertina": "path",
-        "durata": 188,
-        "genere": "rapp",
-        "id": 1,
-        "titolo": "ioio"
-    },
-    {
         "anno": 2023,
         "autore": "bbro",
-        "copertina": "path",
+        "copertina": "./immagini/canzone.png",
         "durata": 199,
         "genere": "rapp",
-        "id": 2,
-        "titolo": "carr"
+        "id": 3,
+        "titolo": "carraaddd"
     },
     {
         "anno": 2020,
         "autore": "yeye",
-        "copertina": "path",
+        "copertina": "./immagini/canzone.png",
         "durata": 188,
         "genere": "rapp",
-        "id": 3,
+        "id": 4,
         "titolo": "skkkrt"
+    },
+    {
+        "anno": 2020,
+        "autore": "autore",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/canzone.png",
+        "durata": 13,
+        "genere": "genere",
+        "id": 6,
+        "titolo": "titolo"
+    },
+    {
+        "anno": 2022,
+        "autore": "pap",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/canzone.png",
+        "durata": 273,
+        "genere": "buzz",
+        "id": 9,
+        "titolo": "bum"
+    },
+    {
+        "anno": 3433,
+        "autore": "kedot",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/canzone.png",
+        "durata": 251,
+        "genere": "daaaaa",
+        "id": 12,
+        "titolo": "3636"
+    },
+    {
+        "anno": 84384,
+        "autore": "uygyfutf",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/canzone.png",
+        "durata": 153,
+        "genere": "udiufheifu",
+        "id": 14,
+        "titolo": "9988"
     }
 ]

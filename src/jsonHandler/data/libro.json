@@ -1,20 +1,12 @@
 [
     {
-        "anno": 2000,
-        "autore": "bbbb",
-        "copertina": "path",
-        "editore": "Mondadori",
-        "isbn": 898989,
-        "numPagine": 100,
-        "titolo": "aaaa"
-    },
-    {
-        "anno": 2000,
-        "autore": "bbbb",
-        "copertina": "path",
-        "editore": "Mondadori",
-        "isbn": 898989,
-        "numPagine": 100,
-        "titolo": "aaaa"
+        "anno": 1999,
+        "autore": "90kkk",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "iuirn",
+        "id": 21,
+        "isbn": 0,
+        "numPagine": 366,
+        "titolo": "iiii"
     }
 ]

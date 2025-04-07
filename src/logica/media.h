@@ -1,6 +1,5 @@
 #ifndef MEDIA
 #define MEDIA
-#include <strstream>
 #include <iostream>
 #include "visitor.h"
 using std::string;
@@ -17,6 +16,7 @@ class media
         
     public:
         media(const string&, const string&, const int&, const string&, const int&);
+        virtual ~media();
 
         string getTitolo() const;
         string getAutore() const;

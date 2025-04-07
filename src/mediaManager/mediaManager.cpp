@@ -1,0 +1,196 @@
+#include "mediaManager.h"
+#include "../jsonHandler/jsonHandler.h"
+#include <string>
+#include <algorithm> // Per std::transform
+#include <cctype>    // Per std::toupper
+                     
+void mediaManager::addMedia(media* newMedia)
+{
+    LM.push_back(newMedia);
+    save();
+}
+void mediaManager::save() const
+{
+    jsonHandler jHandler; 
+    jHandler.clearAll();
+    
+    for(auto m : LM)
+        jHandler.saveMedia(m);
+}
+
+void mediaManager::removeMedia(int _id)
+{
+    media* temp = searchById(_id);
+    auto i = LM.begin();
+    while(i != LM.end())
+    {
+        if((*i)->getId()==temp->getId())
+        {
+            i = LM.erase(i);
+            delete temp;
+            save();
+        }
+        else
+            i++;
+    }
+}
+
+void mediaManager::load()
+{
+    jsonHandler jHandler;
+    jHandler.readAllLibri(LM);
+    jHandler.readAllCanzoni(LM);
+    jHandler.readAllAlbum(LM);
+}
+
+int mediaManager::size() const { return LM.size(); }
+
+list<media*> mediaManager::filtroSoloLibri() const
+{
+    list<media*> listaTemp;
+    for(auto m : LM)
+    {
+        if(dynamic_cast<libro*>(m))
+            listaTemp.push_back(m);
+    }
+    return listaTemp;
+}
+
+list<media*> mediaManager::filtroSoloCanzoni() const
+{
+    list<media*> listaTemp;
+    for(auto m : LM)
+    {
+        if(dynamic_cast<canzone*>(m))
+            listaTemp.push_back(m);
+    }
+    return listaTemp;
+}
+
+list<media*> mediaManager::filtroSoloAlbum() const
+{
+    list<media*> listaTemp;
+    for(auto m : LM)
+    {
+        if(dynamic_cast<album*>(m))
+            listaTemp.push_back(m);
+    }
+    return listaTemp;
+}
+
+void mediaManager::rendiMaiuscolo(string& str)
+{
+    transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::toupper(c); }); 
+}
+
+list<media*> mediaManager::search(string strDaCercare) const
+{
+    list<media*> listaTemp;
+    for(auto m : LM)
+    {
+        //Trasformo tutto in maiuscolo per evitare ricerca case sensitive 
+        rendiMaiuscolo(strDaCercare);
+
+        string titoloMaiuscolo = m->getTitolo(), 
+               autoreMaiuscolo = m->getAutore(), 
+               annoMaiuscolo = to_string(m->getAnno()), 
+               idMaiuscolo = to_string(m->getId());
+        
+        rendiMaiuscolo(titoloMaiuscolo);
+        rendiMaiuscolo(autoreMaiuscolo);
+        rendiMaiuscolo(annoMaiuscolo);
+        rendiMaiuscolo(idMaiuscolo);
+        
+        //ricerca
+        if(titoloMaiuscolo.find(strDaCercare) != string::npos ||
+           autoreMaiuscolo.find(strDaCercare) != string::npos || 
+           annoMaiuscolo.find(strDaCercare) != string::npos ||
+           idMaiuscolo.find(strDaCercare) != string::npos)
+        {
+            listaTemp.push_back(m);
+        }
+        else if (auto t = dynamic_cast<libro*>(m)) 
+        {
+            //Trasformo tutto in maiuscolo per evitare ricerca case sensitive 
+            string isbnMaiuscolo = to_string(t->getIsbn()), 
+                   editoreMaiuscolo = t->getEditore();
+
+            rendiMaiuscolo(isbnMaiuscolo);
+            rendiMaiuscolo(editoreMaiuscolo);
+
+            //ricerca
+            if(isbnMaiuscolo.find(strDaCercare) != string::npos || editoreMaiuscolo.find(strDaCercare) != string::npos)
+                listaTemp.push_back(m);
+        }
+        else if (auto t = dynamic_cast<canzone*>(m)) 
+        {
+            //Trasformo tutto in maiuscolo per evitare ricerca case sensitive 
+            string genereMaiuscolo = t->getGenere();
+            rendiMaiuscolo(genereMaiuscolo);
+
+            //ricerca
+            if(genereMaiuscolo.find(strDaCercare) != string::npos)
+                listaTemp.push_back(m);
+        }
+
+    }
+
+    return listaTemp;
+}
+
+media* mediaManager::operator[](size_t index)
+{
+    auto it = LM.begin();
+    advance(it, index);
+    return *it;
+}
+const media* mediaManager::operator[](size_t index) const
+{
+    auto it = LM.begin();
+    advance(it, index);
+    return *it;
+
+}
+
+int mediaManager::trovaIdLibero() const
+{
+    list<media*> copiaLM = this->LM; // copia non profonda!! (perchè non necessaria)
+
+    if(copiaLM.empty())
+        return 0;
+    else
+    {
+        copiaLM.sort([](const media* a, const media* b) 
+        { return a->getId() < b->getId(); });
+
+
+        int last=0;
+        for(auto i : copiaLM)
+        {
+            if(i->getId()>last)
+                return last;
+
+            else if (i->getId()==last)
+                last++;
+        }
+        return ++last;
+    }
+}
+
+media* mediaManager::searchById(int _id) const
+{
+    for(auto m : LM)
+    {
+        if(m->getId()==_id)
+            return m;
+    }
+    return nullptr;
+}
+
+
+
+
+
+
+
+

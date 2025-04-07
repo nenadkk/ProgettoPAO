@@ -1,5 +1,6 @@
 #include "mediaWidgetDettaglio.h"
 #include "qglobal.h"
+#include "qnamespace.h"
 #include "sceltaDettaglioVisitor.h"
 #include <QWidget>
 #include <QPushButton>
@@ -132,6 +133,13 @@ void mediaWidgetDettaglio::buildDettaglio(album* object)
     QWidget *parteDx = new QWidget();
     parteDx->setStyleSheet("border: 1px solid white");
 
+    QLabel *lableTracklist = new QLabel("LISTA CANZONI");
+    lableTracklist->setFont(QFont("Mono",20));
+    lableTracklist->setAlignment(Qt::AlignCenter);   
+    lableTracklist->setFixedHeight(50);
+
+    layoutDX->addWidget(lableTracklist);
+
     QListWidget *tracklist = new QListWidget();
 
     for (int i=0; i<objAlbum->getNumCanzoni();i++)
@@ -148,26 +156,16 @@ void mediaWidgetDettaglio::buildDettaglio(album* object)
 
     }
 
-    QLabel *lableTracklist = new QLabel("LISTA CANZONI");
-    lableTracklist->setFont(QFont("Mono",20));
-    lableTracklist->setAlignment(Qt::AlignCenter);   
-    lableTracklist->setFixedHeight(50);
-
-    layoutDX->addWidget(lableTracklist);
-
     if(objAlbum->getNumCanzoni()==0)
     {
-        QLabel *lableZeroCanzoni = new QLabel("Non ci sono canzoni\nin questo album.");
+        QListWidgetItem* lableZeroCanzoni = new QListWidgetItem("Non ci sono canzoni\nin questo album.");
         lableZeroCanzoni->setFont(QFont("Mono",20));
-        lableZeroCanzoni->setAlignment(Qt::AlignCenter);   
+        lableZeroCanzoni->setTextAlignment(Qt::AlignCenter);
 
-        layoutDX->addWidget(lableZeroCanzoni);
-        
-        delete tracklist;
-
+        tracklist->addItem(lableZeroCanzoni);
     }
-    else
-        layoutDX->addWidget(tracklist);
+    
+    layoutDX->addWidget(tracklist);
 
     parteDx->setLayout(layoutDX);
     layout->addWidget(parteDx);

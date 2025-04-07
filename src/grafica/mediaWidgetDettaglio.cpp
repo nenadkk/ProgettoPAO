@@ -162,6 +162,8 @@ void mediaWidgetDettaglio::buildDettaglio(album* object)
         lableZeroCanzoni->setAlignment(Qt::AlignCenter);   
 
         layoutDX->addWidget(lableZeroCanzoni);
+        
+        delete tracklist;
 
     }
     else

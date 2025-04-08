@@ -1,4 +1,4 @@
-#include "mediaWidgetAnteprima.h"
+#include "widgetAnteprima.h"
 #include "mainWindow.h"
 
 #include <QVBoxLayout>
@@ -7,7 +7,7 @@
 #include <QMouseEvent>
 #include <QListWidget>
 
-mediaWidgetAnteprima::mediaWidgetAnteprima(media* obj, QGridLayout* l, QWidget* parent) : 
+widgetAnteprima::widgetAnteprima(media* obj, QGridLayout* l, QWidget* parent) : 
     QWidget(parent), object(obj) ,layoutEsterno(l)
 {
     windowEsterna = (dynamic_cast<mainWindow*>(parent));
@@ -32,14 +32,14 @@ mediaWidgetAnteprima::mediaWidgetAnteprima(media* obj, QGridLayout* l, QWidget* 
     labelTesto->setAlignment(Qt::AlignCenter);
     mainLayout->addWidget(labelTesto);
 
-    QObject::connect(this, &mediaWidgetAnteprima::clicked, [=,this](){
+    QObject::connect(this, &widgetAnteprima::clicked, [=,this](){
             windowEsterna->mostraDettagli(object);
             });
     
     this->setLayout(mainLayout);
 
 }
-void mediaWidgetAnteprima::mousePressEvent(QMouseEvent* event)  
+void widgetAnteprima::mousePressEvent(QMouseEvent* event)  
 {
     if (event->button() == Qt::LeftButton) //se viene clickato con il tasto sx del mouse
         emit clicked(); 

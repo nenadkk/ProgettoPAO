@@ -23,9 +23,9 @@ class mainWindow : public QMainWindow
         
     private slots:
         void sceltaCreazione();//scegli che tipo di media creare
-        void creaLibro();
-        void creaCanzone();
-        void creaAlbum();
+        void avviaCreazioneLibro();
+        void avviaCreazioneCanzone();
+        void avviaCreazioneAlbum();
 
         void filtraLibri();
         void filtraCanzoni();

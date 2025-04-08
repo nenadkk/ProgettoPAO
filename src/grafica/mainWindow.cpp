@@ -11,8 +11,8 @@
 #include <QLabel>
 
 #include "widgetCreazione.h"
-#include "mediaWidgetAnteprima.h"
-#include "mediaWidgetDettaglio.h"
+#include "widgetAnteprima.h"
+#include "widgetDettaglio.h"
 
 mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent), rowGrid(0), colGrid(0)
 {
@@ -131,7 +131,7 @@ void mainWindow::addToMediaVisibili(media* m)
     if(maxCol>5)
         maxCol=5;
 
-    mediaWidgetAnteprima* item = new mediaWidgetAnteprima(m,mediaVisibili,this);
+    widgetAnteprima* item = new widgetAnteprima(m,mediaVisibili,this);
 
     mediaVisibili->addWidget(item, rowGrid, colGrid);
 
@@ -189,21 +189,21 @@ void mainWindow::sceltaCreazione()
     creaLibro->setFixedHeight(40);
     creaLibro->setFont(QFont("Mono",15));
     layout->addWidget(creaLibro);
-    connect(creaLibro, &QPushButton::clicked, this, &mainWindow::creaLibro);
+    connect(creaLibro, &QPushButton::clicked, this, &mainWindow::avviaCreazioneLibro);
     layoutPulsanti->addWidget(creaLibro);
 
     QPushButton *creaCanzone = new QPushButton("Canzone");
     creaCanzone->setFixedHeight(40);
     creaCanzone->setFont(QFont("Mono",15));
     layout->addWidget(creaCanzone);
-    connect(creaCanzone, &QPushButton::clicked, this, &mainWindow::creaCanzone);
+    connect(creaCanzone, &QPushButton::clicked, this, &mainWindow::avviaCreazioneCanzone);
     layoutPulsanti->addWidget(creaCanzone);
 
     QPushButton *creaAlbum = new QPushButton("Album");
     creaAlbum->setFixedHeight(40);
     creaAlbum->setFont(QFont("Mono",15));
     layout->addWidget(creaAlbum);
-    connect(creaAlbum, &QPushButton::clicked, this, &mainWindow::creaAlbum);
+    connect(creaAlbum, &QPushButton::clicked, this, &mainWindow::avviaCreazioneAlbum);
     layoutPulsanti->addWidget(creaAlbum);
 
     layout->addWidget(pulsantiTipoMedia);
@@ -217,7 +217,7 @@ void mainWindow::sceltaCreazione()
     
 }
 
-void mainWindow::creaLibro()
+void mainWindow::avviaCreazioneLibro()
 {
     svuotaMediaVisibili();
 
@@ -226,7 +226,7 @@ void mainWindow::creaLibro()
     mediaVisibili->addWidget(wid);
 }
 
-void mainWindow::creaCanzone()
+void mainWindow::avviaCreazioneCanzone()
 {
     svuotaMediaVisibili();
 
@@ -235,7 +235,7 @@ void mainWindow::creaCanzone()
     mediaVisibili->addWidget(wid);
 }
 
-void mainWindow::creaAlbum()
+void mainWindow::avviaCreazioneAlbum()
 {
     svuotaMediaVisibili();
 
@@ -270,7 +270,7 @@ void mainWindow::filtraAlbum()
 
 void mainWindow::mostraDettagli(media* obj)
 {
-    mediaWidgetDettaglio *item = new mediaWidgetDettaglio(obj,&mediaMan,this); 
+    widgetDettaglio *item = new widgetDettaglio(obj,&mediaMan,this); 
     svuotaMediaVisibili();
     mediaVisibili->addWidget(item);
 }

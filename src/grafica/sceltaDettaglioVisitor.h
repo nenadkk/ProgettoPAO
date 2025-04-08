@@ -1,15 +1,15 @@
 #ifndef SCELTADETTAGLIOVISITOR
 #define SCELTADETTAGLIOVISITOR
 #include "../logica/visitor.h"
-#include "mediaWidgetDettaglio.h"
+#include "widgetDettaglio.h"
 
 class sceltaDettaglioVisitor : public visitor
 {
     private:
-        mediaWidgetDettaglio *widget;
+        widgetDettaglio *widget;
 
     public:
-        sceltaDettaglioVisitor(mediaWidgetDettaglio*);
+        sceltaDettaglioVisitor(widgetDettaglio*);
 
         virtual void visit(libro *_libro) override; 
         virtual void visit(canzone *_canzone) override; 

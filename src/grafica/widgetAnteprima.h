@@ -1,5 +1,5 @@
-#ifndef MEDIAWIDGETANTEPRIMA    
-#define MEDIAWIDGETANTEPRIMA
+#ifndef WIDGETANTEPRIMA    
+#define WIDGETANTEPRIMA
 
 #include "../logica/media.h"
 #include "mainWindow.h"
@@ -11,7 +11,7 @@
 #include <QEvent>
 #include <QListWidget>
 
-class mediaWidgetAnteprima : public QWidget
+class widgetAnteprima : public QWidget
 {
     Q_OBJECT
 
@@ -25,7 +25,7 @@ class mediaWidgetAnteprima : public QWidget
         void mousePressEvent(QMouseEvent* event) override;
 
     public:
-        explicit mediaWidgetAnteprima(media*, QGridLayout*, QWidget* parent = nullptr);
+        explicit widgetAnteprima(media*, QGridLayout*, QWidget* parent = nullptr);
 
     signals:
         void clicked();

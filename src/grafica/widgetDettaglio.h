@@ -1,5 +1,5 @@
-#ifndef MEDIAWIDGETDETTAGLIO
-#define MEDIAWIDGETDETTAGLIO
+#ifndef WIDGETDETTAGLIO
+#define WIDGETDETTAGLIO
 
 #include "../logica/libro.h"
 #include "../logica/canzone.h"
@@ -13,7 +13,7 @@
 #include <QEvent>
 #include <QListWidget>
 
-class mediaWidgetDettaglio : public QWidget
+class widgetDettaglio : public QWidget
 {    
     private:
         media* object;
@@ -22,7 +22,7 @@ class mediaWidgetDettaglio : public QWidget
         void aggiungiPulsanti(QHBoxLayout*);
 
     public:
-        mediaWidgetDettaglio(media*,mediaManager*,QWidget *parent = nullptr);
+        widgetDettaglio(media*,mediaManager*,QWidget *parent = nullptr);
 
         void buildDettaglio(libro*);
         void buildDettaglio(canzone*);

@@ -1,4 +1,4 @@
-#include "mediaWidgetDettaglio.h"
+#include "widgetDettaglio.h"
 #include "qglobal.h"
 #include "qnamespace.h"
 #include "sceltaDettaglioVisitor.h"
@@ -6,7 +6,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 
-mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj, mediaManager* man, QWidget* parent): 
+widgetDettaglio::widgetDettaglio(media* obj, mediaManager* man, QWidget* parent): 
     QWidget(parent), object(obj),manager(man)
 {
     windowEsterna = (dynamic_cast<mainWindow*>(parent));
@@ -14,7 +14,7 @@ mediaWidgetDettaglio::mediaWidgetDettaglio(media* obj, mediaManager* man, QWidge
     obj->accept(&vis);
 }
 
-void mediaWidgetDettaglio::buildDettaglio(libro* object)
+void widgetDettaglio::buildDettaglio(libro* object)
 {
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setAlignment(Qt::AlignCenter);
@@ -49,7 +49,7 @@ void mediaWidgetDettaglio::buildDettaglio(libro* object)
 
 }
 
-void mediaWidgetDettaglio::buildDettaglio(canzone* object)
+void widgetDettaglio::buildDettaglio(canzone* object)
 {
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setAlignment(Qt::AlignCenter);
@@ -90,7 +90,7 @@ void mediaWidgetDettaglio::buildDettaglio(canzone* object)
 
 }
 
-void mediaWidgetDettaglio::buildDettaglio(album* object)
+void widgetDettaglio::buildDettaglio(album* object)
 {
     QHBoxLayout *layout = new QHBoxLayout();
 
@@ -176,7 +176,7 @@ void mediaWidgetDettaglio::buildDettaglio(album* object)
 
 }
 
-void mediaWidgetDettaglio::aggiungiPulsanti(QHBoxLayout* layoutPulsanti)
+void widgetDettaglio::aggiungiPulsanti(QHBoxLayout* layoutPulsanti)
 {
         // Pulsanti
         QPushButton *buttonModifica = new QPushButton("Modifica");
@@ -194,11 +194,11 @@ void mediaWidgetDettaglio::aggiungiPulsanti(QHBoxLayout* layoutPulsanti)
         buttonModifica->setFixedSize(150, 60);
         buttonElimina->setFixedSize(150, 60);
 
-        connect(buttonElimina, &QPushButton::clicked, this, &mediaWidgetDettaglio::removeMedia);
+        connect(buttonElimina, &QPushButton::clicked, this, &widgetDettaglio::removeMedia);
 
 }
 
-void mediaWidgetDettaglio::removeMedia()
+void widgetDettaglio::removeMedia()
 {
     QString str = "L'elemento verrà eliminato definitivamente. Vuoi procedere?";
     QMessageBox::StandardButton reply = QMessageBox::question(this, "Conferma azione",str,QMessageBox::Yes | QMessageBox::No);

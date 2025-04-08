@@ -1,6 +1,6 @@
 #include "sceltaDettaglioVisitor.h"
 
-sceltaDettaglioVisitor::sceltaDettaglioVisitor(mediaWidgetDettaglio* m) : widget(m) {}
+sceltaDettaglioVisitor::sceltaDettaglioVisitor(widgetDettaglio* m) : widget(m) {}
 
 
 void sceltaDettaglioVisitor::visit(libro* _libro)

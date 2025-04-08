@@ -31,9 +31,9 @@ struct qt_meta_stringdata_mainWindow_t {
     char stringdata0[11];
     char stringdata1[16];
     char stringdata2[1];
-    char stringdata3[10];
-    char stringdata4[12];
-    char stringdata5[10];
+    char stringdata3[20];
+    char stringdata4[22];
+    char stringdata5[20];
     char stringdata6[12];
     char stringdata7[14];
     char stringdata8[12];
@@ -46,20 +46,20 @@ Q_CONSTINIT static const qt_meta_stringdata_mainWindow_t qt_meta_stringdata_main
         QT_MOC_LITERAL(0, 10),  // "mainWindow"
         QT_MOC_LITERAL(11, 15),  // "sceltaCreazione"
         QT_MOC_LITERAL(27, 0),  // ""
-        QT_MOC_LITERAL(28, 9),  // "creaLibro"
-        QT_MOC_LITERAL(38, 11),  // "creaCanzone"
-        QT_MOC_LITERAL(50, 9),  // "creaAlbum"
-        QT_MOC_LITERAL(60, 11),  // "filtraLibri"
-        QT_MOC_LITERAL(72, 13),  // "filtraCanzoni"
-        QT_MOC_LITERAL(86, 11),  // "filtraAlbum"
-        QT_MOC_LITERAL(98, 19)   // "reloadMediaVisibili"
+        QT_MOC_LITERAL(28, 19),  // "avviaCreazioneLibro"
+        QT_MOC_LITERAL(48, 21),  // "avviaCreazioneCanzone"
+        QT_MOC_LITERAL(70, 19),  // "avviaCreazioneAlbum"
+        QT_MOC_LITERAL(90, 11),  // "filtraLibri"
+        QT_MOC_LITERAL(102, 13),  // "filtraCanzoni"
+        QT_MOC_LITERAL(116, 11),  // "filtraAlbum"
+        QT_MOC_LITERAL(128, 19)   // "reloadMediaVisibili"
     },
     "mainWindow",
     "sceltaCreazione",
     "",
-    "creaLibro",
-    "creaCanzone",
-    "creaAlbum",
+    "avviaCreazioneLibro",
+    "avviaCreazioneCanzone",
+    "avviaCreazioneAlbum",
     "filtraLibri",
     "filtraCanzoni",
     "filtraAlbum",
@@ -115,11 +115,11 @@ Q_CONSTINIT const QMetaObject mainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<mainWindow, std::true_type>,
         // method 'sceltaCreazione'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'creaLibro'
+        // method 'avviaCreazioneLibro'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'creaCanzone'
+        // method 'avviaCreazioneCanzone'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'creaAlbum'
+        // method 'avviaCreazioneAlbum'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'filtraLibri'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
@@ -140,9 +140,9 @@ void mainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->sceltaCreazione(); break;
-        case 1: _t->creaLibro(); break;
-        case 2: _t->creaCanzone(); break;
-        case 3: _t->creaAlbum(); break;
+        case 1: _t->avviaCreazioneLibro(); break;
+        case 2: _t->avviaCreazioneCanzone(); break;
+        case 3: _t->avviaCreazioneAlbum(); break;
         case 4: _t->filtraLibri(); break;
         case 5: _t->filtraCanzoni(); break;
         case 6: _t->filtraAlbum(); break;

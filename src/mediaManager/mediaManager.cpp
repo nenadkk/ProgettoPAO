@@ -1,5 +1,6 @@
 #include "mediaManager.h"
 #include "../jsonHandler/jsonHandler.h"
+#include "filtraVisitor.h"
 #include "searchVisitor.h"
 #include <cctype>    // Per std::toupper
                      
@@ -45,35 +46,20 @@ int mediaManager::size() const { return LM.size(); }
 
 list<media*> mediaManager::filtroSoloLibri() const
 {
-    list<media*> listaTemp;
-    for(auto m : LM)
-    {
-        if(dynamic_cast<libro*>(m))
-            listaTemp.push_back(m);
-    }
-    return listaTemp;
+    filtraVisitor vis(LM);
+    return vis.getSoloLibri();
 }
 
 list<media*> mediaManager::filtroSoloCanzoni() const
 {
-    list<media*> listaTemp;
-    for(auto m : LM)
-    {
-        if(dynamic_cast<canzone*>(m))
-            listaTemp.push_back(m);
-    }
-    return listaTemp;
+    filtraVisitor vis(LM);
+    return vis.getSoloCanzoni();
 }
 
 list<media*> mediaManager::filtroSoloAlbum() const
-{
-    list<media*> listaTemp;
-    for(auto m : LM)
-    {
-        if(dynamic_cast<album*>(m))
-            listaTemp.push_back(m);
-    }
-    return listaTemp;
+{ 
+    filtraVisitor vis(LM);
+    return vis.getSoloAlbum();
 }
 
 list<media*> mediaManager::search(string strDaCercare) const

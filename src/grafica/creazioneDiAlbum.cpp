@@ -91,10 +91,9 @@ void creazioneDiAlbum::crea()
         {
             int trackID = item->data(Qt::UserRole).toInt();
             media* c = manager->searchById(trackID);
-            if(c && dynamic_cast<canzone*>(c))
-            {
+
+            if(c)
                 newAlbum->addCanzone(dynamic_cast<canzone*>(c));
-            }
         }
     }
 

@@ -53,12 +53,14 @@ OBJECTS_DIR   = build/obj/
 ####### Files
 
 SOURCES       = src/main.cpp \
+		src/grafica/creazioneDiAlbum.cpp \
+		src/grafica/creazioneDiCanzone.cpp \
+		src/grafica/creazioneDiLibro.cpp \
 		src/grafica/mainWindow.cpp \
 		src/grafica/sceltaDettaglioVisitor.cpp \
 		src/grafica/widgetAnteprima.cpp \
-		src/grafica/widgetCreazione.cpp \
-		src/grafica/widgetCreazioneVisitor.cpp \
 		src/grafica/widgetDettaglio.cpp \
+		src/grafica/widgetDiCreazione.cpp \
 		src/jsonHandler/jsonHandler.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
@@ -67,14 +69,16 @@ SOURCES       = src/main.cpp \
 		src/logica/media.cpp \
 		src/mediaManager/mediaManager.cpp build/moc/moc_mainWindow.cpp \
 		build/moc/moc_widgetAnteprima.cpp \
-		build/moc/moc_widgetCreazione.cpp
+		build/moc/moc_widgetDiCreazione.cpp
 OBJECTS       = build/obj/main.o \
+		build/obj/creazioneDiAlbum.o \
+		build/obj/creazioneDiCanzone.o \
+		build/obj/creazioneDiLibro.o \
 		build/obj/mainWindow.o \
 		build/obj/sceltaDettaglioVisitor.o \
 		build/obj/widgetAnteprima.o \
-		build/obj/widgetCreazione.o \
-		build/obj/widgetCreazioneVisitor.o \
 		build/obj/widgetDettaglio.o \
+		build/obj/widgetDiCreazione.o \
 		build/obj/jsonHandler.o \
 		build/obj/jsonVisitor.o \
 		build/obj/album.o \
@@ -84,7 +88,7 @@ OBJECTS       = build/obj/main.o \
 		build/obj/mediaManager.o \
 		build/obj/moc_mainWindow.o \
 		build/obj/moc_widgetAnteprima.o \
-		build/obj/moc_widgetCreazione.o
+		build/obj/moc_widgetDiCreazione.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/common/linux.conf \
@@ -150,12 +154,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		ProgettoPAO.pro src/grafica/mainWindow.h \
+		ProgettoPAO.pro src/grafica/creazioneDiAlbum.h \
+		src/grafica/creazioneDiCanzone.h \
+		src/grafica/creazioneDiLibro.h \
+		src/grafica/mainWindow.h \
 		src/grafica/sceltaDettaglioVisitor.h \
 		src/grafica/widgetAnteprima.h \
-		src/grafica/widgetCreazione.h \
-		src/grafica/widgetCreazioneVisitor.h \
 		src/grafica/widgetDettaglio.h \
+		src/grafica/widgetDiCreazione.h \
 		src/jsonHandler/jsonHandler.h \
 		src/jsonHandler/jsonVisitor.h \
 		src/logica/album.h \
@@ -164,12 +170,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/logica/media.h \
 		src/logica/visitor.h \
 		src/mediaManager/mediaManager.h src/main.cpp \
+		src/grafica/creazioneDiAlbum.cpp \
+		src/grafica/creazioneDiCanzone.cpp \
+		src/grafica/creazioneDiLibro.cpp \
 		src/grafica/mainWindow.cpp \
 		src/grafica/sceltaDettaglioVisitor.cpp \
 		src/grafica/widgetAnteprima.cpp \
-		src/grafica/widgetCreazione.cpp \
-		src/grafica/widgetCreazioneVisitor.cpp \
 		src/grafica/widgetDettaglio.cpp \
+		src/grafica/widgetDiCreazione.cpp \
 		src/jsonHandler/jsonHandler.cpp \
 		src/jsonHandler/jsonVisitor.cpp \
 		src/logica/album.cpp \
@@ -342,8 +350,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/grafica/mainWindow.h src/grafica/sceltaDettaglioVisitor.h src/grafica/widgetAnteprima.h src/grafica/widgetCreazione.h src/grafica/widgetCreazioneVisitor.h src/grafica/widgetDettaglio.h src/jsonHandler/jsonHandler.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/grafica/mainWindow.cpp src/grafica/sceltaDettaglioVisitor.cpp src/grafica/widgetAnteprima.cpp src/grafica/widgetCreazione.cpp src/grafica/widgetCreazioneVisitor.cpp src/grafica/widgetDettaglio.cpp src/jsonHandler/jsonHandler.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/grafica/creazioneDiAlbum.h src/grafica/creazioneDiCanzone.h src/grafica/creazioneDiLibro.h src/grafica/mainWindow.h src/grafica/sceltaDettaglioVisitor.h src/grafica/widgetAnteprima.h src/grafica/widgetDettaglio.h src/grafica/widgetDiCreazione.h src/jsonHandler/jsonHandler.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/grafica/creazioneDiAlbum.cpp src/grafica/creazioneDiCanzone.cpp src/grafica/creazioneDiLibro.cpp src/grafica/mainWindow.cpp src/grafica/sceltaDettaglioVisitor.cpp src/grafica/widgetAnteprima.cpp src/grafica/widgetDettaglio.cpp src/grafica/widgetDiCreazione.cpp src/jsonHandler/jsonHandler.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -375,9 +383,9 @@ compiler_moc_predefs_clean:
 build/moc/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -fPIC -dM -E -o build/moc/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: build/moc/moc_mainWindow.cpp build/moc/moc_widgetAnteprima.cpp build/moc/moc_widgetCreazione.cpp
+compiler_moc_header_make_all: build/moc/moc_mainWindow.cpp build/moc/moc_widgetAnteprima.cpp build/moc/moc_widgetDiCreazione.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) build/moc/moc_mainWindow.cpp build/moc/moc_widgetAnteprima.cpp build/moc/moc_widgetCreazione.cpp
+	-$(DEL_FILE) build/moc/moc_mainWindow.cpp build/moc/moc_widgetAnteprima.cpp build/moc/moc_widgetDiCreazione.cpp
 build/moc/moc_mainWindow.cpp: src/grafica/mainWindow.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
@@ -401,7 +409,7 @@ build/moc/moc_widgetAnteprima.cpp: src/grafica/widgetAnteprima.h \
 		/usr/lib/qt6/libexec/moc
 	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/widgetAnteprima.h -o build/moc/moc_widgetAnteprima.cpp
 
-build/moc/moc_widgetCreazione.cpp: src/grafica/widgetCreazione.h \
+build/moc/moc_widgetDiCreazione.cpp: src/grafica/widgetDiCreazione.h \
 		src/grafica/mainWindow.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
@@ -411,7 +419,7 @@ build/moc/moc_widgetCreazione.cpp: src/grafica/widgetCreazione.h \
 		src/logica/libro.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
-	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/widgetCreazione.h -o build/moc/moc_widgetCreazione.cpp
+	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/nenad/Progetti/ProgettoPAO/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/nenad/Progetti/ProgettoPAO -I/home/nenad/Progetti/ProgettoPAO -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/grafica/widgetDiCreazione.h -o build/moc/moc_widgetDiCreazione.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -438,6 +446,39 @@ build/obj/main.o: src/main.cpp src/grafica/mainWindow.h \
 		src/logica/libro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/main.o src/main.cpp
 
+build/obj/creazioneDiAlbum.o: src/grafica/creazioneDiAlbum.cpp src/grafica/creazioneDiAlbum.h \
+		src/grafica/widgetDiCreazione.h \
+		src/grafica/mainWindow.h \
+		src/logica/media.h \
+		src/logica/visitor.h \
+		src/mediaManager/mediaManager.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/logica/libro.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/creazioneDiAlbum.o src/grafica/creazioneDiAlbum.cpp
+
+build/obj/creazioneDiCanzone.o: src/grafica/creazioneDiCanzone.cpp src/grafica/creazioneDiCanzone.h \
+		src/grafica/widgetDiCreazione.h \
+		src/grafica/mainWindow.h \
+		src/logica/media.h \
+		src/logica/visitor.h \
+		src/mediaManager/mediaManager.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/logica/libro.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/creazioneDiCanzone.o src/grafica/creazioneDiCanzone.cpp
+
+build/obj/creazioneDiLibro.o: src/grafica/creazioneDiLibro.cpp src/grafica/creazioneDiLibro.h \
+		src/grafica/widgetDiCreazione.h \
+		src/grafica/mainWindow.h \
+		src/logica/media.h \
+		src/logica/visitor.h \
+		src/mediaManager/mediaManager.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/logica/libro.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/creazioneDiLibro.o src/grafica/creazioneDiLibro.cpp
+
 build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
@@ -445,7 +486,10 @@ build/obj/mainWindow.o: src/grafica/mainWindow.cpp src/grafica/mainWindow.h \
 		src/logica/canzone.h \
 		src/logica/album.h \
 		src/logica/libro.h \
-		src/grafica/widgetCreazione.h \
+		src/grafica/creazioneDiLibro.h \
+		src/grafica/widgetDiCreazione.h \
+		src/grafica/creazioneDiCanzone.h \
+		src/grafica/creazioneDiAlbum.h \
 		src/grafica/widgetAnteprima.h \
 		src/grafica/widgetDettaglio.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mainWindow.o src/grafica/mainWindow.cpp
@@ -471,28 +515,6 @@ build/obj/widgetAnteprima.o: src/grafica/widgetAnteprima.cpp src/grafica/widgetA
 		src/logica/libro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/widgetAnteprima.o src/grafica/widgetAnteprima.cpp
 
-build/obj/widgetCreazione.o: src/grafica/widgetCreazione.cpp src/grafica/widgetCreazione.h \
-		src/grafica/mainWindow.h \
-		src/logica/media.h \
-		src/logica/visitor.h \
-		src/mediaManager/mediaManager.h \
-		src/logica/canzone.h \
-		src/logica/album.h \
-		src/logica/libro.h \
-		src/grafica/widgetCreazioneVisitor.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/widgetCreazione.o src/grafica/widgetCreazione.cpp
-
-build/obj/widgetCreazioneVisitor.o: src/grafica/widgetCreazioneVisitor.cpp src/grafica/widgetCreazioneVisitor.h \
-		src/logica/visitor.h \
-		src/logica/media.h \
-		src/grafica/mainWindow.h \
-		src/mediaManager/mediaManager.h \
-		src/logica/canzone.h \
-		src/logica/album.h \
-		src/logica/libro.h \
-		src/grafica/widgetCreazione.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/widgetCreazioneVisitor.o src/grafica/widgetCreazioneVisitor.cpp
-
 build/obj/widgetDettaglio.o: src/grafica/widgetDettaglio.cpp src/grafica/widgetDettaglio.h \
 		src/logica/libro.h \
 		src/logica/media.h \
@@ -503,6 +525,16 @@ build/obj/widgetDettaglio.o: src/grafica/widgetDettaglio.cpp src/grafica/widgetD
 		src/mediaManager/mediaManager.h \
 		src/grafica/sceltaDettaglioVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/widgetDettaglio.o src/grafica/widgetDettaglio.cpp
+
+build/obj/widgetDiCreazione.o: src/grafica/widgetDiCreazione.cpp src/grafica/widgetDiCreazione.h \
+		src/grafica/mainWindow.h \
+		src/logica/media.h \
+		src/logica/visitor.h \
+		src/mediaManager/mediaManager.h \
+		src/logica/canzone.h \
+		src/logica/album.h \
+		src/logica/libro.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/widgetDiCreazione.o src/grafica/widgetDiCreazione.cpp
 
 build/obj/jsonHandler.o: src/jsonHandler/jsonHandler.cpp src/jsonHandler/jsonVisitor.h \
 		src/logica/visitor.h \
@@ -557,8 +589,8 @@ build/obj/moc_mainWindow.o: build/moc/moc_mainWindow.cpp
 build/obj/moc_widgetAnteprima.o: build/moc/moc_widgetAnteprima.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_widgetAnteprima.o build/moc/moc_widgetAnteprima.cpp
 
-build/obj/moc_widgetCreazione.o: build/moc/moc_widgetCreazione.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_widgetCreazione.o build/moc/moc_widgetCreazione.cpp
+build/obj/moc_widgetDiCreazione.o: build/moc/moc_widgetDiCreazione.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_widgetDiCreazione.o build/moc/moc_widgetDiCreazione.cpp
 
 ####### Install
 

@@ -1,43 +1,35 @@
-#ifndef WIDGETCREAZIONE
-#define WIDGETCREAZIONE
+#ifndef WIDGETDICREAZIONE
+#define WIDGETDICREAZIONE
 #include <QPushButton>
 #include <QMap>
 #include <QListWidget>
+#include <array>
 
 #include "mainWindow.h"
 #include "../mediaManager/mediaManager.h"
 #include "../logica/media.h"
 
-class widgetCreazione : public QWidget
+class widgetDiCreazione : public QWidget
 {
     Q_OBJECT
 
-    private:
+    protected:
         mediaManager *manager;
         QMap<QString, QLineEdit*> attributi;
         mainWindow* windowEsterna;
-        QListWidget* trackList;
+        std::array<QWidget*, 4> widgetBase;
+
+        widgetDiCreazione(mediaManager*, QWidget* parent=nullptr);
 
         void copiaImmagine();
         bool isImageFile(const QString &filePath) const;
         bool validaInput();
 
-        void creaSottoOggettoMedia(QWidget**,widgetCreazione*);
-
-    private slots:
-        void creaLibro();
-        void creaCanzone();
-        void creaAlbum();
+    protected slots:
+        virtual void crea() = 0;
         void browseImage();
 
-    public slots:
-
-        void buildWidget(libro*);
-        void buildWidget(canzone*);
-        void buildWidget(album*);
-
     public:
-        widgetCreazione(media*, mediaManager*, QWidget* parent=nullptr);
         void insertLineEdit(QString,QLineEdit*);
         QLineEdit*& operator[](const QString& );
 };

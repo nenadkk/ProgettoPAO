@@ -8,5 +8,15 @@
         "isbn": 0,
         "numPagine": 366,
         "titolo": "iiii"
+    },
+    {
+        "anno": 2011,
+        "autore": "bobz",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "speggio",
+        "id": 0,
+        "isbn": 1839184937,
+        "numPagine": 104,
+        "titolo": "cs"
     }
 ]

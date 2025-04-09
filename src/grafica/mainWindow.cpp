@@ -10,7 +10,10 @@
 #include <QListWidget>
 #include <QLabel>
 
-#include "widgetCreazione.h"
+#include "creazioneDiLibro.h"
+#include "creazioneDiCanzone.h"
+#include "creazioneDiAlbum.h"
+#include "widgetDiCreazione.h"
 #include "widgetAnteprima.h"
 #include "widgetDettaglio.h"
 
@@ -221,8 +224,7 @@ void mainWindow::avviaCreazioneLibro()
 {
     svuotaMediaVisibili();
 
-    libro temp;
-    widgetCreazione *wid = new widgetCreazione(&temp,&mediaMan,this);
+    creazioneDiLibro *wid = new creazioneDiLibro(&mediaMan,this);
     mediaVisibili->addWidget(wid);
 }
 
@@ -230,8 +232,7 @@ void mainWindow::avviaCreazioneCanzone()
 {
     svuotaMediaVisibili();
 
-    canzone temp;
-    widgetCreazione *wid = new widgetCreazione(&temp,&mediaMan,this);
+    creazioneDiCanzone *wid = new creazioneDiCanzone(&mediaMan,this);
     mediaVisibili->addWidget(wid);
 }
 
@@ -239,8 +240,7 @@ void mainWindow::avviaCreazioneAlbum()
 {
     svuotaMediaVisibili();
 
-    album temp;
-    widgetCreazione *wid = new widgetCreazione(&temp,&mediaMan,this);
+    creazioneDiAlbum *wid = new creazioneDiAlbum(&mediaMan,this);
     mediaVisibili->addWidget(wid);
 }
 

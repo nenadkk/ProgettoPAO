@@ -19,10 +19,10 @@ void filtraVisitor::visit(libro* _libro)
 
 void filtraVisitor::visit(canzone* _canzone)
 {
-    soloLibri.push_back(_canzone);
+    soloCanzoni.push_back(_canzone);
 }
 
 void filtraVisitor::visit(album* _album)
 {
-    soloLibri.push_back(_album);
+    soloAlbum.push_back(_album);
 }

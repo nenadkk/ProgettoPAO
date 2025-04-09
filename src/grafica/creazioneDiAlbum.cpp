@@ -40,7 +40,7 @@ creazioneDiAlbum::creazioneDiAlbum(mediaManager* man, QWidget* parent) : widgetD
             
     for (const auto m : manager->filtroSoloCanzoni()) 
     {
-        canzone *c = dynamic_cast<canzone*>(m);
+        const canzone *c = dynamic_cast<const canzone*>(m);
 
         QString str = QString::fromStdString(c->getTitolo()) + "   " + toQString(c->getAutore()+ "   "  );
         str +=QString::number((c->getDurata())/60 ) + ":" + QString::number((c->getDurata())%60);

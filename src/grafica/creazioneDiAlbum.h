@@ -5,9 +5,11 @@
 
 class creazioneDiAlbum : public widgetDiCreazione
 {
+    private:
+        QListWidget* trackList;
+
     protected:
         void crea() override;
-        QListWidget* trackList;
     public:
         creazioneDiAlbum(mediaManager*, QWidget* parent=nullptr);
 };

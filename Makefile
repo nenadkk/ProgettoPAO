@@ -67,7 +67,8 @@ SOURCES       = src/main.cpp \
 		src/logica/cazone.cpp \
 		src/logica/libro.cpp \
 		src/logica/media.cpp \
-		src/mediaManager/mediaManager.cpp build/moc/moc_mainWindow.cpp \
+		src/mediaManager/mediaManager.cpp \
+		src/mediaManager/searchVisitor.cpp build/moc/moc_mainWindow.cpp \
 		build/moc/moc_widgetAnteprima.cpp \
 		build/moc/moc_widgetDiCreazione.cpp
 OBJECTS       = build/obj/main.o \
@@ -86,6 +87,7 @@ OBJECTS       = build/obj/main.o \
 		build/obj/libro.o \
 		build/obj/media.o \
 		build/obj/mediaManager.o \
+		build/obj/searchVisitor.o \
 		build/obj/moc_mainWindow.o \
 		build/obj/moc_widgetAnteprima.o \
 		build/obj/moc_widgetDiCreazione.o
@@ -169,7 +171,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/logica/libro.h \
 		src/logica/media.h \
 		src/logica/visitor.h \
-		src/mediaManager/mediaManager.h src/main.cpp \
+		src/mediaManager/mediaManager.h \
+		src/mediaManager/searchVisitor.h src/main.cpp \
 		src/grafica/creazioneDiAlbum.cpp \
 		src/grafica/creazioneDiCanzone.cpp \
 		src/grafica/creazioneDiLibro.cpp \
@@ -184,7 +187,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		src/logica/cazone.cpp \
 		src/logica/libro.cpp \
 		src/logica/media.cpp \
-		src/mediaManager/mediaManager.cpp
+		src/mediaManager/mediaManager.cpp \
+		src/mediaManager/searchVisitor.cpp
 QMAKE_TARGET  = ProgettoPAO
 DESTDIR       = 
 TARGET        = ProgettoPAO
@@ -350,8 +354,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/grafica/creazioneDiAlbum.h src/grafica/creazioneDiCanzone.h src/grafica/creazioneDiLibro.h src/grafica/mainWindow.h src/grafica/sceltaDettaglioVisitor.h src/grafica/widgetAnteprima.h src/grafica/widgetDettaglio.h src/grafica/widgetDiCreazione.h src/jsonHandler/jsonHandler.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/grafica/creazioneDiAlbum.cpp src/grafica/creazioneDiCanzone.cpp src/grafica/creazioneDiLibro.cpp src/grafica/mainWindow.cpp src/grafica/sceltaDettaglioVisitor.cpp src/grafica/widgetAnteprima.cpp src/grafica/widgetDettaglio.cpp src/grafica/widgetDiCreazione.cpp src/jsonHandler/jsonHandler.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/grafica/creazioneDiAlbum.h src/grafica/creazioneDiCanzone.h src/grafica/creazioneDiLibro.h src/grafica/mainWindow.h src/grafica/sceltaDettaglioVisitor.h src/grafica/widgetAnteprima.h src/grafica/widgetDettaglio.h src/grafica/widgetDiCreazione.h src/jsonHandler/jsonHandler.h src/jsonHandler/jsonVisitor.h src/logica/album.h src/logica/canzone.h src/logica/libro.h src/logica/media.h src/logica/visitor.h src/mediaManager/mediaManager.h src/mediaManager/searchVisitor.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/grafica/creazioneDiAlbum.cpp src/grafica/creazioneDiCanzone.cpp src/grafica/creazioneDiLibro.cpp src/grafica/mainWindow.cpp src/grafica/sceltaDettaglioVisitor.cpp src/grafica/widgetAnteprima.cpp src/grafica/widgetDettaglio.cpp src/grafica/widgetDiCreazione.cpp src/jsonHandler/jsonHandler.cpp src/jsonHandler/jsonVisitor.cpp src/logica/album.cpp src/logica/cazone.cpp src/logica/libro.cpp src/logica/media.cpp src/mediaManager/mediaManager.cpp src/mediaManager/searchVisitor.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -580,8 +584,17 @@ build/obj/mediaManager.o: src/mediaManager/mediaManager.cpp src/mediaManager/med
 		src/logica/album.h \
 		src/logica/libro.h \
 		src/jsonHandler/jsonHandler.h \
-		src/jsonHandler/jsonVisitor.h
+		src/jsonHandler/jsonVisitor.h \
+		src/mediaManager/searchVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/mediaManager.o src/mediaManager/mediaManager.cpp
+
+build/obj/searchVisitor.o: src/mediaManager/searchVisitor.cpp src/mediaManager/searchVisitor.h \
+		src/logica/visitor.h \
+		src/logica/libro.h \
+		src/logica/media.h \
+		src/logica/canzone.h \
+		src/logica/album.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/searchVisitor.o src/mediaManager/searchVisitor.cpp
 
 build/obj/moc_mainWindow.o: build/moc/moc_mainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_mainWindow.o build/moc/moc_mainWindow.cpp

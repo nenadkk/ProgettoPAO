@@ -1,7 +1,6 @@
 #include "mediaManager.h"
 #include "../jsonHandler/jsonHandler.h"
-#include <string>
-#include <algorithm> // Per std::transform
+#include "searchVisitor.h"
 #include <cctype>    // Per std::toupper
                      
 void mediaManager::addMedia(media* newMedia)
@@ -77,63 +76,18 @@ list<media*> mediaManager::filtroSoloAlbum() const
     return listaTemp;
 }
 
-void mediaManager::rendiMaiuscolo(string& str)
-{
-    transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::toupper(c); }); 
-}
-
 list<media*> mediaManager::search(string strDaCercare) const
 {
     list<media*> listaTemp;
+    list<int> idRisultati;
+    searchVisitor vis(strDaCercare, &idRisultati);
+
     for(auto m : LM)
-    {
-        //Trasformo tutto in maiuscolo per evitare ricerca case sensitive 
-        rendiMaiuscolo(strDaCercare);
-
-        string titoloMaiuscolo = m->getTitolo(), 
-               autoreMaiuscolo = m->getAutore(), 
-               annoMaiuscolo = to_string(m->getAnno()), 
-               idMaiuscolo = to_string(m->getId());
-        
-        rendiMaiuscolo(titoloMaiuscolo);
-        rendiMaiuscolo(autoreMaiuscolo);
-        rendiMaiuscolo(annoMaiuscolo);
-        rendiMaiuscolo(idMaiuscolo);
-        
-        //ricerca
-        if(titoloMaiuscolo.find(strDaCercare) != string::npos ||
-           autoreMaiuscolo.find(strDaCercare) != string::npos || 
-           annoMaiuscolo.find(strDaCercare) != string::npos ||
-           idMaiuscolo.find(strDaCercare) != string::npos)
-        {
-            listaTemp.push_back(m);
-        }
-        else if (auto t = dynamic_cast<libro*>(m)) 
-        {
-            //Trasformo tutto in maiuscolo per evitare ricerca case sensitive 
-            string isbnMaiuscolo = to_string(t->getIsbn()), 
-                   editoreMaiuscolo = t->getEditore();
-
-            rendiMaiuscolo(isbnMaiuscolo);
-            rendiMaiuscolo(editoreMaiuscolo);
-
-            //ricerca
-            if(isbnMaiuscolo.find(strDaCercare) != string::npos || editoreMaiuscolo.find(strDaCercare) != string::npos)
-                listaTemp.push_back(m);
-        }
-        else if (auto t = dynamic_cast<canzone*>(m)) 
-        {
-            //Trasformo tutto in maiuscolo per evitare ricerca case sensitive 
-            string genereMaiuscolo = t->getGenere();
-            rendiMaiuscolo(genereMaiuscolo);
-
-            //ricerca
-            if(genereMaiuscolo.find(strDaCercare) != string::npos)
-                listaTemp.push_back(m);
-        }
-
-    }
-
+        m->accept(&vis);
+    
+    for(int _id : idRisultati)
+        listaTemp.push_back(this->searchById(_id));
+         
     return listaTemp;
 }
 

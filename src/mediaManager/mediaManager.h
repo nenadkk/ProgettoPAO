@@ -7,7 +7,6 @@ class mediaManager
 {
     private:
         list<media*> LM;
-        static void rendiMaiuscolo(string&);
 
     public:
         void save() const;

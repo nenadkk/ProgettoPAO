@@ -1,4 +1,7 @@
 #include "widgetDettaglio.h"
+#include "editorLibro.h"
+#include "editorCanzone.h"
+#include "editorAlbum.h"
 #include "qglobal.h"
 #include "qnamespace.h"
 #include "sceltaDettaglioVisitor.h"
@@ -40,9 +43,30 @@ void widgetDettaglio::buildDettaglio(libro* object)
     info->setAlignment(Qt::AlignCenter);
     layout->addWidget(info);
 
+    // Pulsanti
     QHBoxLayout *layoutPulsanti = new QHBoxLayout();
-    aggiungiPulsanti(layoutPulsanti);
+
+    QPushButton *buttonModifica = new QPushButton("Modifica");
+    QPushButton *buttonElimina = new QPushButton("Elimina");
+
+    layoutPulsanti->addWidget(buttonModifica);
+    layoutPulsanti->addWidget(buttonElimina);
+
+    buttonModifica->setFont(QFont("Mono",18));
+    buttonElimina->setFont(QFont("Mono",18));
+
+    buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+    buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+
+    buttonModifica->setFixedSize(150, 60);
+    buttonElimina->setFixedSize(150, 60);
+
+    connect(buttonModifica, &QPushButton::clicked, this, &widgetDettaglio::modificaLibro);
+    connect(buttonElimina, &QPushButton::clicked, this, &widgetDettaglio::removeMedia);
+
     layout->addLayout(layoutPulsanti);
+
+
 
     this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
@@ -80,9 +104,29 @@ void widgetDettaglio::buildDettaglio(canzone* object)
     info->setAlignment(Qt::AlignCenter);
     layout->addWidget(info);    
 
+
+    // Pulsanti
     QHBoxLayout *layoutPulsanti = new QHBoxLayout();
-    aggiungiPulsanti(layoutPulsanti);
+    QPushButton *buttonModifica = new QPushButton("Modifica");
+    QPushButton *buttonElimina = new QPushButton("Elimina");
+
+    layoutPulsanti->addWidget(buttonModifica);
+    layoutPulsanti->addWidget(buttonElimina);
+
+    buttonModifica->setFont(QFont("Mono",18));
+    buttonElimina->setFont(QFont("Mono",18));
+
+    buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+    buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+
+    buttonModifica->setFixedSize(150, 60);
+    buttonElimina->setFixedSize(150, 60);
+
+    connect(buttonModifica, &QPushButton::clicked, this, &widgetDettaglio::modificaCanzone);
+    connect(buttonElimina, &QPushButton::clicked, this, &widgetDettaglio::removeMedia);
+
     layout->addLayout(layoutPulsanti);
+
 
     this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
@@ -121,8 +165,28 @@ void widgetDettaglio::buildDettaglio(album* object)
     info->setFont(QFont("Mono",20));
     info->setAlignment(Qt::AlignLeft);
 
+    // Pulsanti
     QHBoxLayout *layoutPulsanti = new QHBoxLayout();
-    aggiungiPulsanti(layoutPulsanti);
+
+    QPushButton *buttonModifica = new QPushButton("Modifica");
+    QPushButton *buttonElimina = new QPushButton("Elimina");
+
+    layoutPulsanti->addWidget(buttonModifica);
+    layoutPulsanti->addWidget(buttonElimina);
+
+    buttonModifica->setFont(QFont("Mono",18));
+    buttonElimina->setFont(QFont("Mono",18));
+
+    buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+    buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+
+    buttonModifica->setFixedSize(150, 60);
+    buttonElimina->setFixedSize(150, 60);
+
+    connect(buttonModifica, &QPushButton::clicked, this, &widgetDettaglio::modificaAlbum);
+    connect(buttonElimina, &QPushButton::clicked, this, &widgetDettaglio::removeMedia);
+
+
 
     layoutSX->addWidget(info);
     layoutSX->addLayout(layoutPulsanti);
@@ -176,27 +240,6 @@ void widgetDettaglio::buildDettaglio(album* object)
 
 }
 
-void widgetDettaglio::aggiungiPulsanti(QHBoxLayout* layoutPulsanti)
-{
-        // Pulsanti
-        QPushButton *buttonModifica = new QPushButton("Modifica");
-        QPushButton *buttonElimina = new QPushButton("Elimina");
-        
-        layoutPulsanti->addWidget(buttonModifica);
-        layoutPulsanti->addWidget(buttonElimina);
-        
-        buttonModifica->setFont(QFont("Mono",18));
-        buttonElimina->setFont(QFont("Mono",18));
-
-        buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
-        buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
-
-        buttonModifica->setFixedSize(150, 60);
-        buttonElimina->setFixedSize(150, 60);
-
-        connect(buttonElimina, &QPushButton::clicked, this, &widgetDettaglio::removeMedia);
-
-}
 
 void widgetDettaglio::removeMedia()
 {
@@ -211,6 +254,23 @@ void widgetDettaglio::removeMedia()
     
 }
 
+void widgetDettaglio::modificaLibro()
+{
+    editorLibro *temp = new editorLibro(manager,windowEsterna,object);
+    windowEsterna->addToMediaVisibili(temp);  
+}
+
+void widgetDettaglio::modificaCanzone()
+{
+    editorCanzone *temp = new editorCanzone(manager,windowEsterna,object);
+    windowEsterna->addToMediaVisibili(temp);   
+}
+
+void widgetDettaglio::modificaAlbum()
+{
+    editorAlbum *temp = new editorAlbum(manager,windowEsterna,object);
+    windowEsterna->addToMediaVisibili(temp);
+}
 
 
 

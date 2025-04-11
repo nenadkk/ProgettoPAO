@@ -1,8 +1,8 @@
-#include "creazioneDiLibro.h"
-#include "widgetDiCreazione.h"
+#include "editorLibro.h"
 #include <QLabel>
 
-creazioneDiLibro::creazioneDiLibro(mediaManager* man, QWidget* parent) : widgetDiCreazione(man,parent)
+editorLibro::editorLibro(mediaManager* man, QWidget* parent, media* obj) : 
+    widgetEditorMedia(man,parent,obj)
 {
     QVBoxLayout *layout = new QVBoxLayout();    
 
@@ -21,6 +21,9 @@ creazioneDiLibro::creazioneDiLibro(mediaManager* man, QWidget* parent) : widgetD
     (*this)["numeroPagine"]->setFixedSize(200,30);
     QIntValidator *validatorNumPag = new QIntValidator((*this)["numeroPagine"]);
     (*this)["numeroPagine"]->setValidator(validatorNumPag);
+
+    if(object)
+        (*this)["numeroPagine"]->setText(QString::number(dynamic_cast<libro*>(object)->getNumPagine()));
 
     QHBoxLayout *layoutNumPagine = new QHBoxLayout(widgetNumPagine);
     layoutNumPagine->setContentsMargins(0,0,0,0);
@@ -42,6 +45,9 @@ creazioneDiLibro::creazioneDiLibro(mediaManager* man, QWidget* parent) : widgetD
     QIntValidator *validatorIsbn = new QIntValidator(0,INT_MAX,(*this)["isbn"]);
     (*this)["isbn"]->setValidator(validatorIsbn);
 
+    if(object)
+        (*this)["isbn"]->setText(QString::number(dynamic_cast<libro*>(object)->getIsbn()));
+
     QHBoxLayout *layoutIsbn = new QHBoxLayout(widgetIsbn);
     layoutIsbn->setContentsMargins(0,0,0,0);
     layoutIsbn->setSpacing(0);
@@ -59,6 +65,9 @@ creazioneDiLibro::creazioneDiLibro(mediaManager* man, QWidget* parent) : widgetD
     this->insertLineEdit("editore",new QLineEdit());
     (*this)["editore"]->setFont(QFont("Mono",14));
     (*this)["editore"]->setFixedSize(200,30);
+
+    if(object)
+        (*this)["editore"]->setText(QString::fromStdString(dynamic_cast<libro*>(object)->getEditore()));
 
 
     QHBoxLayout *layoutGenere = new QHBoxLayout(widgetEditore);
@@ -82,7 +91,12 @@ creazioneDiLibro::creazioneDiLibro(mediaManager* man, QWidget* parent) : widgetD
     QPushButton *btnSalva = new QPushButton("SALVA",widgetPulsanti);
     btnSalva->setFixedSize(200,50);
     btnSalva->setFont(QFont("Mono",15));
-    QObject::connect(btnSalva, &QPushButton::clicked, this, &creazioneDiLibro::crea);
+
+    if(object)
+        QObject::connect(btnSalva, &QPushButton::clicked, this, &editorLibro::modifica);
+    else
+        QObject::connect(btnSalva, &QPushButton::clicked, this, &editorLibro::crea);
+
     layoutPulsanti->addWidget(btnSalva,0, Qt::AlignRight);
 
     //---------------------------------------------------
@@ -100,7 +114,7 @@ creazioneDiLibro::creazioneDiLibro(mediaManager* man, QWidget* parent) : widgetD
 
 }
 
-void creazioneDiLibro::crea()
+void editorLibro::crea()
 {
     if(validaInput())
     {
@@ -117,4 +131,10 @@ void creazioneDiLibro::crea()
         windowEsterna->reloadMediaVisibili();
     }
 
+}
+
+void editorLibro::modifica()
+{
+
+    qDebug()<<"MODIFICATO";
 }

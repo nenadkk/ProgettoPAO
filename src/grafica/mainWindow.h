@@ -35,6 +35,7 @@ class mainWindow : public QMainWindow
         mainWindow(QWidget* parent = nullptr);
         void mostraDettagli(media*);
         void svuotaMediaVisibili();
+        void addToMediaVisibili(QWidget*);//permette di visualizzare un'altro widget
 
     public slots:
         void reloadMediaVisibili();

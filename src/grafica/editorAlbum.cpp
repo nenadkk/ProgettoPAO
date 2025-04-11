@@ -1,8 +1,10 @@
-#include "creazioneDiAlbum.h"
-#include "widgetDiCreazione.h"
+#include "editorAlbum.h"
+#include "../logica/album.h"
+#include "qglobal.h"
 #include <QLabel>
 
-creazioneDiAlbum::creazioneDiAlbum(mediaManager* man, QWidget* parent) : widgetDiCreazione(man,parent), trackList(nullptr)
+editorAlbum::editorAlbum(mediaManager* man, QWidget* parent, media* obj) : 
+    widgetEditorMedia(man,parent,obj), trackList(nullptr)
 {
     //---------- PARTE SINISTRA ----------
     trackList = new QListWidget();
@@ -25,7 +27,11 @@ creazioneDiAlbum::creazioneDiAlbum(mediaManager* man, QWidget* parent) : widgetD
     QPushButton *btnSalva = new QPushButton("SALVA",widgetPulsanti);
     btnSalva->setFixedSize(200,50);
     btnSalva->setFont(QFont("Mono",15));
-    QObject::connect(btnSalva, &QPushButton::clicked, this, &creazioneDiAlbum::crea);
+    if(object)
+        QObject::connect(btnSalva, &QPushButton::clicked, this, &editorAlbum::modifica);
+    else
+        QObject::connect(btnSalva, &QPushButton::clicked, this, &editorAlbum::crea);
+
     layoutSinistraPulsanti->addWidget(btnSalva,0, Qt::AlignRight);
 
     //---------------------------------------------------
@@ -45,11 +51,21 @@ creazioneDiAlbum::creazioneDiAlbum(mediaManager* man, QWidget* parent) : widgetD
         QString str = QString::fromStdString(c->getTitolo()) + "   " + toQString(c->getAutore()+ "   "  );
         str +=QString::number((c->getDurata())/60 ) + ":" + QString::number((c->getDurata())%60);
         QListWidgetItem *item = new QListWidgetItem(str, trackList);
-        item->setData(Qt::UserRole, c->getId()); // Assegna l'ID all'elemento
 
         
+        item->setData(Qt::UserRole, c->getId()); // Assegna l'ID all'elemento
+        
         item->setFont(QFont("Mono",20));
-        item->setCheckState(Qt::Unchecked);
+
+        if(object)
+        {
+            if(dynamic_cast<album*>(object)->contieneCanzone(c->getId()))
+                item->setCheckState(Qt::Checked);
+            else
+                item->setCheckState(Qt::Unchecked);
+        }
+        else
+            item->setCheckState(Qt::Unchecked);
     }
 
     trackList->setStyleSheet(
@@ -70,7 +86,7 @@ creazioneDiAlbum::creazioneDiAlbum(mediaManager* man, QWidget* parent) : widgetD
     this->setLayout(layout);  
 }
 
-void creazioneDiAlbum::crea()
+void editorAlbum::crea()
 {    
     if(!validaInput())
         return;
@@ -101,4 +117,9 @@ void creazioneDiAlbum::crea()
     windowEsterna->reloadMediaVisibili();
 
 
+}
+
+void editorAlbum::modifica()
+{
+    qDebug()<<"MODIFICATO";
 }

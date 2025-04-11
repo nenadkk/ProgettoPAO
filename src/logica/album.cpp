@@ -19,6 +19,16 @@ album::album(const string& _titolo, const string& _autore, const int& _anno, con
 int album::getDurataTotale() const { return durataTotale; }
 int album::getNumCanzoni() const { return trackList.size(); };
 
+bool album::contieneCanzone(int _id) const
+{
+    for(canzone* c : trackList)
+    {
+        if(c->getId()==_id)
+            return true;
+    }
+    return false;
+}
+
 void album::addCanzone(canzone* newCanzone)
 {
     trackList.push_back(newCanzone);

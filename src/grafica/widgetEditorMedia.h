@@ -1,5 +1,5 @@
-#ifndef WIDGETDICREAZIONE
-#define WIDGETDICREAZIONE
+#ifndef WIDGETEDITORMEDIA
+#define WIDGETEDITORMEDIA
 #include <QPushButton>
 #include <QMap>
 #include <QListWidget>
@@ -9,7 +9,7 @@
 #include "../mediaManager/mediaManager.h"
 #include "../logica/media.h"
 
-class widgetDiCreazione : public QWidget
+class widgetEditorMedia : public QWidget
 {
     Q_OBJECT
 
@@ -18,8 +18,12 @@ class widgetDiCreazione : public QWidget
         QMap<QString, QLineEdit*> attributi;
         mainWindow* windowEsterna;
         std::array<QWidget*, 4> widgetBase;
+        media* object;
 
-        widgetDiCreazione(mediaManager*, QWidget* parent=nullptr);
+        widgetEditorMedia(mediaManager*, QWidget* parent=nullptr, media* object=nullptr); //se object non viene passato allora 
+                                                                                          //viene creato il widget in modalità 
+                                                                                          //creazione, altrimenti in modalità di 
+                                                                                          //modifica
 
         void copiaImmagine();
         bool isImageFile(const QString &filePath) const;
@@ -27,6 +31,7 @@ class widgetDiCreazione : public QWidget
 
     protected slots:
         virtual void crea() = 0;
+        virtual void modifica() = 0;
         void browseImage();
 
     public:

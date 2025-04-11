@@ -10,10 +10,9 @@
 #include <QListWidget>
 #include <QLabel>
 
-#include "creazioneDiLibro.h"
-#include "creazioneDiCanzone.h"
-#include "creazioneDiAlbum.h"
-#include "widgetDiCreazione.h"
+#include "editorLibro.h"
+#include "editorCanzone.h"
+#include "editorAlbum.h"
 #include "widgetAnteprima.h"
 #include "widgetDettaglio.h"
 
@@ -145,6 +144,11 @@ void mainWindow::addToMediaVisibili(media* m)
         rowGrid++;
     }
 }
+void mainWindow::addToMediaVisibili(QWidget* w)
+{
+    svuotaMediaVisibili();
+    mediaVisibili->addWidget(w);
+}
 
 void mainWindow::reloadMediaVisibili()
 {
@@ -224,7 +228,7 @@ void mainWindow::avviaCreazioneLibro()
 {
     svuotaMediaVisibili();
 
-    creazioneDiLibro *wid = new creazioneDiLibro(&mediaMan,this);
+    editorLibro *wid = new editorLibro(&mediaMan,this);
     mediaVisibili->addWidget(wid);
 }
 
@@ -232,7 +236,7 @@ void mainWindow::avviaCreazioneCanzone()
 {
     svuotaMediaVisibili();
 
-    creazioneDiCanzone *wid = new creazioneDiCanzone(&mediaMan,this);
+    editorCanzone *wid = new editorCanzone(&mediaMan,this);
     mediaVisibili->addWidget(wid);
 }
 
@@ -240,7 +244,7 @@ void mainWindow::avviaCreazioneAlbum()
 {
     svuotaMediaVisibili();
 
-    creazioneDiAlbum *wid = new creazioneDiAlbum(&mediaMan,this);
+    editorAlbum *wid = new editorAlbum(&mediaMan,this);
     mediaVisibili->addWidget(wid);
 }
 

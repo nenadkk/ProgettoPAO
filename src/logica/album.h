@@ -24,6 +24,9 @@ class album : public media
         int getDurataTotale() const;
         int getNumCanzoni() const;
 
+        bool contieneCanzone(int) const;//prende in input un id e restituisce true 
+                                        //se la canzone è contenuta nell'album 
+
         void addCanzone(canzone*);
 
         virtual void accept(visitor *_visitor) override;

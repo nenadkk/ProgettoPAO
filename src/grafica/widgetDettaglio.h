@@ -19,7 +19,6 @@ class widgetDettaglio : public QWidget
         media* object;
         mediaManager* manager;
         mainWindow* windowEsterna;
-        void aggiungiPulsanti(QHBoxLayout*);
 
     public:
         widgetDettaglio(media*,mediaManager*,QWidget *parent = nullptr);
@@ -30,6 +29,9 @@ class widgetDettaglio : public QWidget
 
     private slots:
         void removeMedia();
+        void modificaLibro();
+        void modificaCanzone();
+        void modificaAlbum();
 
 };
 

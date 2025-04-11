@@ -2,10 +2,10 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QLabel>
-#include "widgetDiCreazione.h"
+#include "widgetEditorMedia.h"
 
-widgetDiCreazione::widgetDiCreazione(mediaManager* man, QWidget* parent) : 
-    QWidget(parent), manager(man)
+widgetEditorMedia::widgetEditorMedia(mediaManager* man, QWidget* parent, media* obj) : 
+    QWidget(parent), manager(man), object(obj)
 {
 
     windowEsterna = dynamic_cast<mainWindow*>(parent);
@@ -21,6 +21,9 @@ widgetDiCreazione::widgetDiCreazione(mediaManager* man, QWidget* parent) :
     this->insertLineEdit("titolo",new QLineEdit());
     (*this)["titolo"]->setFont(QFont("Mono",14));
     (*this)["titolo"]->setFixedSize(200,30);
+    
+    if(object)
+        (*this)["titolo"]->setText(QString::fromStdString(object->getTitolo()));
 
     QHBoxLayout *layoutTitolo = new QHBoxLayout(widgetBase[0]);
     layoutTitolo->setContentsMargins(0,0,0,0);
@@ -38,7 +41,10 @@ widgetDiCreazione::widgetDiCreazione(mediaManager* man, QWidget* parent) :
 
     this->insertLineEdit("autore",new QLineEdit());
     (*this)["autore"]->setFont(QFont("Mono",14));
-    (*this)["autore"]->setFixedSize(200,30);
+    (*this)["autore"]->setFixedSize(200,30);    
+
+    if(object)
+        (*this)["autore"]->setText(QString::fromStdString(object->getAutore()));
 
     QHBoxLayout *layoutAutore = new QHBoxLayout(widgetBase[1]);
     layoutAutore->setContentsMargins(0,0,0,0);
@@ -60,6 +66,9 @@ widgetDiCreazione::widgetDiCreazione(mediaManager* man, QWidget* parent) :
     QIntValidator *validatorAnno = new QIntValidator((*this)["anno"]);
     (*this)["anno"]->setValidator(validatorAnno);
 
+    if(object)
+        (*this)["anno"]->setText(QString::number(object->getAnno()));
+
     QHBoxLayout *layoutAnno = new QHBoxLayout(widgetBase[2]);
     layoutAnno->setContentsMargins(0,0,0,0);
     layoutAnno->setSpacing(0);
@@ -77,12 +86,15 @@ widgetDiCreazione::widgetDiCreazione(mediaManager* man, QWidget* parent) :
     (*this)["copertina"]->setFont(QFont("Mono",14));
     (*this)["copertina"]->setFixedSize(200,30);
 
+    if(object)
+        (*this)["copertina"]->setText(QString::fromStdString(object->getCopertina()));
+
     QHBoxLayout *layoutCopertina = new QHBoxLayout(widgetBase[3]);
     
     QPushButton* btnSfoglia = new QPushButton("Sfoglia");
     btnSfoglia->setFixedSize(120,30);
     btnSfoglia->setFont(QFont("Mono",15));
-    QObject::connect(btnSfoglia, &QPushButton::clicked, this, &widgetDiCreazione::browseImage);
+    QObject::connect(btnSfoglia, &QPushButton::clicked, this, &widgetEditorMedia::browseImage);
 
     layoutCopertina->setContentsMargins(0,0,0,0);
     layoutCopertina->setSpacing(0);
@@ -91,17 +103,17 @@ widgetDiCreazione::widgetDiCreazione(mediaManager* man, QWidget* parent) :
     layoutCopertina->addWidget(btnSfoglia, 0, Qt::AlignLeft);
 }
 
-QLineEdit*& widgetDiCreazione::operator[](const QString& key) 
+QLineEdit*& widgetEditorMedia::operator[](const QString& key) 
 {
     return attributi[key];
 }
 
-void widgetDiCreazione::insertLineEdit(QString str,QLineEdit* n)
+void  widgetEditorMedia::insertLineEdit(QString str,QLineEdit* n)
 {
     attributi.insert(str,n);
 }
 
-bool widgetDiCreazione::validaInput()
+bool widgetEditorMedia::validaInput()
 {
     foreach(auto val, attributi.values())
     {
@@ -114,7 +126,7 @@ bool widgetDiCreazione::validaInput()
     return true;
 }
 
-void widgetDiCreazione::copiaImmagine() 
+void widgetEditorMedia::copiaImmagine() 
 {
     QFileInfo infoImmagine(attributi["copertina"]->text());
     if (!infoImmagine.exists()) {
@@ -139,7 +151,7 @@ void widgetDiCreazione::copiaImmagine()
 
 }
 
-void widgetDiCreazione::browseImage()
+void widgetEditorMedia::browseImage()
 {
     if(attributi["copertina"])
     {
@@ -149,7 +161,7 @@ void widgetDiCreazione::browseImage()
     }
 }
 
-bool widgetDiCreazione::isImageFile(const QString &filePath) const 
+bool widgetEditorMedia::isImageFile(const QString &filePath) const 
 {
     QFileInfo fileInfo(filePath);
     QString ext = fileInfo.suffix().toLower();

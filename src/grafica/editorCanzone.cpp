@@ -1,8 +1,8 @@
-#include "creazioneDiCanzone.h"
-#include "widgetDiCreazione.h"
+#include "editorCanzone.h"
 #include <QLabel>
 
-creazioneDiCanzone::creazioneDiCanzone(mediaManager* man, QWidget* parent) : widgetDiCreazione(man,parent)
+editorCanzone::editorCanzone(mediaManager* man, QWidget* parent, media* obj) : 
+    widgetEditorMedia(man,parent,obj)
 {
     QVBoxLayout *layout = new QVBoxLayout();    
 
@@ -22,6 +22,9 @@ creazioneDiCanzone::creazioneDiCanzone(mediaManager* man, QWidget* parent) : wid
     QIntValidator *validatorDurataMin = new QIntValidator((*this)["durataMin"]);
     (*this)["durataMin"]->setValidator(validatorDurataMin);
 
+    if(object)
+        (*this)["durataMin"]->setText(QString::number(dynamic_cast<canzone*>(object)->getDurata()/60));
+
     QLabel *lableMin = new QLabel("min");
     lableMin->setFont(QFont("Mono",14));
     
@@ -30,6 +33,9 @@ creazioneDiCanzone::creazioneDiCanzone(mediaManager* man, QWidget* parent) : wid
     (*this)["durataSec"]->setFixedSize(40,30);
     QIntValidator *validatorDurataSec = new QIntValidator((*this)["durataSec"]);
     (*this)["durataSec"]->setValidator(validatorDurataSec);
+
+    if(object)
+        (*this)["durataSec"]->setText(QString::number(dynamic_cast<canzone*>(object)->getDurata()%60));
 
     QLabel *lableSec = new QLabel("sec");
     lableSec->setFont(QFont("Mono",14));
@@ -55,6 +61,8 @@ creazioneDiCanzone::creazioneDiCanzone(mediaManager* man, QWidget* parent) : wid
     (*this)["genere"]->setFont(QFont("Mono",14));
     (*this)["genere"]->setFixedSize(200,30);
 
+    if(object)
+        (*this)["genere"]->setText(QString::fromStdString(dynamic_cast<canzone*>(object)->getGenere()));
 
     QHBoxLayout *layoutGenere = new QHBoxLayout(widgetGenere);
     layoutGenere->setContentsMargins(0,0,0,0);
@@ -77,7 +85,12 @@ creazioneDiCanzone::creazioneDiCanzone(mediaManager* man, QWidget* parent) : wid
     QPushButton *btnSalva = new QPushButton("SALVA",widgetPulsanti);
     btnSalva->setFixedSize(200,50);
     btnSalva->setFont(QFont("Mono",15));
-    QObject::connect(btnSalva, &QPushButton::clicked, this, &creazioneDiCanzone::crea);
+
+    if(object)
+        QObject::connect(btnSalva, &QPushButton::clicked, this, &editorCanzone::modifica);
+    else
+        QObject::connect(btnSalva, &QPushButton::clicked, this, &editorCanzone::crea);
+
     layoutPulsanti->addWidget(btnSalva,0, Qt::AlignRight);
 
     //---------------------------------------------------
@@ -92,7 +105,7 @@ creazioneDiCanzone::creazioneDiCanzone(mediaManager* man, QWidget* parent) : wid
     this->setLayout(layout);
 }
 
-void creazioneDiCanzone::crea()
+void editorCanzone::crea()
 {    
     if(validaInput())
     {
@@ -108,4 +121,9 @@ void creazioneDiCanzone::crea()
         windowEsterna->reloadMediaVisibili();
     }
 
+}
+void editorCanzone::modifica()
+{
+
+    qDebug()<<"MODIFICATO";
 }

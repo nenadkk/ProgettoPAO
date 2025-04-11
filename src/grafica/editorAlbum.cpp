@@ -121,5 +121,32 @@ void editorAlbum::crea()
 
 void editorAlbum::modifica()
 {
-    qDebug()<<"MODIFICATO";
+    object->setTitolo(attributi["titolo"]->text().toStdString());
+    object->setAutore(attributi["autore"]->text().toStdString());
+    object->setAnno(attributi["anno"]->text().toInt());
+    object->setCopertina(attributi["copertina"]->text().toStdString());
+
+    album* _album = dynamic_cast<album*>(object);
+    //svuoto l'album
+    while(_album->getNumCanzoni()!=0)
+    {
+        _album->removeCanzone((*_album)[0]->getId());
+    }
+    //ripopolo l'album
+    for(int i=0; i<trackList->count();++i)
+    {
+        QListWidgetItem *item = trackList->item(i);
+
+        if (item->checkState() == Qt::Checked) 
+        {
+            int trackID = item->data(Qt::UserRole).toInt();
+            media* c = manager->searchById(trackID);
+
+            if(c)
+                _album->addCanzone(dynamic_cast<canzone*>(c));
+        }
+    }
+
+    manager->save();
+    windowEsterna->reloadMediaVisibili();
 }

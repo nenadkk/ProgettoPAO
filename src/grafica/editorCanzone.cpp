@@ -124,6 +124,15 @@ void editorCanzone::crea()
 }
 void editorCanzone::modifica()
 {
+    object->setTitolo(attributi["titolo"]->text().toStdString());
+    object->setAutore(attributi["autore"]->text().toStdString());
+    object->setAnno(attributi["anno"]->text().toInt());
+    object->setCopertina(attributi["copertina"]->text().toStdString());
 
-    qDebug()<<"MODIFICATO";
+    int durata = (attributi["durataMin"]->text().toInt())*60 + attributi["durataSec"]->text().toInt(); 
+    dynamic_cast<canzone*>(object)->setDurata(durata);
+    dynamic_cast<canzone*>(object)->setGenere(attributi["genere"]->text().toStdString());
+
+    manager->save();
+    windowEsterna->reloadMediaVisibili();
 }

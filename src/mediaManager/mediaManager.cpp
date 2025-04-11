@@ -4,11 +4,6 @@
 #include "searchVisitor.h"
 #include <cctype>    // Per std::toupper
                      
-void mediaManager::addMedia(media* newMedia)
-{
-    LM.push_back(newMedia);
-    save();
-}
 void mediaManager::save() const
 {
     jsonHandler jHandler; 
@@ -18,14 +13,20 @@ void mediaManager::save() const
         jHandler.saveMedia(m);
 }
 
+void mediaManager::addMedia(media* newMedia)
+{
+    LM.push_back(newMedia);
+    save();
+}
+
 void mediaManager::removeMedia(int _id)
 {
-    int id = searchById(_id)->getId();
     auto i = LM.begin();
     while(i != LM.end())
     {
-        if((*i)->getId()==id)
+        if((*i)->getId()==_id)
         {
+            delete *i;
             i = LM.erase(i);
             save();
         }
@@ -83,12 +84,12 @@ media* mediaManager::operator[](size_t index)
     advance(it, index);
     return *it;
 }
+
 const media* mediaManager::operator[](size_t index) const
 {
     auto it = LM.begin();
     advance(it, index);
     return *it;
-
 }
 
 int mediaManager::trovaIdLibero() const

@@ -35,6 +35,21 @@ void album::addCanzone(canzone* newCanzone)
     durataTotale+=newCanzone->getDurata();
 }
 
+void album::removeCanzone(int _id)
+{
+    auto i = trackList.begin();
+    while(i != trackList.end())
+    {
+        if((*i)->getId()==_id)
+        {
+            durataTotale -=(*i)->getDurata();
+            i = trackList.erase(i);
+        }
+        else
+            i++;
+    }
+}
+
 void album::accept(visitor *_visitor)
 {
     _visitor->visit(this);

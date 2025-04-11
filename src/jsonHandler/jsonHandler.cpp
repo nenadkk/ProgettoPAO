@@ -124,9 +124,6 @@ void jsonHandler::readAllAlbum(list<media*>& listaMedia)
     }
     QJsonArray jsonArray = doc.array();
 
-    list<media*> tempCanzoni;
-    readAllCanzoni(tempCanzoni);
-
     for (const QJsonValue& value : jsonArray) 
     {
         if (value.isObject()) 
@@ -142,9 +139,10 @@ void jsonHandler::readAllAlbum(list<media*>& listaMedia)
 
             for(auto temp : canzoniJson)
             {
-                for(auto m : tempCanzoni)
+                for(auto m : listaMedia)
                 {
-                    if(m->getId()==temp.toInt()) //se l'id combacia
+                    if(m->getId()==temp.toInt()) //se l'id combacia (l'id è univoco per ogni media, quindi se combacia
+                                                 //per forza è un media di tipo canzone)
                     {
                         a->addCanzone(dynamic_cast<canzone*>(m)); 
                     }

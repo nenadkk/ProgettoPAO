@@ -12,11 +12,21 @@
     {
         "anno": 2011,
         "autore": "bobz",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/1a2862f648c3e079bcb093b6bdffa9f0.jpg",
         "editore": "speggio",
         "id": 0,
         "isbn": 1839184937,
         "numPagine": 104,
-        "titolo": "cs"
+        "titolo": "GRANDE"
+    },
+    {
+        "anno": 1777,
+        "autore": "Manzoni",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
+        "editore": "Mondadori",
+        "id": 7,
+        "isbn": 0,
+        "numPagine": 1800,
+        "titolo": "Promessi sposi"
     }
 ]

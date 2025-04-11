@@ -15,8 +15,7 @@
         "autore": "gg",
         "canzoni": [
             3,
-            6,
-            9
+            6
         ],
         "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
         "id": 8,
@@ -27,8 +26,7 @@
         "autore": "FFF",
         "canzoni": [
             3,
-            6,
-            9
+            12
         ],
         "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
         "id": 11,
@@ -38,10 +36,8 @@
         "anno": 2020,
         "autore": "PP",
         "canzoni": [
-            3,
             4,
-            6,
-            9
+            6
         ],
         "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
         "id": 10,
@@ -60,8 +56,7 @@
         "anno": 555,
         "autore": "hhiu",
         "canzoni": [
-            6,
-            9
+            6
         ],
         "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
         "id": 17,

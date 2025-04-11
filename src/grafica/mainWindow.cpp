@@ -13,6 +13,7 @@
 #include "editorLibro.h"
 #include "editorCanzone.h"
 #include "editorAlbum.h"
+#include "qglobal.h"
 #include "widgetAnteprima.h"
 #include "widgetDettaglio.h"
 
@@ -155,7 +156,9 @@ void mainWindow::reloadMediaVisibili()
     svuotaMediaVisibili();
 
     for (int i=0;i<mediaMan.size();i++) 
+    {
         addToMediaVisibili(mediaMan[i]);
+    }
 }
 
 void mainWindow::svuotaMediaVisibili()

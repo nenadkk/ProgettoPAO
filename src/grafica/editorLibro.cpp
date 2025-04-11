@@ -135,6 +135,15 @@ void editorLibro::crea()
 
 void editorLibro::modifica()
 {
+    object->setTitolo(attributi["titolo"]->text().toStdString());
+    object->setAutore(attributi["autore"]->text().toStdString());
+    object->setAnno(attributi["anno"]->text().toInt());
+    object->setCopertina(attributi["copertina"]->text().toStdString());
 
-    qDebug()<<"MODIFICATO";
+    dynamic_cast<libro*>(object)->setNumPagine(attributi["numeroPagine"]->text().toInt());
+    dynamic_cast<libro*>(object)->setIsbn(attributi["isbn"]->text().toInt());
+    dynamic_cast<libro*>(object)->setEditore(attributi["editore"]->text().toStdString());
+
+    manager->save();
+    windowEsterna->reloadMediaVisibili();
 }

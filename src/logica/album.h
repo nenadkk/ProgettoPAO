@@ -28,6 +28,7 @@ class album : public media
                                         //se la canzone è contenuta nell'album 
 
         void addCanzone(canzone*);
+        void removeCanzone(int);
 
         virtual void accept(visitor *_visitor) override;
 

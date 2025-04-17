@@ -9,6 +9,7 @@ class mediaManager
         list<media*> LM;
 
     public:
+        ~mediaManager();
         void save() const;
         void load();
 

@@ -8,9 +8,9 @@ filtraVisitor::filtraVisitor(list<media*> l)
     }
 }
 
-list<media*> filtraVisitor::getSoloLibri() { return soloLibri; }
-list<media*> filtraVisitor::getSoloCanzoni() { return soloCanzoni; }
-list<media*> filtraVisitor::getSoloAlbum() { return soloAlbum; }
+list<media*> filtraVisitor::getSoloLibri() const { return soloLibri; }
+list<media*> filtraVisitor::getSoloCanzoni() const { return soloCanzoni; }
+list<media*> filtraVisitor::getSoloAlbum() const { return soloAlbum; }
 
 void filtraVisitor::visit(libro* _libro)
 {

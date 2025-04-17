@@ -1,5 +1,6 @@
 #include "searchVisitor.h"
 
+searchVisitor::~searchVisitor() {}
 searchVisitor::searchVisitor(string str, list<int>* l) : strDaCercare(str), idRisultati(l) 
 {
     rendiMaiuscolo(strDaCercare);

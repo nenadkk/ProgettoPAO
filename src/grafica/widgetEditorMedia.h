@@ -15,9 +15,10 @@ class widgetEditorMedia : public QWidget
 
     protected:
         mediaManager *manager;
-        QMap<QString, QLineEdit*> attributi;
+        QMap<QString, QLineEdit*> attributi;//i QLineEdit in questa mappa avranno come parent il layout principale
+                                            //quindi verranno distrutti alla distruzione di quest ultimo
         mainWindow* windowEsterna;
-        std::array<QWidget*, 4> widgetBase;
+        std::array<QWidget*, 4> widgetBase;//stesso discorso che con 'attributi'
         media* object;
 
         widgetEditorMedia(mediaManager*, QWidget* parent=nullptr, media* object=nullptr); //se object non viene passato allora 

@@ -6,6 +6,9 @@
 #include <ostream>
 #include <string>
 
+//la classe album non implementa un distruttore per la delete degli oggetti puntati nella tracklist
+//perché gli stssi oggetti canzone potrebbero essere puntati da più album
+
 using namespace std;
 class album : public media
 {

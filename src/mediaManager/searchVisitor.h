@@ -19,6 +19,7 @@ class searchVisitor : public visitor
 
     public:
         searchVisitor(string, list<int>*);
+        ~searchVisitor();
 
         virtual void visit(libro *_libro) override; 
         virtual void visit(canzone *_canzone) override; 

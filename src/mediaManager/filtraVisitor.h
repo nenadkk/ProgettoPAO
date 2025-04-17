@@ -7,6 +7,10 @@
 #include "../logica/canzone.h"
 #include "../logica/album.h"
 
+//nel distruttore di questa classe gli oggetti puntati dalle liste soloLibri,soloCanzoni,soloAlbum
+//non vengono eliminati perché questi oggetti sono condivisi con mediaManager, eliminarli significherebbe
+//renderli rimuoverli anche da mediaManager
+//
 class filtraVisitor : visitor
 {
     private:
@@ -21,9 +25,9 @@ class filtraVisitor : visitor
     public:
         filtraVisitor(list<media*>);
 
-        list<media*> getSoloLibri();
-        list<media*> getSoloCanzoni();
-        list<media*> getSoloAlbum();
+        list<media*> getSoloLibri() const;
+        list<media*> getSoloCanzoni() const;
+        list<media*> getSoloAlbum() const;
 
 };
 #endif

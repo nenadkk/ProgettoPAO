@@ -3,6 +3,9 @@
 #include "../logica/visitor.h"
 #include "widgetDettaglio.h"
 
+//l'oggetto puntato da widget non deve essere distrutto perché poi va visulizzato a schermo anche
+//dopo la distruttore di questa classe
+
 class sceltaDettaglioVisitor : public visitor
 {
     private:

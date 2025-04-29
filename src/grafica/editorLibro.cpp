@@ -1,8 +1,8 @@
 #include "editorLibro.h"
 #include <QLabel>
 
-editorLibro::editorLibro(mediaManager* man, QWidget* parent, media* obj) : 
-    widgetEditorMedia(man,parent,obj)
+editorLibro::editorLibro(mediaManager* man, mainWindow* mw, media* obj) : 
+    widgetEditorMedia(man, mw, obj)
 {
     QVBoxLayout *layout = new QVBoxLayout();    
 

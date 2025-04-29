@@ -9,6 +9,6 @@ class editorLibro : public widgetEditorMedia
         void crea() override;
         void modifica() override;
     public:
-        editorLibro(mediaManager*, QWidget* parent=nullptr, media* obj=nullptr);
+        editorLibro(mediaManager*, mainWindow*, media* obj=nullptr);
 };
 #endif

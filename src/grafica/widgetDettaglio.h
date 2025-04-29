@@ -21,7 +21,7 @@ class widgetDettaglio : public QWidget
         mainWindow* windowEsterna;
 
     public:
-        widgetDettaglio(media*,mediaManager*,QWidget *parent = nullptr);
+        widgetDettaglio(media*,mediaManager*,mainWindow *parent = nullptr);
 
         void buildDettaglio(libro*);
         void buildDettaglio(canzone*);

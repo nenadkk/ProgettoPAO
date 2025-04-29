@@ -4,12 +4,9 @@
 #include <QLabel>
 #include "widgetEditorMedia.h"
 
-widgetEditorMedia::widgetEditorMedia(mediaManager* man, QWidget* parent, media* obj) : 
-    QWidget(parent), manager(man), object(obj)
+widgetEditorMedia::widgetEditorMedia(mediaManager* man, mainWindow* mw, media* obj) : 
+    windowEsterna(mw), manager(man), object(obj)
 {
-
-    windowEsterna = dynamic_cast<mainWindow*>(parent);
-
     //---------- TITOLO ----------
     widgetBase[0] = new QWidget();
     widgetBase[0]->setFixedWidth(350);

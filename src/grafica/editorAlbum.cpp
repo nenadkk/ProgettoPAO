@@ -1,10 +1,9 @@
 #include "editorAlbum.h"
 #include "../logica/album.h"
-#include "qglobal.h"
 #include <QLabel>
 
-editorAlbum::editorAlbum(mediaManager* man, QWidget* parent, media* obj) : 
-    widgetEditorMedia(man,parent,obj), trackList(nullptr)
+editorAlbum::editorAlbum(mediaManager* man, mainWindow* mw, media* obj) : 
+    widgetEditorMedia(man, mw, obj), trackList(nullptr)
 {
     //---------- PARTE SINISTRA ----------
     trackList = new QListWidget();

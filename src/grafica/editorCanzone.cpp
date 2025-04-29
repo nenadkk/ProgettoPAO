@@ -1,8 +1,8 @@
 #include "editorCanzone.h"
 #include <QLabel>
 
-editorCanzone::editorCanzone(mediaManager* man, QWidget* parent, media* obj) : 
-    widgetEditorMedia(man,parent,obj)
+editorCanzone::editorCanzone(mediaManager* man, mainWindow* mw, media* obj) : 
+    widgetEditorMedia(man, mw, obj)
 {
     QVBoxLayout *layout = new QVBoxLayout();    
 

@@ -9,34 +9,30 @@
 #include <QPushButton>
 #include <QMessageBox>
 
-widgetDettaglio::widgetDettaglio(media* obj, mediaManager* man, QWidget* parent): 
-    QWidget(parent), object(obj),manager(man)
+widgetDettaglio::widgetDettaglio(media* obj, mediaManager* man, mainWindow* parent): 
+    object(obj),manager(man), windowEsterna(parent) 
 {
-    windowEsterna = (dynamic_cast<mainWindow*>(parent));
     sceltaDettaglioVisitor vis(this);
     obj->accept(&vis);
 }
 
 void widgetDettaglio::buildDettaglio(libro* object)
 {
-    QVBoxLayout *layout = new QVBoxLayout();
+    QVBoxLayout *layout = new QVBoxLayout(); 
     layout->setAlignment(Qt::AlignCenter);
 
-    libro *objLibro = dynamic_cast<libro*>(object); //sono sicuro che funzioni perché questa
-                                                    //funzione è richiamata dal visitor
-
     QLabel *imageLabel = new QLabel();
-    imageLabel->setPixmap(QPixmap(toQString(objLibro->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
     imageLabel->setAlignment(Qt::AlignCenter);
     layout->addWidget(imageLabel);
 
-    QString str = "Titolo: " + QString::fromStdString(objLibro->getTitolo()) + "\n" +
-                  "Autore: " + QString::fromStdString(objLibro->getAutore()) + "\n" +
-                  "Anno: " + QString::number(objLibro->getAnno()) + "\n" +
-                  "ID: " + QString::number(objLibro->getId()) + "\n" +
-                  "Numero Pagine: " + QString::number(objLibro->getNumPagine()) + "\n" +
-                  "ISBN: " + QString::number(objLibro->getIsbn()) + "\n" +
-                  "Editore: " + QString::fromStdString(objLibro->getEditore()) + "\n";
+    QString str = "Titolo: " + QString::fromStdString(object->getTitolo()) + "\n" +
+                  "Autore: " + QString::fromStdString(object->getAutore()) + "\n" +
+                  "Anno: " + QString::number(object->getAnno()) + "\n" +
+                  "ID: " + QString::number(object->getId()) + "\n" +
+                  "Numero Pagine: " + QString::number(object->getNumPagine()) + "\n" +
+                  "ISBN: " + QString::number(object->getIsbn()) + "\n" +
+                  "Editore: " + QString::fromStdString(object->getEditore()) + "\n";
                     
     QLabel *info = new QLabel(str);
     info->setFont(QFont("Mono",20));
@@ -78,26 +74,24 @@ void widgetDettaglio::buildDettaglio(canzone* object)
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setAlignment(Qt::AlignCenter);
 
-    canzone *objCanzone = dynamic_cast<canzone*>(object);
-
     QLabel *imageLabel = new QLabel();
-    imageLabel->setPixmap(QPixmap(toQString(objCanzone->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
     imageLabel->setAlignment(Qt::AlignCenter);
     layout->addWidget(imageLabel);
 
 
-    QString str = "Titolo: " + QString::fromStdString(objCanzone->getTitolo()) + "\n" +
-                  "Autore: " + QString::fromStdString(objCanzone->getAutore()) + "\n" +
-                  "Anno: " + QString::number(objCanzone->getAnno()) + "\n" +
-                  "ID: " + QString::number(objCanzone->getId()) + "\n" +
-                  "Durata: " + QString::number(objCanzone->getDurata()/60) +":";
+    QString str = "Titolo: " + QString::fromStdString(object->getTitolo()) + "\n" +
+                  "Autore: " + QString::fromStdString(object->getAutore()) + "\n" +
+                  "Anno: " + QString::number(object->getAnno()) + "\n" +
+                  "ID: " + QString::number(object->getId()) + "\n" +
+                  "Durata: " + QString::number(object->getDurata()/60) +":";
 
-    if(objCanzone->getDurata()%60 > 9)
-        str += QString::number(objCanzone->getDurata()%60);  
+    if(object->getDurata()%60 > 9)
+        str += QString::number(object->getDurata()%60);  
     else
-        str += "0"+QString::number(objCanzone->getDurata()%60);   
+        str += "0"+QString::number(object->getDurata()%60);   
 
-    str += "\nGenere: " + QString::fromStdString(objCanzone->getGenere()) + "\n";
+    str += "\nGenere: " + QString::fromStdString(object->getGenere()) + "\n";
 
     QLabel *info = new QLabel(str);
     info->setFont(QFont("Mono",20));
@@ -142,23 +136,21 @@ void widgetDettaglio::buildDettaglio(album* object)
     QVBoxLayout *layoutSX = new QVBoxLayout();
     layoutSX->setAlignment(Qt::AlignLeft);
 
-    album *objAlbum = dynamic_cast<album*>(object);
-
     QLabel *imageLabel = new QLabel();
-    imageLabel->setPixmap(QPixmap(toQString(objAlbum->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
     imageLabel->setAlignment(Qt::AlignCenter);
     layoutSX->addWidget(imageLabel);
 
-    QString str = "Titolo: " + QString::fromStdString(objAlbum->getTitolo()) + "\n" +
-                  "Autore: " + QString::fromStdString(objAlbum->getAutore()) + "\n" +
-                  "Anno: " + QString::number(objAlbum->getAnno()) + "\n" +
-                  "ID: " + QString::number(objAlbum->getId()) + "\n" +
-                  "Durata: " + QString::number(objAlbum->getDurataTotale()/60) +":";
+    QString str = "Titolo: " + QString::fromStdString(object->getTitolo()) + "\n" +
+                  "Autore: " + QString::fromStdString(object->getAutore()) + "\n" +
+                  "Anno: " + QString::number(object->getAnno()) + "\n" +
+                  "ID: " + QString::number(object->getId()) + "\n" +
+                  "Durata: " + QString::number(object->getDurataTotale()/60) +":";
 
-    if(objAlbum->getDurataTotale()%60 > 9)
-        str += QString::number(objAlbum->getDurataTotale()%60);  
+    if(object->getDurataTotale()%60 > 9)
+        str += QString::number(object->getDurataTotale()%60);  
     else
-        str += "0"+QString::number(objAlbum->getDurataTotale()%60);  
+        str += "0"+QString::number(object->getDurataTotale()%60);  
 
 
     QLabel *info = new QLabel(str);
@@ -206,12 +198,12 @@ void widgetDettaglio::buildDettaglio(album* object)
 
     QListWidget *tracklist = new QListWidget();
 
-    for (int i=0; i<objAlbum->getNumCanzoni();i++)
+    for (int i=0; i<object->getNumCanzoni();i++)
     {
-        QString txt = QString::fromStdString((*objAlbum)[i]->getTitolo()) +"    "+ 
-                      QString::fromStdString((*objAlbum)[i]->getAutore()) +"    "+
-                      QString::number((*objAlbum)[i]->getDurata()/60) +":"+
-                      QString::number((*objAlbum)[i]->getDurata()%60);
+        QString txt = QString::fromStdString((*object)[i]->getTitolo()) +"    "+ 
+                      QString::fromStdString((*object)[i]->getAutore()) +"    "+
+                      QString::number((*object)[i]->getDurata()/60) +":"+
+                      QString::number((*object)[i]->getDurata()%60);
 
         
         QListWidgetItem* track = new QListWidgetItem(txt);
@@ -220,7 +212,7 @@ void widgetDettaglio::buildDettaglio(album* object)
 
     }
 
-    if(objAlbum->getNumCanzoni()==0)
+    if(object->getNumCanzoni()==0)
     {
         QListWidgetItem* lableZeroCanzoni = new QListWidgetItem("Non ci sono canzoni\nin questo album.");
         lableZeroCanzoni->setFont(QFont("Mono",20));

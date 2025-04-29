@@ -21,7 +21,7 @@ class widgetEditorMedia : public QWidget
         std::array<QWidget*, 4> widgetBase;//stesso discorso che con 'attributi'
         media* object;
 
-        widgetEditorMedia(mediaManager*, QWidget* parent=nullptr, media* object=nullptr); //se object non viene passato allora 
+        widgetEditorMedia(mediaManager*, mainWindow*, media* object=nullptr); //se object non viene passato allora 
                                                                                           //viene creato il widget in modalità 
                                                                                           //creazione, altrimenti in modalità di 
                                                                                           //modifica

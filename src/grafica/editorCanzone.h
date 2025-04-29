@@ -9,6 +9,6 @@ class editorCanzone : public widgetEditorMedia
         void crea() override;
         void modifica() override;
     public:
-        editorCanzone(mediaManager*, QWidget* parent=nullptr, media* obj=nullptr);
+        editorCanzone(mediaManager*, mainWindow*, media* obj=nullptr);
 };
 #endif

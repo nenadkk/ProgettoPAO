@@ -25,7 +25,7 @@ class widgetAnteprima : public QWidget
         void mousePressEvent(QMouseEvent* event) override;
 
     public:
-        explicit widgetAnteprima(media*, QGridLayout*, QWidget* parent = nullptr);
+        explicit widgetAnteprima(media*, QGridLayout*, mainWindow*);
 
     signals:
         void clicked();

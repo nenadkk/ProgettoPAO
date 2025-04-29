@@ -7,11 +7,9 @@
 #include <QMouseEvent>
 #include <QListWidget>
 
-widgetAnteprima::widgetAnteprima(media* obj, QGridLayout* l, QWidget* parent) : 
-    QWidget(parent), object(obj) ,layoutEsterno(l)
+widgetAnteprima::widgetAnteprima(media* obj, QGridLayout* l, mainWindow* m) : 
+    object(obj) ,layoutEsterno(l), windowEsterna(m)
 {
-    windowEsterna = (dynamic_cast<mainWindow*>(parent));
-
     QVBoxLayout* mainLayout = new QVBoxLayout();
     mainLayout->setAlignment(Qt::AlignCenter);
 

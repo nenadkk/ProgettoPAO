@@ -12,6 +12,6 @@ class editorAlbum : public widgetEditorMedia
         void crea() override;
         void modifica() override;
     public:
-        editorAlbum(mediaManager*, QWidget* parent=nullptr, media* obj=nullptr);
+        editorAlbum(mediaManager*, mainWindow*, media* obj=nullptr);
 };
 #endif

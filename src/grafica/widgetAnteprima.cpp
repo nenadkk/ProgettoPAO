@@ -8,7 +8,7 @@
 #include <QListWidget>
 
 widgetAnteprima::widgetAnteprima(media* obj, QGridLayout* l, mainWindow* m) : 
-    object(obj) ,layoutEsterno(l), windowEsterna(m)
+    object(obj), windowEsterna(m), layoutEsterno(l)
 {
     QVBoxLayout* mainLayout = new QVBoxLayout();
     mainLayout->setAlignment(Qt::AlignCenter);

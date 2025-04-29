@@ -5,7 +5,7 @@
 #include "widgetEditorMedia.h"
 
 widgetEditorMedia::widgetEditorMedia(mediaManager* man, mainWindow* mw, media* obj) : 
-    windowEsterna(mw), manager(man), object(obj)
+    manager(man), windowEsterna(mw), object(obj)
 {
     //---------- TITOLO ----------
     widgetBase[0] = new QWidget();

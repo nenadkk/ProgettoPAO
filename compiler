@@ -9,6 +9,7 @@ make
 #fa clear se la compilazione non ha dato errori
 if [ $? -eq 0 ]; then
     clear
+    rm Makefile
 fi
 
 # Verifica se l'opzione -k NON è stata fornita

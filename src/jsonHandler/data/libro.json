@@ -1,32 +1,22 @@
 [
     {
-        "anno": 1999,
-        "autore": "90kkk",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
-        "editore": "iuirn",
-        "id": 21,
-        "isbn": 0,
-        "numPagine": 366,
-        "titolo": "iiii"
-    },
-    {
-        "anno": 2011,
-        "autore": "bobz",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/1a2862f648c3e079bcb093b6bdffa9f0.jpg",
-        "editore": "speggio",
+        "anno": 1997,
+        "autore": "J.K. Rowling",
+        "copertina": "./immagini/hp_la_pietra_filosofale.jpg",
+        "editore": "MinaLima",
         "id": 0,
-        "isbn": 1839184937,
-        "numPagine": 104,
-        "titolo": "GRANDE"
+        "isbn": 0,
+        "numPagine": 304,
+        "titolo": "Harry Potter e la pietra filosofale"
     },
     {
-        "anno": 1777,
-        "autore": "Manzoni",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/libro.png",
-        "editore": "Mondadori",
-        "id": 7,
+        "anno": 1998,
+        "autore": "J.K. Rowling",
+        "copertina": "/home/nenad/Scaricati/hp_la_camera_dei_segreti.jpg",
+        "editore": "Salani Editore",
+        "id": 2,
         "isbn": 0,
-        "numPagine": 1800,
-        "titolo": "Promessi sposi"
+        "numPagine": 224,
+        "titolo": "Harry Potter e la camera dei segreti"
     }
 ]

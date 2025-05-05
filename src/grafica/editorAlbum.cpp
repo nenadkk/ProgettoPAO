@@ -90,6 +90,7 @@ void editorAlbum::crea()
     if(!validaInput())
         return;
 
+    copiaImmagine();
     //creazione album
     album *newAlbum = new album(attributi["titolo"]->text().toStdString(),
             attributi["autore"]->text().toStdString(),
@@ -115,7 +116,6 @@ void editorAlbum::crea()
     manager->addMedia(newAlbum);
     windowEsterna->reloadMediaVisibili();
 
-
 }
 
 void editorAlbum::modifica()
@@ -123,7 +123,11 @@ void editorAlbum::modifica()
     object->setTitolo(attributi["titolo"]->text().toStdString());
     object->setAutore(attributi["autore"]->text().toStdString());
     object->setAnno(attributi["anno"]->text().toInt());
-    object->setCopertina(attributi["copertina"]->text().toStdString());
+
+    string copertina=attributi["copertina"]->text().toStdString();
+    if(copertina!=object->getCopertina())
+        copiaImmagine();
+    object->setCopertina(copertina);
 
     album* _album = dynamic_cast<album*>(object);
     //svuoto l'album

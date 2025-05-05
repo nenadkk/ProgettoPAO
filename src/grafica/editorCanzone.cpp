@@ -109,6 +109,7 @@ void editorCanzone::crea()
 {    
     if(validaInput())
     {
+        copiaImmagine();
         int durata = (attributi["durataMin"]->text().toInt())*60+(attributi["durataSec"]->text().toInt());
         manager->addMedia(new canzone(attributi["titolo"]->text().toStdString(),
                     attributi["autore"]->text().toStdString(),
@@ -127,7 +128,11 @@ void editorCanzone::modifica()
     object->setTitolo(attributi["titolo"]->text().toStdString());
     object->setAutore(attributi["autore"]->text().toStdString());
     object->setAnno(attributi["anno"]->text().toInt());
-    object->setCopertina(attributi["copertina"]->text().toStdString());
+
+    string copertina=attributi["copertina"]->text().toStdString();
+    if(copertina!=object->getCopertina())
+        copiaImmagine();
+    object->setCopertina(copertina);
 
     int durata = (attributi["durataMin"]->text().toInt())*60 + attributi["durataSec"]->text().toInt(); 
     dynamic_cast<canzone*>(object)->setDurata(durata);

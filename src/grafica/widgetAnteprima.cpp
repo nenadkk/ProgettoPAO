@@ -15,7 +15,7 @@ widgetAnteprima::widgetAnteprima(media* obj, QGridLayout* l, mainWindow* m) :
 
     setFixedSize(250, 330);
     setAttribute(Qt::WA_StyledBackground);
-    setStyleSheet("QWidget {background-color: #686868; border-radius: 10px;}");
+    setStyleSheet("QWidget {background-color: #3F4454; border-radius: 10px;}");
 
     QLabel *imageLabel = new QLabel();
     imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(200, 300, Qt::KeepAspectRatio));
@@ -28,6 +28,8 @@ widgetAnteprima::widgetAnteprima(media* obj, QGridLayout* l, mainWindow* m) :
     QLabel *labelTesto = new QLabel(str);
     labelTesto->setFont(QFont("Mono",13));
     labelTesto->setAlignment(Qt::AlignCenter);
+    labelTesto->setWordWrap(true);
+
     mainLayout->addWidget(labelTesto);
 
     QObject::connect(this, &widgetAnteprima::clicked, [=,this](){

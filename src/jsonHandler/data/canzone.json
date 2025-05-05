@@ -1,2 +1,11 @@
 [
+    {
+        "anno": 2000,
+        "autore": "Linkin Park",
+        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/album.png",
+        "durata": 216,
+        "genere": "Rock",
+        "id": 4,
+        "titolo": "In the end"
+    }
 ]

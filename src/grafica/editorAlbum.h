@@ -11,6 +11,7 @@ class editorAlbum : public widgetEditorMedia
     protected:
         void crea() override;
         void modifica() override;
+        bool validaInput() override;
     public:
         editorAlbum(mediaManager*, mainWindow*, media* obj=nullptr);
 };

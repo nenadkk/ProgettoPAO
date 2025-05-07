@@ -125,6 +125,9 @@ void editorCanzone::crea()
 }
 void editorCanzone::modifica()
 {
+    if(!validaInput())
+        return;
+
     object->setTitolo(attributi["titolo"]->text().toStdString());
     object->setAutore(attributi["autore"]->text().toStdString());
     object->setAnno(attributi["anno"]->text().toInt());

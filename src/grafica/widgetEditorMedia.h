@@ -28,7 +28,7 @@ class widgetEditorMedia : public QWidget
 
         void copiaImmagine();
         bool isImageFile(const QString &filePath) const;
-        bool validaInput();
+        virtual bool validaInput();
 
     protected slots:
         virtual void crea() = 0;

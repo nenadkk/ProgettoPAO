@@ -8,7 +8,7 @@ class mediaManager
 {
     private:
         list<media*> LM;
-    
+
     public:
         ~mediaManager();
         void saveAll() const;

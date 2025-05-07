@@ -124,10 +124,8 @@ void mainWindow::ricerca()
     svuotaAreaContenuti();
 
     if(!query.empty())
-    {
-        //Ripopola con i valori filtrati
-        addToAreaContenuti(query);
-    }
+        addToAreaContenuti(query); //Ripopola con i valori filtrati
+
 }
 
 void mainWindow::addToAreaContenuti(list<media*> listaMedia)
@@ -135,9 +133,7 @@ void mainWindow::addToAreaContenuti(list<media*> listaMedia)
     int colGrid=0;
     int rowGrid=0;
 
-    int maxCol = max(2,((this->width())/(270+10)));
-    if(maxCol>5)
-        maxCol=5;
+    int maxCol = max(2,((this->width() - 200)/(270)));
 
     for(auto m : listaMedia)
     {

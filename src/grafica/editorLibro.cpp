@@ -135,6 +135,9 @@ void editorLibro::crea()
 
 void editorLibro::modifica()
 {
+    if(!validaInput())
+        return;
+
     object->setTitolo(attributi["titolo"]->text().toStdString());
     object->setAutore(attributi["autore"]->text().toStdString());
     object->setAnno(attributi["anno"]->text().toInt());
@@ -151,3 +154,4 @@ void editorLibro::modifica()
     manager->saveAll();
     windowEsterna->reloadAreaContenuti();
 }
+

@@ -1,6 +1,7 @@
 #include "editorAlbum.h"
 #include "../logica/album.h"
 #include <QLabel>
+#include <QMessageBox>
 
 editorAlbum::editorAlbum(mediaManager* man, mainWindow* mw, media* obj) : 
     widgetEditorMedia(man, mw, obj), trackList(nullptr)
@@ -120,6 +121,9 @@ void editorAlbum::crea()
 
 void editorAlbum::modifica()
 {
+    if(!validaInput())
+        return;
+
     object->setTitolo(attributi["titolo"]->text().toStdString());
     object->setAutore(attributi["autore"]->text().toStdString());
     object->setAnno(attributi["anno"]->text().toInt());
@@ -153,3 +157,33 @@ void editorAlbum::modifica()
     manager->saveAll();
     windowEsterna->reloadAreaContenuti();
 }
+
+bool editorAlbum::validaInput()
+{
+    foreach(auto val, attributi.values())
+    {
+        if(val->text().isEmpty())
+        {
+            QMessageBox::warning(this, "Validazione", "Dati non validi o nulli. Compilare ogni campo con valori significativi.");
+            return false;
+        }
+    }
+    int count=0;
+    for(int i=0; i<trackList->count();++i)
+    {
+        if (trackList->item(i)->checkState() == Qt::Checked) 
+            count++;
+    }
+    if(count==0)
+    {
+        QMessageBox::warning(this, "Validazione", "Un album non può essere vuoto.");
+        return false;
+    }
+
+ 
+    return true;
+}
+
+
+
+

@@ -17,7 +17,7 @@ void jsonHandler::clearAll()
 {
     for(auto p : save_file)
     {
-        QFile file(toQString(p.second));
+        QFile file(QString::fromStdString(p.second));
 
         QJsonArray emptyArray;
         QJsonDocument doc(emptyArray);

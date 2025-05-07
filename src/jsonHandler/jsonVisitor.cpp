@@ -99,14 +99,14 @@ void jsonVisitor::visit(album *_album)
 QJsonObject jsonVisitor::libroToJson(const libro& _libro)
 {
     QJsonObject json;
-    json["titolo"] = toQString(_libro.getTitolo());
-    json["autore"] = toQString(_libro.getAutore());
+    json["titolo"] = QString::fromStdString(_libro.getTitolo());
+    json["autore"] = QString::fromStdString(_libro.getAutore());
     json["anno"] = _libro.getAnno();
-    json["copertina"] = toQString(_libro.getCopertina());
+    json["copertina"] = QString::fromStdString(_libro.getCopertina());
     json["id"] = _libro.getId();
     json["numPagine"] = _libro.getNumPagine();
     json["isbn"] = _libro.getIsbn();
-    json["editore"] = toQString(_libro.getEditore());
+    json["editore"] = QString::fromStdString(_libro.getEditore());
     
     return json;
 }
@@ -114,13 +114,13 @@ QJsonObject jsonVisitor::libroToJson(const libro& _libro)
 QJsonObject jsonVisitor::canzoneToJson(const canzone& _canzone)
 {
     QJsonObject json;
-    json["titolo"] = toQString(_canzone.getTitolo());
-    json["autore"] = toQString(_canzone.getAutore());
+    json["titolo"] = QString::fromStdString(_canzone.getTitolo());
+    json["autore"] = QString::fromStdString(_canzone.getAutore());
     json["anno"] = _canzone.getAnno();
-    json["copertina"] = toQString(_canzone.getCopertina());
+    json["copertina"] = QString::fromStdString(_canzone.getCopertina());
     json["id"] = _canzone.getId();
     json["durata"] = _canzone.getDurata();
-    json["genere"] = toQString(_canzone.getGenere());
+    json["genere"] = QString::fromStdString(_canzone.getGenere());
     
     return json;
 }
@@ -128,10 +128,10 @@ QJsonObject jsonVisitor::canzoneToJson(const canzone& _canzone)
 QJsonObject jsonVisitor::albumToJson(const album& _album)
 {
     QJsonObject json;
-    json["titolo"] = toQString(_album.getTitolo());
-    json["autore"] = toQString(_album.getAutore());
+    json["titolo"] = QString::fromStdString(_album.getTitolo());
+    json["autore"] = QString::fromStdString(_album.getAutore());
     json["anno"] = _album.getAnno();
-    json["copertina"] = toQString(_album.getCopertina());
+    json["copertina"] = QString::fromStdString(_album.getCopertina());
     json["id"] = _album.getId();
 
     QJsonArray canzoniArray;

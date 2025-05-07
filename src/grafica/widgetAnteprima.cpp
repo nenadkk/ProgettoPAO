@@ -18,7 +18,7 @@ widgetAnteprima::widgetAnteprima(media* obj, QGridLayout* l, mainWindow* m) :
     setStyleSheet("QWidget {background-color: #3F4454; border-radius: 10px;}");
 
     QLabel *imageLabel = new QLabel();
-    imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(200, 300, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap(QString::fromStdString(object->getCopertina())).scaled(200, 300, Qt::KeepAspectRatio));
     imageLabel->setAlignment(Qt::AlignCenter);
     mainLayout->addWidget(imageLabel);
 

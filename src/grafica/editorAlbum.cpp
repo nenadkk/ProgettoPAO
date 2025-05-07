@@ -47,7 +47,7 @@ editorAlbum::editorAlbum(mediaManager* man, mainWindow* mw, media* obj) :
     {
         const canzone *c = dynamic_cast<const canzone*>(m);
 
-        QString str = QString::fromStdString(c->getTitolo()) + "   " + toQString(c->getAutore()+ "   "  );
+        QString str = QString::fromStdString(c->getTitolo()) + "   " + QString::fromStdString(c->getAutore()+ "   "  );
         str +=QString::number((c->getDurata())/60 ) + ":" + QString::number((c->getDurata())%60);
         QListWidgetItem *item = new QListWidgetItem(str, trackList);
 

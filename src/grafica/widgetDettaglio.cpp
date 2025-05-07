@@ -22,7 +22,7 @@ void widgetDettaglio::buildDettaglio(libro* object)
     layout->setAlignment(Qt::AlignCenter);
 
     QLabel *imageLabel = new QLabel();
-    imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap(QString::fromStdString(object->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
     imageLabel->setAlignment(Qt::AlignCenter);
     layout->addWidget(imageLabel);
 
@@ -75,7 +75,7 @@ void widgetDettaglio::buildDettaglio(canzone* object)
     layout->setAlignment(Qt::AlignCenter);
 
     QLabel *imageLabel = new QLabel();
-    imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap(QString::fromStdString(object->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
     imageLabel->setAlignment(Qt::AlignCenter);
     layout->addWidget(imageLabel);
 
@@ -137,7 +137,7 @@ void widgetDettaglio::buildDettaglio(album* object)
     layoutSX->setAlignment(Qt::AlignLeft);
 
     QLabel *imageLabel = new QLabel();
-    imageLabel->setPixmap(QPixmap(toQString(object->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap(QString::fromStdString(object->getCopertina())).scaled(300, 400, Qt::KeepAspectRatio));
     imageLabel->setAlignment(Qt::AlignCenter);
     layoutSX->addWidget(imageLabel);
 

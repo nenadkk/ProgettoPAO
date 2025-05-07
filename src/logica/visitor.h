@@ -9,11 +9,6 @@ class libro;
 class canzone;
 class album;
 
-inline QString toQString(const std::string& str) 
-{
-    return QString::fromStdString(str);
-}
-
 class visitor
 {
     public:

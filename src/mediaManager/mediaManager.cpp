@@ -9,6 +9,7 @@ mediaManager::~mediaManager()
     for(auto m : LM)
         delete m;
 }
+
 void mediaManager::save() const
 {
     jsonHandler jHandler; 

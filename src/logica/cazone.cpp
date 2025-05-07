@@ -10,7 +10,6 @@ canzone::canzone(const string& _titolo, const string& _autore, const int& _anno,
 int canzone::getDurata() const { return durata; }
 string canzone::getGenere() const { return genere; }
 
-
 void canzone::setDurata(const int& d) { durata=d; }
 void canzone::setGenere(const string& g) { genere=g; }
 

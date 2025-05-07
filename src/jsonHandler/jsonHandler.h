@@ -13,7 +13,6 @@
 class jsonHandler 
 {
     private:
-        jsonVisitor vis;
     public:
         void saveMedia(media*);
 

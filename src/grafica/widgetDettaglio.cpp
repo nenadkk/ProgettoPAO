@@ -200,11 +200,20 @@ void widgetDettaglio::buildDettaglio(album* object)
 
     for (int i=0; i<object->getNumCanzoni();i++)
     {
-        QString txt = QString::fromStdString((*object)[i]->getTitolo()) +"    "+ 
-                      QString::fromStdString((*object)[i]->getAutore()) +"    "+
-                      QString::number((*object)[i]->getDurata()/60) +":"+
-                      QString::number((*object)[i]->getDurata()%60);
+        QString txt = QString::fromStdString((*object)[i]->getTitolo()) +" - "+ 
+                      QString::fromStdString((*object)[i]->getAutore());
 
+        if(txt.length()>20)
+        {
+            txt.resize(20);
+            txt+="...";
+        }
+
+        QString txt_durata = QString::number((*object)[i]->getDurata()/60) +":"+
+                             QString::number((*object)[i]->getDurata()%60);
+        for(int i=0;i<(30-txt_durata.length()-txt.length());i++)
+            txt+=" ";
+        txt+=txt_durata;
         
         QListWidgetItem* track = new QListWidgetItem(txt);
         track->setFont(QFont("Mono",20));

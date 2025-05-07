@@ -52,7 +52,7 @@ Q_CONSTINIT static const qt_meta_stringdata_mainWindow_t qt_meta_stringdata_main
         QT_MOC_LITERAL(90, 11),  // "filtraLibri"
         QT_MOC_LITERAL(102, 13),  // "filtraCanzoni"
         QT_MOC_LITERAL(116, 11),  // "filtraAlbum"
-        QT_MOC_LITERAL(128, 19)   // "reloadMediaVisibili"
+        QT_MOC_LITERAL(128, 19)   // "reloadAreaContenuti"
     },
     "mainWindow",
     "sceltaCreazione",
@@ -63,7 +63,7 @@ Q_CONSTINIT static const qt_meta_stringdata_mainWindow_t qt_meta_stringdata_main
     "filtraLibri",
     "filtraCanzoni",
     "filtraAlbum",
-    "reloadMediaVisibili"
+    "reloadAreaContenuti"
 };
 #undef QT_MOC_LITERAL
 } // unnamed namespace
@@ -127,7 +127,7 @@ Q_CONSTINIT const QMetaObject mainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'filtraAlbum'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'reloadMediaVisibili'
+        // method 'reloadAreaContenuti'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -146,7 +146,7 @@ void mainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 4: _t->filtraLibri(); break;
         case 5: _t->filtraCanzoni(); break;
         case 6: _t->filtraAlbum(); break;
-        case 7: _t->reloadMediaVisibili(); break;
+        case 7: _t->reloadAreaContenuti(); break;
         default: ;
         }
     }

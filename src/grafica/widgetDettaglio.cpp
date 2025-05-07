@@ -250,7 +250,7 @@ void widgetDettaglio::removeMedia()
     if (reply == QMessageBox::Yes) 
     {
         manager->removeMedia(object->getId());
-        windowEsterna->reloadMediaVisibili();
+        windowEsterna->reloadAreaContenuti();
     }
     
 }
@@ -258,19 +258,19 @@ void widgetDettaglio::removeMedia()
 void widgetDettaglio::modificaLibro()
 {
     editorLibro *temp = new editorLibro(manager,windowEsterna,object);
-    windowEsterna->addToMediaVisibili(temp);  
+    windowEsterna->addToAreaContenuti(temp);  
 }
 
 void widgetDettaglio::modificaCanzone()
 {
     editorCanzone *temp = new editorCanzone(manager,windowEsterna,object);
-    windowEsterna->addToMediaVisibili(temp);   
+    windowEsterna->addToAreaContenuti(temp);   
 }
 
 void widgetDettaglio::modificaAlbum()
 {
     editorAlbum *temp = new editorAlbum(manager,windowEsterna,object);
-    windowEsterna->addToMediaVisibili(temp);
+    windowEsterna->addToAreaContenuti(temp);
 }
 
 

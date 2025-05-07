@@ -12,14 +12,11 @@ class mainWindow : public QMainWindow
 
     private:
         mediaManager mediaMan;
-        QGridLayout *mediaVisibili;
+        QGridLayout *areaContenuti;
         QLineEdit *searchBar;
 
-        int rowGrid; //serve per disposizione anteprime nel layout pricipale
-        int colGrid; //serve per disposizione anteprime nel layout pricipale
-
         void ricerca();
-        void addToMediaVisibili(media*);//aggiunge l'anteprima del media al layout principale
+        void addToAreaContenuti(list<media*>);//aggiunge l'anteprima del media al layout principale
         
     private slots:
         void sceltaCreazione();//scegli che tipo di media creare
@@ -34,11 +31,15 @@ class mainWindow : public QMainWindow
     public:
         mainWindow(QWidget* parent = nullptr);
         void mostraDettagli(media*);
-        void svuotaMediaVisibili();
-        void addToMediaVisibili(QWidget*);//permette di visualizzare un'altro widget
+        void svuotaAreaContenuti();
+        void addToAreaContenuti(QWidget*);//permette di visualizzare un'altro widget
                                           //rimuove il contenuto precedente
 
     public slots:
-        void reloadMediaVisibili();
+        void reloadAreaContenuti();
 };
 #endif
+
+//NB: la differenza tra addToAreaContenuti(QWidget*) e addToAreaContenuti(media*) è che la prima fa si che
+//ci sia un solo widget visualizzabile all'interno di mediaVisibili, mentre la seconda serve a disporre più
+//widget anteprima in griglia

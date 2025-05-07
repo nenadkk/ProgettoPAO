@@ -19,7 +19,7 @@ editorAlbum::editorAlbum(mediaManager* man, mainWindow* mw, media* obj) :
     QPushButton *btnAnnulla = new QPushButton("ANNULLA",widgetPulsanti);
     btnAnnulla->setFixedSize(200,50);
     btnAnnulla->setFont(QFont("Mono",15));
-    QObject::connect(btnAnnulla, &QPushButton::clicked, windowEsterna, &mainWindow::reloadMediaVisibili);
+    QObject::connect(btnAnnulla, &QPushButton::clicked, windowEsterna, &mainWindow::reloadAreaContenuti);
     layoutSinistraPulsanti->addWidget(btnAnnulla,0, Qt::AlignLeft);
 
     //---------- PULSANTE SALVA ----------
@@ -114,7 +114,7 @@ void editorAlbum::crea()
     }
 
     manager->addMedia(newAlbum);
-    windowEsterna->reloadMediaVisibili();
+    windowEsterna->reloadAreaContenuti();
 
 }
 
@@ -151,5 +151,5 @@ void editorAlbum::modifica()
     }
 
     manager->saveAll();
-    windowEsterna->reloadMediaVisibili();
+    windowEsterna->reloadAreaContenuti();
 }

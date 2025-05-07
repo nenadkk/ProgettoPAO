@@ -78,7 +78,7 @@ editorCanzone::editorCanzone(mediaManager* man, mainWindow* mw, media* obj) :
     QPushButton *btnAnnulla = new QPushButton("ANNULLA",widgetPulsanti);
     btnAnnulla->setFixedSize(200,50);
     btnAnnulla->setFont(QFont("Mono",15));
-    QObject::connect(btnAnnulla, &QPushButton::clicked, windowEsterna, &mainWindow::reloadMediaVisibili);
+    QObject::connect(btnAnnulla, &QPushButton::clicked, windowEsterna, &mainWindow::reloadAreaContenuti);
     layoutPulsanti->addWidget(btnAnnulla,0, Qt::AlignLeft);
 
     //---------- PULSANTE SALVA ----------
@@ -119,7 +119,7 @@ void editorCanzone::crea()
                     durata,
                     attributi["genere"]->text().toStdString()));
 
-        windowEsterna->reloadMediaVisibili();
+        windowEsterna->reloadAreaContenuti();
     }
 
 }
@@ -139,5 +139,5 @@ void editorCanzone::modifica()
     dynamic_cast<canzone*>(object)->setGenere(attributi["genere"]->text().toStdString());
 
     manager->saveAll();
-    windowEsterna->reloadMediaVisibili();
+    windowEsterna->reloadAreaContenuti();
 }

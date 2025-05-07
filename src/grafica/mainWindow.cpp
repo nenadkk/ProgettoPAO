@@ -10,6 +10,8 @@
 #include <QListWidget>
 #include <QLabel>
 
+#include <list>
+
 #include "editorLibro.h"
 #include "editorCanzone.h"
 #include "editorAlbum.h"
@@ -18,7 +20,7 @@
 #include "widgetDettaglio.h"
 
 mainWindow::mainWindow(QWidget* parent) : 
-    QMainWindow(parent), rowGrid(0), colGrid(0) 
+    QMainWindow(parent)
 {
     // Configurazione della finestra principale
     setWindowTitle("Interfaccia Qt");
@@ -88,7 +90,7 @@ mainWindow::mainWindow(QWidget* parent) :
     clearButton->setStyleSheet("font-size: 18px; color: #555;");
     connect(clearButton, &QPushButton::clicked, [=, this]() {
             searchBar->clear();
-            this->reloadMediaVisibili();
+            this->reloadAreaContenuti();
             });
 
     searchLayout->addWidget(clearButton);
@@ -97,11 +99,11 @@ mainWindow::mainWindow(QWidget* parent) :
     // Area di contenuto con scroll
     QScrollArea *scrollArea = new QScrollArea();
     QWidget *contentWidget = new QWidget();
-    mediaVisibili = new QGridLayout(contentWidget);
+    areaContenuti = new QGridLayout(contentWidget);
 
-    reloadMediaVisibili();
+    reloadAreaContenuti();
 
-    contentWidget->setLayout(mediaVisibili);
+    contentWidget->setLayout(areaContenuti);
     scrollArea->setWidget(contentWidget);
     scrollArea->setWidgetResizable(true);
 
@@ -119,57 +121,61 @@ void mainWindow::ricerca()
     string daCercare = searchBar->text().toStdString();
     list<media*> query = mediaMan.search(daCercare);
 
-    svuotaMediaVisibili();
+    svuotaAreaContenuti();
 
     if(!query.empty())
     {
         //Ripopola con i valori filtrati
-        for (auto m : query) 
-            addToMediaVisibili(m);
+        addToAreaContenuti(query);
     }
 }
 
-void mainWindow::addToMediaVisibili(media* m)
+void mainWindow::addToAreaContenuti(list<media*> listaMedia)
 {
+    int colGrid=0;
+    int rowGrid=0;
+
     int maxCol = max(2,((this->width())/(270+10)));
     if(maxCol>5)
         maxCol=5;
 
-    widgetAnteprima* item = new widgetAnteprima(m,mediaVisibili,this);
-
-    mediaVisibili->addWidget(item, rowGrid, colGrid);
-
-    colGrid++;
-    if (colGrid >= maxCol) 
+    for(auto m : listaMedia)
     {
-        colGrid = 0;
-        rowGrid++;
+        widgetAnteprima* item = new widgetAnteprima(m,areaContenuti,this);
+        areaContenuti->addWidget(item, rowGrid, colGrid);
+        colGrid++;
+
+        if (colGrid >= maxCol) 
+        {
+            colGrid = 0;
+            rowGrid++;
+        }
     }
+
 }
-void mainWindow::addToMediaVisibili(QWidget* w)
+void mainWindow::addToAreaContenuti(QWidget* w)
 {
-    svuotaMediaVisibili();
-    mediaVisibili->addWidget(w);
+    svuotaAreaContenuti();
+    areaContenuti->addWidget(w);
 }
 
-void mainWindow::reloadMediaVisibili()
+void mainWindow::reloadAreaContenuti()
 {
-    svuotaMediaVisibili();
-
+    svuotaAreaContenuti();
+    
+    list<media*> temp; //non faccio eliminazione profonda perché questi ogetti sono
+                       //condivisi con il mediaManager
     for (int i=0;i<mediaMan.size();i++) 
-    {
-        addToMediaVisibili(mediaMan[i]);
-    }
+        temp.push_back(mediaMan[i]);
+        
+    addToAreaContenuti(temp);
 }
 
-void mainWindow::svuotaMediaVisibili()
+void mainWindow::svuotaAreaContenuti()
 {
-    rowGrid=0;
-    colGrid=0;
-
-    if (mediaVisibili != nullptr)
+    if (areaContenuti != nullptr)
     {
-        while (QLayoutItem *item = mediaVisibili->takeAt(0)) 
+        while (QLayoutItem *item = areaContenuti->takeAt(0)) 
         {
             if (QWidget *widget = item->widget()) 
                 widget->deleteLater();
@@ -181,7 +187,7 @@ void mainWindow::svuotaMediaVisibili()
 
 void mainWindow::sceltaCreazione()
 {
-    svuotaMediaVisibili(); 
+    svuotaAreaContenuti(); 
     
     QWidget* sezioneCrea = new QWidget();
     sezioneCrea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -224,63 +230,57 @@ void mainWindow::sceltaCreazione()
     space->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
     layout->addWidget(space);
 
-    mediaVisibili->addWidget(sezioneCrea);
+    areaContenuti->addWidget(sezioneCrea);
     
 }
 
 void mainWindow::avviaCreazioneLibro()
 {
-    svuotaMediaVisibili();
+    svuotaAreaContenuti();
 
     editorLibro *wid = new editorLibro(&mediaMan,this);
-    mediaVisibili->addWidget(wid);
+    areaContenuti->addWidget(wid);
 }
 
 void mainWindow::avviaCreazioneCanzone()
 {
-    svuotaMediaVisibili();
+    svuotaAreaContenuti();
 
     editorCanzone *wid = new editorCanzone(&mediaMan,this);
-    mediaVisibili->addWidget(wid);
+    areaContenuti->addWidget(wid);
 }
 
 void mainWindow::avviaCreazioneAlbum()
 {
-    svuotaMediaVisibili();
+    svuotaAreaContenuti();
 
     editorAlbum *wid = new editorAlbum(&mediaMan,this);
-    mediaVisibili->addWidget(wid);
+    areaContenuti->addWidget(wid);
 }
 
 void mainWindow::filtraLibri()
 {
-    svuotaMediaVisibili();
-
-    for(auto m : mediaMan.filtroSoloLibri())
-        addToMediaVisibili(m);
+    svuotaAreaContenuti();
+    addToAreaContenuti(mediaMan.filtroSoloLibri());
 }
 
 void mainWindow::filtraCanzoni()
 {
-    svuotaMediaVisibili();
-
-    for(auto m : mediaMan.filtroSoloCanzoni())
-        addToMediaVisibili(m);
+    svuotaAreaContenuti();
+    addToAreaContenuti(mediaMan.filtroSoloCanzoni());
 }
 
 void mainWindow::filtraAlbum()
 {
-    svuotaMediaVisibili();
-
-    for(auto m : mediaMan.filtroSoloAlbum())
-        addToMediaVisibili(m);
+    svuotaAreaContenuti();
+    addToAreaContenuti(mediaMan.filtroSoloAlbum());
 }
 
 void mainWindow::mostraDettagli(media* obj)
 {
     widgetDettaglio *item = new widgetDettaglio(obj,&mediaMan,this); 
-    svuotaMediaVisibili();
-    mediaVisibili->addWidget(item);
+    svuotaAreaContenuti();
+    areaContenuti->addWidget(item);
 }
 
 

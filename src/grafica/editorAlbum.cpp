@@ -150,6 +150,6 @@ void editorAlbum::modifica()
         }
     }
 
-    manager->save();
+    manager->saveAll();
     windowEsterna->reloadMediaVisibili();
 }

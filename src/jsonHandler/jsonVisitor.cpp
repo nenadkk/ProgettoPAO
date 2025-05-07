@@ -5,11 +5,12 @@
 #include <QDir>
 #include <QDebug>
 #include "../logica/libro.h"
+#include "jsonHandler.h"//per poter accede a save_file
 
 void jsonVisitor::visit(libro *_libro)
 {
   //  QJsonDocument doc(jsonVisitor::libroToJson(*(_libro)));
-    QFile file("./src/jsonHandler/data/libro.json");
+    QFile file(QString::fromStdString(save_file.find("libro")->second));
 
     QJsonDocument doc;
     QJsonArray jsonArray;
@@ -38,7 +39,7 @@ void jsonVisitor::visit(libro *_libro)
 
 void jsonVisitor::visit(canzone *_canzone)
 {
-    QFile file("./src/jsonHandler/data/canzone.json");
+    QFile file(QString::fromStdString(save_file.find("canzone")->second));
 
     QJsonDocument doc;
     QJsonArray jsonArray;
@@ -67,7 +68,7 @@ void jsonVisitor::visit(canzone *_canzone)
 
 void jsonVisitor::visit(album *_album)
 {
-    QFile file("./src/jsonHandler/data/album.json");
+    QFile file(QString::fromStdString(save_file.find("album")->second));
 
     QJsonDocument doc;
     QJsonArray jsonArray;

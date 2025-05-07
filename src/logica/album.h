@@ -31,7 +31,7 @@ class album : public media
                                         //se la canzone è contenuta nell'album 
 
         void addCanzone(canzone*);
-        void removeCanzone(int);
+        void removeCanzone(int); //rimozione in base all'id
 
         virtual void accept(visitor *_visitor) override;
 

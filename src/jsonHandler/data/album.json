@@ -3,8 +3,7 @@
         "anno": 2000,
         "autore": "Linkin Park",
         "canzoni": [
-            4,
-            3
+            4
         ],
         "copertina": "./immagini/hybrid_theory.jpg",
         "id": 1,

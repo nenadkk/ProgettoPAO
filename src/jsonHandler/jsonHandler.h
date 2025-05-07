@@ -10,17 +10,21 @@
 #include <QJsonArray>
 #include <QString>
 
+static const unordered_map<string, string> save_file= {
+    {"libro" , "./src/jsonHandler/data/libro.json"},
+    {"canzone" , "./src/jsonHandler/data/canzone.json"},
+    {"album" , "./src/jsonHandler/data/album.json"}};
+
 class jsonHandler 
 {
-    private:
     public:
-        void saveMedia(media*);
+        static void saveMedia(media*);
 
-        void readAllLibri(list<media*>&);
-        void readAllCanzoni(list<media*>&);
-        void readAllAlbum(list<media*>&);
+        static void readAllLibri(list<media*>&);
+        static void readAllCanzoni(list<media*>&);
+        static void readAllAlbum(list<media*>&);
 
-        void clearAll(); //svuota i file per poter poi ripopolare
+        static void clearAll(); //svuota i file per poter poi ripopolare
 };
 
 

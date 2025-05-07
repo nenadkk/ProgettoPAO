@@ -148,6 +148,6 @@ void editorLibro::modifica()
     dynamic_cast<libro*>(object)->setIsbn(attributi["isbn"]->text().toInt());
     dynamic_cast<libro*>(object)->setEditore(attributi["editore"]->text().toStdString());
 
-    manager->save();
+    manager->saveAll();
     windowEsterna->reloadMediaVisibili();
 }

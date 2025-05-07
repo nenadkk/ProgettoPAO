@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QString>
 #include "jsonVisitor.h"
 #include "jsonHandler.h"
 #include "../logica/libro.h"
@@ -14,12 +15,9 @@ void jsonHandler::saveMedia(media* obj)
 
 void jsonHandler::clearAll()
 {
-    string paths[3] = {"./src/jsonHandler/data/libro.json",
-        "./src/jsonHandler/data/canzone.json",
-        "./src/jsonHandler/data/album.json"};
-    for(string p : paths)
+    for(auto p : save_file)
     {
-        QFile file(toQString(p));
+        QFile file(toQString(p.second));
 
         QJsonArray emptyArray;
         QJsonDocument doc(emptyArray);
@@ -34,7 +32,7 @@ void jsonHandler::clearAll()
 
 void jsonHandler::readAllLibri(list<media*>& listaMedia)
 {
-    QFile file("./src/jsonHandler/data/libro.json");
+    QFile file( QString::fromStdString(save_file.find("libro")->second) );
 
     if (!file.open(QIODevice::ReadOnly)) 
     {
@@ -70,7 +68,7 @@ void jsonHandler::readAllLibri(list<media*>& listaMedia)
 
 void jsonHandler::readAllCanzoni(list<media*>& listaMedia)
 {
-    QFile file("./src/jsonHandler/data/canzone.json");
+    QFile file( QString::fromStdString(save_file.find("canzone")->second) );
 
     if (!file.open(QIODevice::ReadOnly)) 
     {
@@ -106,7 +104,7 @@ void jsonHandler::readAllCanzoni(list<media*>& listaMedia)
 
 void jsonHandler::readAllAlbum(list<media*>& listaMedia)
 {
-    QFile file("./src/jsonHandler/data/album.json");
+    QFile file( QString::fromStdString(save_file.find("album")->second) );
 
     if (!file.open(QIODevice::ReadOnly)) 
     {

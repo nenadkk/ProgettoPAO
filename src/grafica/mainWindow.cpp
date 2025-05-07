@@ -17,7 +17,8 @@
 #include "widgetAnteprima.h"
 #include "widgetDettaglio.h"
 
-mainWindow::mainWindow(QWidget* parent) : QMainWindow(parent), rowGrid(0), colGrid(0)
+mainWindow::mainWindow(QWidget* parent) : 
+    QMainWindow(parent), rowGrid(0), colGrid(0) 
 {
     // Configurazione della finestra principale
     setWindowTitle("Interfaccia Qt");

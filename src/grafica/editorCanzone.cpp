@@ -138,6 +138,6 @@ void editorCanzone::modifica()
     dynamic_cast<canzone*>(object)->setDurata(durata);
     dynamic_cast<canzone*>(object)->setGenere(attributi["genere"]->text().toStdString());
 
-    manager->save();
+    manager->saveAll();
     windowEsterna->reloadMediaVisibili();
 }

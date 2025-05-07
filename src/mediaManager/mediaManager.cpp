@@ -10,19 +10,18 @@ mediaManager::~mediaManager()
         delete m;
 }
 
-void mediaManager::save() const
+void mediaManager::saveAll() const
 {
-    jsonHandler jHandler; 
-    jHandler.clearAll();
+    jsonHandler::clearAll();
     
     for(auto m : LM)
-        jHandler.saveMedia(m);
+        jsonHandler::saveMedia(m);
 }
 
 void mediaManager::addMedia(media* newMedia)
 {
     LM.push_back(newMedia);
-    save();
+    saveAll();
 }
 
 void mediaManager::removeMedia(int _id)
@@ -32,9 +31,19 @@ void mediaManager::removeMedia(int _id)
     {
         if((*i)->getId()==_id)
         {
+            //controllo se il media da eliminare è una canzone ed presente in qualche 
+            //album, in caso la elimino dall'album.
+            for(auto m : filtroSoloAlbum())
+            {
+                album* a = dynamic_cast<album*>(m);
+                if(a->contieneCanzone(_id))//solo le canzoni possono essere 
+                                           //contenute in un album. 
+                    a->removeCanzone(_id);
+            }
+
             delete *i;
             i = LM.erase(i);
-            save();
+            saveAll();
         }
         else
             i++;
@@ -43,10 +52,9 @@ void mediaManager::removeMedia(int _id)
 
 void mediaManager::load()
 {
-    jsonHandler jHandler;
-    jHandler.readAllLibri(LM);
-    jHandler.readAllCanzoni(LM);
-    jHandler.readAllAlbum(LM);
+    jsonHandler::readAllLibri(LM);
+    jsonHandler::readAllCanzoni(LM);
+    jsonHandler::readAllAlbum(LM);
 }
 
 int mediaManager::size() const { return LM.size(); }
@@ -109,7 +117,6 @@ int mediaManager::trovaIdLibero() const
         copiaLM.sort([](const media* a, const media* b) 
         { return a->getId() < b->getId(); });
 
-
         int last=0;
         for(auto i : copiaLM)
         {
@@ -132,6 +139,7 @@ media* mediaManager::searchById(int _id) const
     }
     return nullptr;
 }
+
 
 
 

@@ -16,7 +16,6 @@ rimuovi=1;
 
 if [[ $# -ne 0 ]]; then
     for arg in "$@";do
-        echo "$arg"
         
         if [[ "$arg" == "-k" ]]; then
             rimuovi=0

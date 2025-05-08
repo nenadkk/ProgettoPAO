@@ -16,9 +16,10 @@ rimuovi=1;
 
 if [[ $# -ne 0 ]]; then
     for arg in "$@";do
+        echo "$arg"
         
         if [[ "$arg" == "-k" ]]; then
-            rimuovi=0;
+            rimuovi=0
 
         elif [[ "$arg" == "-a" ]]; then
             find ./src -name '*.cpp' | xargs -I{} clang-tidy -p . {}

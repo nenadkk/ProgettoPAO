@@ -15,7 +15,7 @@ class searchVisitor : public visitor
         string strDaCercare; 
         list<int> *idRisultati;
         static void rendiMaiuscolo(string&);
-        void ricercaAttributiStandard(media*);
+        bool ricercaAttributiStandard(media*);
 
     public:
         searchVisitor(string, list<int>*);

@@ -1,4 +1,5 @@
 #include "editorLibro.h"
+#include "../logica/libro.h"
 #include <QLabel>
 
 editorLibro::editorLibro(mediaManager* man, mainWindow* mw, media* obj) : 

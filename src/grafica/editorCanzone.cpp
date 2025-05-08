@@ -1,5 +1,6 @@
 #include "editorCanzone.h"
 #include <QLabel>
+#include "../logica/canzone.h"
 
 editorCanzone::editorCanzone(mediaManager* man, mainWindow* mw, media* obj) : 
     widgetEditorMedia(man, mw, obj)

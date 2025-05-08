@@ -1,8 +1,7 @@
 #ifndef MEDIAMANAGER
 #define MEDIAMANAGER
-#include "../logica/canzone.h"
-#include "../logica/album.h"
-#include "../logica/libro.h"
+#include "../logica/media.h"
+#include <list>
 
 class mediaManager
 {

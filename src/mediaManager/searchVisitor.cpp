@@ -11,7 +11,7 @@ void searchVisitor::rendiMaiuscolo(string& str)
     transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::toupper(c); }); 
 }
 
-void searchVisitor::ricercaAttributiStandard(media* obj)
+bool searchVisitor::ricercaAttributiStandard(media* obj)
 {
     string titoloMaiuscolo = obj->getTitolo(), 
            autoreMaiuscolo = obj->getAutore(), 
@@ -29,8 +29,9 @@ void searchVisitor::ricercaAttributiStandard(media* obj)
             annoMaiuscolo.find(strDaCercare) != string::npos ||
             idMaiuscolo.find(strDaCercare) != string::npos)
     {
-        idRisultati->push_back(obj->getId());
+        return true;
     }   
+    return false;
 }
 
 void searchVisitor::visit(libro *_libro)
@@ -44,26 +45,29 @@ void searchVisitor::visit(libro *_libro)
     rendiMaiuscolo(editoreMaiuscolo);
 
     //ricerca
-    if(isbnMaiuscolo.find(strDaCercare) != string::npos || editoreMaiuscolo.find(strDaCercare) != string::npos)
+    if( isbnMaiuscolo.find(strDaCercare) != string::npos || 
+        editoreMaiuscolo.find(strDaCercare) != string::npos || 
+        ricercaAttributiStandard(_libro) )
         idRisultati->push_back(_libro->getId());
 
 }
 
 void searchVisitor::visit(canzone *_canzone)
 {
-    ricercaAttributiStandard(_canzone);
 
     string genereMaiuscolo = _canzone->getGenere();
     rendiMaiuscolo(genereMaiuscolo);
 
     //ricerca
-    if(genereMaiuscolo.find(strDaCercare) != string::npos)
+    if( genereMaiuscolo.find(strDaCercare) != string::npos ||
+        ricercaAttributiStandard(_canzone) )
         idRisultati->push_back(_canzone->getId());
 }
 
 void searchVisitor::visit(album *_album)
 {
-    ricercaAttributiStandard(_album);
+    if(ricercaAttributiStandard(_album))
+        idRisultati->push_back(_album->getId());
     //la classe album non ha altri attributi su cui poter fare ricerca al di fuori di quelli base
     //quindi basta solo la ricerca standard comune a tutti
 }

@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QLabel>
 #include "widgetEditorMedia.h"
+#include "qglobal.h"
 
 widgetEditorMedia::widgetEditorMedia(mediaManager* man, mainWindow* mw, media* obj) : 
     manager(man), windowEsterna(mw), object(obj)
@@ -131,28 +132,67 @@ void widgetEditorMedia::copiaImmagine()
         return;
     }
 
-    QString nomeFile = infoImmagine.fileName();
-    QString percorsoDestinazione = "./immagini/" + nomeFile;
-    QFileInfo infoDestinazione(percorsoDestinazione);
+    QString folderImmagine = infoImmagine.absolutePath();
+    QString targetFolder = QDir::currentPath() + QString("/immagini");
 
-    if (!infoDestinazione.exists()) 
+    qDebug()<<folderImmagine;
+    qDebug()<<targetFolder;
+
+    //se l'immagine è stata selezionata nella cartella /immagini dell'applicazione
+    if(folderImmagine.startsWith(targetFolder))
     {
-        if (!QFile::copy(attributi["copertina"]->text(), percorsoDestinazione)) 
-        {
-            qDebug() << "Errore durante la copia dell'immagine.";
-            return;
-        }
-        attributi["copertina"]->setText(percorsoDestinazione);
+        QString pathDestinazione = "./immagini/" + infoImmagine.fileName();
+        attributi["copertina"]->setText(pathDestinazione);
+
     }
+    else //altrimenti
+    {
+        //se esiste già un file con lo stesso nome
+        if(QFileInfo("./immagini/" + infoImmagine.fileName()).exists())
+        {
+            //controllo e prendo il primo nome libero
+            int N=1;
+            while(QFileInfo("./immagini/" + infoImmagine.baseName() +
+                            "("+ QString::number(N)+")." + 
+                            infoImmagine.completeSuffix()).exists())
+            {
+                N++;
+            }
 
+            //copio il file e aggiorno l'attributo
+            QString pathDestinazione = "./immagini/" + infoImmagine.baseName() +
+                                       "("+ QString::number(N)+")." + 
+                                       infoImmagine.completeSuffix();
 
+            if(!QFile::copy(attributi["copertina"]->text(), pathDestinazione))
+            {
+                qDebug()<<"Errore durante la copia dell'immagine.";
+                return;
+            }
+            attributi["copertina"]->setText(pathDestinazione);
+
+        }
+        else //se invece non esistono altri file con lo stesso nome 
+        { 
+            QString pathDestinazione = "./immagini/" + infoImmagine.fileName();
+
+            if(!QFile::copy(attributi["copertina"]->text(), pathDestinazione))
+            {
+                qDebug()<<"Errore durante la copia dell'immagine.";
+                return;
+            }
+            attributi["copertina"]->setText(pathDestinazione);
+
+        }
+    }
 }
 
 void widgetEditorMedia::browseImage()
 {
     if(attributi["copertina"])
     {
-        QString filePath = QFileDialog::getOpenFileName(this, "Seleziona un'immagine", "", "Immagini (*.png *.jpg *.jpeg *.bmp *.gif)");
+        QString dirIniziale = QDir::currentPath() + QString("/immagini/");
+        QString filePath = QFileDialog::getOpenFileName(this, "Seleziona un'immagine", dirIniziale, "Immagini (*.png *.jpg *.jpeg *.bmp *.gif)");
         if (!filePath.isEmpty() && isImageFile(filePath))    
             attributi["copertina"]->setText(filePath);       
     }

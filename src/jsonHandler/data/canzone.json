@@ -20,7 +20,7 @@
     {
         "anno": 1969,
         "autore": "The Beatles",
-        "copertina": "/home/student/ProgettoPAO/immagini/here_comes_the_sun.jpeg",
+        "copertina": "./immagini/here_comes_the_sun.jpeg",
         "durata": 259,
         "genere": "Pop Rock",
         "id": 6,

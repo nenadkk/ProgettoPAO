@@ -136,7 +136,7 @@ void editorCanzone::modifica()
     string copertina=attributi["copertina"]->text().toStdString();
     if(copertina!=object->getCopertina())
         copiaImmagine();
-    object->setCopertina(copertina);
+    object->setCopertina(attributi["copertina"]->text().toStdString());
 
     int durata = (attributi["durataMin"]->text().toInt())*60 + attributi["durataSec"]->text().toInt(); 
     dynamic_cast<canzone*>(object)->setDurata(durata);

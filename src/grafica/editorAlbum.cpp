@@ -131,6 +131,8 @@ void editorAlbum::modifica()
     string copertina=attributi["copertina"]->text().toStdString();
     if(copertina!=object->getCopertina())
         copiaImmagine();
+
+    copertina=attributi["copertina"]->text().toStdString();
     object->setCopertina(copertina);
 
     album* _album = dynamic_cast<album*>(object);

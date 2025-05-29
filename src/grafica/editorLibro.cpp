@@ -146,6 +146,8 @@ void editorLibro::modifica()
     string copertina=attributi["copertina"]->text().toStdString();
     if(copertina!=object->getCopertina())
         copiaImmagine();
+
+    copertina=attributi["copertina"]->text().toStdString();
     object->setCopertina(copertina);
 
     dynamic_cast<libro*>(object)->setNumPagine(attributi["numeroPagine"]->text().toInt());

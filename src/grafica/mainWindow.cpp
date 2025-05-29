@@ -40,9 +40,13 @@ mainWindow::mainWindow(QWidget* parent) :
     QWidget *sideBar = new QWidget();
     QVBoxLayout *sideBarLayout = new QVBoxLayout(sideBar);
 
-    QWidget *space = new QWidget();
-    space->setFixedHeight(60);
-    sideBarLayout->addWidget(space);
+    QPushButton *pulsanteHome = new QPushButton();
+    pulsanteHome->setIcon(QIcon(QPixmap("./immagini/.icons/iconaHome.png")));
+    pulsanteHome->setFixedHeight(60);
+    pulsanteHome->setIconSize(QSize(60,60));
+    sideBarLayout->addWidget(pulsanteHome);
+    connect(pulsanteHome, &QPushButton::clicked, this, &mainWindow::reloadAreaContenuti);
+    
 
     QPushButton *pulsanteCrea = new QPushButton("Crea");
     pulsanteCrea->setFont(QFont("Mono",14));

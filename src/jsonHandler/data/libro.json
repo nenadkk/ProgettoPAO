@@ -12,7 +12,7 @@
     {
         "anno": 1998,
         "autore": "J.K. Rowling",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/hp_camera_segreti.jpeg",
+        "copertina": "./immagini/hp_camera_segreti.jpeg",
         "editore": "Salani Editore",
         "id": 2,
         "isbn": 0,

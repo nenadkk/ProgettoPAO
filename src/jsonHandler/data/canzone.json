@@ -2,10 +2,28 @@
     {
         "anno": 2000,
         "autore": "Linkin park",
-        "copertina": "/home/nenad/Progetti/ProgettoPAO/immagini/hybrid_theory.jpg",
+        "copertina": "./immagini/hybrid_theory.jpg",
         "durata": 216,
         "genere": "Rock",
         "id": 4,
         "titolo": "In the end"
+    },
+    {
+        "anno": 1969,
+        "autore": "The Beatles",
+        "copertina": "./immagini/here_comes_the_sun.jpeg",
+        "durata": 185,
+        "genere": "Pop Rock",
+        "id": 3,
+        "titolo": "Here Comes The Sun"
+    },
+    {
+        "anno": 1969,
+        "autore": "The Beatles",
+        "copertina": "/home/student/ProgettoPAO/immagini/here_comes_the_sun.jpeg",
+        "durata": 259,
+        "genere": "Pop Rock",
+        "id": 6,
+        "titolo": "Come Together"
     }
 ]

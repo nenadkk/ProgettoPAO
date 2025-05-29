@@ -15,7 +15,6 @@
 #include "editorLibro.h"
 #include "editorCanzone.h"
 #include "editorAlbum.h"
-#include "qglobal.h"
 #include "widgetAnteprima.h"
 #include "widgetDettaglio.h"
 

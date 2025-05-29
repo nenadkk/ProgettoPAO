@@ -15,7 +15,7 @@ widgetAnteprima::widgetAnteprima(media* obj, QGridLayout* l, mainWindow* m) :
 
     setFixedSize(250, 330);
     setAttribute(Qt::WA_StyledBackground);
-    setStyleSheet("QWidget {background-color: #3F4454; border-radius: 10px;}");
+    setStyleSheet("QWidget {background-color: #32AA46; border-radius: 10px;}");
 
     QLabel *imageLabel = new QLabel();
     imageLabel->setPixmap(QPixmap(QString::fromStdString(object->getCopertina())).scaled(200, 300, Qt::KeepAspectRatio));

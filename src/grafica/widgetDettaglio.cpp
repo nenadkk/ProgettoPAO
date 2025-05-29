@@ -51,8 +51,8 @@ void widgetDettaglio::buildDettaglio(libro* object)
     buttonModifica->setFont(QFont("Mono",18));
     buttonElimina->setFont(QFont("Mono",18));
 
-    buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
-    buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+    buttonModifica->setStyleSheet("color: black; background-color: #67D163; padding: 10px");
+    buttonElimina->setStyleSheet("color: black; background-color: #67D163; padding: 10px");
 
     buttonModifica->setFixedSize(150, 60);
     buttonElimina->setFixedSize(150, 60);
@@ -64,7 +64,7 @@ void widgetDettaglio::buildDettaglio(libro* object)
 
 
 
-    this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
+    this->setStyleSheet("QWidget {background-color: #68D165; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
 }
@@ -110,8 +110,8 @@ void widgetDettaglio::buildDettaglio(canzone* object)
     buttonModifica->setFont(QFont("Mono",18));
     buttonElimina->setFont(QFont("Mono",18));
 
-    buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
-    buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+    buttonModifica->setStyleSheet("color: black; background-color: #67D163; padding: 10px");
+    buttonElimina->setStyleSheet("color: black; background-color: #67D163; padding: 10px");
 
     buttonModifica->setFixedSize(150, 60);
     buttonElimina->setFixedSize(150, 60);
@@ -122,7 +122,7 @@ void widgetDettaglio::buildDettaglio(canzone* object)
     layout->addLayout(layoutPulsanti);
 
 
-    this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
+    this->setStyleSheet("QWidget {background-color: #68D165; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
 
@@ -169,8 +169,8 @@ void widgetDettaglio::buildDettaglio(album* object)
     buttonModifica->setFont(QFont("Mono",18));
     buttonElimina->setFont(QFont("Mono",18));
 
-    buttonModifica->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
-    buttonElimina->setStyleSheet("color: black; background-color: #A8A8A8; padding: 10px");
+    buttonModifica->setStyleSheet("color: black; background-color: #67D163; padding: 10px");
+    buttonElimina->setStyleSheet("color: black; background-color: #67D163; padding: 10px");
 
     buttonModifica->setFixedSize(150, 60);
     buttonElimina->setFixedSize(150, 60);
@@ -235,7 +235,7 @@ void widgetDettaglio::buildDettaglio(album* object)
     parteDx->setLayout(layoutDX);
     layout->addWidget(parteDx);
 
-    this->setStyleSheet("QWidget {background-color: #686868; border-radius: 10px; padding: 10px;}");
+    this->setStyleSheet("QWidget {background-color: #68D165; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
 

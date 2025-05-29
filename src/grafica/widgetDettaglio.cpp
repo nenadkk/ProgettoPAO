@@ -36,6 +36,7 @@ void widgetDettaglio::buildDettaglio(libro* object)
                     
     QLabel *info = new QLabel(str);
     info->setFont(QFont("Mono",20));
+    info->setStyleSheet("color: black;");
     info->setAlignment(Qt::AlignCenter);
     layout->addWidget(info);
 
@@ -64,7 +65,7 @@ void widgetDettaglio::buildDettaglio(libro* object)
 
 
 
-    this->setStyleSheet("QWidget {background-color: #68D165; border-radius: 10px; padding: 10px;}");
+    this->setStyleSheet("QWidget {background-color: #A0E59F; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
 }
@@ -95,6 +96,7 @@ void widgetDettaglio::buildDettaglio(canzone* object)
 
     QLabel *info = new QLabel(str);
     info->setFont(QFont("Mono",20));
+    info->setStyleSheet("color: black;");
     info->setAlignment(Qt::AlignCenter);
     layout->addWidget(info);    
 
@@ -122,7 +124,7 @@ void widgetDettaglio::buildDettaglio(canzone* object)
     layout->addLayout(layoutPulsanti);
 
 
-    this->setStyleSheet("QWidget {background-color: #68D165; border-radius: 10px; padding: 10px;}");
+    this->setStyleSheet("QWidget {background-color: #A0E59F; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
 
@@ -155,6 +157,7 @@ void widgetDettaglio::buildDettaglio(album* object)
 
     QLabel *info = new QLabel(str);
     info->setFont(QFont("Mono",20));
+    info->setStyleSheet("color: black;");
     info->setAlignment(Qt::AlignLeft);
 
     // Pulsanti
@@ -235,7 +238,7 @@ void widgetDettaglio::buildDettaglio(album* object)
     parteDx->setLayout(layoutDX);
     layout->addWidget(parteDx);
 
-    this->setStyleSheet("QWidget {background-color: #68D165; border-radius: 10px; padding: 10px;}");
+    this->setStyleSheet("QWidget {background-color: #A0E59F; border-radius: 10px; padding: 10px;}");
     this->setLayout(layout);
 
 

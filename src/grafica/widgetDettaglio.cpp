@@ -195,11 +195,19 @@ void widgetDettaglio::buildDettaglio(album* object)
     QLabel *lableTracklist = new QLabel("LISTA CANZONI");
     lableTracklist->setFont(QFont("Mono",20));
     lableTracklist->setAlignment(Qt::AlignCenter);   
+    lableTracklist->setStyleSheet("color: black;");
     lableTracklist->setFixedHeight(50);
 
     layoutDX->addWidget(lableTracklist);
 
     QListWidget *tracklist = new QListWidget();
+    tracklist->setStyleSheet("QListWidget::item {"
+        "    background-color: #67D163;" // Colore di sfondo che hai chiesto
+        "    border-radius: 8px;"       // Arrotonda gli angoli di 8 pixel
+        "    margin: 2px;"             // Aggiunge un piccolo margine tra gli item per vedere meglio l'arrotondamento
+        "    padding: 5px;"             // Aggiunge un po' di padding interno al testo
+        "    color: black;"
+        "}");
 
     for (int i=0; i<object->getNumCanzoni();i++)
     {
@@ -220,6 +228,7 @@ void widgetDettaglio::buildDettaglio(album* object)
         
         QListWidgetItem* track = new QListWidgetItem(txt);
         track->setFont(QFont("Mono",20));
+        //track->setBackground(QBrush(QColor("#67D163")));
         tracklist->addItem(track);
 
     }

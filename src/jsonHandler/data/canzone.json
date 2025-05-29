@@ -25,5 +25,32 @@
         "genere": "Pop Rock",
         "id": 6,
         "titolo": "Come Together"
+    },
+    {
+        "anno": 2000,
+        "autore": "Linkin Park",
+        "copertina": "./immagini/hybrid_theory.jpg",
+        "durata": 184,
+        "genere": "Rock",
+        "id": 5,
+        "titolo": "Papercut"
+    },
+    {
+        "anno": 2000,
+        "autore": "Linkin Park",
+        "copertina": "./immagini/hybrid_theory.jpg",
+        "durata": 189,
+        "genere": "Rock",
+        "id": 8,
+        "titolo": "By Myself"
+    },
+    {
+        "anno": 2016,
+        "autore": "Salmo",
+        "copertina": "./immagini/1984(1).jpg",
+        "durata": 249,
+        "genere": "Rap",
+        "id": 10,
+        "titolo": "1984"
     }
 ]

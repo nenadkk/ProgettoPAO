@@ -18,5 +18,15 @@
         "isbn": 0,
         "numPagine": 224,
         "titolo": "Harry Potter e la camera dei segreti"
+    },
+    {
+        "anno": 1949,
+        "autore": "George Orwell",
+        "copertina": "./immagini/1984.jpg",
+        "editore": "Books&Coffee",
+        "id": 7,
+        "isbn": 0,
+        "numPagine": 360,
+        "titolo": "1984"
     }
 ]

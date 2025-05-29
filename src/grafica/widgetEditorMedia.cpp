@@ -135,9 +135,6 @@ void widgetEditorMedia::copiaImmagine()
     QString folderImmagine = infoImmagine.absolutePath();
     QString targetFolder = QDir::currentPath() + QString("/immagini");
 
-    qDebug()<<folderImmagine;
-    qDebug()<<targetFolder;
-
     //se l'immagine è stata selezionata nella cartella /immagini dell'applicazione
     if(folderImmagine.startsWith(targetFolder))
     {

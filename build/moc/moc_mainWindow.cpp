@@ -1,54 +1,74 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainWindow.h'
 **
-** Created by: The Qt Meta Object Compiler version 68 (Qt 6.2.4)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../../src/grafica/mainWindow.h"
-#include <QtCore/qbytearray.h>
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainWindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
-#error "This file was generated using the moc from 6.2.4. It"
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_mainWindow_t {
-    const uint offsetsAndSize[20];
-    char stringdata0[148];
+    uint offsetsAndSizes[20];
+    char stringdata0[11];
+    char stringdata1[16];
+    char stringdata2[1];
+    char stringdata3[20];
+    char stringdata4[22];
+    char stringdata5[20];
+    char stringdata6[12];
+    char stringdata7[14];
+    char stringdata8[12];
+    char stringdata9[20];
 };
 #define QT_MOC_LITERAL(ofs, len) \
-    uint(offsetof(qt_meta_stringdata_mainWindow_t, stringdata0) + ofs), len 
-static const qt_meta_stringdata_mainWindow_t qt_meta_stringdata_mainWindow = {
+    uint(sizeof(qt_meta_stringdata_mainWindow_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_mainWindow_t qt_meta_stringdata_mainWindow = {
     {
-QT_MOC_LITERAL(0, 10), // "mainWindow"
-QT_MOC_LITERAL(11, 15), // "sceltaCreazione"
-QT_MOC_LITERAL(27, 0), // ""
-QT_MOC_LITERAL(28, 19), // "avviaCreazioneLibro"
-QT_MOC_LITERAL(48, 21), // "avviaCreazioneCanzone"
-QT_MOC_LITERAL(70, 19), // "avviaCreazioneAlbum"
-QT_MOC_LITERAL(90, 11), // "filtraLibri"
-QT_MOC_LITERAL(102, 13), // "filtraCanzoni"
-QT_MOC_LITERAL(116, 11), // "filtraAlbum"
-QT_MOC_LITERAL(128, 19) // "reloadAreaContenuti"
-
+        QT_MOC_LITERAL(0, 10),  // "mainWindow"
+        QT_MOC_LITERAL(11, 15),  // "sceltaCreazione"
+        QT_MOC_LITERAL(27, 0),  // ""
+        QT_MOC_LITERAL(28, 19),  // "avviaCreazioneLibro"
+        QT_MOC_LITERAL(48, 21),  // "avviaCreazioneCanzone"
+        QT_MOC_LITERAL(70, 19),  // "avviaCreazioneAlbum"
+        QT_MOC_LITERAL(90, 11),  // "filtraLibri"
+        QT_MOC_LITERAL(102, 13),  // "filtraCanzoni"
+        QT_MOC_LITERAL(116, 11),  // "filtraAlbum"
+        QT_MOC_LITERAL(128, 19)   // "reloadAreaContenuti"
     },
-    "mainWindow\0sceltaCreazione\0\0"
-    "avviaCreazioneLibro\0avviaCreazioneCanzone\0"
-    "avviaCreazioneAlbum\0filtraLibri\0"
-    "filtraCanzoni\0filtraAlbum\0reloadAreaContenuti"
+    "mainWindow",
+    "sceltaCreazione",
+    "",
+    "avviaCreazioneLibro",
+    "avviaCreazioneCanzone",
+    "avviaCreazioneAlbum",
+    "filtraLibri",
+    "filtraCanzoni",
+    "filtraAlbum",
+    "reloadAreaContenuti"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_mainWindow[] = {
+Q_CONSTINIT static const uint qt_meta_data_mainWindow[] = {
 
  // content:
       10,       // revision
@@ -84,6 +104,35 @@ static const uint qt_meta_data_mainWindow[] = {
        0        // eod
 };
 
+Q_CONSTINIT const QMetaObject mainWindow::staticMetaObject = { {
+    QMetaObject::SuperData::link<QMainWindow::staticMetaObject>(),
+    qt_meta_stringdata_mainWindow.offsetsAndSizes,
+    qt_meta_data_mainWindow,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_mainWindow_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<mainWindow, std::true_type>,
+        // method 'sceltaCreazione'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'avviaCreazioneLibro'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'avviaCreazioneCanzone'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'avviaCreazioneAlbum'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'filtraLibri'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'filtraCanzoni'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'filtraAlbum'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'reloadAreaContenuti'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
+    >,
+    nullptr
+} };
+
 void mainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
@@ -103,22 +152,6 @@ void mainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     }
     (void)_a;
 }
-
-const QMetaObject mainWindow::staticMetaObject = { {
-    QMetaObject::SuperData::link<QMainWindow::staticMetaObject>(),
-    qt_meta_stringdata_mainWindow.offsetsAndSize,
-    qt_meta_data_mainWindow,
-    qt_static_metacall,
-    nullptr,
-qt_incomplete_metaTypeArray<qt_meta_stringdata_mainWindow_t
-, QtPrivate::TypeAndForceComplete<mainWindow, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-
-
->,
-    nullptr
-} };
-
 
 const QMetaObject *mainWindow::metaObject() const
 {

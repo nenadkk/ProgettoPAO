@@ -1,0 +1,36 @@
+#!/bin/bash
+qmake6 -project
+qmake6
+sed -i "7a QT += widgets gui core" ProgettoPAO.pro
+sed -i "7a OBJECTS_DIR = build/obj" ProgettoPAO.pro
+sed -i "7a MOC_DIR = build/moc" ProgettoPAO.pro
+
+make
+#fa clear se la compilazione non ha dato errori
+if [ $? -eq 0 ]; then
+    clear
+    echo "Nessun errore di compilazione!"
+fi
+
+rimuovi=1;
+
+if [[ $# -ne 0 ]]; then
+    for arg in "$@";do
+        
+        if [[ "$arg" == "-k" ]]; then
+            rimuovi=0
+
+        elif [[ "$arg" == "-a" ]]; then
+            find ./src -name '*.cpp' | xargs -I{} clang-tidy -p . {}
+        fi
+
+    done
+
+fi
+
+if [[ $rimuovi -eq 1 ]]; then
+    rm build/obj/*.o
+fi
+
+
+

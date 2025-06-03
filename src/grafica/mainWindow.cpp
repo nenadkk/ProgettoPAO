@@ -1,5 +1,6 @@
 #include "mainWindow.h"
 #include <QApplication>
+#include <QMessageBox>
 #include <QMainWindow>
 #include <QWidget>
 #include <QVBoxLayout>
@@ -9,18 +10,22 @@
 #include <QScrollArea>
 #include <QListWidget>
 #include <QLabel>
+#include <QDir>
+#include <QFileDialog>
 
 #include <list>
 
 #include "editorLibro.h"
 #include "editorCanzone.h"
 #include "editorAlbum.h"
+#include "qglobal.h"
 #include "widgetAnteprima.h"
 #include "widgetDettaglio.h"
 
 mainWindow::mainWindow(QWidget* parent) : 
     QMainWindow(parent)
 {
+
     // Configurazione della finestra principale
     setWindowTitle("Interfaccia Qt");
     resize(1200, 800);
@@ -282,6 +287,21 @@ void mainWindow::mostraDettagli(media* obj)
     areaContenuti->addWidget(item);
 }
 
+bool mainWindow::loadFileSalvataggio()
+{
+    QString str = "Scegliere il file .json che si vuole usare per salvare i dati dell'applicazione";
+    QMessageBox::information(this,"Salvataggio",str);
+
+    QString dirIniziale = QDir::currentPath() + QString("/src/jsonHandler/data/");
+    fileSalvataggio = QFileDialog::getOpenFileName(this, "Seleziona il file .json di salvataggio", dirIniziale, "Json (*.json)");
+        
+    qDebug()<<fileSalvataggio<<fileSalvataggio.isEmpty();
+
+    if(fileSalvataggio.isEmpty() || QFileInfo(fileSalvataggio).suffix().toLower()!=".json")
+        return false;
+ 
+    return true;
+}
 
 
 

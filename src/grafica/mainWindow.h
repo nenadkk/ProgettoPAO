@@ -11,12 +11,14 @@ class mainWindow : public QMainWindow
     Q_OBJECT
 
     private:
+        QString fileSalvataggio;
         mediaManager mediaMan;
         QGridLayout *areaContenuti;
         QLineEdit *searchBar;
 
         void ricerca();
         void addToAreaContenuti(list<media*>);//aggiunge l'anteprima del media al layout principale
+        bool loadFileSalvataggio(); //true se la selezione del file avviene correttamente, false altrimenti
         
     private slots:
         void sceltaCreazione();//scegli che tipo di media creare

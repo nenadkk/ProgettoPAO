@@ -52,5 +52,14 @@
         "genere": "Rap",
         "id": 10,
         "titolo": "1984"
+    },
+    {
+        "anno": 2024,
+        "autore": "Awaken I Am",
+        "copertina": "./immagini/relic.jpg",
+        "durata": 215,
+        "genere": "Punk",
+        "id": 9,
+        "titolo": "Relic"
     }
 ]

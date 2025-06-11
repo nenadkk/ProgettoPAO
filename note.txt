@@ -1,6 +1,0 @@
-fare la parte iniziale di selezione del file json in cu andranno salvati i dati
-
-vedere se rimuovere il metodo clearAll in jsonHandler perché al momento della 
-scrittura il vecchio contenuto viene effettivamente riscritto da capo
-
-adattare jsonHandler per avere tutto in un solo file json

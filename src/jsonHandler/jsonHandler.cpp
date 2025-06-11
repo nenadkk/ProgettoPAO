@@ -5,7 +5,7 @@
 #include <QString>
 #include "jsonVisitor.h"
 #include "jsonHandler.h"
-#include "../logica/libro.h"
+#include "../mediaManager/mediaManager.h"
 
 void jsonHandler::saveMedia(media* obj)
 {
@@ -15,7 +15,7 @@ void jsonHandler::saveMedia(media* obj)
 
 void jsonHandler::clearAll()
 {
-    for(auto p : save_file)
+    for(auto p : mediaManager::save_file)
     {
         QFile file(QString::fromStdString(p.second));
 
@@ -32,7 +32,7 @@ void jsonHandler::clearAll()
 
 void jsonHandler::readAllLibri(list<media*>& listaMedia)
 {
-    QFile file( QString::fromStdString(save_file.find("libro")->second) );
+    QFile file( QString::fromStdString(mediaManager::save_file.find("libro")->second) );
 
     if (!file.open(QIODevice::ReadOnly)) 
     {
@@ -68,7 +68,7 @@ void jsonHandler::readAllLibri(list<media*>& listaMedia)
 
 void jsonHandler::readAllCanzoni(list<media*>& listaMedia)
 {
-    QFile file( QString::fromStdString(save_file.find("canzone")->second) );
+    QFile file( QString::fromStdString(mediaManager::save_file.find("canzone")->second) );
 
     if (!file.open(QIODevice::ReadOnly)) 
     {
@@ -104,7 +104,7 @@ void jsonHandler::readAllCanzoni(list<media*>& listaMedia)
 
 void jsonHandler::readAllAlbum(list<media*>& listaMedia)
 {
-    QFile file( QString::fromStdString(save_file.find("album")->second) );
+    QFile file( QString::fromStdString(mediaManager::save_file.find("album")->second) );
 
     if (!file.open(QIODevice::ReadOnly)) 
     {

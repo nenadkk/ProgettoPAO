@@ -1,9 +1,24 @@
 #include "mediaManager.h"
 #include "../jsonHandler/jsonHandler.h"
 #include "filtraVisitor.h"
+#include "qglobal.h"
 #include "searchVisitor.h"
 #include <cctype>    // Per std::toupper
+#include <QMessageBox>
+#include <QFileDialog>
                      
+
+unordered_map<string, string> mediaManager::save_file= {
+    {"libro" , ""},
+    {"canzone" , ""},
+    {"album" , ""}
+};
+
+
+mediaManager::mediaManager()
+{
+    load();
+}
 mediaManager::~mediaManager()
 {
     for(auto m : LM)
@@ -51,10 +66,24 @@ void mediaManager::removeMedia(int _id)
 }
 
 void mediaManager::load()
-{
-    jsonHandler::readAllLibri(LM);
-    jsonHandler::readAllCanzoni(LM);
-    jsonHandler::readAllAlbum(LM);
+{    
+    //svuoto il contenuto prima di ricaricare la lista
+    for(auto m : LM)
+        delete m;
+
+    //nota: non posso fare tutto in una funzione perché loadFileDiSalvataggio 
+    //è un metodo statico e tale deve rimenere
+    mediaManager::loadFileDiSalvataggio();
+
+    //ricarico la lista, solo se ho un file effettivamente caricato
+    if(save_file.find("libro")->second != "")
+        jsonHandler::readAllLibri(LM);
+
+    if(save_file.find("canzone")->second != "")
+        jsonHandler::readAllCanzoni(LM);
+
+    if(save_file.find("album")->second != "")
+        jsonHandler::readAllAlbum(LM);
 }
 
 int mediaManager::size() const { return LM.size(); }
@@ -140,7 +169,39 @@ media* mediaManager::searchById(int _id) const
     return nullptr;
 }
 
+void mediaManager::loadFileDiSalvataggio()
+{
+    QString dirIniziale = QDir::currentPath() + QString("/src/jsonHandler/data/");
 
+    QString str = "Adesso verra chiesto di selezionare i file .json di salvataggio nel seguente ordine:\n- LIBRI\n- CANZONI\n- ALBUM";
+    QMessageBox::information(nullptr,"Salvataggio",str);
+
+    // SCELTA FILE LIBRI
+
+    QString temp = QFileDialog::getOpenFileName(nullptr, "Seleziona il file .json di salvataggio LIBRI", dirIniziale, "Json (*.json)");
+
+    if(QFileInfo(temp).suffix().toLower()!="json")
+        temp="";
+    save_file["libro"] = temp.toStdString();
+
+    // SCELTA FILE CANZONI
+
+    temp = QFileDialog::getOpenFileName(nullptr, "Seleziona il file .json di salvataggio CANZONI", dirIniziale, "Json (*.json)");
+        
+    if(QFileInfo(temp).suffix().toLower()!="json")
+        temp="";
+    save_file["canzone"] = temp.toStdString();
+
+    // SCELTA FILE ALBUM
+
+    temp = QFileDialog::getOpenFileName(nullptr, "Seleziona il file .json di salvataggio ALBUM", dirIniziale, "Json (*.json)");
+
+    if(QFileInfo(temp).suffix().toLower()!="json")
+        temp="";
+    save_file["album"] = temp.toStdString();
+
+
+}
 
 
 

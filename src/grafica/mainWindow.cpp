@@ -30,9 +30,6 @@ mainWindow::mainWindow(QWidget* parent) :
     setWindowTitle("Interfaccia Qt");
     resize(1200, 800);
 
-    //Caricamento dati 
-    mediaMan.load();
-
     // Widget principale
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -50,7 +47,6 @@ mainWindow::mainWindow(QWidget* parent) :
     pulsanteHome->setIconSize(QSize(60,60));
     sideBarLayout->addWidget(pulsanteHome);
     connect(pulsanteHome, &QPushButton::clicked, this, &mainWindow::reloadAreaContenuti);
-    
 
     QPushButton *pulsanteCrea = new QPushButton("Crea");
     pulsanteCrea->setFont(QFont("Mono",14));
@@ -123,6 +119,7 @@ mainWindow::mainWindow(QWidget* parent) :
     mainLayout->addWidget(centralArea);
 
 }
+
 
 void mainWindow::ricerca()
 {
@@ -287,21 +284,6 @@ void mainWindow::mostraDettagli(media* obj)
     areaContenuti->addWidget(item);
 }
 
-bool mainWindow::loadFileSalvataggio()
-{
-    QString str = "Scegliere il file .json che si vuole usare per salvare i dati dell'applicazione";
-    QMessageBox::information(this,"Salvataggio",str);
-
-    QString dirIniziale = QDir::currentPath() + QString("/src/jsonHandler/data/");
-    fileSalvataggio = QFileDialog::getOpenFileName(this, "Seleziona il file .json di salvataggio", dirIniziale, "Json (*.json)");
-        
-    qDebug()<<fileSalvataggio<<fileSalvataggio.isEmpty();
-
-    if(fileSalvataggio.isEmpty() || QFileInfo(fileSalvataggio).suffix().toLower()!=".json")
-        return false;
- 
-    return true;
-}
 
 
 

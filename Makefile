@@ -531,7 +531,8 @@ build/obj/jsonHandler.o: src/jsonHandler/jsonHandler.cpp src/jsonHandler/jsonVis
 		src/logica/media.h \
 		src/logica/canzone.h \
 		src/logica/album.h \
-		src/jsonHandler/jsonHandler.h
+		src/jsonHandler/jsonHandler.h \
+		src/mediaManager/mediaManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/jsonHandler.o src/jsonHandler/jsonHandler.cpp
 
 build/obj/jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVisitor.h \
@@ -540,7 +541,7 @@ build/obj/jsonVisitor.o: src/jsonHandler/jsonVisitor.cpp src/jsonHandler/jsonVis
 		src/logica/media.h \
 		src/logica/canzone.h \
 		src/logica/album.h \
-		src/jsonHandler/jsonHandler.h
+		src/mediaManager/mediaManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/jsonVisitor.o src/jsonHandler/jsonVisitor.cpp
 
 build/obj/album.o: src/logica/album.cpp src/logica/album.h \

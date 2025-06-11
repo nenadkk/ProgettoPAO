@@ -10,11 +10,6 @@
 #include <QJsonArray>
 #include <QString>
 
-static const unordered_map<string, string> save_file= {
-    {"libro" , "./src/jsonHandler/data/libro.json"},
-    {"canzone" , "./src/jsonHandler/data/canzone.json"},
-    {"album" , "./src/jsonHandler/data/album.json"}};
-
 class jsonHandler 
 {
     public:

@@ -18,7 +18,6 @@ class mainWindow : public QMainWindow
 
         void ricerca();
         void addToAreaContenuti(list<media*>);//aggiunge l'anteprima del media al layout principale
-        bool loadFileSalvataggio(); //true se la selezione del file avviene correttamente, false altrimenti
         
     private slots:
         void sceltaCreazione();//scegli che tipo di media creare
@@ -44,4 +43,4 @@ class mainWindow : public QMainWindow
 
 //NB: la differenza tra addToAreaContenuti(QWidget*) e addToAreaContenuti(media*) è che la prima fa si che
 //ci sia un solo widget visualizzabile all'interno di mediaVisibili, mentre la seconda serve a disporre più
-//widget anteprima in griglia
+//widget anteprima in grig
